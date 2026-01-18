@@ -5,17 +5,23 @@ import { useState } from 'react';
 export default function CVRedoPage() {
   const [isPro, setIsPro] = useState(false); // In a real app, this would come from user authentication
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState('');
+  const [showResult, setShowResult] = useState(false);
+  const [resultData, setResultData] = useState<any>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSubmitMessage('');
+    setShowResult(false);
 
     // Simulate processing
     setTimeout(() => {
       setIsSubmitting(false);
-      setSubmitMessage('Success! Your CV has been redesigned with a standard template. Check your email for the download link. Upgrade to Pro for premium templates and advanced customization!');
+      setResultData({
+        template: 'Classic Professional Template',
+        improvements: ['Modern layout applied', 'Improved typography', 'Enhanced visual hierarchy'],
+        downloadUrl: '#'
+      });
+      setShowResult(true);
     }, 2000);
   };
 
@@ -104,9 +110,63 @@ export default function CVRedoPage() {
                   </button>
                 </form>
 
-                {submitMessage && (
-                  <div className="mt-6 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
-                    <p className="text-green-800 dark:text-green-200 text-sm">{submitMessage}</p>
+                {showResult && resultData && (
+                  <div className="mt-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+                    <div className="text-center mb-6">
+                      <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-full mb-4">
+                        <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">CV Redesign Complete!</h3>
+                      <p className="text-gray-600 dark:text-gray-300">Your CV has been redesigned with a modern template</p>
+                    </div>
+
+                    <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
+                      <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Template: {resultData.template}</h4>
+                      <div className="aspect-[3/4] bg-white dark:bg-gray-600 rounded border-2 border-dashed border-gray-300 dark:border-gray-500 flex items-center justify-center mb-4">
+                        <div className="text-center text-gray-500 dark:text-gray-400">
+                          <svg className="mx-auto h-12 w-12 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                          </svg>
+                          <p className="text-sm">CV Preview</p>
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <h5 className="font-medium text-gray-900 dark:text-white">Improvements made:</h5>
+                        <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                          {resultData.improvements.map((improvement: string, index: number) => (
+                            <li key={index} className="flex items-center">
+                              <span className="text-green-500 mr-2">✓</span>
+                              {improvement}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div className="flex gap-3">
+                        <a
+                          href={resultData.downloadUrl}
+                          className="flex-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-medium py-3 px-4 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors text-center"
+                        >
+                          Download Free Version
+                        </a>
+                        <a
+                          href="/pricing"
+                          className="flex-1 bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-medium py-3 px-4 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-center"
+                        >
+                          Upgrade to Pro
+                        </a>
+                      </div>
+
+                      <div className="text-center">
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                          Pro version includes premium templates, custom color schemes, and advanced customization options
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 )}
 
