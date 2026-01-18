@@ -29,35 +29,59 @@ export default function Home() {
 
         <section className="py-16 sm:py-24">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">Our Premium Tools</h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">Professional CV optimization and redesign tools powered by AI</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">Our Tools</h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300">Free basic tools with premium upgrades powered by AI</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8 hover:shadow-md transition-shadow">
+              <div className="mb-4 flex items-center">
+                <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs font-medium px-2 py-1 rounded-full">Free</span>
+                <span className="ml-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs font-medium px-2 py-1 rounded-full">Pro Upgrade</span>
+              </div>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">CV Optimizer</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-6">
                 Optimize your CV for applicant tracking systems (ATS) and improve your chances of getting noticed by recruiters.
               </p>
-              <a
-                href="/pricing"
-                className="inline-block bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-medium py-2 px-4 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
-              >
-                Upgrade to Pro
-              </a>
+              <div className="flex gap-3">
+                <a
+                  href="/apps/cv-optimizer"
+                  className="inline-block bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-medium py-2 px-4 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
+                >
+                  Try Free
+                </a>
+                <a
+                  href="/pricing"
+                  className="inline-block bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-medium py-2 px-4 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                >
+                  Go Pro
+                </a>
+              </div>
             </div>
 
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8 hover:shadow-md transition-shadow">
+              <div className="mb-4 flex items-center">
+                <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs font-medium px-2 py-1 rounded-full">Free</span>
+                <span className="ml-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs font-medium px-2 py-1 rounded-full">Pro Upgrade</span>
+              </div>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">CV Redo</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-6">
                 Completely redesign your CV with modern templates and layouts that make a lasting impression.
               </p>
-              <a
-                href="/pricing"
-                className="inline-block bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-medium py-2 px-4 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
-              >
-                Upgrade to Pro
-              </a>
+              <div className="flex gap-3">
+                <a
+                  href="/apps/cv-redo"
+                  className="inline-block bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-medium py-2 px-4 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
+                >
+                  Try Free
+                </a>
+                <a
+                  href="/pricing"
+                  className="inline-block bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-medium py-2 px-4 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                >
+                  Go Pro
+                </a>
+              </div>
             </div>
           </div>
         </section>

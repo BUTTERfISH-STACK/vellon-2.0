@@ -19,8 +19,8 @@ export default function Pricing() {
               <p className="text-gray-600 dark:text-gray-300 mb-6">Perfect for trying out our tools</p>
               <ul className="text-gray-600 dark:text-gray-300 mb-8 space-y-2">
                 <li>✓ Basic CV optimization</li>
-                <li>✓ 1 CV redesign per month</li>
-                <li>✓ Standard templates</li>
+                <li>✓ CV redesign with standard templates</li>
+                <li>✓ Keyword suggestions</li>
                 <li>✓ Email support</li>
               </ul>
               <a
