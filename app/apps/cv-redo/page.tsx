@@ -4,6 +4,20 @@ import { useState } from 'react';
 
 export default function CVRedoPage() {
   const [isPro, setIsPro] = useState(false); // In a real app, this would come from user authentication
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitMessage('');
+
+    // Simulate processing
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setSubmitMessage('Success! Your CV has been redesigned with a standard template. Check your email for the download link. Upgrade to Pro for premium templates and advanced customization!');
+    }, 2000);
+  };
 
   if (!isPro) {
     return (
@@ -27,7 +41,7 @@ export default function CVRedoPage() {
                   </p>
                 </div>
 
-                <form className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Full Name
@@ -36,6 +50,7 @@ export default function CVRedoPage() {
                       type="text"
                       id="name"
                       name="name"
+                      required
                       className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white"
                       placeholder="John Doe"
                     />
@@ -48,6 +63,7 @@ export default function CVRedoPage() {
                       type="email"
                       id="email"
                       name="email"
+                      required
                       className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white"
                       placeholder="john@example.com"
                     />
@@ -60,6 +76,7 @@ export default function CVRedoPage() {
                       type="file"
                       id="resume"
                       name="resume"
+                      required
                       className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white"
                       accept=".pdf,.doc,.docx"
                     />
@@ -80,11 +97,18 @@ export default function CVRedoPage() {
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-black dark:bg-white text-white dark:text-black py-3 px-4 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors font-medium"
+                    disabled={isSubmitting}
+                    className="w-full bg-black dark:bg-white text-white dark:text-black py-3 px-4 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Redo My CV (Free)
+                    {isSubmitting ? 'Redesigning...' : 'Redo My CV (Free)'}
                   </button>
                 </form>
+
+                {submitMessage && (
+                  <div className="mt-6 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
+                    <p className="text-green-800 dark:text-green-200 text-sm">{submitMessage}</p>
+                  </div>
+                )}
 
                 <div className="mt-8 p-6 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 rounded-lg">
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Upgrade to Pro for:</h3>
