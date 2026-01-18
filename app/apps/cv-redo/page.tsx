@@ -7,6 +7,8 @@ export default function CVRedoPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [resultData, setResultData] = useState<any>(null);
+  const [parsingProgress, setParsingProgress] = useState(0);
+  const [parsingStep, setParsingStep] = useState('');
 
   const handleDownload = () => {
     const cvContent = `═══════════════════════════════════════════
@@ -79,17 +81,45 @@ Upgrade to Pro for premium templates and advanced customization!
     e.preventDefault();
     setIsSubmitting(true);
     setShowResult(false);
+    setParsingProgress(0);
 
-    // Simulate processing
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setResultData({
-        template: 'Classic Professional Template',
-        improvements: ['Modern layout applied', 'Improved typography', 'Enhanced visual hierarchy'],
-        downloadUrl: '#'
-      });
-      setShowResult(true);
-    }, 2000);
+    // Simulate CV parsing with progress updates
+    const parsingSteps = [
+      'Uploading CV file...',
+      'Extracting text content...',
+      'Analyzing document structure...',
+      'Parsing contact information...',
+      'Identifying sections and content...',
+      'Applying modern design template...',
+      'Optimizing layout and typography...',
+      'Finalizing design elements...'
+    ];
+
+    for (let i = 0; i < parsingSteps.length; i++) {
+      setParsingStep(parsingSteps[i]);
+      setParsingProgress(((i + 1) / parsingSteps.length) * 100);
+      await new Promise(resolve => setTimeout(resolve, 400));
+    }
+
+    setIsSubmitting(false);
+    setResultData({
+      template: 'Modern Creative Template',
+      improvements: [
+        'Applied contemporary design aesthetics',
+        'Enhanced visual hierarchy with modern typography',
+        'Added color accents and professional spacing',
+        'Optimized content layout for better readability',
+        'Incorporated modern design elements'
+      ],
+      parsedData: {
+        name: 'John Doe',
+        title: 'Software Developer',
+        experience: '5+ years',
+        skills: ['JavaScript', 'React', 'Node.js', 'Python', 'UI/UX']
+      },
+      downloadUrl: '#'
+    });
+    setShowResult(true);
   };
 
   if (!isPro) {
@@ -168,12 +198,31 @@ Upgrade to Pro for premium templates and advanced customization!
                       <option value="minimal">Minimalist</option>
                     </select>
                   </div>
+                  {isSubmitting && (
+                    <div className="mb-4 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-sm font-medium text-purple-800 dark:text-purple-200">
+                          {parsingStep}
+                        </span>
+                        <span className="text-sm text-purple-600 dark:text-purple-300">
+                          {Math.round(parsingProgress)}%
+                        </span>
+                      </div>
+                      <div className="w-full bg-purple-200 dark:bg-purple-800 rounded-full h-2">
+                        <div
+                          className="bg-purple-600 dark:bg-purple-400 h-2 rounded-full transition-all duration-300"
+                          style={{ width: `${parsingProgress}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                  )}
+
                   <button
                     type="submit"
                     disabled={isSubmitting}
                     className="w-full bg-black dark:bg-white text-white dark:text-black py-3 px-4 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting ? 'Redesigning...' : 'Redo My CV (Free)'}
+                    {isSubmitting ? 'Redesigning Your CV...' : 'Redo My CV (Free)'}
                   </button>
                 </form>
 
@@ -191,29 +240,90 @@ Upgrade to Pro for premium templates and advanced customization!
 
                     <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
                       <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Template: {resultData.template}</h4>
-                      <div className="aspect-[3/4] bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-700 dark:to-gray-600 rounded border border-gray-200 dark:border-gray-500 p-4 mb-4 overflow-hidden">
-                        <div className="text-gray-900 dark:text-white text-xs leading-tight">
-                          <div className="text-center mb-3 border-b border-gray-300 dark:border-gray-500 pb-2">
-                            <h3 className="font-bold text-sm text-blue-900 dark:text-blue-200">JOHN DOE</h3>
-                            <p className="text-gray-600 dark:text-gray-300 font-medium">Software Developer</p>
+                      <div className="aspect-[3/4] bg-gradient-to-br from-purple-50 via-pink-50 to-indigo-100 dark:from-gray-800 dark:via-purple-900/20 dark:to-indigo-900/20 rounded-xl border border-purple-200 dark:border-purple-600 p-6 mb-4 overflow-hidden shadow-lg">
+                        <div className="text-gray-900 dark:text-white">
+                          {/* Modern Header */}
+                          <div className="relative mb-6">
+                            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg opacity-10"></div>
+                            <div className="relative text-center py-4">
+                              <h3 className="font-bold text-xl text-purple-900 dark:text-purple-200 mb-1">
+                                {resultData.parsedData?.name || 'JOHN DOE'}
+                              </h3>
+                              <p className="text-purple-700 dark:text-purple-300 font-medium text-sm">
+                                {resultData.parsedData?.title || 'Software Developer'}
+                              </p>
+                              <div className="flex justify-center mt-2">
+                                <div className="w-12 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+                              </div>
+                            </div>
                           </div>
-                          <div className="mb-2">
-                            <h4 className="font-semibold text-xs mb-1 text-blue-800 dark:text-blue-300">CONTACT</h4>
-                            <p className="text-gray-700 dark:text-gray-200">📧 john@example.com</p>
-                            <p className="text-gray-700 dark:text-gray-200">📱 +1 (555) 123-4567</p>
+
+                          {/* Contact Section */}
+                          <div className="mb-5">
+                            <div className="flex items-center gap-2 mb-3">
+                              <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
+                              <h4 className="font-semibold text-sm text-purple-800 dark:text-purple-300 uppercase tracking-wide">Contact</h4>
+                            </div>
+                            <div className="ml-5 space-y-2">
+                              <div className="flex items-center gap-2">
+                                <span className="text-purple-600 dark:text-purple-400">✉</span>
+                                <p className="text-gray-700 dark:text-gray-200 text-sm">john@example.com</p>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <span className="text-purple-600 dark:text-purple-400">📱</span>
+                                <p className="text-gray-700 dark:text-gray-200 text-sm">+1 (555) 123-4567</p>
+                              </div>
+                            </div>
                           </div>
-                          <div className="mb-2">
-                            <h4 className="font-semibold text-xs mb-1 text-blue-800 dark:text-blue-300">EXPERIENCE</h4>
-                            <p className="font-medium text-xs">Senior Developer</p>
-                            <p className="text-gray-600 dark:text-gray-300 text-xs">Tech Corp • 2020-Present</p>
-                            <ul className="text-gray-700 dark:text-gray-200 text-xs ml-2 mt-1">
-                              <li>• Developed web applications</li>
-                              <li>• Led team projects</li>
-                            </ul>
+
+                          {/* Experience Section */}
+                          <div className="mb-5">
+                            <div className="flex items-center gap-2 mb-3">
+                              <div className="w-3 h-3 bg-pink-500 rounded-full"></div>
+                              <h4 className="font-semibold text-sm text-pink-800 dark:text-pink-300 uppercase tracking-wide">Experience</h4>
+                            </div>
+                            <div className="ml-5">
+                              <div className="mb-3">
+                                <p className="font-semibold text-sm text-gray-900 dark:text-white">Senior Developer</p>
+                                <p className="text-pink-600 dark:text-pink-400 text-xs font-medium">Tech Corp • 2020-Present</p>
+                                <ul className="text-gray-700 dark:text-gray-200 text-xs mt-2 space-y-1">
+                                  <li className="flex items-start gap-2">
+                                    <span className="text-pink-500 mt-1">•</span>
+                                    <span>Developed modern web applications using React & Node.js</span>
+                                  </li>
+                                  <li className="flex items-start gap-2">
+                                    <span className="text-pink-500 mt-1">•</span>
+                                    <span>Led cross-functional development teams</span>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
                           </div>
-                          <div className="mb-2">
-                            <h4 className="font-semibold text-xs mb-1 text-blue-800 dark:text-blue-300">SKILLS</h4>
-                            <p className="text-gray-700 dark:text-gray-200 text-xs">JavaScript, React, Node.js, Python</p>
+
+                          {/* Skills Section */}
+                          <div className="mb-4">
+                            <div className="flex items-center gap-2 mb-3">
+                              <div className="w-3 h-3 bg-indigo-500 rounded-full"></div>
+                              <h4 className="font-semibold text-sm text-indigo-800 dark:text-indigo-300 uppercase tracking-wide">Skills</h4>
+                            </div>
+                            <div className="ml-5 flex flex-wrap gap-2">
+                              {(resultData.parsedData?.skills || ['JavaScript', 'React', 'Node.js', 'Python', 'UI/UX']).map((skill: string, index: number) => (
+                                <span key={index} className="bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-indigo-900/40 dark:to-purple-900/40 text-indigo-800 dark:text-indigo-200 text-xs px-3 py-1 rounded-full border border-indigo-200 dark:border-indigo-600">
+                                  {skill}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Design Quality Indicator */}
+                          <div className="mt-4 p-3 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg border border-green-200 dark:border-green-700">
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="text-xs font-medium text-green-800 dark:text-green-200">Design Quality</span>
+                              <span className="text-xs font-bold text-green-800 dark:text-green-200">98%</span>
+                            </div>
+                            <div className="w-full bg-green-200 dark:bg-green-800 rounded-full h-1.5">
+                              <div className="bg-gradient-to-r from-green-500 to-emerald-500 h-1.5 rounded-full" style={{ width: '98%' }}></div>
+                            </div>
                           </div>
                         </div>
                       </div>
