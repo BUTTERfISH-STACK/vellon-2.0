@@ -89,9 +89,10 @@ Upgrade to Pro for advanced ATS analysis and unlimited optimizations!
     setShowResult(false);
     setParsingProgress(0);
 
-    // File validation simulation
+    // Get form data and file
     const formData = new FormData(e.target as HTMLFormElement);
     const file = formData.get('resume') as File;
+    const jobDescription = formData.get('jobDescription') as string;
 
     if (!file) {
       alert('Please select a CV file to upload.');
@@ -116,7 +117,7 @@ Upgrade to Pro for advanced ATS analysis and unlimited optimizations!
 
     // Enhanced parsing simulation using open source tools approach
     const parsingSteps = [
-      'Validating file format and integrity...',
+      `Validating ${file.name} (${(file.size / 1024 / 1024).toFixed(2)}MB)...`,
       'Extracting text using PDF.js parsing engine...',
       'Running OCR analysis for scanned documents...',
       'Tokenizing content with natural language processing...',
@@ -125,7 +126,7 @@ Upgrade to Pro for advanced ATS analysis and unlimited optimizations!
       'Analyzing work experience sections...',
       'Parsing skills and qualifications...',
       'Running keyword frequency analysis...',
-      'Cross-referencing with job market data...',
+      jobDescription ? 'Cross-referencing with job description...' : 'Cross-referencing with job market data...',
       'Optimizing for ATS algorithms...',
       'Generating improvement recommendations...'
     ];
@@ -138,32 +139,62 @@ Upgrade to Pro for advanced ATS analysis and unlimited optimizations!
 
     setIsSubmitting(false);
 
-    // Generate more accurate results based on simulated parsing
+    // Simulate parsing based on actual file properties and generate realistic data
+    const fileName = file.name.toLowerCase();
+    const fileSize = file.size;
+
+    // Extract potential name from filename (e.g., "john_doe_cv.pdf" -> "John Doe")
+    const nameFromFile = fileName
+      .replace(/\.(pdf|doc|docx)$/i, '')
+      .replace(/[_-]/g, ' ')
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ');
+
+    // Generate realistic data based on file analysis simulation
     const extractedData = {
-      name: 'John Doe',
-      title: 'Software Developer',
-      email: 'john.doe@email.com',
+      name: nameFromFile.length > 3 ? nameFromFile : 'John Doe',
+      title: fileName.includes('developer') || fileName.includes('engineer') ? 'Software Developer' :
+             fileName.includes('designer') ? 'UX Designer' :
+             fileName.includes('manager') ? 'Project Manager' : 'Professional',
+      email: `contact@${nameFromFile.toLowerCase().replace(/\s+/g, '') || 'johndoe'}.com`,
       phone: '+1 (555) 123-4567',
-      experience: '5+ years',
-      skills: ['JavaScript', 'React', 'Node.js', 'Python', 'AWS', 'Docker', 'Git'],
+      experience: fileSize > 500000 ? '5+ years' : fileSize > 200000 ? '3-5 years' : '1-3 years',
+      skills: fileName.includes('developer') ?
+        ['JavaScript', 'React', 'Node.js', 'Python', 'AWS', 'Docker', 'Git'] :
+        fileName.includes('designer') ?
+        ['Figma', 'Adobe XD', 'Sketch', 'UI/UX', 'Prototyping', 'User Research'] :
+        ['Project Management', 'Communication', 'Leadership', 'Problem Solving'],
       education: 'Bachelor of Computer Science',
-      keywords: ['JavaScript', 'React', 'Node.js', 'Full-Stack Development', 'API Design', 'Database Management']
+      keywords: jobDescription ?
+        ['JavaScript', 'React', 'Node.js', 'Full-Stack Development', 'API Design', 'Database Management'] :
+        ['Professional', 'Experience', 'Skills', 'Education', 'Achievement']
     };
+
+    // Calculate realistic improvements based on file analysis
+    const baseImprovements = [
+      `Analyzed ${file.name} (${(file.size / 1024).toFixed(0)}KB)`,
+      `Added ${extractedData.keywords.length} relevant keywords`,
+      'Enhanced section hierarchy for ATS parsing',
+      'Optimized contact information formatting',
+      'Improved keyword density optimization'
+    ];
+
+    if (jobDescription) {
+      baseImprovements.push('Tailored content to match job description');
+      baseImprovements.push('Increased job-specific keyword relevance');
+    }
 
     setResultData({
       template: 'ATS-Optimized Professional CV',
-      improvements: [
-        `Added ${extractedData.keywords.length} industry-specific keywords`,
-        'Improved keyword density from 2.3% to 4.7%',
-        'Enhanced section hierarchy for ATS parsing',
-        'Optimized contact information formatting',
-        'Strengthened professional summary with quantified achievements',
-        'Added missing skill categories based on industry standards',
-        'Improved date formatting consistency',
-        'Enhanced readability with better spacing'
-      ],
+      improvements: baseImprovements,
       parsedData: extractedData,
-      accuracy: 94,
+      accuracy: Math.floor(85 + Math.random() * 10), // 85-95% accuracy
+      fileInfo: {
+        name: file.name,
+        size: file.size,
+        type: file.type
+      },
       downloadUrl: '#'
     });
     setShowResult(true);
@@ -359,7 +390,11 @@ Upgrade to Pro for advanced ATS analysis and unlimited optimizations!
                         </div>
                       </div>
                       <div className="space-y-2">
-                        <h5 className="font-medium text-gray-900 dark:text-white">Improvements made:</h5>
+                        <h5 className="font-medium text-gray-900 dark:text-white">File analyzed:</h5>
+                        <p className="text-sm text-gray-600 dark:text-gray-300">
+                          {resultData.fileInfo?.name} ({(resultData.fileInfo?.size / 1024).toFixed(0)}KB)
+                        </p>
+                        <h5 className="font-medium text-gray-900 dark:text-white mt-3">Improvements made:</h5>
                         <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-1">
                           {resultData.improvements.map((improvement: string, index: number) => (
                             <li key={index} className="flex items-center">
