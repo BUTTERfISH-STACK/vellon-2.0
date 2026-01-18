@@ -115,20 +115,19 @@ Upgrade to Pro for advanced ATS analysis and unlimited optimizations!
       return;
     }
 
-    // Enhanced parsing simulation using open source tools approach
+    // File property analysis simulation (frontend limitation: cannot parse PDF content)
     const parsingSteps = [
-      `Validating ${file.name} (${(file.size / 1024 / 1024).toFixed(2)}MB)...`,
-      'Extracting text using PDF.js parsing engine...',
-      'Running OCR analysis for scanned documents...',
-      'Tokenizing content with natural language processing...',
-      'Identifying named entities (names, organizations, dates)...',
-      'Extracting contact information patterns...',
-      'Analyzing work experience sections...',
-      'Parsing skills and qualifications...',
-      'Running keyword frequency analysis...',
-      jobDescription ? 'Cross-referencing with job description...' : 'Cross-referencing with job market data...',
-      'Optimizing for ATS algorithms...',
-      'Generating improvement recommendations...'
+      `Validating ${file.name} (${(file.size / 1024).toFixed(0)}KB file)...`,
+      'Analyzing filename for profession keywords...',
+      'Extracting potential name from file naming patterns...',
+      'Estimating experience level from file size...',
+      'Mapping profession to relevant skills database...',
+      'Generating profession-specific keyword suggestions...',
+      'Applying ATS optimization patterns...',
+      jobDescription ? 'Incorporating job description keywords...' : 'Using industry-standard keywords...',
+      'Creating personalized improvement recommendations...',
+      'Preparing downloadable optimized CV template...',
+      'Finalizing results...'
     ];
 
     for (let i = 0; i < parsingSteps.length; i++) {
@@ -293,6 +292,9 @@ Upgrade to Pro for advanced ATS analysis and unlimited optimizations!
                 <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
                   <p className="text-blue-800 dark:text-blue-200 text-sm">
                     <strong>Free Plan:</strong> Basic optimization with keyword suggestions. Upgrade to Pro for advanced ATS analysis and unlimited optimizations.
+                  </p>
+                  <p className="text-blue-700 dark:text-blue-300 text-xs mt-2">
+                    <em>Note: This demo analyzes file properties and simulates parsing. Real PDF content parsing requires server-side processing.</em>
                   </p>
                 </div>
 
