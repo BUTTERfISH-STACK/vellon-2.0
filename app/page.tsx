@@ -13,21 +13,26 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="/apps"
+              href="/pricing"
               className="inline-block bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-medium py-3 px-6 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
             >
               Get Started
             </a>
             <a
-              href="/apps"
+              href="/about"
               className="inline-block bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-medium py-3 px-6 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             >
-              View Apps
+              Learn More
             </a>
           </div>
         </section>
 
         <section className="py-16 sm:py-24">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">Our Premium Tools</h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300">Professional CV optimization and redesign tools powered by AI</p>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8 hover:shadow-md transition-shadow">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">CV Optimizer</h2>
@@ -35,10 +40,10 @@ export default function Home() {
                 Optimize your CV for applicant tracking systems (ATS) and improve your chances of getting noticed by recruiters.
               </p>
               <a
-                href="/apps/cv-optimizer"
+                href="/pricing"
                 className="inline-block bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-medium py-2 px-4 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
               >
-                Try Now
+                Upgrade to Pro
               </a>
             </div>
 
@@ -48,10 +53,10 @@ export default function Home() {
                 Completely redesign your CV with modern templates and layouts that make a lasting impression.
               </p>
               <a
-                href="/apps/cv-redo"
+                href="/pricing"
                 className="inline-block bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-medium py-2 px-4 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
               >
-                Try Now
+                Upgrade to Pro
               </a>
             </div>
           </div>

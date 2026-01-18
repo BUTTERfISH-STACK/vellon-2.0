@@ -45,12 +45,12 @@ export default function Pricing() {
                 <li>✓ Priority support</li>
                 <li>✓ ATS compatibility check</li>
               </ul>
-              <a
-                href="#"
+              <button
+                id="yoco-pro-payment"
                 className="inline-block w-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-medium py-3 px-6 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors text-center"
               >
                 Choose Pro
-              </a>
+              </button>
             </div>
 
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8 border border-gray-200 dark:border-gray-700">
@@ -64,12 +64,12 @@ export default function Pricing() {
                 <li>✓ API access</li>
                 <li>✓ Dedicated support</li>
               </ul>
-              <a
-                href="#"
+              <button
+                id="yoco-enterprise-contact"
                 className="inline-block w-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-medium py-3 px-6 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors text-center"
               >
                 Contact Sales
-              </a>
+              </button>
             </div>
           </div>
         </section>
