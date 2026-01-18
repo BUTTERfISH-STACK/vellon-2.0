@@ -1,6 +1,61 @@
 import { NextRequest, NextResponse } from 'next/server';
 import * as pdfParse from 'pdf-parse';
 import * as mammoth from 'mammoth';
+import { createWorker } from 'tesseract.js';
+import pdf2pic from 'pdf2pic';
+import * as os from 'os';
+
+async function extractTextFromPDF(buffer: Buffer): Promise<string> {
+  try {
+    // First, try pdf-parse for text-based PDFs
+    const pdfData = await (pdfParse as any)(buffer);
+    const textFromPdf = pdfData.text.trim();
+
+    // If we got substantial text, return it
+    if (textFromPdf.length > 200) {
+      return textFromPdf;
+    }
+
+    // If text is minimal, likely a scanned PDF, use OCR
+    console.log('Minimal text extracted, attempting OCR...');
+
+    // Convert PDF to images (first 3 pages max)
+    const convert = pdf2pic.fromBuffer(buffer, {
+      density: 200,           // higher dpi for better OCR
+      saveFilename: "page",
+      savePath: os.tmpdir(),  // temporary path
+      format: "png",
+      width: 2000,
+      height: 2000
+    });
+
+    const worker = await createWorker('eng');
+
+    let ocrText = '';
+
+    // Process first 3 pages
+    for (let pageNum = 1; pageNum <= 3; pageNum++) {
+      try {
+        const result = await convert(pageNum);
+        if (result && result.path) {
+          const { data: { text } } = await worker.recognize(result.path);
+          ocrText += text + '\n';
+        }
+      } catch (pageError) {
+        // Stop if page doesn't exist
+        break;
+      }
+    }
+
+    await worker.terminate();
+
+    return ocrText || textFromPdf; // Return OCR text, or fallback to minimal pdf text
+
+  } catch (error) {
+    console.error('PDF extraction error:', error);
+    throw new Error('Failed to extract text from PDF');
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -39,8 +94,7 @@ export async function POST(request: NextRequest) {
     // Parse based on file type
     try {
       if (file.type === 'application/pdf') {
-        const data = await (pdfParse as any)(buffer);
-        extractedText = data.text;
+        extractedText = await extractTextFromPDF(buffer);
       } else if (file.type.includes('word')) {
         const result = await mammoth.extractRawText({ buffer });
         extractedText = result.value;
