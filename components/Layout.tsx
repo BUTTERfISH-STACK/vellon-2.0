@@ -21,9 +21,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <Link href="/pricing" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
                 Pricing
               </Link>
-              <Link href="/login" className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
-                Login
-              </Link>
             </nav>
           </div>
         </div>
