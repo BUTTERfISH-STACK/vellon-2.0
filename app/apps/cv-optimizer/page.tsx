@@ -1017,7 +1017,7 @@ export default function CVOptimizerPage() {
         <section className="text-center py-20 sm:py-32 animate-fade-in-up">
           <div className="inline-block p-1 bg-gradient-primary rounded-full mb-6 animate-glow">
             <div className="bg-surface px-4 py-2 rounded-full">
-              <span className="text-primary font-bold text-sm">Employers don't care about the fancy looks. They care about who they pay, doing the work, being eligible for the role.</span>
+              <h2 className="text-primary font-bold text-lg">Employers don't care about the fancy looks. They care about who they pay, doing the work, being eligible for the role.</h2>
             </div>
           </div>
           <p className="max-w-3xl mx-auto text-xl text-text-muted mb-8 leading-relaxed">
@@ -1127,89 +1127,6 @@ export default function CVOptimizerPage() {
                       <div className="flex items-center gap-2">
                         <span className="text-accent">🎪</span>
                         <span className="font-medium">Advanced AI Features</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-gradient-to-r from-accent to-accent/80 p-6 rounded-2xl text-white">
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <h3 className="text-xl font-bold">Pro Beast Mode</h3>
-                      <p className="text-accent/90">Professional CV tools that get you hired</p>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold">R59<span className="text-sm font-normal">/month</span></div>
-                      <div className="text-xs text-accent/80">Cancel anytime</div>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                    <div className="bg-white/10 p-4 rounded-lg">
-                      <div className="text-accent font-bold text-lg mb-1">🎨 Premium Templates</div>
-                      <p className="text-sm text-white/90">Creative & Modern designs that stand out</p>
-                    </div>
-                    <div className="bg-white/10 p-4 rounded-lg">
-                      <div className="text-accent font-bold text-lg mb-1">🎯 ATS Optimization</div>
-                      <p className="text-sm text-white/90">95%+ pass rate with scoring analysis</p>
-                    </div>
-                    <div className="bg-white/10 p-4 rounded-lg">
-                      <div className="text-accent font-bold text-lg mb-1">📈 Success Tracking</div>
-                      <p className="text-sm text-white/90">Monitor applications & interview rates</p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <a
-                      href="/pricing"
-                      className="flex-1 bg-white text-accent font-bold py-3 px-6 rounded-xl hover:bg-gray-100 transition-colors text-center"
-                    >
-                      Upgrade to Pro Now
-                    </a>
-                    <div className="text-xs text-accent/80 text-center sm:text-left">
-                      💎 14-day free trial • No setup fees • Instant activation
-                    </div>
-                  </div>
-                </div>
-              </div>
-                  <div className="bg-white/50 p-4 rounded-lg">
-                    <p className="text-accent font-bold text-sm mb-2">🚀 Unlock Pro Power - Only R59/month</p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-2">
-                          <span className="text-accent">✨</span>
-                          <span className="font-medium">Premium Templates</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-accent">🎯</span>
-                          <span className="font-medium">ATS Score Analysis</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-accent">📄</span>
-                          <span className="font-medium">Cover Letter Generator</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-accent">🎨</span>
-                          <span className="font-medium">Custom Branding</span>
-                        </div>
-                      </div>
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-2">
-                          <span className="text-accent">📊</span>
-                          <span className="font-medium">Application Tracking</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-accent">🔄</span>
-                          <span className="font-medium">Unlimited Exports</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-accent">⚡</span>
-                          <span className="font-medium">Priority Support</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-accent">🎪</span>
-                          <span className="font-medium">Advanced AI Features</span>
-                        </div>
                       </div>
                     </div>
                   </div>
