@@ -49,7 +49,7 @@ interface CVTemplate {
 }
 
 export default function CVRedoPage() {
-  const [isPro, setIsPro] = useState(false); // In a real app, this would come from user authentication
+  const [isPro, setIsPro] = useState(true); // Set to true for development - in production this would come from user authentication
   const [isGenerating, setIsGenerating] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const [isEditing, setIsEditing] = useState(true);
