@@ -187,7 +187,21 @@ Upgrade to Pro for premium templates and advanced customization!
 
     } catch (error) {
       console.error('Upload error:', error);
-      alert(`Error redesigning CV: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      let errorMessage = 'Unknown error occurred';
+
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      } else if (typeof error === 'object' && error !== null) {
+        // Try to extract error from response
+        const errorObj = error as any;
+        if (errorObj.message) {
+          errorMessage = errorObj.message;
+        } else if (errorObj.error) {
+          errorMessage = errorObj.error;
+        }
+      }
+
+      alert(`Error redesigning CV: ${errorMessage}`);
       setIsSubmitting(false);
     }
   };

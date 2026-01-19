@@ -181,7 +181,21 @@ Upgrade to Pro for advanced ATS analysis and unlimited optimizations!
 
     } catch (error) {
       console.error('Upload error:', error);
-      alert(`Error processing CV: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      let errorMessage = 'Unknown error occurred';
+
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      } else if (typeof error === 'object' && error !== null) {
+        // Try to extract error from response
+        const errorObj = error as any;
+        if (errorObj.message) {
+          errorMessage = errorObj.message;
+        } else if (errorObj.error) {
+          errorMessage = errorObj.error;
+        }
+      }
+
+      alert(`Error processing CV: ${errorMessage}`);
       setIsSubmitting(false);
     }
   };

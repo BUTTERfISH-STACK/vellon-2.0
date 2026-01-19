@@ -1,56 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import * as pdfParse from 'pdf-parse';
 import * as mammoth from 'mammoth';
-import { createWorker } from 'tesseract.js';
-import pdf2pic from 'pdf2pic';
-import * as os from 'os';
 
 async function extractTextFromPDF(buffer: Buffer): Promise<string> {
   try {
-    // First, try pdf-parse for text-based PDFs
     const pdfData = await (pdfParse as any)(buffer);
-    const textFromPdf = pdfData.text.trim();
-
-    // If we got substantial text, return it
-    if (textFromPdf.length > 200) {
-      return textFromPdf;
-    }
-
-    // If text is minimal, likely a scanned PDF, use OCR
-    console.log('Minimal text extracted, attempting OCR...');
-
-    // Convert PDF to images (first 3 pages max)
-    const convert = pdf2pic.fromBuffer(buffer, {
-      density: 200,           // higher dpi for better OCR
-      saveFilename: "page",
-      savePath: os.tmpdir(),  // temporary path
-      format: "png",
-      width: 2000,
-      height: 2000
-    });
-
-    const worker = await createWorker('eng');
-
-    let ocrText = '';
-
-    // Process first 3 pages
-    for (let pageNum = 1; pageNum <= 3; pageNum++) {
-      try {
-        const result = await convert(pageNum);
-        if (result && result.path) {
-          const { data: { text } } = await worker.recognize(result.path);
-          ocrText += text + '\n';
-        }
-      } catch (pageError) {
-        // Stop if page doesn't exist
-        break;
-      }
-    }
-
-    await worker.terminate();
-
-    return ocrText || textFromPdf; // Return OCR text, or fallback to minimal pdf text
-
+    return pdfData.text || '';
   } catch (error) {
     console.error('PDF extraction error:', error);
     throw new Error('Failed to extract text from PDF');
@@ -59,75 +14,105 @@ async function extractTextFromPDF(buffer: Buffer): Promise<string> {
 
 export async function POST(request: NextRequest) {
   try {
-    const formData = await request.formData();
-    const file = formData.get('resume') as File;
-    const selectedTemplate = formData.get('template') as string;
+    // Ensure we always return valid JSON
+    let responseData: any = { error: 'Unknown error occurred' };
+    let statusCode = 500;
 
-    if (!file) {
-      return NextResponse.json({ error: 'No file uploaded' }, { status: 400 });
-    }
-
-    // Validate file type
-    const allowedTypes = [
-      'application/pdf',
-      'application/msword',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-    ];
-
-    if (!allowedTypes.includes(file.type)) {
-      return NextResponse.json({
-        error: 'Invalid file type. Only PDF, DOC, and DOCX files are allowed.'
-      }, { status: 400 });
-    }
-
-    // Check file size (10MB limit)
-    if (file.size > 10 * 1024 * 1024) {
-      return NextResponse.json({ error: 'File size must be less than 10MB.' }, { status: 400 });
-    }
-
-    // Convert File to Buffer
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-
-    let extractedText = '';
-
-    // Parse based on file type
     try {
-      if (file.type === 'application/pdf') {
-        extractedText = await extractTextFromPDF(buffer);
-      } else if (file.type.includes('word')) {
-        const result = await mammoth.extractRawText({ buffer });
-        extractedText = result.value;
+      const formData = await request.formData();
+      const file = formData.get('resume') as File;
+      const selectedTemplate = formData.get('template') as string;
+
+      if (!file) {
+        responseData = { error: 'No file uploaded' };
+        statusCode = 400;
+      } else {
+        // Validate file type
+        const allowedTypes = [
+          'application/pdf',
+          'application/msword',
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        ];
+
+        if (!allowedTypes.includes(file.type)) {
+          responseData = {
+            error: 'Invalid file type. Only PDF, DOC, and DOCX files are allowed.'
+          };
+          statusCode = 400;
+        } else {
+          // Check file size (10MB limit)
+          if (file.size > 10 * 1024 * 1024) {
+            responseData = { error: 'File size must be less than 10MB.' };
+            statusCode = 400;
+          } else {
+            // Convert File to Buffer
+            const bytes = await file.arrayBuffer();
+            const buffer = Buffer.from(bytes);
+
+            let extractedText = '';
+
+            // Parse based on file type
+            try {
+              if (file.type === 'application/pdf') {
+                extractedText = await extractTextFromPDF(buffer);
+              } else if (file.type.includes('word')) {
+                const result = await mammoth.extractRawText({ buffer });
+                extractedText = result.value;
+              }
+
+              // Extract information from CV text
+              const parsedData = extractCVData(extractedText, file.name);
+
+              // Generate redesign suggestions based on template
+              const improvements = generateRedesignSuggestions(extractedText, selectedTemplate, parsedData);
+
+              responseData = {
+                success: true,
+                parsedData: {
+                  ...parsedData,
+                  template: selectedTemplate
+                },
+                improvements,
+                accuracy: Math.floor(88 + Math.random() * 8),
+                extractedText: extractedText.substring(0, 500) + (extractedText.length > 500 ? '...' : ''),
+                wordCount: extractedText.split(/\s+/).length,
+                characterCount: extractedText.length
+              };
+              statusCode = 200;
+
+            } catch (parseError) {
+              console.error('File parsing error:', parseError);
+              responseData = {
+                error: 'Failed to parse file. Please ensure the file is not corrupted and try again.'
+              };
+              statusCode = 500;
+            }
+          }
+        }
       }
-    } catch (error) {
-      console.error('File parsing error:', error);
-      return NextResponse.json({
-        error: 'Failed to parse file. Please ensure the file is not corrupted and try again.'
-      }, { status: 500 });
+    } catch (processingError) {
+      console.error('Processing error:', processingError);
+      responseData = { error: 'Internal server error during processing' };
+      statusCode = 500;
     }
 
-    // Extract information from CV text
-    const parsedData = extractCVData(extractedText, file.name);
-
-    // Generate redesign suggestions based on template
-    const improvements = generateRedesignSuggestions(extractedText, selectedTemplate, parsedData);
-
-    return NextResponse.json({
-      success: true,
-      parsedData: {
-        ...parsedData,
-        template: selectedTemplate
+    // Ensure we always return valid JSON
+    return new Response(JSON.stringify(responseData), {
+      status: statusCode,
+      headers: {
+        'Content-Type': 'application/json',
       },
-      improvements,
-      accuracy: Math.floor(88 + Math.random() * 8),
-      extractedText: extractedText.substring(0, 500) + (extractedText.length > 500 ? '...' : ''),
-      wordCount: extractedText.split(/\s+/).length,
-      characterCount: extractedText.length
     });
 
   } catch (error) {
     console.error('API Error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    // Final fallback to ensure we always return valid JSON
+    return new Response(JSON.stringify({ error: 'Internal server error' }), {
+      status: 500,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   }
 }
 
