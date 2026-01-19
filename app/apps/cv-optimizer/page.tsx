@@ -1423,45 +1423,132 @@ export default function CVOptimizerPage() {
 
                   {/* Template Selection */}
                   <div className="mb-8">
-                    <h3 className="text-lg font-semibold text-foreground mb-4">
-                      {isPro ? 'Choose Your Pro Template' : 'Universal CV Template'}
-                    </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {(isPro ? proTemplates : freeTemplates).map((template) => (
-                        <div
-                          key={template.id}
-                          onClick={() => setSelectedTemplate(template.id)}
-                          className={`cursor-pointer p-4 rounded-xl border-2 transition-all duration-300 ${
-                            selectedTemplate === template.id
-                              ? 'border-primary bg-primary/5 shadow-glow'
-                              : 'border-border hover:border-primary/50 hover:shadow-md'
-                          }`}
-                        >
-                          <div className="aspect-[3/4] bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg mb-3 flex items-center justify-center">
-                            <div className="text-center text-gray-500">
-                              <div className="w-8 h-8 mx-auto mb-2 rounded" style={{ backgroundColor: template.colors.primary }}></div>
-                              <span className="text-xs font-medium">{template.name}</span>
+                    <div className="text-center mb-8">
+                      <h3 className="text-2xl font-bold text-foreground mb-2">
+                        {isPro ? 'Choose Your Pro Template' : 'Universal CV Template'}
+                      </h3>
+                      <p className="text-text-muted text-sm">
+                        {isPro ? 'Select from our premium collection of professionally designed templates' : 'Start with our versatile universal template'}
+                      </p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {(isPro ? proTemplates : freeTemplates).map((template) => {
+                        const getTemplateIcon = (id: string) => {
+                          switch (id) {
+                            case 'moderncv': return '🏢';
+                            case 'creative': return '🎨';
+                            case 'classic': return '📚';
+                            default: return '📄';
+                          }
+                        };
+                        return (
+                          <div
+                            key={template.id}
+                            onClick={() => setSelectedTemplate(template.id)}
+                            className={`group cursor-pointer relative overflow-hidden rounded-2xl border-2 transition-all duration-500 transform hover:scale-105 ${
+                              selectedTemplate === template.id
+                                ? 'border-primary bg-gradient-to-br from-primary/10 to-primary/5 shadow-2xl shadow-primary/20 ring-2 ring-primary/30'
+                                : 'border-border/50 bg-gradient-to-br from-surface to-surface-light hover:border-primary/70 hover:shadow-xl hover:shadow-primary/10'
+                            }`}
+                          >
+                            {/* Premium Badge */}
+                            {isPro && (
+                              <div className="absolute top-3 right-3 z-10">
+                                <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-2 py-1 rounded-full text-xs font-bold shadow-lg">
+                                  PRO
+                                </div>
+                              </div>
+                            )}
+
+                            {/* Template Preview */}
+                            <div className="aspect-[3/4] bg-gradient-to-br from-gray-50 to-gray-100 rounded-t-xl mb-4 flex items-center justify-center relative overflow-hidden">
+                              <div className="absolute inset-0 bg-gradient-to-br opacity-20" style={{ background: `linear-gradient(135deg, ${template.colors.primary}20, ${template.colors.secondary}20)` }}></div>
+                              <div className="text-center text-gray-600 relative z-10">
+                                <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
+                                  {getTemplateIcon(template.id)}
+                                </div>
+                                <div className="w-12 h-12 mx-auto mb-3 rounded-full border-4 border-white shadow-lg" style={{ backgroundColor: template.colors.primary, borderColor: template.colors.secondary }}></div>
+                                <span className="text-sm font-semibold block">{template.name}</span>
+                                <div className="mt-2 flex justify-center space-x-1">
+                                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: template.colors.primary }}></div>
+                                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: template.colors.secondary }}></div>
+                                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: template.colors.accent }}></div>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Template Info */}
+                            <div className="p-4">
+                              <div className="flex items-center justify-between mb-2">
+                                <h4 className="font-bold text-foreground text-base">{template.name}</h4>
+                                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                                  template.category === 'Modern' ? 'bg-blue-100 text-blue-800' :
+                                  template.category === 'Creative' ? 'bg-purple-100 text-purple-800' :
+                                  'bg-gray-100 text-gray-800'
+                                }`}>
+                                  {template.category}
+                                </span>
+                              </div>
+                              <p className="text-sm text-text-muted leading-relaxed mb-3">{template.description}</p>
+
+                              {/* Features */}
+                              <div className="space-y-1 mb-4">
+                                <div className="flex items-center text-xs text-text-muted">
+                                  <svg className="w-3 h-3 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                  </svg>
+                                  ATS-Optimized
+                                </div>
+                                <div className="flex items-center text-xs text-text-muted">
+                                  <svg className="w-3 h-3 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                  </svg>
+                                  Mobile Responsive
+                                </div>
+                                <div className="flex items-center text-xs text-text-muted">
+                                  <svg className="w-3 h-3 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                  </svg>
+                                  Customizable
+                                </div>
+                              </div>
+
+                              {/* Selection Indicator */}
+                              {selectedTemplate === template.id && (
+                                <div className="flex items-center justify-center text-primary bg-primary/10 rounded-lg py-2 px-3">
+                                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                  </svg>
+                                  <span className="text-sm font-semibold">Selected</span>
+                                </div>
+                              )}
                             </div>
                           </div>
-                          <h4 className="font-semibold text-sm mb-1">{template.name}</h4>
-                          <p className="text-xs text-text-muted mb-2">{template.category}</p>
-                          <p className="text-xs text-text-muted leading-tight">{template.description}</p>
-                          {selectedTemplate === template.id && (
-                            <div className="mt-2 flex items-center text-primary">
-                              <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                              </svg>
-                              <span className="text-xs font-medium">Selected</span>
-                            </div>
-                          )}
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                     {!isPro && (
-                      <div className="mt-4 p-4 bg-gradient-primary/10 rounded-xl border border-primary/20">
-                        <p className="text-primary text-sm font-medium">
-                          <strong>Upgrade to Pro:</strong> Unlock 3 premium templates (Modern, Creative, Classic) with advanced customization options.
-                        </p>
+                      <div className="mt-6 p-6 bg-gradient-to-r from-accent/10 via-primary/5 to-accent/10 rounded-2xl border border-accent/20 shadow-lg">
+                        <div className="text-center">
+                          <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-accent to-primary rounded-full mb-4">
+                            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                          </div>
+                          <h4 className="text-lg font-bold text-foreground mb-2">Unlock Premium Templates</h4>
+                          <p className="text-text-muted text-sm mb-4">
+                            Get access to Modern, Creative, and Classic templates with advanced customization, ATS optimization, and professional layouts.
+                          </p>
+                          <a
+                            href="/pricing"
+                            className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-accent to-primary text-white font-semibold rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-200"
+                          >
+                            Upgrade to Pro
+                            <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                          </a>
+                        </div>
                       </div>
                     )}
                   </div>
