@@ -7,7 +7,7 @@ import jsPDF from 'jspdf';
 const CVMockup = ({ type }: { type: 'modern' | 'classic' | 'creative' }) => {
   const mockups = {
     modern: (
-      <div className="bg-white text-gray-900 p-6 h-full flex flex-col relative">
+      <div className="bg-gradient-to-br from-white to-blue-50 text-gray-900 p-6 h-full flex flex-col relative">
         {/* Vellon Stamp */}
         <div className="absolute top-4 right-4 opacity-40 drop-shadow-sm">
           <img src="/vellon-stamp.png" alt="Vellon" className="w-16 h-16 object-contain" />
@@ -127,7 +127,7 @@ const CVMockup = ({ type }: { type: 'modern' | 'classic' | 'creative' }) => {
       </div>
     ),
     classic: (
-      <div className="bg-white text-gray-900 p-6 h-full flex flex-col relative">
+      <div className="bg-gradient-to-br from-white to-gray-50 text-gray-900 p-6 h-full flex flex-col relative">
         {/* Vellon Stamp */}
         <div className="absolute top-4 right-4 opacity-40 drop-shadow-sm">
           <img src="/vellon-stamp.png" alt="Vellon" className="w-16 h-16 object-contain" />
@@ -610,6 +610,21 @@ export default function CVOptimizerPage() {
     // Get selected template colors
     const availableTemplates = isPro ? proTemplates : freeTemplates;
     const currentTemplate = availableTemplates.find(t => t.id === selectedTemplate) || availableTemplates[0];
+
+    // Add subtle background color based on template
+    if (selectedTemplate === 'creative') {
+      // Light blue background for creative template
+      doc.setFillColor(248, 250, 252); // Very light blue-gray
+      doc.rect(0, 0, doc.internal.pageSize.getWidth(), doc.internal.pageSize.getHeight(), 'F');
+    } else if (selectedTemplate === 'moderncv') {
+      // Very subtle blue tint for modern template
+      doc.setFillColor(249, 250, 251); // Extremely light blue
+      doc.rect(0, 0, doc.internal.pageSize.getWidth(), doc.internal.pageSize.getHeight(), 'F');
+    } else if (selectedTemplate === 'classic') {
+      // Subtle gray background for classic template
+      doc.setFillColor(250, 250, 250); // Very light gray
+      doc.rect(0, 0, doc.internal.pageSize.getWidth(), doc.internal.pageSize.getHeight(), 'F');
+    }
 
     // Apply template-specific styling
     if (isPro && currentTemplate) {
