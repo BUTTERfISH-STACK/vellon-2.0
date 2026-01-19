@@ -981,8 +981,8 @@ export default function CVOptimizerPage() {
                   }`}
                 />
                 <img
-                  src="/cv-classic.png"
-                  alt="Classic CV Design"
+                  src="/cv-minimalist.png"
+                  alt="Minimalist CV Design"
                   className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
                     currentSlide === 2 ? 'opacity-100' : 'opacity-0'
                   }`}
@@ -1000,7 +1000,7 @@ export default function CVOptimizerPage() {
                 ))}
               </div>
               <div className="absolute top-4 right-4 bg-accent/10 text-accent px-3 py-1 rounded-full text-xs font-medium">
-                {currentSlide === 0 ? 'Creative' : currentSlide === 1 ? 'Modern' : 'Classic'} Style
+                {currentSlide === 0 ? 'Creative' : currentSlide === 1 ? 'Modern' : 'Minimalist'} Style
               </div>
             </div>
           </div>
