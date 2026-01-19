@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import jsPDF from 'jspdf';
 
 interface CVData {
@@ -53,7 +53,7 @@ export default function CVOptimizerPage() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const [isEditing, setIsEditing] = useState(true);
-  const [selectedTemplate, setSelectedTemplate] = useState<string>('creative');
+  const [selectedTemplate, setSelectedTemplate] = useState<string>('universal');
   const [cvData, setCvData] = useState<CVData>({
     personal: {
       name: '',
@@ -70,7 +70,18 @@ export default function CVOptimizerPage() {
     certifications: [{ name: '', issuer: '', date: '' }]
   });
 
-  // Pro templates loaded from Git
+  // Available templates based on tier
+  const [freeTemplates, setFreeTemplates] = useState<CVTemplate[]>([
+    {
+      id: 'universal',
+      name: 'Universal CV',
+      description: 'Clean and professional CV template suitable for all industries and career levels',
+      preview: '/templates/universal-preview.jpg',
+      category: 'Basic',
+      colors: { primary: '#2563eb', secondary: '#64748b', accent: '#f59e0b' }
+    }
+  ]);
+
   const [proTemplates, setProTemplates] = useState<CVTemplate[]>([
     {
       id: 'moderncv',
@@ -79,30 +90,6 @@ export default function CVOptimizerPage() {
       preview: '/templates/moderncv-preview.jpg',
       category: 'Modern',
       colors: { primary: '#000000', secondary: '#000000', accent: '#000000' }
-    },
-    {
-      id: 'academic',
-      name: 'Academic CV',
-      description: 'Traditional academic CV template suitable for researchers and academics, with formal layout',
-      preview: '/templates/academic-preview.jpg',
-      category: 'Academic',
-      colors: { primary: '#7c3aed', secondary: '#ec4899', accent: '#f59e0b' }
-    },
-    {
-      id: 'banking',
-      name: 'Banking CV',
-      description: 'Professional CV template designed for banking and finance professionals',
-      preview: '/templates/banking-preview.jpg',
-      category: 'Finance',
-      colors: { primary: '#059669', secondary: '#0891b2', accent: '#7c3aed' }
-    },
-    {
-      id: 'engineering',
-      name: 'Engineering CV',
-      description: 'Technical CV template for engineering professionals with emphasis on skills and projects',
-      preview: '/templates/engineering-preview.jpg',
-      category: 'Engineering',
-      colors: { primary: '#7c2d12', secondary: '#365314', accent: '#1e40af' }
     },
     {
       id: 'creative',
@@ -121,6 +108,11 @@ export default function CVOptimizerPage() {
       colors: { primary: '#374151', secondary: '#6b7280', accent: '#111827' }
     }
   ]);
+
+  // Set default template based on tier
+  useEffect(() => {
+    setSelectedTemplate(isPro ? 'creative' : 'universal');
+  }, [isPro]);
 
   const updatePersonal = (field: keyof CVData['personal'], value: string) => {
     setCvData(prev => ({
@@ -220,7 +212,8 @@ export default function CVOptimizerPage() {
     let yPosition = 20;
 
     // Get selected template colors
-    const currentTemplate = proTemplates.find(t => t.id === selectedTemplate) || proTemplates[0];
+    const availableTemplates = isPro ? proTemplates : freeTemplates;
+    const currentTemplate = availableTemplates.find(t => t.id === selectedTemplate) || availableTemplates[0];
 
     // Apply template-specific styling
     if (isPro && currentTemplate) {
@@ -894,43 +887,50 @@ export default function CVOptimizerPage() {
                     ))}
                   </div>
 
-                  {/* Pro Template Selection */}
-                  {isPro && (
-                    <div className="mb-8">
-                      <h3 className="text-lg font-semibold text-foreground mb-4">Choose Your Template</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {proTemplates.map((template) => (
-                          <div
-                            key={template.id}
-                            onClick={() => setSelectedTemplate(template.id)}
-                            className={`cursor-pointer p-4 rounded-xl border-2 transition-all duration-300 ${
-                              selectedTemplate === template.id
-                                ? 'border-primary bg-primary/5 shadow-glow'
-                                : 'border-border hover:border-primary/50 hover:shadow-md'
-                            }`}
-                          >
-                            <div className="aspect-[3/4] bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg mb-3 flex items-center justify-center">
-                              <div className="text-center text-gray-500">
-                                <div className="w-8 h-8 mx-auto mb-2 rounded" style={{ backgroundColor: template.colors.primary }}></div>
-                                <span className="text-xs font-medium">{template.name}</span>
-                              </div>
+                  {/* Template Selection */}
+                  <div className="mb-8">
+                    <h3 className="text-lg font-semibold text-foreground mb-4">
+                      {isPro ? 'Choose Your Pro Template' : 'Universal CV Template'}
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {(isPro ? proTemplates : freeTemplates).map((template) => (
+                        <div
+                          key={template.id}
+                          onClick={() => setSelectedTemplate(template.id)}
+                          className={`cursor-pointer p-4 rounded-xl border-2 transition-all duration-300 ${
+                            selectedTemplate === template.id
+                              ? 'border-primary bg-primary/5 shadow-glow'
+                              : 'border-border hover:border-primary/50 hover:shadow-md'
+                          }`}
+                        >
+                          <div className="aspect-[3/4] bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg mb-3 flex items-center justify-center">
+                            <div className="text-center text-gray-500">
+                              <div className="w-8 h-8 mx-auto mb-2 rounded" style={{ backgroundColor: template.colors.primary }}></div>
+                              <span className="text-xs font-medium">{template.name}</span>
                             </div>
-                            <h4 className="font-semibold text-sm mb-1">{template.name}</h4>
-                            <p className="text-xs text-text-muted mb-2">{template.category}</p>
-                            <p className="text-xs text-text-muted leading-tight">{template.description}</p>
-                            {selectedTemplate === template.id && (
-                              <div className="mt-2 flex items-center text-primary">
-                                <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                </svg>
-                                <span className="text-xs font-medium">Selected</span>
-                              </div>
-                            )}
                           </div>
-                        ))}
-                      </div>
+                          <h4 className="font-semibold text-sm mb-1">{template.name}</h4>
+                          <p className="text-xs text-text-muted mb-2">{template.category}</p>
+                          <p className="text-xs text-text-muted leading-tight">{template.description}</p>
+                          {selectedTemplate === template.id && (
+                            <div className="mt-2 flex items-center text-primary">
+                              <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                              </svg>
+                              <span className="text-xs font-medium">Selected</span>
+                            </div>
+                          )}
+                        </div>
+                      ))}
                     </div>
-                  )}
+                    {!isPro && (
+                      <div className="mt-4 p-4 bg-gradient-primary/10 rounded-xl border border-primary/20">
+                        <p className="text-primary text-sm font-medium">
+                          <strong>Upgrade to Pro:</strong> Unlock 3 premium templates (Modern, Creative, Classic) with advanced customization options.
+                        </p>
+                      </div>
+                    )}
+                  </div>
 
                   <div className="flex gap-4">
                     <button

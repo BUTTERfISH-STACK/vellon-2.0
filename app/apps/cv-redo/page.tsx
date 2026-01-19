@@ -132,40 +132,100 @@ export default function CVRedoPage() {
     certifications: [{ name: '', issuer: '', date: '' }]
   });
 
-  // Dynamic template loading from API
-  const [proTemplates, setProTemplates] = useState<CVTemplate[]>([]);
-  const [templatesLoading, setTemplatesLoading] = useState(true);
-  const [templatesError, setTemplatesError] = useState<string | null>(null);
+  // Available templates based on tier
+  const [freeTemplates, setFreeTemplates] = useState<CVTemplate[]>([
+    {
+      id: 'universal',
+      name: 'Universal CV',
+      description: 'Clean and professional CV template suitable for all industries and career levels',
+      preview: '/templates/universal-preview.jpg',
+      category: 'Basic',
+      package: 'jsonresume-theme-universal',
+      colors: { primary: '#2563eb', secondary: '#64748b', accent: '#f59e0b' },
+      features: ['Clean Design', 'Professional', 'Universal Appeal']
+    }
+  ]);
 
-  // Load templates from API
+  const [proTemplates, setProTemplates] = useState<CVTemplate[]>([
+    {
+      id: 'moderncv',
+      name: 'Modern CV',
+      description: 'A modern curriculum vitae template with clean design and professional layout, inspired by LaTeX moderncv',
+      preview: '/templates/moderncv-preview.jpg',
+      category: 'Modern',
+      package: 'jsonresume-theme-moderncv',
+      colors: { primary: '#000000', secondary: '#000000', accent: '#000000' },
+      features: ['Clean Design', 'Professional Layout', 'LaTeX Inspired']
+    },
+    {
+      id: 'creative',
+      name: 'Creative CV',
+      description: 'Creative and artistic CV template for designers and creative professionals',
+      preview: '/templates/creative-preview.jpg',
+      category: 'Creative',
+      package: 'jsonresume-theme-creative',
+      colors: { primary: '#dc2626', secondary: '#ea580c', accent: '#7c3aed' },
+      features: ['Artistic Design', 'Creative Layout', 'Visual Appeal']
+    },
+    {
+      id: 'classic',
+      name: 'Classic CV',
+      description: 'Classic and timeless CV template with elegant typography and clean layout',
+      preview: '/templates/classic-preview.jpg',
+      category: 'Classic',
+      package: 'jsonresume-theme-classic',
+      colors: { primary: '#374151', secondary: '#6b7280', accent: '#111827' },
+      features: ['Elegant Typography', 'Clean Layout', 'Timeless Design']
+    }
+  ]);
+
+  // Set default template based on tier
   useEffect(() => {
-    const loadTemplates = async () => {
-      try {
-        setTemplatesLoading(true);
-        const response = await fetch('/api/cv-templates');
-        if (!response.ok) {
-          throw new Error('Failed to load templates');
-        }
-        const templates = await response.json();
-        setProTemplates(templates);
-      } catch (error) {
-        console.error('Error loading templates:', error);
-        setTemplatesError('Failed to load templates. Please try again.');
-      } finally {
-        setTemplatesLoading(false);
-      }
-    };
+    setSelectedTemplate(isPro ? 'creative' : 'universal');
+  }, [isPro]);
 
-    loadTemplates();
+  // Fetch JSON Resume schema for validation
+  const [jsonResumeSchema, setJsonResumeSchema] = useState<any>(null);
+  const [schemaLoading, setSchemaLoading] = useState(false);
+
+  const fetchJsonResumeSchema = async () => {
+    setSchemaLoading(true);
+    try {
+      const response = await fetch('/api/cv-templates', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ action: 'fetch-schema' }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch schema');
+      }
+
+      const data = await response.json();
+      setJsonResumeSchema(data.schema);
+      console.log('JSON Resume Schema:', data.schema);
+    } catch (error) {
+      console.error('Error fetching JSON Resume schema:', error);
+    } finally {
+      setSchemaLoading(false);
+    }
+  };
+
+  // Fetch schema on component mount
+  useEffect(() => {
+    fetchJsonResumeSchema();
   }, []);
 
   // Template filtering and search
   const [templateFilter, setTemplateFilter] = useState<string>('all');
   const [templateSearch, setTemplateSearch] = useState<string>('');
 
-  const categories = ['all', ...Array.from(new Set(proTemplates.map(t => t.category)))];
+  const availableTemplates = isPro ? proTemplates : freeTemplates;
+  const categories = ['all', ...Array.from(new Set(availableTemplates.map(t => t.category)))];
 
-  const filteredTemplates = proTemplates.filter(template => {
+  const filteredTemplates = availableTemplates.filter(template => {
     const matchesCategory = templateFilter === 'all' || template.category === templateFilter;
     const matchesSearch = template.name.toLowerCase().includes(templateSearch.toLowerCase()) ||
                          template.description.toLowerCase().includes(templateSearch.toLowerCase()) ||
@@ -271,7 +331,8 @@ export default function CVRedoPage() {
     let yPosition = 20;
 
     // Get selected template colors
-    const currentTemplate = proTemplates.find(t => t.id === selectedTemplate) || proTemplates[0];
+    const availableTemplates = isPro ? proTemplates : freeTemplates;
+    const currentTemplate = availableTemplates.find(t => t.id === selectedTemplate) || availableTemplates[0];
 
     // Apply template-specific header styling
     if (isPro && currentTemplate) {
@@ -679,6 +740,12 @@ export default function CVRedoPage() {
                 <p className="text-primary text-sm font-medium">
                   <strong>Free Plan:</strong> AI-powered CV redesign with modern templates. Upgrade to Pro for premium designs and advanced customization.
                 </p>
+                {jsonResumeSchema && (
+                  <div className="mt-3 flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-xs text-green-600 font-medium">JSON Resume Standard Integrated</span>
+                  </div>
+                )}
               </div>
 
               {isEditing ? (
@@ -1064,38 +1131,8 @@ export default function CVRedoPage() {
                         </div>
                       </div>
 
-                      {/* Loading State */}
-                      {templatesLoading && (
-                        <div className="text-center py-12">
-                          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-surface flex items-center justify-center">
-                            <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-                          </div>
-                          <h4 className="text-lg font-semibold text-foreground mb-2">Loading Templates</h4>
-                          <p className="text-text-muted">Fetching your premium template collection...</p>
-                        </div>
-                      )}
-
-                      {/* Error State */}
-                      {templatesError && (
-                        <div className="text-center py-12">
-                          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-red-100 dark:bg-red-900/20 flex items-center justify-center">
-                            <svg className="w-8 h-8 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
-                            </svg>
-                          </div>
-                          <h4 className="text-lg font-semibold text-foreground mb-2">Failed to Load Templates</h4>
-                          <p className="text-text-muted mb-4">{templatesError}</p>
-                          <button
-                            onClick={() => window.location.reload()}
-                            className="bg-primary text-white px-6 py-2 rounded-lg font-medium hover:shadow-glow transition-all duration-200"
-                          >
-                            Try Again
-                          </button>
-                        </div>
-                      )}
-
                       {/* Template Grid */}
-                      {!templatesLoading && !templatesError && (
+                      {(
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                         {filteredTemplates.map((template, index) => (
                           <div
@@ -1285,24 +1322,26 @@ export default function CVRedoPage() {
                       )}
 
                       {/* Template Stats */}
-                      <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                        <div className="p-4 bg-surface rounded-xl border border-border/50">
-                          <div className="text-2xl font-black text-primary">{proTemplates.length}</div>
-                          <div className="text-sm text-text-muted">Total Templates</div>
+                      {isPro && (
+                        <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                          <div className="p-4 bg-surface rounded-xl border border-border/50">
+                            <div className="text-2xl font-black text-primary">{proTemplates.length}</div>
+                            <div className="text-sm text-text-muted">Pro Templates</div>
+                          </div>
+                          <div className="p-4 bg-surface rounded-xl border border-border/50">
+                            <div className="text-2xl font-black text-secondary">{categories.length - 1}</div>
+                            <div className="text-sm text-text-muted">Categories</div>
+                          </div>
+                          <div className="p-4 bg-surface rounded-xl border border-border/50">
+                            <div className="text-2xl font-black text-accent">∞</div>
+                            <div className="text-sm text-text-muted">Customizations</div>
+                          </div>
+                          <div className="p-4 bg-surface rounded-xl border border-border/50">
+                            <div className="text-2xl font-black text-primary">AI</div>
+                            <div className="text-sm text-text-muted">Powered Design</div>
+                          </div>
                         </div>
-                        <div className="p-4 bg-surface rounded-xl border border-border/50">
-                          <div className="text-2xl font-black text-secondary">{categories.length - 1}</div>
-                          <div className="text-sm text-text-muted">Categories</div>
-                        </div>
-                        <div className="p-4 bg-surface rounded-xl border border-border/50">
-                          <div className="text-2xl font-black text-accent">∞</div>
-                          <div className="text-sm text-text-muted">Customizations</div>
-                        </div>
-                        <div className="p-4 bg-surface rounded-xl border border-border/50">
-                          <div className="text-2xl font-black text-primary">AI</div>
-                          <div className="text-sm text-text-muted">Powered Design</div>
-                        </div>
-                      </div>
+                      )}
                     </div>
                   )}
 
