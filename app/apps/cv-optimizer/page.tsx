@@ -1090,84 +1090,108 @@ export default function CVOptimizerPage() {
                   </div>
                 )}
 
-                <div className="bg-white/50 p-4 rounded-lg">
-                  <p className="text-accent font-bold text-sm mb-2">🚀 Unlock Pro Power - Only R59/month</p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2">
-                        <span className="text-accent">✨</span>
-                        <span className="font-medium">Premium Templates</span>
+                <div className="bg-gradient-to-br from-amber-50/80 via-orange-50/60 to-pink-50/70 p-6 rounded-3xl shadow-lg border border-amber-100/50 backdrop-blur-sm">
+                  <div className="text-center mb-6">
+                    <div className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 to-orange-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg mb-4">
+                      <span className="text-lg">🌟</span>
+                      <span>Unlock Pro Power - Only R59/month</span>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3 p-3 bg-white/60 rounded-xl hover:bg-white/80 transition-all duration-300 shadow-sm">
+                        <span className="text-2xl">✨</span>
+                        <span className="font-semibold text-gray-800">Premium Templates</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-accent">🎯</span>
-                        <span className="font-medium">ATS Score Analysis</span>
+                      <div className="flex items-center gap-3 p-3 bg-white/60 rounded-xl hover:bg-white/80 transition-all duration-300 shadow-sm">
+                        <span className="text-2xl">🎯</span>
+                        <span className="font-semibold text-gray-800">ATS Score Analysis</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-accent">📄</span>
-                        <span className="font-medium">Cover Letter Generator</span>
+                      <div className="flex items-center gap-3 p-3 bg-white/60 rounded-xl hover:bg-white/80 transition-all duration-300 shadow-sm">
+                        <span className="text-2xl">📄</span>
+                        <span className="font-semibold text-gray-800">Cover Letter Generator</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-accent">🎨</span>
-                        <span className="font-medium">Custom Branding</span>
+                      <div className="flex items-center gap-3 p-3 bg-white/60 rounded-xl hover:bg-white/80 transition-all duration-300 shadow-sm">
+                        <span className="text-2xl">🎨</span>
+                        <span className="font-semibold text-gray-800">Custom Branding</span>
                       </div>
                     </div>
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2">
-                        <span className="text-accent">📊</span>
-                        <span className="font-medium">Application Tracking</span>
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3 p-3 bg-white/60 rounded-xl hover:bg-white/80 transition-all duration-300 shadow-sm">
+                        <span className="text-2xl">📊</span>
+                        <span className="font-semibold text-gray-800">Application Tracking</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-accent">🔄</span>
-                        <span className="font-medium">Unlimited Exports</span>
+                      <div className="flex items-center gap-3 p-3 bg-white/60 rounded-xl hover:bg-white/80 transition-all duration-300 shadow-sm">
+                        <span className="text-2xl">🔄</span>
+                        <span className="font-semibold text-gray-800">Unlimited Exports</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-accent">⚡</span>
-                        <span className="font-medium">Priority Support</span>
+                      <div className="flex items-center gap-3 p-3 bg-white/60 rounded-xl hover:bg-white/80 transition-all duration-300 shadow-sm">
+                        <span className="text-2xl">⚡</span>
+                        <span className="font-semibold text-gray-800">Priority Support</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-accent">🎪</span>
-                        <span className="font-medium">Advanced AI Features</span>
+                      <div className="flex items-center gap-3 p-3 bg-white/60 rounded-xl hover:bg-white/80 transition-all duration-300 shadow-sm">
+                        <span className="text-2xl">🎪</span>
+                        <span className="font-semibold text-gray-800">Advanced AI Features</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-r from-accent to-accent/80 p-6 rounded-2xl text-white">
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <h3 className="text-xl font-bold">Pro Beast Mode</h3>
-                      <p className="text-accent/90">Professional CV tools that get you hired</p>
+                <div className="bg-gradient-to-br from-rose-500 via-pink-500 to-purple-600 p-8 rounded-3xl text-white shadow-2xl relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 to-pink-400/20 animate-pulse"></div>
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between mb-6">
+                      <div>
+                        <h3 className="text-3xl font-bold mb-2 bg-gradient-to-r from-yellow-200 to-pink-200 bg-clip-text text-transparent">Pro Beast Mode</h3>
+                        <p className="text-pink-100 text-lg">Professional CV tools that get you hired</p>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-4xl font-bold mb-1">R59<span className="text-lg font-normal text-pink-200">/month</span></div>
+                        <div className="text-sm text-pink-200 flex items-center gap-1">
+                          <span>💫</span>
+                          <span>Cancel anytime</span>
+                        </div>
+                      </div>
                     </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold">R59<span className="text-sm font-normal">/month</span></div>
-                      <div className="text-xs text-accent/80">Cancel anytime</div>
-                    </div>
-                  </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                    <div className="bg-white/10 p-4 rounded-lg">
-                      <div className="text-accent font-bold text-lg mb-1">🎨 Premium Templates</div>
-                      <p className="text-sm text-white/90">Creative & Modern designs that stand out</p>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                      <div className="bg-white/15 backdrop-blur-sm p-5 rounded-2xl border border-white/20 hover:bg-white/25 transition-all duration-300 shadow-lg">
+                        <div className="text-yellow-200 font-bold text-xl mb-2 flex items-center gap-2">
+                          <span className="text-2xl">🎨</span>
+                          <span>Premium Templates</span>
+                        </div>
+                        <p className="text-pink-100 leading-relaxed">Creative & Modern designs that stand out</p>
+                      </div>
+                      <div className="bg-white/15 backdrop-blur-sm p-5 rounded-2xl border border-white/20 hover:bg-white/25 transition-all duration-300 shadow-lg">
+                        <div className="text-yellow-200 font-bold text-xl mb-2 flex items-center gap-2">
+                          <span className="text-2xl">🎯</span>
+                          <span>ATS Optimization</span>
+                        </div>
+                        <p className="text-pink-100 leading-relaxed">95%+ pass rate with scoring analysis</p>
+                      </div>
+                      <div className="bg-white/15 backdrop-blur-sm p-5 rounded-2xl border border-white/20 hover:bg-white/25 transition-all duration-300 shadow-lg">
+                        <div className="text-yellow-200 font-bold text-xl mb-2 flex items-center gap-2">
+                          <span className="text-2xl">📈</span>
+                          <span>Success Tracking</span>
+                        </div>
+                        <p className="text-pink-100 leading-relaxed">Monitor applications & interview rates</p>
+                      </div>
                     </div>
-                    <div className="bg-white/10 p-4 rounded-lg">
-                      <div className="text-accent font-bold text-lg mb-1">🎯 ATS Optimization</div>
-                      <p className="text-sm text-white/90">95%+ pass rate with scoring analysis</p>
-                    </div>
-                    <div className="bg-white/10 p-4 rounded-lg">
-                      <div className="text-accent font-bold text-lg mb-1">📈 Success Tracking</div>
-                      <p className="text-sm text-white/90">Monitor applications & interview rates</p>
-                    </div>
-                  </div>
 
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <a
-                      href="/pricing"
-                      className="flex-1 bg-white text-accent font-bold py-3 px-6 rounded-xl hover:bg-gray-100 transition-colors text-center"
-                    >
-                      Upgrade to Pro Now
-                    </a>
-                    <div className="text-xs text-accent/80 text-center sm:text-left">
-                      💎 14-day free trial • No setup fees • Instant activation
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <a
+                        href="/pricing"
+                        className="flex-1 bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 font-bold py-4 px-8 rounded-2xl hover:from-yellow-300 hover:to-orange-400 transition-all duration-300 text-center shadow-xl hover:shadow-2xl transform hover:scale-105"
+                      >
+                        <span className="flex items-center justify-center gap-2">
+                          <span className="text-xl">🚀</span>
+                          <span>Upgrade to Pro Now</span>
+                        </span>
+                      </a>
+                      <div className="text-sm text-pink-200 text-center sm:text-left flex items-center justify-center sm:justify-start gap-2">
+                        <span className="text-lg">💎</span>
+                        <span>14-day free trial • No setup fees • Instant activation</span>
+                      </div>
                     </div>
                   </div>
                 </div>
