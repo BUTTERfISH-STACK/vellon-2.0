@@ -952,7 +952,7 @@ export default function CVOptimizerPage() {
         <section className="text-center py-20 sm:py-32 animate-fade-in-up">
           <div className="inline-block p-1 bg-gradient-primary rounded-full mb-6 animate-glow">
             <div className="bg-surface px-4 py-2 rounded-full">
-              <span className="text-primary font-medium text-sm">📄 CV Generator</span>
+              <span className="text-primary font-bold text-sm">Employers don't care about the fancy looks. They care about who they pay, doing the work, being eligible for the role.</span>
             </div>
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-primary bg-clip-text text-transparent mb-6">
