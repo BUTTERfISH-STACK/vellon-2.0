@@ -155,15 +155,13 @@ function extractCVData(text: string, fileName: string) {
   const professionData = detectProfession(text, fileName);
 
   return {
-    name: nameMatch ? nameMatch[1].trim() : extractNameFromFilename(fileName),
+    name: nameMatch ? nameMatch[1].trim() : null,
     title: professionData.profession,
-    email: emailMatch ? emailMatch[1] : `${extractNameFromFilename(fileName).toLowerCase().replace(/\s+/g, '.')}@email.com`,
-    phone: phoneMatch ? phoneMatch[1] : '+1 (555) 123-4567',
+    email: emailMatch ? emailMatch[1] : null,
+    phone: phoneMatch ? phoneMatch[1] : null,
     experience,
     skills: professionData.skills,
-    education: professionData.profession.includes('Software') ? 'Bachelor of Computer Science' :
-               professionData.profession.includes('Design') ? 'Bachelor of Fine Arts' :
-               'Bachelor of Business Administration',
+    education: null,
     keywords: professionData.keywords
   };
 }
@@ -215,7 +213,7 @@ function detectProfession(text: string, fileName: string) {
   // Default
   return {
     profession: 'Professional',
-    skills: ['Communication', 'Leadership', 'Problem Solving', 'Team Collaboration', 'Project Management'],
+    skills: ['Communication', 'Leadership', 'Problem Solving', 'Team Collaboration'],
     keywords: ['Professional Development', 'Leadership', 'Communication', 'Team Collaboration', 'Problem Solving']
   };
 }
@@ -233,7 +231,7 @@ function extractNameFromFilename(fileName: string) {
     ).join(' ');
   }
 
-  return 'Alex Johnson';
+  return null;
 }
 
 function generateOptimizationSuggestions(text: string, jobDescription: string, parsedData: any) {
