@@ -1,262 +1,58 @@
 [
   {
-    "id": "executive-premium",
-    "name": "Executive Premium",
-    "description": "Ultra-sophisticated template for C-suite executives with premium styling, gold accents, and executive-level formatting",
-    "preview": "/templates/executive-premium.jpg",
-    "category": "Executive",
+    "id": "flat",
+    "name": "Flat",
+    "description": "Clean and minimal template with a flat design aesthetic, perfect for modern professionals",
+    "preview": "/templates/flat-preview.png",
+    "category": "Modern",
+    "package": "jsonresume-theme-flat",
     "colors": {
-      "primary": "#1e293b",
-      "secondary": "#fbbf24",
-      "accent": "#dc2626"
+      "primary": "#2c3e50",
+      "secondary": "#3498db",
+      "accent": "#e74c3c"
     },
-    "features": ["Executive Styling", "Gold Accents", "Premium Layout"]
+    "features": ["Clean Design", "Minimal Layout", "Professional Look"]
   },
   {
-    "id": "tech-innovator",
-    "name": "Tech Innovator",
-    "description": "Cutting-edge template for tech professionals with code snippets, GitHub integration, and modern tech aesthetics",
-    "preview": "/templates/tech-innovator.jpg",
-    "category": "Technology",
+    "id": "paper",
+    "name": "Paper",
+    "description": "Traditional paper-style template that mimics a printed document with elegant typography",
+    "preview": "/templates/paper-preview.png",
+    "category": "Classic",
+    "package": "jsonresume-theme-paper",
     "colors": {
-      "primary": "#0f172a",
-      "secondary": "#06b6d4",
-      "accent": "#8b5cf6"
+      "primary": "#2c3e50",
+      "secondary": "#34495e",
+      "accent": "#e67e22"
     },
-    "features": ["Code Snippets", "GitHub Integration", "Modern Tech Design"]
+    "features": ["Paper Style", "Elegant Typography", "Traditional Layout"]
   },
   {
-    "id": "creative-director",
-    "name": "Creative Director",
-    "description": "Bold and artistic template for creative directors with portfolio integration and stunning visual elements",
-    "preview": "/templates/creative-director.jpg",
-    "category": "Creative",
+    "id": "elegant",
+    "name": "Elegant",
+    "description": "Sophisticated template with refined styling and premium visual elements",
+    "preview": "/templates/elegant-preview.png",
+    "category": "Premium",
+    "package": "jsonresume-theme-elegant",
     "colors": {
-      "primary": "#7c2d12",
-      "secondary": "#f59e0b",
-      "accent": "#ec4899"
+      "primary": "#2c3e50",
+      "secondary": "#9b59b6",
+      "accent": "#e74c3c"
     },
-    "features": ["Portfolio Integration", "Visual Elements", "Artistic Design"]
+    "features": ["Sophisticated Design", "Premium Elements", "Refined Styling"]
   },
   {
-    "id": "academic-researcher",
-    "name": "Academic Researcher",
-    "description": "Comprehensive academic template with publication tracking, research metrics, and scholarly formatting",
-    "preview": "/templates/academic-researcher.jpg",
-    "category": "Academic",
+    "id": "kendall",
+    "name": "Kendall",
+    "description": "Modern template with a focus on readability and clean section separation",
+    "preview": "/templates/kendall-preview.png",
+    "category": "Modern",
+    "package": "jsonresume-theme-kendall",
     "colors": {
-      "primary": "#1e40af",
-      "secondary": "#059669",
-      "accent": "#7c3aed"
+      "primary": "#2c3e50",
+      "secondary": "#27ae60",
+      "accent": "#f39c12"
     },
-    "features": ["Publication Tracking", "Research Metrics", "Scholarly Format"]
-  },
-  {
-    "id": "finance-elite",
-    "name": "Finance Elite",
-    "description": "Prestigious template for finance professionals with market data integration and professional financial styling",
-    "preview": "/templates/finance-elite.jpg",
-    "category": "Finance",
-    "colors": {
-      "primary": "#065f46",
-      "secondary": "#0891b2",
-      "accent": "#f59e0b"
-    },
-    "features": ["Market Data", "Financial Styling", "Professional Layout"]
-  },
-  {
-    "id": "medical-professional",
-    "name": "Medical Professional",
-    "description": "Specialized template for healthcare professionals with medical certifications and clinical experience formatting",
-    "preview": "/templates/medical-professional.jpg",
-    "category": "Healthcare",
-    "colors": {
-      "primary": "#dc2626",
-      "secondary": "#059669",
-      "accent": "#0891b2"
-    },
-    "features": ["Medical Certifications", "Clinical Experience", "Healthcare Focus"]
-  },
-  {
-    "id": "legal-expert",
-    "name": "Legal Expert",
-    "description": "Professional template for legal professionals with case law formatting and bar association styling",
-    "preview": "/templates/legal-expert.jpg",
-    "category": "Legal",
-    "colors": {
-      "primary": "#1e293b",
-      "secondary": "#6b7280",
-      "accent": "#374151"
-    },
-    "features": ["Case Law Format", "Bar Association Style", "Legal Professional"]
-  },
-  {
-    "id": "startup-founder",
-    "name": "Startup Founder",
-    "description": "Dynamic template for entrepreneurs with pitch deck integration and startup metrics visualization",
-    "preview": "/templates/startup-founder.jpg",
-    "category": "Entrepreneurship",
-    "colors": {
-      "primary": "#7c3aed",
-      "secondary": "#f59e0b",
-      "accent": "#dc2626"
-    },
-    "features": ["Pitch Deck Integration", "Startup Metrics", "Entrepreneur Focus"]
-  },
-  {
-    "id": "engineering-excellence",
-    "name": "Engineering Excellence",
-    "description": "Technical template for engineers with CAD integration, project portfolios, and engineering certifications",
-    "preview": "/templates/engineering-excellence.jpg",
-    "category": "Engineering",
-    "colors": {
-      "primary": "#7c2d12",
-      "secondary": "#365314",
-      "accent": "#1e40af"
-    },
-    "features": ["CAD Integration", "Project Portfolios", "Engineering Certs"]
-  },
-  {
-    "id": "marketing-guru",
-    "name": "Marketing Guru",
-    "description": "Creative template for marketing professionals with campaign metrics, brand guidelines, and visual storytelling",
-    "preview": "/templates/marketing-guru.jpg",
-    "category": "Marketing",
-    "colors": {
-      "primary": "#ec4899",
-      "secondary": "#8b5cf6",
-      "accent": "#f59e0b"
-    },
-    "features": ["Campaign Metrics", "Brand Guidelines", "Visual Storytelling"]
-  },
-  {
-    "id": "data-scientist",
-    "name": "Data Scientist",
-    "description": "Analytical template for data professionals with visualization integration and statistical formatting",
-    "preview": "/templates/data-scientist.jpg",
-    "category": "Data Science",
-    "colors": {
-      "primary": "#0891b2",
-      "secondary": "#06b6d4",
-      "accent": "#8b5cf6"
-    },
-    "features": ["Data Visualization", "Statistical Format", "Analytics Focus"]
-  },
-  {
-    "id": "consultant-pro",
-    "name": "Consultant Pro",
-    "description": "Strategic template for consultants with case studies, client testimonials, and professional service formatting",
-    "preview": "/templates/consultant-pro.jpg",
-    "category": "Consulting",
-    "colors": {
-      "primary": "#374151",
-      "secondary": "#6b7280",
-      "accent": "#1e40af"
-    },
-    "features": ["Case Studies", "Client Testimonials", "Consulting Format"]
-  },
-  {
-    "id": "sales-champion",
-    "name": "Sales Champion",
-    "description": "Results-driven template for sales professionals with KPI tracking and achievement visualization",
-    "preview": "/templates/sales-champion.jpg",
-    "category": "Sales",
-    "colors": {
-      "primary": "#059669",
-      "secondary": "#10b981",
-      "accent": "#f59e0b"
-    },
-    "features": ["KPI Tracking", "Achievement Visualization", "Sales Metrics"]
-  },
-  {
-    "id": "hr-expert",
-    "name": "HR Expert",
-    "description": "Comprehensive template for HR professionals with talent management metrics and organizational development focus",
-    "preview": "/templates/hr-expert.jpg",
-    "category": "Human Resources",
-    "colors": {
-      "primary": "#be185d",
-      "secondary": "#ec4899",
-      "accent": "#8b5cf6"
-    },
-    "features": ["Talent Management", "HR Metrics", "Organizational Development"]
-  },
-  {
-    "id": "education-leader",
-    "name": "Education Leader",
-    "description": "Educational template for teachers and administrators with curriculum integration and pedagogical formatting",
-    "preview": "/templates/education-leader.jpg",
-    "category": "Education",
-    "colors": {
-      "primary": "#7c3aed",
-      "secondary": "#a855f7",
-      "accent": "#06b6d4"
-    },
-    "features": ["Curriculum Integration", "Pedagogical Format", "Education Focus"]
-  },
-  {
-    "id": "nonprofit-director",
-    "name": "Nonprofit Director",
-    "description": "Impact-focused template for nonprofit leaders with mission statements and social impact metrics",
-    "preview": "/templates/nonprofit-director.jpg",
-    "category": "Nonprofit",
-    "colors": {
-      "primary": "#059669",
-      "secondary": "#10b981",
-      "accent": "#f59e0b"
-    },
-    "features": ["Mission Statements", "Social Impact", "Nonprofit Metrics"]
-  },
-  {
-    "id": "real-estate-pro",
-    "name": "Real Estate Pro",
-    "description": "Professional template for real estate professionals with property listings and market analysis integration",
-    "preview": "/templates/real-estate-pro.jpg",
-    "category": "Real Estate",
-    "colors": {
-      "primary": "#7c2d12",
-      "secondary": "#ea580c",
-      "accent": "#059669"
-    },
-    "features": ["Property Listings", "Market Analysis", "Real Estate Focus"]
-  },
-  {
-    "id": "hospitality-manager",
-    "name": "Hospitality Manager",
-    "description": "Elegant template for hospitality professionals with service excellence focus and luxury branding",
-    "preview": "/templates/hospitality-manager.jpg",
-    "category": "Hospitality",
-    "colors": {
-      "primary": "#1e293b",
-      "secondary": "#fbbf24",
-      "accent": "#ec4899"
-    },
-    "features": ["Service Excellence", "Luxury Branding", "Hospitality Focus"]
-  },
-  {
-    "id": "construction-expert",
-    "name": "Construction Expert",
-    "description": "Robust template for construction professionals with project management tools and safety certifications",
-    "preview": "/templates/construction-expert.jpg",
-    "category": "Construction",
-    "colors": {
-      "primary": "#7c2d12",
-      "secondary": "#a16207",
-      "accent": "#dc2626"
-    },
-    "features": ["Project Management", "Safety Certifications", "Construction Focus"]
-  },
-  {
-    "id": "retail-manager",
-    "name": "Retail Manager",
-    "description": "Dynamic template for retail professionals with sales performance metrics and customer experience focus",
-    "preview": "/templates/retail-manager.jpg",
-    "category": "Retail",
-    "colors": {
-      "primary": "#be185d",
-      "secondary": "#f97316",
-      "accent": "#8b5cf6"
-    },
-    "features": ["Sales Performance", "Customer Experience", "Retail Metrics"]
+    "features": ["High Readability", "Clean Sections", "Modern Layout"]
   }
 ]

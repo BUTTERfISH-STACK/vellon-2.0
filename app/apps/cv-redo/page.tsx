@@ -3,6 +3,66 @@
 import { useState, useEffect } from 'react';
 import jsPDF from 'jspdf';
 
+// Sample CV data for previews
+const sampleCVData = {
+  basics: {
+    name: 'John Doe',
+    label: 'Software Developer',
+    email: 'john@example.com',
+    phone: '(555) 123-4567',
+    website: 'https://johndoe.dev',
+    summary: 'Experienced software developer with 5+ years of expertise in full-stack development.',
+    location: {
+      address: '123 Main St',
+      postalCode: '12345',
+      city: 'Anytown',
+      countryCode: 'US',
+      region: 'CA'
+    },
+    profiles: [
+      {
+        network: 'LinkedIn',
+        username: 'johndoe',
+        url: 'https://linkedin.com/in/johndoe'
+      }
+    ]
+  },
+  work: [
+    {
+      name: 'Tech Corp',
+      position: 'Senior Developer',
+      startDate: '2020-01-01',
+      endDate: '2023-12-31',
+      summary: 'Led development of web applications using React and Node.js',
+      highlights: [
+        'Developed scalable web applications',
+        'Mentored junior developers',
+        'Improved performance by 40%'
+      ]
+    }
+  ],
+  education: [
+    {
+      institution: 'University of Technology',
+      area: 'Computer Science',
+      studyType: 'Bachelor',
+      startDate: '2016-09-01',
+      endDate: '2020-05-31',
+      gpa: '3.8'
+    }
+  ],
+  skills: [
+    { name: 'JavaScript', level: 'Expert' },
+    { name: 'React', level: 'Expert' },
+    { name: 'Node.js', level: 'Advanced' },
+    { name: 'Python', level: 'Intermediate' }
+  ],
+  languages: [
+    { language: 'English', fluency: 'Native' },
+    { language: 'Spanish', fluency: 'Intermediate' }
+  ]
+};
+
 interface CVData {
   personal: {
     name: string;
@@ -41,11 +101,13 @@ interface CVTemplate {
   description: string;
   preview: string;
   category: string;
+  package: string;
   colors: {
     primary: string;
     secondary: string;
     accent: string;
   };
+  features: string[];
 }
 
 export default function CVRedoPage() {
@@ -1046,57 +1108,111 @@ export default function CVRedoPage() {
                             }`}
                             style={{ animationDelay: `${index * 100}ms` }}
                           >
-                            {/* Template Preview */}
-                            <div className="aspect-[4/5] relative overflow-hidden">
-                              <div className={`absolute inset-0 bg-gradient-to-br opacity-90 transition-opacity duration-300 group-hover:opacity-100`}
-                                   style={{
-                                     background: `linear-gradient(135deg, ${template.colors.primary}15, ${template.colors.secondary}15)`
-                                   }}>
-                                {/* Animated Background Pattern */}
-                                <div className="absolute inset-0 opacity-20">
-                                  <div className="absolute top-4 left-4 w-16 h-16 rounded-full border-2 animate-pulse"
-                                       style={{ borderColor: template.colors.primary }}></div>
-                                  <div className="absolute bottom-4 right-4 w-12 h-12 rounded-lg border-2 animate-pulse delay-1000"
-                                       style={{ borderColor: template.colors.secondary }}></div>
-                                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded animate-pulse delay-500"
-                                       style={{ backgroundColor: template.colors.accent }}></div>
+                            {/* Template Preview - Actual CV Layout */}
+                            <div className="aspect-[4/5] relative overflow-hidden bg-white border border-gray-200">
+                              <div className="p-4 h-full flex flex-col">
+                                {/* Header */}
+                                <div className="text-center mb-4 pb-2 border-b" style={{ borderColor: template.colors.primary }}>
+                                  <h3 className="text-lg font-bold mb-1" style={{ color: template.colors.primary }}>
+                                    John Doe
+                                  </h3>
+                                  <p className="text-sm text-gray-600">Software Developer</p>
                                 </div>
 
-                                {/* Template Mockup */}
-                                <div className="absolute inset-4 bg-white/90 dark:bg-surface/90 rounded-lg shadow-lg p-3">
-                                  <div className="space-y-2">
-                                    <div className="h-3 rounded" style={{ backgroundColor: template.colors.primary }}></div>
-                                    <div className="h-2 rounded w-3/4" style={{ backgroundColor: template.colors.secondary }}></div>
-                                    <div className="h-2 rounded w-1/2" style={{ backgroundColor: template.colors.accent }}></div>
-                                    <div className="space-y-1 mt-4">
-                                      <div className="h-1.5 rounded w-full opacity-60" style={{ backgroundColor: template.colors.primary }}></div>
-                                      <div className="h-1.5 rounded w-4/5 opacity-60" style={{ backgroundColor: template.colors.secondary }}></div>
-                                      <div className="h-1.5 rounded w-2/3 opacity-60" style={{ backgroundColor: template.colors.accent }}></div>
+                                {/* Contact Info */}
+                                <div className="mb-3 text-xs text-gray-600 space-y-1">
+                                  <div>📧 john@example.com</div>
+                                  <div>📱 (555) 123-4567</div>
+                                  <div>🌐 johndoe.dev</div>
+                                </div>
+
+                                {/* Summary */}
+                                <div className="mb-3">
+                                  <h4 className="text-sm font-semibold mb-1" style={{ color: template.colors.secondary }}>
+                                    Summary
+                                  </h4>
+                                  <p className="text-xs text-gray-700 leading-tight">
+                                    Experienced software developer with 5+ years of expertise in full-stack development.
+                                  </p>
+                                </div>
+
+                                {/* Experience */}
+                                <div className="mb-3">
+                                  <h4 className="text-sm font-semibold mb-1" style={{ color: template.colors.secondary }}>
+                                    Experience
+                                  </h4>
+                                  <div className="text-xs">
+                                    <div className="font-medium" style={{ color: template.colors.primary }}>
+                                      Senior Developer
                                     </div>
+                                    <div className="text-gray-600">Tech Corp • 2020-2023</div>
+                                    <div className="text-gray-700 mt-1">
+                                      Led development of web applications using React and Node.js
+                                    </div>
+                                  </div>
+                                </div>
+
+                                {/* Skills */}
+                                <div className="mb-3">
+                                  <h4 className="text-sm font-semibold mb-1" style={{ color: template.colors.secondary }}>
+                                    Skills
+                                  </h4>
+                                  <div className="flex flex-wrap gap-1">
+                                    <span className="px-2 py-1 rounded text-xs font-medium"
+                                          style={{ backgroundColor: `${template.colors.primary}20`, color: template.colors.primary }}>
+                                      JavaScript
+                                    </span>
+                                    <span className="px-2 py-1 rounded text-xs font-medium"
+                                          style={{ backgroundColor: `${template.colors.secondary}20`, color: template.colors.secondary }}>
+                                      React
+                                    </span>
+                                    <span className="px-2 py-1 rounded text-xs font-medium"
+                                          style={{ backgroundColor: `${template.colors.accent}20`, color: template.colors.accent }}>
+                                      Node.js
+                                    </span>
+                                  </div>
+                                </div>
+
+                                {/* Education */}
+                                <div className="mt-auto">
+                                  <h4 className="text-sm font-semibold mb-1" style={{ color: template.colors.secondary }}>
+                                    Education
+                                  </h4>
+                                  <div className="text-xs">
+                                    <div className="font-medium" style={{ color: template.colors.primary }}>
+                                      Bachelor of Computer Science
+                                    </div>
+                                    <div className="text-gray-600">University of Technology • 2016-2020</div>
                                   </div>
                                 </div>
                               </div>
 
-                              {/* Selection Indicator */}
-                              {selectedTemplate === template.id && (
-                                <div className="absolute top-3 right-3 w-8 h-8 bg-primary rounded-full flex items-center justify-center shadow-lg animate-bounce">
-                                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                              {/* Template Badge */}
+                              <div className="absolute top-2 right-2 px-2 py-1 rounded-full text-xs font-bold text-white"
+                                   style={{ backgroundColor: template.colors.primary }}>
+                                {template.name}
+                              </div>
+                            </div>
+
+                            {/* Selection Indicator */}
+                            {selectedTemplate === template.id && (
+                              <div className="absolute top-3 right-3 w-8 h-8 bg-primary rounded-full flex items-center justify-center shadow-lg animate-bounce">
+                                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                </svg>
+                              </div>
+                            )}
+
+                            {/* Hover Overlay */}
+                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                              <div className="text-center">
+                                <div className="w-12 h-12 mx-auto mb-2 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                   </svg>
                                 </div>
-                              )}
-
-                              {/* Hover Overlay */}
-                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                                <div className="text-center">
-                                  <div className="w-12 h-12 mx-auto mb-2 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                    </svg>
-                                  </div>
-                                  <span className="text-white font-semibold text-sm">Preview Template</span>
-                                </div>
+                                <span className="text-white font-semibold text-sm">Preview Template</span>
                               </div>
                             </div>
 
