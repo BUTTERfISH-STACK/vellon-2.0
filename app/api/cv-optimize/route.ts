@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import * as pdf from 'pdf-parse';
+import { extractRawText } from 'mammoth';
 
 // Simplified text extraction - for demo purposes
 async function extractTextFromFile(buffer: Buffer, fileType: string, fileName: string): Promise<string> {
