@@ -36,7 +36,7 @@ Design University, 2019
 export async function POST(request: NextRequest) {
   try {
     // Ensure we always return valid JSON
-    let responseData: any = { error: 'Unknown error occurred' };
+    let responseData: { error?: string; success?: boolean; parsedData?: any; improvements?: string[]; accuracy?: number; extractedText?: string; wordCount?: number; characterCount?: number } = { error: 'Unknown error occurred' };
     let statusCode = 500;
 
     try {
@@ -231,7 +231,7 @@ function detectProfession(text: string, fileName: string) {
 }
 
 function extractNameFromFilename(fileName: string) {
-  let cleanName = fileName
+  const cleanName = fileName
     .replace(/\.(pdf|doc|docx)$/i, '')
     .replace(/\b(cv|resume|curriculum| vitae)\b/gi, '')
     .replace(/[_-]/g, ' ')
@@ -246,7 +246,7 @@ function extractNameFromFilename(fileName: string) {
   return 'Alex Johnson';
 }
 
-function generateRedesignSuggestions(text: string, template: string, parsedData: any) {
+function generateRedesignSuggestions(text: string, template: string, parsedData: { name: string; title: string; email: string; phone: string; experience: string; skills: string[]; education: string; keywords: string[] }) {
   const suggestions = [];
 
   // Basic improvements

@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function About() {
   return (
     <div className="min-h-screen">
@@ -21,7 +23,7 @@ export default function About() {
             <div className="animate-fade-in-up">
               <h2 className="text-4xl lg:text-5xl font-black text-foreground mb-8 leading-tight">Our Story</h2>
               <p className="text-text-muted mb-8 leading-relaxed text-lg font-light">
-                Vellon 2.0 was born from the frustration of job seekers struggling to create compelling CVs that stand out in today's hyper-competitive job market. We witnessed countless talented professionals being overlooked simply because their CVs couldn't pass basic ATS filters or failed to capture attention in the first few seconds.
+                Vellon 2.0 was born from the frustration of job seekers' struggling to create compelling CVs that stand out in today's hyper-competitive job market. We witnessed countless talented professionals being overlooked simply because their CVs couldn't pass basic ATS filters or failed to capture attention in the first few seconds.
               </p>
               <p className="text-text-muted mb-8 leading-relaxed text-lg font-light">
                 Our diverse team of AI engineers, UX designers, career coaches, and hiring managers came together with a shared vision: to democratize professional CV creation. We leverage cutting-edge AI technology to make sophisticated optimization tools accessible to everyone, regardless of their technical background or budget.
@@ -132,7 +134,7 @@ export default function About() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </a>
-              <a
+              <Link
                 href="/"
                 className="inline-flex items-center gap-3 bg-surface-light backdrop-blur-sm text-foreground font-semibold py-5 px-10 rounded-2xl border-2 border-border hover:bg-surface hover:border-primary/50 hover:scale-105 transition-all duration-300 shadow-premium text-lg"
               >
@@ -140,7 +142,7 @@ export default function About() {
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
-              </a>
+              </Link>
             </div>
             <div className="mt-12 flex items-center justify-center gap-8 text-sm text-text-muted">
               <div className="flex items-center gap-2">

@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script src="https://js.yoco.com/sdk/v1/yoco-sdk-web.js"></script>
+        <script async src="https://js.yoco.com/sdk/v1/yoco-sdk-web.js"></script>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

@@ -36,7 +36,7 @@ University of Technology, 2018
 export async function POST(request: NextRequest) {
   try {
     // Ensure we always return valid JSON
-    let responseData: any = { error: 'Unknown error occurred' };
+    let responseData: { error?: string; success?: boolean; parsedData?: any; improvements?: string[]; accuracy?: number; extractedText?: string; wordCount?: number; characterCount?: number } = { error: 'Unknown error occurred' };
     let statusCode = 500;
 
     try {
@@ -218,7 +218,7 @@ function detectProfession(text: string, fileName: string) {
 }
 
 function extractNameFromFilename(fileName: string) {
-  let cleanName = fileName
+  const cleanName = fileName
     .replace(/\.(pdf|doc|docx)$/i, '')
     .replace(/\b(cv|resume|curriculum| vitae)\b/gi, '')
     .replace(/[_-]/g, ' ')
@@ -233,7 +233,7 @@ function extractNameFromFilename(fileName: string) {
   return null;
 }
 
-function generateOptimizationSuggestions(text: string, jobDescription: string, parsedData: any) {
+function generateOptimizationSuggestions(text: string, jobDescription: string, parsedData: { name: string; title: string; email: string; phone: string; experience: string; skills: string[]; education: string; keywords: string[] }) {
   const suggestions = [];
 
   // Basic improvements
@@ -266,7 +266,7 @@ function generateOptimizationSuggestions(text: string, jobDescription: string, p
   return suggestions;
 }
 
-function generateOptimizedCV(extractedText: string, parsedData: any, jobDescription: string) {
+function generateOptimizedCV(extractedText: string, parsedData: { name: string; title: string; email: string; phone: string; experience: string; skills: string[]; education: string; keywords: string[] }, jobDescription: string) {
   return `${parsedData.name || 'Professional'}
 ${parsedData.title || 'Professional'}
 

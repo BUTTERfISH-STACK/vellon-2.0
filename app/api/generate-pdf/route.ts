@@ -2,11 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import puppeteer from 'puppeteer';
 
 // Import themes statically to avoid dynamic require issues with Turbopack
-const flatTheme = require('jsonresume-theme-flat');
-const paperTheme = require('jsonresume-theme-paper');
-const elegantTheme = require('jsonresume-theme-elegant');
-const kendallTheme = require('jsonresume-theme-kendall');
-// Removed stackoverflow theme due to Turbopack compatibility issues
+const flatTheme = require('jsonresume-theme-flat') as any;
+const paperTheme = require('jsonresume-theme-paper') as any;
+const elegantTheme = require('jsonresume-theme-elegant') as any;
+const kendallTheme = require('jsonresume-theme-kendall') as any;
 
 const themeMap: { [key: string]: any } = {
   'flat': flatTheme,
@@ -24,7 +23,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Theme not found' }, { status: 400 });
     }
 
-    const theme = require(themePackage);
+    const theme = require(themePackage) as any;
     let html = theme.render(data);
 
     if (!isPro) {

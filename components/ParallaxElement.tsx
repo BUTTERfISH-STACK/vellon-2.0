@@ -18,7 +18,7 @@ export default function ParallaxElement({
   const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let rellax: any = null;
+    let rellax: { destroy: () => void } | null = null;
 
     const initRellax = async () => {
       try {
