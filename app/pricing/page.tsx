@@ -140,6 +140,7 @@ export default function Pricing() {
               </ul>
               <button
                 id="yoco-pro-payment"
+                onClick={handleProPayment}
                 className="inline-flex items-center justify-center gap-3 w-full bg-white text-primary font-bold py-5 px-8 rounded-2xl hover:bg-gray-50 hover:scale-105 transition-all duration-300 text-center shadow-premium text-lg"
               >
                 Choose Pro Plan
@@ -204,6 +205,7 @@ export default function Pricing() {
               </ul>
               <button
                 id="yoco-enterprise-contact"
+                onClick={handleEnterpriseContact}
                 className="inline-flex items-center justify-center gap-3 w-full bg-gradient-primary text-white font-bold py-5 px-8 rounded-2xl hover:shadow-glow hover:scale-105 transition-all duration-300 text-center shadow-premium text-lg"
               >
                 Contact Sales
