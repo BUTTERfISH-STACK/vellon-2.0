@@ -184,38 +184,38 @@ export default function CVRedoPage() {
     setSelectedTemplate(isPro ? 'creative' : 'universal');
   }, [isPro]);
 
-  // Fetch JSON Resume schema for validation
-  const [jsonResumeSchema, setJsonResumeSchema] = useState<any>(null);
-  const [schemaLoading, setSchemaLoading] = useState(false);
+  // Fetch sample CV templates
+  const [sampleCVTemplates, setSampleCVTemplates] = useState<any[]>([]);
+  const [templatesLoading, setTemplatesLoading] = useState(false);
 
-  const fetchJsonResumeSchema = async () => {
-    setSchemaLoading(true);
+  const fetchSampleCVTemplates = async () => {
+    setTemplatesLoading(true);
     try {
       const response = await fetch('/api/cv-templates', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ action: 'fetch-schema' }),
+        body: JSON.stringify({ action: 'fetch-templates' }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch schema');
+        throw new Error('Failed to fetch templates');
       }
 
       const data = await response.json();
-      setJsonResumeSchema(data.schema);
-      console.log('JSON Resume Schema:', data.schema);
+      setSampleCVTemplates(data.templates);
+      console.log('Sample CV Templates:', data.templates);
     } catch (error) {
-      console.error('Error fetching JSON Resume schema:', error);
+      console.error('Error fetching CV templates:', error);
     } finally {
-      setSchemaLoading(false);
+      setTemplatesLoading(false);
     }
   };
 
-  // Fetch schema on component mount
+  // Fetch templates on component mount
   useEffect(() => {
-    fetchJsonResumeSchema();
+    fetchSampleCVTemplates();
   }, []);
 
   // Template filtering and search
@@ -740,10 +740,10 @@ export default function CVRedoPage() {
                 <p className="text-primary text-sm font-medium">
                   <strong>Free Plan:</strong> AI-powered CV redesign with modern templates. Upgrade to Pro for premium designs and advanced customization.
                 </p>
-                {jsonResumeSchema && (
+                {sampleCVTemplates.length > 0 && (
                   <div className="mt-3 flex items-center gap-2">
                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-xs text-green-600 font-medium">JSON Resume Standard Integrated</span>
+                    <span className="text-xs text-green-600 font-medium">{sampleCVTemplates.length} Sample CV Templates Loaded</span>
                   </div>
                 )}
               </div>
@@ -816,6 +816,68 @@ export default function CVRedoPage() {
                       </div>
                     </div>
                   </div>
+
+                  {/* Sample CV Templates */}
+                  {sampleCVTemplates.length > 0 && (
+                    <div className="mb-8">
+                      <h3 className="text-lg font-semibold text-foreground mb-4">Quick Start: Load Sample CV Data</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {sampleCVTemplates.map((template) => (
+                          <div
+                            key={template.id}
+                            className="p-4 bg-surface rounded-xl border border-border/50 hover:border-primary/50 transition-all duration-200 cursor-pointer group"
+                            onClick={() => {
+                              // Load sample data into form
+                              if (template.data.basics) {
+                                updatePersonal('name', template.data.basics.name || '');
+                                updatePersonal('email', template.data.basics.email || '');
+                                updatePersonal('phone', template.data.basics.phone || '');
+                                updatePersonal('website', template.data.basics.website || '');
+                                setCvData(prev => ({ ...prev, summary: template.data.basics.summary || '' }));
+                              }
+
+                              if (template.data.work) {
+                                const workEntries = template.data.work.map((work: any) => ({
+                                  position: work.position || '',
+                                  company: work.name || '',
+                                  startDate: work.startDate || '',
+                                  endDate: work.endDate || '',
+                                  description: work.highlights ? work.highlights.join('\n• ') : work.summary || ''
+                                }));
+                                setCvData(prev => ({ ...prev, experience: workEntries }));
+                              }
+
+                              if (template.data.education) {
+                                const eduEntries = template.data.education.map((edu: any) => ({
+                                  degree: edu.studyType + ' in ' + edu.area || '',
+                                  institution: edu.institution || '',
+                                  startDate: edu.startDate || '',
+                                  endDate: edu.endDate || '',
+                                  gpa: edu.gpa || ''
+                                }));
+                                setCvData(prev => ({ ...prev, education: eduEntries }));
+                              }
+
+                              if (template.data.skills) {
+                                const skillNames = template.data.skills.map((skill: any) => skill.name || skill);
+                                setCvData(prev => ({ ...prev, skills: skillNames }));
+                              }
+                            }}
+                          >
+                            <h4 className="font-semibold text-sm mb-2">{template.name}</h4>
+                            <p className="text-xs text-text-muted mb-3">{template.description}</p>
+                            <div className="flex items-center text-primary group-hover:text-primary/80 transition-colors">
+                              <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                              </svg>
+                              <span className="text-xs font-medium">Load Sample Data</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      <p className="text-xs text-text-muted mt-2">Click any template to instantly populate the form with sample data for testing.</p>
+                    </div>
+                  )}
 
                   {/* Professional Summary */}
                   <div>
