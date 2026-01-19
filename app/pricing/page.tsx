@@ -138,16 +138,15 @@ export default function Pricing() {
                   <span className="font-light">Remove Vellon 2.0 watermark from all downloads</span>
                 </li>
               </ul>
-              <button
-                id="yoco-pro-payment"
-                onClick={handleProPayment}
+              <a
+                href="/apps"
                 className="inline-flex items-center justify-center gap-3 w-full bg-white text-primary font-bold py-5 px-8 rounded-2xl hover:bg-gray-50 hover:scale-105 transition-all duration-300 text-center shadow-premium text-lg"
               >
                 Choose Pro Plan
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
-              </button>
+              </a>
             </div>
 
             <div className="group bg-surface-light backdrop-blur-sm rounded-3xl shadow-premium p-10 border border-border/50 hover:shadow-glow hover:scale-[1.02] transition-all duration-500 animate-fade-in-up h-full">
@@ -205,7 +204,6 @@ export default function Pricing() {
               </ul>
               <button
                 id="yoco-enterprise-contact"
-                onClick={handleEnterpriseContact}
                 className="inline-flex items-center justify-center gap-3 w-full bg-gradient-primary text-white font-bold py-5 px-8 rounded-2xl hover:shadow-glow hover:scale-105 transition-all duration-300 text-center shadow-premium text-lg"
               >
                 Contact Sales
