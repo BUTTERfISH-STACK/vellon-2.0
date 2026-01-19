@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import jsPDF from 'jspdf';
 
 interface CVData {
@@ -70,169 +70,32 @@ export default function CVRedoPage() {
     certifications: [{ name: '', issuer: '', date: '' }]
   });
 
-  // Enhanced Pro templates with massive variety and features
-  const [proTemplates, setProTemplates] = useState<CVTemplate[]>([
-    {
-      id: 'executive-premium',
-      name: 'Executive Premium',
-      description: 'Ultra-sophisticated template for C-suite executives with premium styling, gold accents, and executive-level formatting',
-      preview: '/templates/executive-premium.jpg',
-      category: 'Executive',
-      colors: { primary: '#1e293b', secondary: '#fbbf24', accent: '#dc2626' }
-    },
-    {
-      id: 'tech-innovator',
-      name: 'Tech Innovator',
-      description: 'Cutting-edge template for tech professionals with code snippets, GitHub integration, and modern tech aesthetics',
-      preview: '/templates/tech-innovator.jpg',
-      category: 'Technology',
-      colors: { primary: '#0f172a', secondary: '#06b6d4', accent: '#8b5cf6' }
-    },
-    {
-      id: 'creative-director',
-      name: 'Creative Director',
-      description: 'Bold and artistic template for creative directors with portfolio integration and stunning visual elements',
-      preview: '/templates/creative-director.jpg',
-      category: 'Creative',
-      colors: { primary: '#7c2d12', secondary: '#f59e0b', accent: '#ec4899' }
-    },
-    {
-      id: 'academic-researcher',
-      name: 'Academic Researcher',
-      description: 'Comprehensive academic template with publication tracking, research metrics, and scholarly formatting',
-      preview: '/templates/academic-researcher.jpg',
-      category: 'Academic',
-      colors: { primary: '#1e40af', secondary: '#059669', accent: '#7c3aed' }
-    },
-    {
-      id: 'finance-elite',
-      name: 'Finance Elite',
-      description: 'Prestigious template for finance professionals with market data integration and professional financial styling',
-      preview: '/templates/finance-elite.jpg',
-      category: 'Finance',
-      colors: { primary: '#065f46', secondary: '#0891b2', accent: '#f59e0b' }
-    },
-    {
-      id: 'medical-professional',
-      name: 'Medical Professional',
-      description: 'Specialized template for healthcare professionals with medical certifications and clinical experience formatting',
-      preview: '/templates/medical-professional.jpg',
-      category: 'Healthcare',
-      colors: { primary: '#dc2626', secondary: '#059669', accent: '#0891b2' }
-    },
-    {
-      id: 'legal-expert',
-      name: 'Legal Expert',
-      description: 'Professional template for legal professionals with case law formatting and bar association styling',
-      preview: '/templates/legal-expert.jpg',
-      category: 'Legal',
-      colors: { primary: '#1e293b', secondary: '#6b7280', accent: '#374151' }
-    },
-    {
-      id: 'startup-founder',
-      name: 'Startup Founder',
-      description: 'Dynamic template for entrepreneurs with pitch deck integration and startup metrics visualization',
-      preview: '/templates/startup-founder.jpg',
-      category: 'Entrepreneurship',
-      colors: { primary: '#7c3aed', secondary: '#f59e0b', accent: '#dc2626' }
-    },
-    {
-      id: 'engineering-excellence',
-      name: 'Engineering Excellence',
-      description: 'Technical template for engineers with CAD integration, project portfolios, and engineering certifications',
-      preview: '/templates/engineering-excellence.jpg',
-      category: 'Engineering',
-      colors: { primary: '#7c2d12', secondary: '#365314', accent: '#1e40af' }
-    },
-    {
-      id: 'marketing-guru',
-      name: 'Marketing Guru',
-      description: 'Creative template for marketing professionals with campaign metrics, brand guidelines, and visual storytelling',
-      preview: '/templates/marketing-guru.jpg',
-      category: 'Marketing',
-      colors: { primary: '#ec4899', secondary: '#8b5cf6', accent: '#f59e0b' }
-    },
-    {
-      id: 'data-scientist',
-      name: 'Data Scientist',
-      description: 'Analytical template for data professionals with visualization integration and statistical formatting',
-      preview: '/templates/data-scientist.jpg',
-      category: 'Data Science',
-      colors: { primary: '#0891b2', secondary: '#06b6d4', accent: '#8b5cf6' }
-    },
-    {
-      id: 'consultant-pro',
-      name: 'Consultant Pro',
-      description: 'Strategic template for consultants with case studies, client testimonials, and professional service formatting',
-      preview: '/templates/consultant-pro.jpg',
-      category: 'Consulting',
-      colors: { primary: '#374151', secondary: '#6b7280', accent: '#1e40af' }
-    },
-    {
-      id: 'sales-champion',
-      name: 'Sales Champion',
-      description: 'Results-driven template for sales professionals with KPI tracking and achievement visualization',
-      preview: '/templates/sales-champion.jpg',
-      category: 'Sales',
-      colors: { primary: '#059669', secondary: '#10b981', accent: '#f59e0b' }
-    },
-    {
-      id: 'hr-expert',
-      name: 'HR Expert',
-      description: 'Comprehensive template for HR professionals with talent management metrics and organizational development focus',
-      preview: '/templates/hr-expert.jpg',
-      category: 'Human Resources',
-      colors: { primary: '#be185d', secondary: '#ec4899', accent: '#8b5cf6' }
-    },
-    {
-      id: 'education-leader',
-      name: 'Education Leader',
-      description: 'Educational template for teachers and administrators with curriculum integration and pedagogical formatting',
-      preview: '/templates/education-leader.jpg',
-      category: 'Education',
-      colors: { primary: '#7c3aed', secondary: '#a855f7', accent: '#06b6d4' }
-    },
-    {
-      id: 'nonprofit-director',
-      name: 'Nonprofit Director',
-      description: 'Impact-focused template for nonprofit leaders with mission statements and social impact metrics',
-      preview: '/templates/nonprofit-director.jpg',
-      category: 'Nonprofit',
-      colors: { primary: '#059669', secondary: '#10b981', accent: '#f59e0b' }
-    },
-    {
-      id: 'real-estate-pro',
-      name: 'Real Estate Pro',
-      description: 'Professional template for real estate professionals with property listings and market analysis integration',
-      preview: '/templates/real-estate-pro.jpg',
-      category: 'Real Estate',
-      colors: { primary: '#7c2d12', secondary: '#ea580c', accent: '#059669' }
-    },
-    {
-      id: 'hospitality-manager',
-      name: 'Hospitality Manager',
-      description: 'Elegant template for hospitality professionals with service excellence focus and luxury branding',
-      preview: '/templates/hospitality-manager.jpg',
-      category: 'Hospitality',
-      colors: { primary: '#1e293b', secondary: '#fbbf24', accent: '#ec4899' }
-    },
-    {
-      id: 'construction-expert',
-      name: 'Construction Expert',
-      description: 'Robust template for construction professionals with project management tools and safety certifications',
-      preview: '/templates/construction-expert.jpg',
-      category: 'Construction',
-      colors: { primary: '#7c2d12', secondary: '#a16207', accent: '#dc2626' }
-    },
-    {
-      id: 'retail-manager',
-      name: 'Retail Manager',
-      description: 'Dynamic template for retail professionals with sales performance metrics and customer experience focus',
-      preview: '/templates/retail-manager.jpg',
-      category: 'Retail',
-      colors: { primary: '#be185d', secondary: '#f97316', accent: '#8b5cf6' }
-    }
-  ]);
+  // Dynamic template loading from API
+  const [proTemplates, setProTemplates] = useState<CVTemplate[]>([]);
+  const [templatesLoading, setTemplatesLoading] = useState(true);
+  const [templatesError, setTemplatesError] = useState<string | null>(null);
+
+  // Load templates from API
+  useEffect(() => {
+    const loadTemplates = async () => {
+      try {
+        setTemplatesLoading(true);
+        const response = await fetch('/api/cv-templates');
+        if (!response.ok) {
+          throw new Error('Failed to load templates');
+        }
+        const templates = await response.json();
+        setProTemplates(templates);
+      } catch (error) {
+        console.error('Error loading templates:', error);
+        setTemplatesError('Failed to load templates. Please try again.');
+      } finally {
+        setTemplatesLoading(false);
+      }
+    };
+
+    loadTemplates();
+  }, []);
 
   // Template filtering and search
   const [templateFilter, setTemplateFilter] = useState<string>('all');
@@ -1139,8 +1002,39 @@ export default function CVRedoPage() {
                         </div>
                       </div>
 
+                      {/* Loading State */}
+                      {templatesLoading && (
+                        <div className="text-center py-12">
+                          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-surface flex items-center justify-center">
+                            <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+                          </div>
+                          <h4 className="text-lg font-semibold text-foreground mb-2">Loading Templates</h4>
+                          <p className="text-text-muted">Fetching your premium template collection...</p>
+                        </div>
+                      )}
+
+                      {/* Error State */}
+                      {templatesError && (
+                        <div className="text-center py-12">
+                          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-red-100 dark:bg-red-900/20 flex items-center justify-center">
+                            <svg className="w-8 h-8 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                            </svg>
+                          </div>
+                          <h4 className="text-lg font-semibold text-foreground mb-2">Failed to Load Templates</h4>
+                          <p className="text-text-muted mb-4">{templatesError}</p>
+                          <button
+                            onClick={() => window.location.reload()}
+                            className="bg-primary text-white px-6 py-2 rounded-lg font-medium hover:shadow-glow transition-all duration-200"
+                          >
+                            Try Again
+                          </button>
+                        </div>
+                      )}
+
                       {/* Template Grid */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                      {!templatesLoading && !templatesError && (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                         {filteredTemplates.map((template, index) => (
                           <div
                             key={template.id}
@@ -1258,7 +1152,8 @@ export default function CVRedoPage() {
                             )}
                           </div>
                         ))}
-                      </div>
+                        </div>
+                      )}
 
                       {/* No Results */}
                       {filteredTemplates.length === 0 && (
