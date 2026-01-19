@@ -70,57 +70,183 @@ export default function CVRedoPage() {
     certifications: [{ name: '', issuer: '', date: '' }]
   });
 
-  // Pro templates loaded from Git
+  // Enhanced Pro templates with massive variety and features
   const [proTemplates, setProTemplates] = useState<CVTemplate[]>([
     {
-      id: 'moderncv',
-      name: 'Modern CV',
-      description: 'A modern curriculum vitae template with clean design and professional layout, inspired by LaTeX moderncv',
-      preview: '/templates/moderncv-preview.jpg',
-      category: 'Modern',
-      colors: { primary: '#1e40af', secondary: '#7c3aed', accent: '#dc2626' }
+      id: 'executive-premium',
+      name: 'Executive Premium',
+      description: 'Ultra-sophisticated template for C-suite executives with premium styling, gold accents, and executive-level formatting',
+      preview: '/templates/executive-premium.jpg',
+      category: 'Executive',
+      colors: { primary: '#1e293b', secondary: '#fbbf24', accent: '#dc2626' }
     },
     {
-      id: 'academic',
-      name: 'Academic CV',
-      description: 'Traditional academic CV template suitable for researchers and academics, with formal layout',
-      preview: '/templates/academic-preview.jpg',
+      id: 'tech-innovator',
+      name: 'Tech Innovator',
+      description: 'Cutting-edge template for tech professionals with code snippets, GitHub integration, and modern tech aesthetics',
+      preview: '/templates/tech-innovator.jpg',
+      category: 'Technology',
+      colors: { primary: '#0f172a', secondary: '#06b6d4', accent: '#8b5cf6' }
+    },
+    {
+      id: 'creative-director',
+      name: 'Creative Director',
+      description: 'Bold and artistic template for creative directors with portfolio integration and stunning visual elements',
+      preview: '/templates/creative-director.jpg',
+      category: 'Creative',
+      colors: { primary: '#7c2d12', secondary: '#f59e0b', accent: '#ec4899' }
+    },
+    {
+      id: 'academic-researcher',
+      name: 'Academic Researcher',
+      description: 'Comprehensive academic template with publication tracking, research metrics, and scholarly formatting',
+      preview: '/templates/academic-researcher.jpg',
       category: 'Academic',
-      colors: { primary: '#7c3aed', secondary: '#ec4899', accent: '#f59e0b' }
+      colors: { primary: '#1e40af', secondary: '#059669', accent: '#7c3aed' }
     },
     {
-      id: 'banking',
-      name: 'Banking CV',
-      description: 'Professional CV template designed for banking and finance professionals',
-      preview: '/templates/banking-preview.jpg',
+      id: 'finance-elite',
+      name: 'Finance Elite',
+      description: 'Prestigious template for finance professionals with market data integration and professional financial styling',
+      preview: '/templates/finance-elite.jpg',
       category: 'Finance',
-      colors: { primary: '#059669', secondary: '#0891b2', accent: '#7c3aed' }
+      colors: { primary: '#065f46', secondary: '#0891b2', accent: '#f59e0b' }
     },
     {
-      id: 'engineering',
-      name: 'Engineering CV',
-      description: 'Technical CV template for engineering professionals with emphasis on skills and projects',
-      preview: '/templates/engineering-preview.jpg',
+      id: 'medical-professional',
+      name: 'Medical Professional',
+      description: 'Specialized template for healthcare professionals with medical certifications and clinical experience formatting',
+      preview: '/templates/medical-professional.jpg',
+      category: 'Healthcare',
+      colors: { primary: '#dc2626', secondary: '#059669', accent: '#0891b2' }
+    },
+    {
+      id: 'legal-expert',
+      name: 'Legal Expert',
+      description: 'Professional template for legal professionals with case law formatting and bar association styling',
+      preview: '/templates/legal-expert.jpg',
+      category: 'Legal',
+      colors: { primary: '#1e293b', secondary: '#6b7280', accent: '#374151' }
+    },
+    {
+      id: 'startup-founder',
+      name: 'Startup Founder',
+      description: 'Dynamic template for entrepreneurs with pitch deck integration and startup metrics visualization',
+      preview: '/templates/startup-founder.jpg',
+      category: 'Entrepreneurship',
+      colors: { primary: '#7c3aed', secondary: '#f59e0b', accent: '#dc2626' }
+    },
+    {
+      id: 'engineering-excellence',
+      name: 'Engineering Excellence',
+      description: 'Technical template for engineers with CAD integration, project portfolios, and engineering certifications',
+      preview: '/templates/engineering-excellence.jpg',
       category: 'Engineering',
       colors: { primary: '#7c2d12', secondary: '#365314', accent: '#1e40af' }
     },
     {
-      id: 'creative',
-      name: 'Creative CV',
-      description: 'Creative and artistic CV template for designers and creative professionals',
-      preview: '/templates/creative-preview.jpg',
-      category: 'Creative',
-      colors: { primary: '#dc2626', secondary: '#ea580c', accent: '#7c3aed' }
+      id: 'marketing-guru',
+      name: 'Marketing Guru',
+      description: 'Creative template for marketing professionals with campaign metrics, brand guidelines, and visual storytelling',
+      preview: '/templates/marketing-guru.jpg',
+      category: 'Marketing',
+      colors: { primary: '#ec4899', secondary: '#8b5cf6', accent: '#f59e0b' }
     },
     {
-      id: 'classic',
-      name: 'Classic CV',
-      description: 'Classic and timeless CV template with elegant typography and clean layout',
-      preview: '/templates/classic-preview.jpg',
-      category: 'Classic',
-      colors: { primary: '#374151', secondary: '#6b7280', accent: '#111827' }
+      id: 'data-scientist',
+      name: 'Data Scientist',
+      description: 'Analytical template for data professionals with visualization integration and statistical formatting',
+      preview: '/templates/data-scientist.jpg',
+      category: 'Data Science',
+      colors: { primary: '#0891b2', secondary: '#06b6d4', accent: '#8b5cf6' }
+    },
+    {
+      id: 'consultant-pro',
+      name: 'Consultant Pro',
+      description: 'Strategic template for consultants with case studies, client testimonials, and professional service formatting',
+      preview: '/templates/consultant-pro.jpg',
+      category: 'Consulting',
+      colors: { primary: '#374151', secondary: '#6b7280', accent: '#1e40af' }
+    },
+    {
+      id: 'sales-champion',
+      name: 'Sales Champion',
+      description: 'Results-driven template for sales professionals with KPI tracking and achievement visualization',
+      preview: '/templates/sales-champion.jpg',
+      category: 'Sales',
+      colors: { primary: '#059669', secondary: '#10b981', accent: '#f59e0b' }
+    },
+    {
+      id: 'hr-expert',
+      name: 'HR Expert',
+      description: 'Comprehensive template for HR professionals with talent management metrics and organizational development focus',
+      preview: '/templates/hr-expert.jpg',
+      category: 'Human Resources',
+      colors: { primary: '#be185d', secondary: '#ec4899', accent: '#8b5cf6' }
+    },
+    {
+      id: 'education-leader',
+      name: 'Education Leader',
+      description: 'Educational template for teachers and administrators with curriculum integration and pedagogical formatting',
+      preview: '/templates/education-leader.jpg',
+      category: 'Education',
+      colors: { primary: '#7c3aed', secondary: '#a855f7', accent: '#06b6d4' }
+    },
+    {
+      id: 'nonprofit-director',
+      name: 'Nonprofit Director',
+      description: 'Impact-focused template for nonprofit leaders with mission statements and social impact metrics',
+      preview: '/templates/nonprofit-director.jpg',
+      category: 'Nonprofit',
+      colors: { primary: '#059669', secondary: '#10b981', accent: '#f59e0b' }
+    },
+    {
+      id: 'real-estate-pro',
+      name: 'Real Estate Pro',
+      description: 'Professional template for real estate professionals with property listings and market analysis integration',
+      preview: '/templates/real-estate-pro.jpg',
+      category: 'Real Estate',
+      colors: { primary: '#7c2d12', secondary: '#ea580c', accent: '#059669' }
+    },
+    {
+      id: 'hospitality-manager',
+      name: 'Hospitality Manager',
+      description: 'Elegant template for hospitality professionals with service excellence focus and luxury branding',
+      preview: '/templates/hospitality-manager.jpg',
+      category: 'Hospitality',
+      colors: { primary: '#1e293b', secondary: '#fbbf24', accent: '#ec4899' }
+    },
+    {
+      id: 'construction-expert',
+      name: 'Construction Expert',
+      description: 'Robust template for construction professionals with project management tools and safety certifications',
+      preview: '/templates/construction-expert.jpg',
+      category: 'Construction',
+      colors: { primary: '#7c2d12', secondary: '#a16207', accent: '#dc2626' }
+    },
+    {
+      id: 'retail-manager',
+      name: 'Retail Manager',
+      description: 'Dynamic template for retail professionals with sales performance metrics and customer experience focus',
+      preview: '/templates/retail-manager.jpg',
+      category: 'Retail',
+      colors: { primary: '#be185d', secondary: '#f97316', accent: '#8b5cf6' }
     }
   ]);
+
+  // Template filtering and search
+  const [templateFilter, setTemplateFilter] = useState<string>('all');
+  const [templateSearch, setTemplateSearch] = useState<string>('');
+
+  const categories = ['all', ...Array.from(new Set(proTemplates.map(t => t.category)))];
+
+  const filteredTemplates = proTemplates.filter(template => {
+    const matchesCategory = templateFilter === 'all' || template.category === templateFilter;
+    const matchesSearch = template.name.toLowerCase().includes(templateSearch.toLowerCase()) ||
+                         template.description.toLowerCase().includes(templateSearch.toLowerCase()) ||
+                         template.category.toLowerCase().includes(templateSearch.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   const updatePersonal = (field: keyof CVData['personal'], value: string) => {
     setCvData(prev => ({
@@ -956,40 +1082,215 @@ export default function CVRedoPage() {
                     ))}
                   </div>
 
-                  {/* Pro Template Selection */}
+                  {/* Enhanced Pro Template Selection */}
                   {isPro && (
-                    <div className="mb-8">
-                      <h3 className="text-lg font-semibold text-foreground mb-4">Choose Your Template</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {proTemplates.map((template) => (
+                    <div className="mb-12">
+                      <div className="text-center mb-8">
+                        <h3 className="text-3xl font-black text-foreground mb-4 bg-gradient-primary bg-clip-text text-transparent">
+                          Choose Your Perfect Template
+                        </h3>
+                        <p className="text-lg text-text-muted max-w-2xl mx-auto">
+                          Select from our premium collection of industry-specific templates, each crafted by AI for maximum impact and professional appeal.
+                        </p>
+                      </div>
+
+                      {/* Search and Filter Controls */}
+                      <div className="mb-8 space-y-4">
+                        <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
+                          {/* Search Bar */}
+                          <div className="relative flex-1 max-w-md">
+                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                              <svg className="h-5 w-5 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                              </svg>
+                            </div>
+                            <input
+                              type="text"
+                              placeholder="Search templates..."
+                              value={templateSearch}
+                              onChange={(e) => setTemplateSearch(e.target.value)}
+                              className="w-full pl-10 pr-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 text-foreground placeholder-text-muted"
+                            />
+                          </div>
+
+                          {/* Category Filter */}
+                          <div className="flex flex-wrap gap-2 justify-center">
+                            {categories.map((category) => (
+                              <button
+                                key={category}
+                                onClick={() => setTemplateFilter(category)}
+                                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                                  templateFilter === category
+                                    ? 'bg-primary text-white shadow-glow'
+                                    : 'bg-surface text-text-muted hover:bg-surface-light hover:text-foreground border border-border'
+                                }`}
+                              >
+                                {category === 'all' ? 'All Templates' : category}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Results Count */}
+                        <div className="text-center">
+                          <span className="text-sm text-text-muted">
+                            Showing {filteredTemplates.length} of {proTemplates.length} templates
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Template Grid */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        {filteredTemplates.map((template, index) => (
                           <div
                             key={template.id}
                             onClick={() => setSelectedTemplate(template.id)}
-                            className={`cursor-pointer p-4 rounded-xl border-2 transition-all duration-300 ${
+                            className={`group cursor-pointer relative overflow-hidden rounded-2xl border-2 transition-all duration-500 hover:scale-105 hover:shadow-2xl ${
                               selectedTemplate === template.id
-                                ? 'border-primary bg-primary/5 shadow-glow'
-                                : 'border-border hover:border-primary/50 hover:shadow-md'
+                                ? 'border-primary bg-gradient-to-br from-primary/10 to-secondary/10 shadow-glow scale-105'
+                                : 'border-border hover:border-primary/50 bg-surface hover:shadow-xl'
                             }`}
+                            style={{ animationDelay: `${index * 100}ms` }}
                           >
-                            <div className="aspect-[3/4] bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg mb-3 flex items-center justify-center">
-                              <div className="text-center text-gray-500">
-                                <div className="w-8 h-8 mx-auto mb-2 rounded" style={{ backgroundColor: template.colors.primary }}></div>
-                                <span className="text-xs font-medium">{template.name}</span>
+                            {/* Template Preview */}
+                            <div className="aspect-[4/5] relative overflow-hidden">
+                              <div className={`absolute inset-0 bg-gradient-to-br opacity-90 transition-opacity duration-300 group-hover:opacity-100`}
+                                   style={{
+                                     background: `linear-gradient(135deg, ${template.colors.primary}15, ${template.colors.secondary}15)`
+                                   }}>
+                                {/* Animated Background Pattern */}
+                                <div className="absolute inset-0 opacity-20">
+                                  <div className="absolute top-4 left-4 w-16 h-16 rounded-full border-2 animate-pulse"
+                                       style={{ borderColor: template.colors.primary }}></div>
+                                  <div className="absolute bottom-4 right-4 w-12 h-12 rounded-lg border-2 animate-pulse delay-1000"
+                                       style={{ borderColor: template.colors.secondary }}></div>
+                                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded animate-pulse delay-500"
+                                       style={{ backgroundColor: template.colors.accent }}></div>
+                                </div>
+
+                                {/* Template Mockup */}
+                                <div className="absolute inset-4 bg-white/90 dark:bg-surface/90 rounded-lg shadow-lg p-3">
+                                  <div className="space-y-2">
+                                    <div className="h-3 rounded" style={{ backgroundColor: template.colors.primary }}></div>
+                                    <div className="h-2 rounded w-3/4" style={{ backgroundColor: template.colors.secondary }}></div>
+                                    <div className="h-2 rounded w-1/2" style={{ backgroundColor: template.colors.accent }}></div>
+                                    <div className="space-y-1 mt-4">
+                                      <div className="h-1.5 rounded w-full opacity-60" style={{ backgroundColor: template.colors.primary }}></div>
+                                      <div className="h-1.5 rounded w-4/5 opacity-60" style={{ backgroundColor: template.colors.secondary }}></div>
+                                      <div className="h-1.5 rounded w-2/3 opacity-60" style={{ backgroundColor: template.colors.accent }}></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* Selection Indicator */}
+                              {selectedTemplate === template.id && (
+                                <div className="absolute top-3 right-3 w-8 h-8 bg-primary rounded-full flex items-center justify-center shadow-lg animate-bounce">
+                                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                  </svg>
+                                </div>
+                              )}
+
+                              {/* Hover Overlay */}
+                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                                <div className="text-center">
+                                  <div className="w-12 h-12 mx-auto mb-2 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    </svg>
+                                  </div>
+                                  <span className="text-white font-semibold text-sm">Preview Template</span>
+                                </div>
                               </div>
                             </div>
-                            <h4 className="font-semibold text-sm mb-1">{template.name}</h4>
-                            <p className="text-xs text-text-muted mb-2">{template.category}</p>
-                            <p className="text-xs text-text-muted leading-tight">{template.description}</p>
-                            {selectedTemplate === template.id && (
-                              <div className="mt-2 flex items-center text-primary">
-                                <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                </svg>
-                                <span className="text-xs font-medium">Selected</span>
+
+                            {/* Template Info */}
+                            <div className="p-5">
+                              <div className="flex items-start justify-between mb-2">
+                                <h4 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors duration-200">
+                                  {template.name}
+                                </h4>
+                                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                                  template.category === 'Executive' ? 'bg-purple-100 text-purple-800' :
+                                  template.category === 'Technology' ? 'bg-blue-100 text-blue-800' :
+                                  template.category === 'Creative' ? 'bg-pink-100 text-pink-800' :
+                                  template.category === 'Academic' ? 'bg-green-100 text-green-800' :
+                                  template.category === 'Finance' ? 'bg-yellow-100 text-yellow-800' :
+                                  'bg-gray-100 text-gray-800'
+                                }`}>
+                                  {template.category}
+                                </span>
                               </div>
+
+                              <p className="text-sm text-text-muted leading-relaxed mb-3 line-clamp-3">
+                                {template.description}
+                              </p>
+
+                              {/* Color Palette */}
+                              <div className="flex items-center gap-2 mb-3">
+                                <span className="text-xs text-text-muted font-medium">Colors:</span>
+                                <div className="flex gap-1">
+                                  <div className="w-4 h-4 rounded-full border border-border/50" style={{ backgroundColor: template.colors.primary }}></div>
+                                  <div className="w-4 h-4 rounded-full border border-border/50" style={{ backgroundColor: template.colors.secondary }}></div>
+                                  <div className="w-4 h-4 rounded-full border border-border/50" style={{ backgroundColor: template.colors.accent }}></div>
+                                </div>
+                              </div>
+
+                              {/* Features */}
+                              <div className="flex flex-wrap gap-1">
+                                <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full font-medium">
+                                  AI Optimized
+                                </span>
+                                <span className="px-2 py-1 bg-secondary/10 text-secondary text-xs rounded-full font-medium">
+                                  Premium
+                                </span>
+                                <span className="px-2 py-1 bg-accent/10 text-accent text-xs rounded-full font-medium">
+                                  Professional
+                                </span>
+                              </div>
+                            </div>
+
+                            {/* Selection Animation */}
+                            {selectedTemplate === template.id && (
+                              <div className="absolute inset-0 border-4 border-primary rounded-2xl animate-pulse pointer-events-none"></div>
                             )}
                           </div>
                         ))}
+                      </div>
+
+                      {/* No Results */}
+                      {filteredTemplates.length === 0 && (
+                        <div className="text-center py-12">
+                          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-surface flex items-center justify-center">
+                            <svg className="w-8 h-8 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                          </div>
+                          <h4 className="text-lg font-semibold text-foreground mb-2">No templates found</h4>
+                          <p className="text-text-muted">Try adjusting your search or filter criteria</p>
+                        </div>
+                      )}
+
+                      {/* Template Stats */}
+                      <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                        <div className="p-4 bg-surface rounded-xl border border-border/50">
+                          <div className="text-2xl font-black text-primary">{proTemplates.length}</div>
+                          <div className="text-sm text-text-muted">Total Templates</div>
+                        </div>
+                        <div className="p-4 bg-surface rounded-xl border border-border/50">
+                          <div className="text-2xl font-black text-secondary">{categories.length - 1}</div>
+                          <div className="text-sm text-text-muted">Categories</div>
+                        </div>
+                        <div className="p-4 bg-surface rounded-xl border border-border/50">
+                          <div className="text-2xl font-black text-accent">∞</div>
+                          <div className="text-sm text-text-muted">Customizations</div>
+                        </div>
+                        <div className="p-4 bg-surface rounded-xl border border-border/50">
+                          <div className="text-2xl font-black text-primary">AI</div>
+                          <div className="text-sm text-text-muted">Powered Design</div>
+                        </div>
                       </div>
                     </div>
                   )}
