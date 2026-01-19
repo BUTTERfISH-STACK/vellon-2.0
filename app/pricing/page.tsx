@@ -95,7 +95,7 @@ export default function Pricing() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <span className="font-light">Advanced CV optimization</span>
+                  <span className="font-light">AI-powered keyword optimization with industry-specific analysis</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
@@ -103,7 +103,7 @@ export default function Pricing() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <span className="font-light">Unlimited CV redesigns</span>
+                  <span className="font-light">Unlimited CV creations and redesigns with no usage limits</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
@@ -111,7 +111,7 @@ export default function Pricing() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <span className="font-light">Premium templates</span>
+                  <span className="font-light">20+ premium ATS-friendly templates with custom branding</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
@@ -119,7 +119,7 @@ export default function Pricing() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <span className="font-light">Priority support</span>
+                  <span className="font-light">Priority email support with 24-hour response time</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
@@ -127,7 +127,15 @@ export default function Pricing() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <span className="font-light">ATS compatibility check</span>
+                  <span className="font-light">Advanced ATS compatibility scoring with detailed reports</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <div className="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                    <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="font-light">Remove Vellon 2.0 watermark from all downloads</span>
                 </li>
               </ul>
               <button
