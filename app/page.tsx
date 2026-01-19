@@ -6,21 +6,21 @@ export default function Home() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         <section className="relative text-center py-20 sm:py-32 overflow-hidden">
           {/* Background Elements with Parallax */}
-          <ParallaxElement speed={-1} className="absolute inset-0 opacity-30">
-            <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-primary rounded-full blur-3xl animate-float"></div>
-            <div className="absolute bottom-10 right-10 w-40 h-40 bg-secondary rounded-full blur-3xl animate-float-delayed"></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-accent rounded-full blur-3xl opacity-20"></div>
+          <ParallaxElement speed={-1} className="absolute inset-0 opacity-40">
+            <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-primary rounded-full blur-3xl animate-float shadow-bioluminescent"></div>
+            <div className="absolute bottom-10 right-10 w-40 h-40 bg-secondary rounded-full blur-3xl animate-float-delayed shadow-bioluminescent"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-accent rounded-full blur-3xl opacity-30 shadow-bioluminescent"></div>
           </ParallaxElement>
 
           {/* Floating decorative elements */}
-          <ParallaxElement speed={-0.5} className="absolute top-20 right-20 opacity-20">
-            <div className="w-16 h-16 bg-gradient-primary rounded-lg rotate-45 animate-float"></div>
+          <ParallaxElement speed={-0.5} className="absolute top-20 right-20 opacity-25">
+            <div className="w-16 h-16 bg-gradient-primary rounded-lg rotate-45 animate-float shadow-glow"></div>
           </ParallaxElement>
-          <ParallaxElement speed={-0.8} className="absolute bottom-32 left-16 opacity-15">
-            <div className="w-12 h-12 bg-secondary rounded-full animate-float-delayed"></div>
+          <ParallaxElement speed={-0.8} className="absolute bottom-32 left-16 opacity-20">
+            <div className="w-12 h-12 bg-secondary rounded-full animate-float-delayed shadow-glow"></div>
           </ParallaxElement>
-          <ParallaxElement speed={-0.3} className="absolute top-40 left-1/4 opacity-25">
-            <div className="w-8 h-8 bg-accent rounded-lg animate-float"></div>
+          <ParallaxElement speed={-0.3} className="absolute top-40 left-1/4 opacity-30">
+            <div className="w-8 h-8 bg-accent rounded-lg animate-float shadow-glow"></div>
           </ParallaxElement>
 
           <ParallaxElement speed={-0.5} className="relative z-10">
@@ -56,11 +56,14 @@ export default function Home() {
 
         <section className="py-16 sm:py-24 relative overflow-hidden">
           {/* Floating background elements */}
-          <ParallaxElement speed={-0.8} className="absolute top-20 right-20 opacity-20">
-            <div className="w-24 h-24 bg-gradient-primary rounded-full blur-2xl"></div>
+          <ParallaxElement speed={-0.8} className="absolute top-20 right-20 opacity-25">
+            <div className="w-24 h-24 bg-gradient-primary rounded-full blur-2xl shadow-bioluminescent"></div>
           </ParallaxElement>
-          <ParallaxElement speed={-1.2} className="absolute bottom-20 left-20 opacity-15">
-            <div className="w-32 h-32 bg-secondary rounded-full blur-3xl"></div>
+          <ParallaxElement speed={-1.2} className="absolute bottom-20 left-20 opacity-20">
+            <div className="w-32 h-32 bg-secondary rounded-full blur-3xl shadow-bioluminescent"></div>
+          </ParallaxElement>
+          <ParallaxElement speed={-0.6} className="absolute top-1/2 left-10 opacity-15">
+            <div className="w-20 h-20 bg-accent rounded-full blur-2xl shadow-bioluminescent"></div>
           </ParallaxElement>
 
           <ParallaxElement speed={-0.3}>
