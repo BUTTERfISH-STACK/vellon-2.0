@@ -1,105 +1,166 @@
 export default function About() {
   return (
     <div className="min-h-screen">
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-        <section className="text-center py-20 sm:py-32 animate-fade-in-up">
-          <div className="inline-block p-1 bg-gradient-primary rounded-full mb-6 animate-glow">
-            <div className="bg-surface px-4 py-2 rounded-full">
-              <span className="text-primary font-medium text-sm">🚀 Our Mission</span>
+      <main className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-20 sm:py-28">
+        <section className="text-center py-24 sm:py-36 lg:py-44 animate-fade-in-up">
+          <div className="inline-flex items-center gap-2 p-1 bg-gradient-primary rounded-full mb-8 animate-glow shadow-warm">
+            <div className="bg-surface px-5 py-2.5 rounded-full">
+              <span className="text-primary font-bold text-sm tracking-wide">🚀 OUR MISSION</span>
             </div>
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-primary bg-clip-text text-transparent mb-6">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight bg-gradient-primary bg-clip-text text-transparent mb-8 leading-[0.9]">
             About Vellon 2.0
           </h1>
-          <p className="max-w-3xl mx-auto text-xl text-text-muted mb-8 leading-relaxed">
-            We're on a mission to revolutionize CV creation and optimization using cutting-edge AI technology.
+          <p className="max-w-4xl mx-auto text-xl sm:text-2xl text-text-muted mb-12 leading-relaxed font-light">
+            We're on a mission to revolutionize CV creation and optimization using cutting-edge AI technology that empowers every professional to land their dream job.
           </p>
         </section>
 
-        <section className="py-16 sm:py-24">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <section className="py-24 sm:py-32 lg:py-40">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
             <div className="animate-fade-in-up">
-              <h2 className="text-3xl font-bold text-foreground mb-6">Our Story</h2>
-              <p className="text-text-muted mb-6 leading-relaxed">
-                Vellon 2.0 was born from the frustration of job seekers struggling to create compelling CVs that stand out in today's competitive job market. We saw an opportunity to leverage AI to make professional CV creation accessible to everyone.
+              <h2 className="text-4xl lg:text-5xl font-black text-foreground mb-8 leading-tight">Our Story</h2>
+              <p className="text-text-muted mb-8 leading-relaxed text-lg font-light">
+                Vellon 2.0 was born from the frustration of job seekers struggling to create compelling CVs that stand out in today's hyper-competitive job market. We witnessed countless talented professionals being overlooked simply because their CVs couldn't pass basic ATS filters or failed to capture attention in the first few seconds.
               </p>
-              <p className="text-text-muted mb-6 leading-relaxed">
-                Our team of AI experts, designers, and career coaches came together to build tools that not only optimize your CV for applicant tracking systems but also help you present your professional story in the most compelling way possible.
+              <p className="text-text-muted mb-8 leading-relaxed text-lg font-light">
+                Our diverse team of AI engineers, UX designers, career coaches, and hiring managers came together with a shared vision: to democratize professional CV creation. We leverage cutting-edge AI technology to make sophisticated optimization tools accessible to everyone, regardless of their technical background or budget.
               </p>
+              <div className="flex items-center gap-4 text-sm text-text-muted">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  <span>Founded in 2024</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-secondary rounded-full"></div>
+                  <span>10,000+ CVs Optimized</span>
+                </div>
+              </div>
             </div>
-            <div className="bg-surface-light backdrop-blur-sm rounded-2xl shadow-premium p-8 border border-border/50 animate-fade-in-up">
-              <h3 className="text-xl font-bold text-foreground mb-4">Our Mission</h3>
-              <p className="text-text-muted leading-relaxed">
-                To empower every professional to land their dream job by providing intelligent, accessible tools that transform how CVs are created and optimized.
+            <div className="bg-surface-light backdrop-blur-sm rounded-3xl shadow-premium p-10 border border-border/50 animate-fade-in-up">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 bg-gradient-primary rounded-2xl flex items-center justify-center">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-black text-foreground">Our Mission</h3>
+              </div>
+              <p className="text-text-muted leading-relaxed text-lg font-light">
+                To empower every professional to land their dream job by providing intelligent, accessible tools that transform how CVs are created and optimized. We believe that career success should be determined by talent and dedication, not by access to expensive services.
               </p>
             </div>
           </div>
         </section>
 
-        <section className="py-16 sm:py-24">
-          <div className="text-center mb-12 animate-fade-in-up">
-            <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-4">Why Choose Vellon 2.0?</h2>
-            <p className="text-xl text-text-muted">What sets us apart from the competition</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center group animate-fade-in-up">
-              <div className="bg-surface-light backdrop-blur-sm rounded-2xl shadow-premium p-8 h-full hover:shadow-glow hover:scale-105 transition-all duration-300 border border-border/50 hover:border-primary/30">
-                <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:animate-glow">
-                  <span className="text-2xl">🤖</span>
-                </div>
-                <h3 className="text-xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors">AI-Powered Optimization</h3>
-                <p className="text-text-muted leading-relaxed">
-                  Our advanced algorithms analyze job descriptions and optimize your CV to pass ATS filters and appeal to hiring managers.
-                </p>
-              </div>
-            </div>
-
-            <div className="text-center group animate-fade-in-up">
-              <div className="bg-surface-light backdrop-blur-sm rounded-2xl shadow-premium p-8 h-full hover:shadow-glow hover:scale-105 transition-all duration-300 border border-border/50 hover:border-primary/30">
-                <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:animate-glow">
-                  <span className="text-2xl">🎨</span>
-                </div>
-                <h3 className="text-xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors">Professional Templates</h3>
-                <p className="text-text-muted leading-relaxed">
-                  Choose from a curated collection of modern, ATS-friendly templates designed by professional designers.
-                </p>
-              </div>
-            </div>
-
-            <div className="text-center group animate-fade-in-up">
-              <div className="bg-surface-light backdrop-blur-sm rounded-2xl shadow-premium p-8 h-full hover:shadow-glow hover:scale-105 transition-all duration-300 border border-border/50 hover:border-primary/30">
-                <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:animate-glow">
-                  <span className="text-2xl">💡</span>
-                </div>
-                <h3 className="text-xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors">Expert Guidance</h3>
-                <p className="text-text-muted leading-relaxed">
-                  Get actionable insights and recommendations based on industry best practices and current hiring trends.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="py-16 sm:py-24">
-          <div className="text-center animate-fade-in-up">
-            <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-8">Ready to Transform Your CV?</h2>
-            <p className="text-xl text-text-muted mb-8">
-              Join thousands of professionals who have already improved their job prospects with Vellon 2.0.
+        <section className="py-24 sm:py-32 lg:py-40">
+          <div className="text-center mb-16 animate-fade-in-up">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black bg-gradient-primary bg-clip-text text-transparent mb-6 leading-tight">
+              Why Choose Vellon 2.0?
+            </h2>
+            <p className="text-xl sm:text-2xl text-text-muted font-light max-w-3xl mx-auto leading-relaxed">
+              What sets us apart from the competition and why professionals trust us with their careers
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+            <div className="text-center group animate-fade-in-up">
+              <div className="bg-surface-light backdrop-blur-sm rounded-3xl shadow-premium p-10 h-full hover:shadow-glow hover:scale-[1.02] transition-all duration-500 border border-border/50 hover:border-primary/30">
+                <div className="w-20 h-20 bg-gradient-primary rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:rotate-12 transition-transform duration-300 shadow-glow">
+                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-black text-foreground mb-6 group-hover:text-primary transition-colors leading-tight">
+                  AI-Powered Optimization
+                </h3>
+                <p className="text-text-muted leading-relaxed text-lg font-light">
+                  Our advanced algorithms analyze job descriptions in real-time and optimize your CV to pass ATS filters while highlighting your most relevant qualifications to human recruiters.
+                </p>
+              </div>
+            </div>
+
+            <div className="text-center group animate-fade-in-up">
+              <div className="bg-surface-light backdrop-blur-sm rounded-3xl shadow-premium p-10 h-full hover:shadow-glow hover:scale-[1.02] transition-all duration-500 border border-border/50 hover:border-primary/30">
+                <div className="w-20 h-20 bg-secondary rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:rotate-12 transition-transform duration-300 shadow-glow">
+                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-black text-foreground mb-6 group-hover:text-primary transition-colors leading-tight">
+                  Professional Templates
+                </h3>
+                <p className="text-text-muted leading-relaxed text-lg font-light">
+                  Choose from a curated collection of modern, ATS-friendly templates designed by professional designers. Each template is optimized for both digital and print formats.
+                </p>
+              </div>
+            </div>
+
+            <div className="text-center group animate-fade-in-up">
+              <div className="bg-surface-light backdrop-blur-sm rounded-3xl shadow-premium p-10 h-full hover:shadow-glow hover:scale-[1.02] transition-all duration-500 border border-border/50 hover:border-primary/30">
+                <div className="w-20 h-20 bg-accent rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:rotate-12 transition-transform duration-300 shadow-glow">
+                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-black text-foreground mb-6 group-hover:text-primary transition-colors leading-tight">
+                  Expert Guidance
+                </h3>
+                <p className="text-text-muted leading-relaxed text-lg font-light">
+                  Get actionable insights and recommendations based on industry best practices, current hiring trends, and data from thousands of successful job applications.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-24 sm:py-32 lg:py-40">
+          <div className="text-center animate-fade-in-up">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black bg-gradient-primary bg-clip-text text-transparent mb-8 leading-tight">
+              Ready to Transform Your CV?
+            </h2>
+            <p className="text-xl sm:text-2xl text-text-muted mb-12 font-light max-w-4xl mx-auto leading-relaxed">
+              Join thousands of professionals who have already improved their job prospects with Vellon 2.0. Start your journey to career success today.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
               <a
                 href="/pricing"
-                className="inline-block bg-gradient-primary text-white font-semibold py-4 px-8 rounded-xl hover:shadow-glow hover:scale-105 transition-all duration-200 shadow-premium"
+                className="group inline-flex items-center gap-3 bg-gradient-primary text-white font-bold py-5 px-10 rounded-2xl hover:shadow-glow hover:scale-105 transition-all duration-300 shadow-premium text-lg"
               >
-                View Pricing
+                View Pricing Plans
+                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
               </a>
               <a
                 href="/"
-                className="inline-block bg-surface-light backdrop-blur-sm text-foreground font-semibold py-4 px-8 rounded-xl border border-border hover:bg-surface hover:scale-105 transition-all duration-200 shadow-premium"
+                className="inline-flex items-center gap-3 bg-surface-light backdrop-blur-sm text-foreground font-semibold py-5 px-10 rounded-2xl border-2 border-border hover:bg-surface hover:border-primary/50 hover:scale-105 transition-all duration-300 shadow-premium text-lg"
               >
-                Learn More
+                Explore Tools
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
               </a>
+            </div>
+            <div className="mt-12 flex items-center justify-center gap-8 text-sm text-text-muted">
+              <div className="flex items-center gap-2">
+                <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                <span>No credit card required</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Free basic tools</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Cancel anytime</span>
+              </div>
             </div>
           </div>
         </section>
