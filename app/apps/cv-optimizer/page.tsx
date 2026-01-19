@@ -115,192 +115,110 @@ Upgrade to Pro for advanced ATS analysis and unlimited optimizations!
       return;
     }
 
-    // File property analysis simulation (frontend limitation: cannot parse PDF content)
+    // Simulate progress while uploading
     const parsingSteps = [
       `Validating ${file.name} (${(file.size / 1024).toFixed(0)}KB file)...`,
-      'Analyzing filename for profession keywords...',
-      'Extracting potential name from file naming patterns...',
-      'Estimating experience level from file size...',
-      'Mapping profession to relevant skills database...',
-      'Generating profession-specific keyword suggestions...',
-      'Applying ATS optimization patterns...',
-      jobDescription ? 'Incorporating job description keywords...' : 'Using industry-standard keywords...',
-      'Creating personalized improvement recommendations...',
-      'Preparing downloadable optimized CV template...',
-      'Finalizing results...'
+      'Uploading file to server...',
+      'Extracting text content...',
+      'Analyzing document structure...',
+      'Detecting profession and skills...',
+      'Generating optimization suggestions...',
+      'Applying ATS optimization...',
+      'Creating personalized recommendations...',
+      'Preparing results...'
     ];
 
-    for (let i = 0; i < parsingSteps.length; i++) {
-      setParsingStep(parsingSteps[i]);
-      setParsingProgress(((i + 1) / parsingSteps.length) * 100);
-      await new Promise(resolve => setTimeout(resolve, 500));
+    try {
+      // Start progress simulation
+      for (let i = 0; i < parsingSteps.length - 1; i++) {
+        setParsingStep(parsingSteps[i]);
+        setParsingProgress(((i + 1) / parsingSteps.length) * 100);
+        await new Promise(resolve => setTimeout(resolve, 300));
+      }
+
+      // Create API request form data
+      const apiFormData = new FormData();
+      apiFormData.append('resume', file);
+      if (jobDescription) {
+        apiFormData.append('jobDescription', jobDescription);
+      }
+
+      // Call the actual API
+      const response = await fetch('/api/cv-optimize', {
+        method: 'POST',
+        body: apiFormData,
+      });
+
+      setParsingStep(parsingSteps[parsingSteps.length - 1]);
+      setParsingProgress(100);
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to process CV');
+      }
+
+      const apiResult = await response.json();
+
+      // Format the result for display
+      setResultData({
+        template: 'ATS-Optimized Professional CV',
+        improvements: apiResult.improvements || [],
+        parsedData: apiResult.parsedData || {},
+        accuracy: apiResult.accuracy || 85,
+        fileInfo: {
+          name: file.name,
+          size: file.size,
+          type: file.type
+        },
+        extractedText: apiResult.extractedText,
+        wordCount: apiResult.wordCount,
+        characterCount: apiResult.characterCount,
+        downloadUrl: '#'
+      });
+
+      setShowResult(true);
+      setIsSubmitting(false);
+
+    } catch (error) {
+      console.error('Upload error:', error);
+      alert(`Error processing CV: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      setIsSubmitting(false);
     }
-
-    setIsSubmitting(false);
-
-    // Simulate parsing based on actual file properties and generate realistic data
-    const fileName = file.name.toLowerCase();
-    const fileSize = file.size;
-
-    // Advanced parsing logic based on file analysis
-    const analyzeFileName = (fileName: string) => {
-      const lowerName = fileName.toLowerCase();
-
-      // Profession detection with priority
-      if (lowerName.includes('software') || lowerName.includes('developer') || lowerName.includes('engineer') || lowerName.includes('programmer')) {
-        return {
-          profession: 'Software Developer',
-          skills: ['JavaScript', 'React', 'Node.js', 'Python', 'TypeScript', 'AWS', 'Docker', 'Git'],
-          keywords: ['JavaScript', 'React', 'Node.js', 'Full-Stack Development', 'API Design', 'Database Management', 'Agile', 'Scrum']
-        };
-      }
-      if (lowerName.includes('designer') || lowerName.includes('ux') || lowerName.includes('ui')) {
-        return {
-          profession: 'UX/UI Designer',
-          skills: ['Figma', 'Adobe XD', 'Sketch', 'Prototyping', 'User Research', 'Wireframing', 'Usability Testing'],
-          keywords: ['UI/UX Design', 'User Experience', 'Prototyping', 'Wireframing', 'Design Systems', 'Figma', 'Adobe Creative Suite']
-        };
-      }
-      if (lowerName.includes('manager') || lowerName.includes('lead') || lowerName.includes('director')) {
-        return {
-          profession: 'Project Manager',
-          skills: ['Project Management', 'Agile', 'Scrum', 'Leadership', 'Communication', 'Risk Management'],
-          keywords: ['Project Management', 'Agile Methodology', 'Team Leadership', 'Stakeholder Management', 'Risk Assessment']
-        };
-      }
-      if (lowerName.includes('analyst') || lowerName.includes('data')) {
-        return {
-          profession: 'Data Analyst',
-          skills: ['SQL', 'Python', 'Excel', 'Tableau', 'Power BI', 'Statistics', 'Data Visualization'],
-          keywords: ['Data Analysis', 'SQL', 'Python', 'Data Visualization', 'Statistical Analysis', 'Business Intelligence']
-        };
-      }
-      if (lowerName.includes('marketing') || lowerName.includes('market')) {
-        return {
-          profession: 'Marketing Specialist',
-          skills: ['Digital Marketing', 'SEO', 'Content Creation', 'Social Media', 'Google Analytics', 'Email Marketing'],
-          keywords: ['Digital Marketing', 'SEO', 'Content Strategy', 'Social Media Marketing', 'Google Analytics', 'Email Campaigns']
-        };
-      }
-
-      // Default professional profile
-      return {
-        profession: 'Professional',
-        skills: ['Communication', 'Leadership', 'Problem Solving', 'Team Collaboration', 'Project Management'],
-        keywords: ['Professional Development', 'Leadership', 'Communication', 'Team Collaboration', 'Problem Solving']
-      };
-    };
-
-    const professionData = analyzeFileName(fileName);
-
-    // Experience level based on file size and naming patterns
-    const getExperienceLevel = (fileSize: number, fileName: string) => {
-      const lowerName = fileName.toLowerCase();
-      if (lowerName.includes('senior') || lowerName.includes('lead') || lowerName.includes('principal')) return '7+ years';
-      if (lowerName.includes('mid') || fileSize > 600000) return '4-6 years';
-      if (fileSize > 400000) return '3-5 years';
-      if (fileSize > 200000) return '2-4 years';
-      return '1-3 years';
-    };
-
-    // Enhanced name extraction with better patterns
-    const extractNameFromFile = (fileName: string) => {
-      // Remove extension and common CV words
-      let cleanName = fileName
-        .replace(/\.(pdf|doc|docx)$/i, '')
-        .replace(/\b(cv|resume|curriculum| vitae)\b/gi, '')
-        .replace(/[_-]/g, ' ')
-        .trim();
-
-      // Handle different naming patterns
-      if (cleanName.includes(' ')) {
-        // Already has spaces, assume it's "First Last"
-        return cleanName.split(' ').slice(0, 2).map(word =>
-          word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-        ).join(' ');
-      } else if (cleanName.length > 6) {
-        // Single word, try to split camelCase or find name-like patterns
-        const camelCaseMatch = cleanName.match(/([a-z]+)([A-Z][a-z]+)/);
-        if (camelCaseMatch) {
-          return `${camelCaseMatch[1].charAt(0).toUpperCase()}${camelCaseMatch[1].slice(1)} ${camelCaseMatch[2]}`;
-        }
-      }
-
-      // Fallback to generic name
-      return 'Alex Johnson';
-    };
-
-    const extractedData = {
-      name: extractNameFromFile(fileName),
-      title: professionData.profession,
-      email: `${extractNameFromFile(fileName).toLowerCase().replace(/\s+/g, '.')}@email.com`,
-      phone: '+1 (555) 123-4567',
-      experience: getExperienceLevel(fileSize, fileName),
-      skills: professionData.skills,
-      education: professionData.profession.includes('Software') ? 'Bachelor of Computer Science' :
-                 professionData.profession.includes('Design') ? 'Bachelor of Fine Arts' :
-                 professionData.profession.includes('Data') ? 'Bachelor of Statistics' :
-                 'Bachelor of Business Administration',
-      keywords: jobDescription ? professionData.keywords : professionData.keywords.slice(0, 5)
-    };
-
-    // Calculate realistic improvements based on file analysis
-    const baseImprovements = [
-      `Analyzed ${file.name} (${(file.size / 1024).toFixed(0)}KB)`,
-      `Added ${extractedData.keywords.length} relevant keywords`,
-      'Enhanced section hierarchy for ATS parsing',
-      'Optimized contact information formatting',
-      'Improved keyword density optimization'
-    ];
-
-    if (jobDescription) {
-      baseImprovements.push('Tailored content to match job description');
-      baseImprovements.push('Increased job-specific keyword relevance');
-    }
-
-    setResultData({
-      template: 'ATS-Optimized Professional CV',
-      improvements: baseImprovements,
-      parsedData: extractedData,
-      accuracy: Math.floor(85 + Math.random() * 10), // 85-95% accuracy
-      fileInfo: {
-        name: file.name,
-        size: file.size,
-        type: file.type
-      },
-      downloadUrl: '#'
-    });
-    setShowResult(true);
   };
 
   if (!isPro) {
     return (
-      <div className="bg-zinc-50 dark:bg-black">
+      <div className="min-h-screen">
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-          <section className="text-center py-20 sm:py-32">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">
+          <section className="text-center py-20 sm:py-32 animate-fade-in-up">
+            <div className="inline-block p-1 bg-gradient-primary rounded-full mb-6 animate-glow">
+              <div className="bg-surface px-4 py-2 rounded-full">
+                <span className="text-primary font-medium text-sm">🎯 ATS Optimization</span>
+              </div>
+            </div>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-primary bg-clip-text text-transparent mb-6">
               CV Optimizer
             </h1>
-            <p className="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-300 mb-8">
+            <p className="max-w-3xl mx-auto text-xl text-text-muted mb-8 leading-relaxed">
               Optimize your CV for free with basic AI-powered suggestions.
             </p>
           </section>
 
           <section className="py-16 sm:py-24">
             <div className="max-w-3xl mx-auto">
-              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
-                <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-                  <p className="text-blue-800 dark:text-blue-200 text-sm">
+              <div className="bg-surface-light backdrop-blur-sm rounded-2xl shadow-premium p-8 border border-border/50">
+                <div className="mb-6 p-4 bg-gradient-primary/10 rounded-xl border border-primary/20">
+                  <p className="text-primary text-sm font-medium">
                     <strong>Free Plan:</strong> Basic optimization with keyword suggestions. Upgrade to Pro for advanced ATS analysis and unlimited optimizations.
                   </p>
-                  <p className="text-blue-700 dark:text-blue-300 text-xs mt-2">
-                    <em>Note: This demo analyzes file properties and simulates parsing. Real PDF content parsing requires server-side processing.</em>
+                  <p className="text-primary/80 text-xs mt-2">
+                    <em>Note: Upload your actual CV file for real-time analysis and optimization.</em>
                   </p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                       Full Name
                     </label>
                     <input
@@ -308,12 +226,12 @@ Upgrade to Pro for advanced ATS analysis and unlimited optimizations!
                       id="name"
                       name="name"
                       required
-                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                      className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 text-foreground placeholder-text-muted"
                       placeholder="John Doe"
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
                       Email
                     </label>
                     <input
@@ -321,12 +239,12 @@ Upgrade to Pro for advanced ATS analysis and unlimited optimizations!
                       id="email"
                       name="email"
                       required
-                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                      className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 text-foreground placeholder-text-muted"
                       placeholder="john@example.com"
                     />
                   </div>
                   <div>
-                    <label htmlFor="resume" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label htmlFor="resume" className="block text-sm font-medium text-foreground mb-2">
                       Upload Your CV
                     </label>
                     <input
@@ -334,35 +252,35 @@ Upgrade to Pro for advanced ATS analysis and unlimited optimizations!
                       id="resume"
                       name="resume"
                       required
-                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                      className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 text-foreground file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-gradient-primary file:text-white hover:file:shadow-glow file:transition-all file:duration-200"
                       accept=".pdf,.doc,.docx"
                     />
                   </div>
                   <div>
-                    <label htmlFor="jobDescription" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label htmlFor="jobDescription" className="block text-sm font-medium text-foreground mb-2">
                       Job Description (Optional)
                     </label>
                     <textarea
                       id="jobDescription"
                       name="jobDescription"
                       rows={4}
-                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                      className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 text-foreground placeholder-text-muted resize-none"
                       placeholder="Paste the job description to get better keyword suggestions..."
                     ></textarea>
                   </div>
                   {isSubmitting && (
-                    <div className="mb-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                    <div className="mb-4 p-4 bg-gradient-primary/10 rounded-xl border border-primary/20">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-medium text-blue-800 dark:text-blue-200">
+                        <span className="text-sm font-medium text-primary">
                           {parsingStep}
                         </span>
-                        <span className="text-sm text-blue-600 dark:text-blue-300">
+                        <span className="text-sm text-primary/80">
                           {Math.round(parsingProgress)}%
                         </span>
                       </div>
-                      <div className="w-full bg-blue-200 dark:bg-blue-800 rounded-full h-2">
+                      <div className="w-full bg-surface rounded-full h-3 shadow-inner">
                         <div
-                          className="bg-blue-600 dark:bg-blue-400 h-2 rounded-full transition-all duration-300"
+                          className="bg-gradient-primary h-3 rounded-full transition-all duration-500 shadow-glow"
                           style={{ width: `${parsingProgress}%` }}
                         ></div>
                       </div>
@@ -372,34 +290,34 @@ Upgrade to Pro for advanced ATS analysis and unlimited optimizations!
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-black dark:bg-white text-white dark:text-black py-3 px-4 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-gradient-primary text-white font-semibold py-4 px-6 rounded-xl hover:shadow-glow hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-premium"
                   >
                     {isSubmitting ? 'Analyzing Your CV...' : 'Optimize My CV (Free)'}
                   </button>
                 </form>
 
                 {showResult && resultData && (
-                  <div className="mt-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+                  <div className="mt-8 bg-surface-light backdrop-blur-sm rounded-2xl shadow-premium p-6 border border-border/50 animate-fade-in-up">
                     <div className="text-center mb-6">
-                      <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-full mb-4">
-                        <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-primary rounded-full mb-4 animate-glow">
+                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">CV Optimization Complete!</h3>
-                      <p className="text-gray-600 dark:text-gray-300">Your CV has been optimized with basic keyword suggestions</p>
+                      <h3 className="text-xl font-bold text-foreground mb-2">CV Optimization Complete!</h3>
+                      <p className="text-text-muted">Your CV has been optimized with AI-powered keyword suggestions</p>
                     </div>
 
-                    <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
-                      <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Template: {resultData.template}</h4>
-                      <div className="aspect-[3/4] bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-800 dark:to-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6 mb-4 overflow-hidden shadow-sm">
-                        <div className="text-gray-900 dark:text-white">
+                    <div className="bg-surface rounded-xl p-6 mb-6 border border-border/50">
+                      <h4 className="font-semibold text-foreground mb-4">Template: {resultData.template}</h4>
+                      <div className="aspect-[3/4] bg-gradient-secondary rounded-xl border border-border/50 p-6 mb-4 overflow-hidden shadow-premium">
+                        <div className="text-foreground">
                           {/* Header */}
-                          <div className="text-center mb-4 pb-3 border-b-2 border-blue-500">
-                            <h3 className="font-bold text-lg text-blue-900 dark:text-blue-200">
+                          <div className="text-center mb-4 pb-3 border-b-2 border-primary">
+                            <h3 className="font-bold text-lg bg-gradient-primary bg-clip-text text-transparent">
                               {resultData.parsedData?.name || 'JOHN DOE'}
                             </h3>
-                            <p className="text-gray-600 dark:text-gray-300 font-medium">
+                            <p className="text-text-muted font-medium">
                               {resultData.parsedData?.title || 'Software Developer'}
                             </p>
                           </div>
@@ -407,31 +325,31 @@ Upgrade to Pro for advanced ATS analysis and unlimited optimizations!
                           {/* Contact */}
                           <div className="mb-4">
                             <div className="flex items-center gap-2 mb-2">
-                              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                              <h4 className="font-semibold text-sm text-blue-800 dark:text-blue-300">CONTACT</h4>
+                              <div className="w-2 h-2 bg-primary rounded-full"></div>
+                              <h4 className="font-semibold text-sm text-primary uppercase tracking-wide">CONTACT</h4>
                             </div>
                             <div className="ml-4 space-y-1">
-                              <p className="text-gray-700 dark:text-gray-200 text-sm">📧 john@example.com</p>
-                              <p className="text-gray-700 dark:text-gray-200 text-sm">📱 +1 (555) 123-4567</p>
+                              <p className="text-text-muted text-sm">📧 {resultData.parsedData?.email || 'john@example.com'}</p>
+                              <p className="text-text-muted text-sm">📱 {resultData.parsedData?.phone || '+1 (555) 123-4567'}</p>
                             </div>
                           </div>
 
                           {/* Experience */}
                           <div className="mb-4">
                             <div className="flex items-center gap-2 mb-2">
-                              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                              <h4 className="font-semibold text-sm text-green-800 dark:text-green-300">EXPERIENCE</h4>
+                              <div className="w-2 h-2 bg-secondary rounded-full"></div>
+                              <h4 className="font-semibold text-sm text-secondary uppercase tracking-wide">EXPERIENCE</h4>
                             </div>
                             <div className="ml-4">
-                              <p className="font-medium text-sm text-gray-900 dark:text-white">Senior Developer</p>
-                              <p className="text-gray-600 dark:text-gray-300 text-xs">Tech Corp • 2020-Present</p>
-                              <ul className="text-gray-700 dark:text-gray-200 text-xs mt-1 space-y-1">
+                              <p className="font-medium text-sm text-foreground">Senior Developer</p>
+                              <p className="text-text-muted text-xs">Tech Corp • 2020-Present</p>
+                              <ul className="text-text-muted text-xs mt-1 space-y-1">
                                 <li className="flex items-start gap-1">
-                                  <span className="text-green-500 mt-1">•</span>
+                                  <span className="text-secondary mt-1">•</span>
                                   <span>Developed web applications using React & Node.js</span>
                                 </li>
                                 <li className="flex items-start gap-1">
-                                  <span className="text-green-500 mt-1">•</span>
+                                  <span className="text-secondary mt-1">•</span>
                                   <span>Led cross-functional team projects</span>
                                 </li>
                               </ul>
@@ -441,12 +359,12 @@ Upgrade to Pro for advanced ATS analysis and unlimited optimizations!
                           {/* Skills */}
                           <div className="mb-4">
                             <div className="flex items-center gap-2 mb-2">
-                              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                              <h4 className="font-semibold text-sm text-purple-800 dark:text-purple-300">SKILLS</h4>
+                              <div className="w-2 h-2 bg-accent rounded-full"></div>
+                              <h4 className="font-semibold text-sm text-accent uppercase tracking-wide">SKILLS</h4>
                             </div>
                             <div className="ml-4 flex flex-wrap gap-1">
                               {(resultData.parsedData?.skills || ['JavaScript', 'React', 'Node.js', 'Python']).map((skill: string, index: number) => (
-                                <span key={index} className="bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 text-xs px-2 py-1 rounded-full">
+                                <span key={index} className="bg-accent/20 text-accent text-xs px-3 py-1 rounded-full border border-accent/30">
                                   {skill}
                                 </span>
                               ))}
@@ -454,27 +372,27 @@ Upgrade to Pro for advanced ATS analysis and unlimited optimizations!
                           </div>
 
                           {/* ATS Score Indicator */}
-                          <div className="mt-4 p-2 bg-green-50 dark:bg-green-900/20 rounded border border-green-200 dark:border-green-800">
+                          <div className="mt-4 p-3 bg-gradient-primary/10 rounded-lg border border-primary/20">
                             <div className="flex items-center justify-between">
-                              <span className="text-xs font-medium text-green-800 dark:text-green-200">ATS Score</span>
-                              <span className="text-xs font-bold text-green-800 dark:text-green-200">95%</span>
+                              <span className="text-xs font-medium text-primary">ATS Score</span>
+                              <span className="text-xs font-bold text-primary">{resultData.accuracy || 95}%</span>
                             </div>
-                            <div className="w-full bg-green-200 dark:bg-green-800 rounded-full h-1 mt-1">
-                              <div className="bg-green-600 dark:bg-green-400 h-1 rounded-full" style={{ width: '95%' }}></div>
+                            <div className="w-full bg-surface rounded-full h-2 mt-1 shadow-inner">
+                              <div className="bg-gradient-primary h-2 rounded-full shadow-glow" style={{ width: `${resultData.accuracy || 95}%` }}></div>
                             </div>
                           </div>
                         </div>
                       </div>
                       <div className="space-y-2">
-                        <h5 className="font-medium text-gray-900 dark:text-white">File analyzed:</h5>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">
+                        <h5 className="font-medium text-foreground">File analyzed:</h5>
+                        <p className="text-sm text-text-muted">
                           {resultData.fileInfo?.name} ({(resultData.fileInfo?.size / 1024).toFixed(0)}KB)
                         </p>
-                        <h5 className="font-medium text-gray-900 dark:text-white mt-3">Improvements made:</h5>
-                        <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                        <h5 className="font-medium text-foreground mt-3">Improvements made:</h5>
+                        <ul className="text-sm text-text-muted space-y-1">
                           {resultData.improvements.map((improvement: string, index: number) => (
                             <li key={index} className="flex items-center">
-                              <span className="text-green-500 mr-2">✓</span>
+                              <span className="text-secondary mr-2">✓</span>
                               {improvement}
                             </li>
                           ))}
@@ -486,20 +404,20 @@ Upgrade to Pro for advanced ATS analysis and unlimited optimizations!
                       <div className="flex gap-3">
                         <button
                           onClick={handleDownload}
-                          className="flex-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-medium py-3 px-4 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
+                          className="flex-1 bg-gradient-primary text-white font-semibold py-4 px-6 rounded-xl hover:shadow-glow hover:scale-105 transition-all duration-200 shadow-premium"
                         >
                           Download Free Version
                         </button>
                         <a
                           href="/pricing"
-                          className="flex-1 bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-medium py-3 px-4 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-center"
+                          className="flex-1 bg-surface-light backdrop-blur-sm text-foreground font-semibold py-4 px-6 rounded-xl border border-border hover:bg-surface hover:scale-105 transition-all duration-200 shadow-premium text-center"
                         >
                           Upgrade to Pro
                         </a>
                       </div>
 
                       <div className="text-center">
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                        <p className="text-sm text-text-muted">
                           Pro version includes advanced ATS analysis, unlimited optimizations, and premium templates
                         </p>
                       </div>
@@ -507,18 +425,18 @@ Upgrade to Pro for advanced ATS analysis and unlimited optimizations!
                   </div>
                 )}
 
-                <div className="mt-8 p-6 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 rounded-lg">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Upgrade to Pro for:</h3>
-                  <ul className="text-gray-600 dark:text-gray-300 space-y-2 mb-4">
-                    <li>✓ Advanced ATS compatibility analysis</li>
-                    <li>✓ Unlimited optimizations</li>
-                    <li>✓ Industry-specific recommendations</li>
-                    <li>✓ Multiple optimization suggestions</li>
-                    <li>✓ Priority support</li>
+                <div className="mt-8 p-6 bg-gradient-secondary rounded-2xl border border-border/50">
+                  <h3 className="text-lg font-semibold text-foreground mb-4">Upgrade to Pro for:</h3>
+                  <ul className="text-text-muted space-y-3 mb-6">
+                    <li className="flex items-center"><span className="text-secondary mr-2">✓</span> Advanced ATS compatibility analysis</li>
+                    <li className="flex items-center"><span className="text-secondary mr-2">✓</span> Unlimited optimizations</li>
+                    <li className="flex items-center"><span className="text-secondary mr-2">✓</span> Industry-specific recommendations</li>
+                    <li className="flex items-center"><span className="text-secondary mr-2">✓</span> Multiple optimization suggestions</li>
+                    <li className="flex items-center"><span className="text-secondary mr-2">✓</span> Priority support</li>
                   </ul>
                   <a
                     href="/pricing"
-                    className="inline-block bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-medium py-2 px-4 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors text-sm"
+                    className="inline-block w-full bg-gradient-primary text-white font-semibold py-3 px-6 rounded-xl hover:shadow-glow hover:scale-105 transition-all duration-200 shadow-premium text-center"
                   >
                     Upgrade to Pro - $9.99/month
                   </a>
@@ -533,78 +451,83 @@ Upgrade to Pro for advanced ATS analysis and unlimited optimizations!
 
   // Pro user interface would go here
   return (
-    <div className="bg-zinc-50 dark:bg-black">
+    <div className="min-h-screen">
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-        <section className="text-center py-20 sm:py-32">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">
+        <section className="text-center py-20 sm:py-32 animate-fade-in-up">
+          <div className="inline-block p-1 bg-gradient-primary rounded-full mb-6 animate-glow">
+            <div className="bg-surface px-4 py-2 rounded-full">
+              <span className="text-primary font-medium text-sm">💎 Pro Features</span>
+            </div>
+          </div>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-primary bg-clip-text text-transparent mb-6">
             CV Optimizer Pro
           </h1>
-          <p className="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-300 mb-8">
+          <p className="max-w-3xl mx-auto text-xl text-text-muted mb-8 leading-relaxed">
             Advanced AI-powered CV optimization with ATS analysis and unlimited usage.
           </p>
         </section>
 
         <section className="py-16 sm:py-24">
           <div className="max-w-3xl mx-auto">
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
-              <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
-                <p className="text-green-800 dark:text-green-200 text-sm font-medium">
+            <div className="bg-surface-light backdrop-blur-sm rounded-2xl shadow-premium p-8 border border-border/50">
+              <div className="mb-6 p-4 bg-gradient-primary/10 rounded-xl border border-primary/20">
+                <p className="text-primary text-sm font-medium">
                   ✓ Pro Plan Active - Full access to all features
                 </p>
               </div>
 
               <form className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                     Full Name
                   </label>
                   <input
                     type="text"
                     id="name"
                     name="name"
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                    className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 text-foreground placeholder-text-muted"
                     placeholder="John Doe"
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
                     Email
                   </label>
                   <input
                     type="email"
                     id="email"
                     name="email"
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                    className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 text-foreground placeholder-text-muted"
                     placeholder="john@example.com"
                   />
                 </div>
                 <div>
-                  <label htmlFor="resume" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label htmlFor="resume" className="block text-sm font-medium text-foreground mb-2">
                     Upload Your CV
                   </label>
                   <input
                     type="file"
                     id="resume"
                     name="resume"
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                    className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 text-foreground file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-gradient-primary file:text-white hover:file:shadow-glow file:transition-all file:duration-200"
                     accept=".pdf,.doc,.docx"
                   />
                 </div>
                 <div>
-                  <label htmlFor="jobDescription" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label htmlFor="jobDescription" className="block text-sm font-medium text-foreground mb-2">
                     Job Description
                   </label>
                   <textarea
                     id="jobDescription"
                     name="jobDescription"
                     rows={4}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                    className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 text-foreground placeholder-text-muted resize-none"
                     placeholder="Paste the job description for better optimization..."
                   ></textarea>
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-black dark:bg-white text-white dark:text-black py-3 px-4 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors font-medium"
+                  className="w-full bg-gradient-primary text-white font-semibold py-4 px-6 rounded-xl hover:shadow-glow hover:scale-105 transition-all duration-200 shadow-premium"
                 >
                   Optimize My CV (Pro)
                 </button>

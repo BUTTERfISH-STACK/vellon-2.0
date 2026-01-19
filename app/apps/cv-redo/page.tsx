@@ -122,170 +122,74 @@ Upgrade to Pro for premium templates and advanced customization!
       return;
     }
 
-    // File property analysis simulation (frontend limitation: cannot parse PDF content)
+    // Simulate progress while uploading
     const parsingSteps = [
       `Validating ${file.name} (${(file.size / 1024).toFixed(0)}KB file)...`,
-      'Analyzing filename for profession keywords...',
-      'Extracting potential name from file naming patterns...',
-      'Estimating experience level from file size...',
-      'Mapping profession to relevant skills database...',
+      'Uploading file to server...',
+      'Extracting text content...',
+      'Analyzing document structure...',
+      'Detecting profession and skills...',
       `Applying ${selectedTemplate} design template...`,
       'Optimizing layout and typography...',
       'Enhancing visual hierarchy...',
-      'Preparing downloadable redesigned CV...',
-      'Finalizing design elements...'
+      'Preparing results...'
     ];
 
-    for (let i = 0; i < parsingSteps.length; i++) {
-      setParsingStep(parsingSteps[i]);
-      setParsingProgress(((i + 1) / parsingSteps.length) * 100);
-      await new Promise(resolve => setTimeout(resolve, 500));
+    try {
+      // Start progress simulation
+      for (let i = 0; i < parsingSteps.length - 1; i++) {
+        setParsingStep(parsingSteps[i]);
+        setParsingProgress(((i + 1) / parsingSteps.length) * 100);
+        await new Promise(resolve => setTimeout(resolve, 300));
+      }
+
+      // Create API request form data
+      const apiFormData = new FormData();
+      apiFormData.append('resume', file);
+      apiFormData.append('template', selectedTemplate || 'modern');
+
+      // Call the actual API
+      const response = await fetch('/api/cv-redo', {
+        method: 'POST',
+        body: apiFormData,
+      });
+
+      setParsingStep(parsingSteps[parsingSteps.length - 1]);
+      setParsingProgress(100);
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to redesign CV');
+      }
+
+      const apiResult = await response.json();
+
+      // Format the result for display
+      setResultData({
+        template: `${selectedTemplate || 'Modern Clean'} Template`,
+        improvements: apiResult.improvements || [],
+        parsedData: apiResult.parsedData || {},
+        accuracy: apiResult.accuracy || 88,
+        fileInfo: {
+          name: file.name,
+          size: file.size,
+          type: file.type,
+          selectedTemplate: selectedTemplate
+        },
+        extractedText: apiResult.extractedText,
+        wordCount: apiResult.wordCount,
+        characterCount: apiResult.characterCount,
+        downloadUrl: '#'
+      });
+
+      setShowResult(true);
+      setIsSubmitting(false);
+
+    } catch (error) {
+      console.error('Upload error:', error);
+      alert(`Error redesigning CV: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      setIsSubmitting(false);
     }
-
-    setIsSubmitting(false);
-
-    // Simulate parsing based on actual file properties
-    const fileName = file.name.toLowerCase();
-    const fileSize = file.size;
-
-    // Advanced parsing logic based on file analysis
-    const analyzeFileName = (fileName: string) => {
-      const lowerName = fileName.toLowerCase();
-
-      // Profession detection with priority
-      if (lowerName.includes('software') || lowerName.includes('developer') || lowerName.includes('engineer') || lowerName.includes('programmer')) {
-        return {
-          profession: 'Software Developer',
-          skills: ['JavaScript', 'React', 'Node.js', 'Python', 'UI/UX', 'Figma', 'Adobe Creative Suite']
-        };
-      }
-      if (lowerName.includes('designer') || lowerName.includes('ux') || lowerName.includes('ui')) {
-        return {
-          profession: 'UX/UI Designer',
-          skills: ['Figma', 'Adobe XD', 'Sketch', 'Prototyping', 'User Research', 'Wireframing', 'Usability Testing']
-        };
-      }
-      if (lowerName.includes('manager') || lowerName.includes('lead') || lowerName.includes('director')) {
-        return {
-          profession: 'Project Manager',
-          skills: ['Project Management', 'Agile', 'Scrum', 'Leadership', 'Communication', 'Risk Management']
-        };
-      }
-      if (lowerName.includes('analyst') || lowerName.includes('data')) {
-        return {
-          profession: 'Data Analyst',
-          skills: ['SQL', 'Python', 'Excel', 'Tableau', 'Power BI', 'Statistics', 'Data Visualization']
-        };
-      }
-      if (lowerName.includes('marketing') || lowerName.includes('market')) {
-        return {
-          profession: 'Marketing Specialist',
-          skills: ['Digital Marketing', 'SEO', 'Content Creation', 'Social Media', 'Google Analytics', 'Email Marketing']
-        };
-      }
-
-      // Default professional profile
-      return {
-        profession: 'Professional',
-        skills: ['Communication', 'Leadership', 'Problem Solving', 'Team Collaboration', 'Project Management']
-      };
-    };
-
-    const professionData = analyzeFileName(fileName);
-
-    // Experience level based on file size and naming patterns
-    const getExperienceLevel = (fileSize: number, fileName: string) => {
-      const lowerName = fileName.toLowerCase();
-      if (lowerName.includes('senior') || lowerName.includes('lead') || lowerName.includes('principal')) return '7+ years';
-      if (lowerName.includes('mid') || fileSize > 600000) return '4-6 years';
-      if (fileSize > 400000) return '3-5 years';
-      if (fileSize > 200000) return '2-4 years';
-      return '1-3 years';
-    };
-
-    // Enhanced name extraction with better patterns
-    const extractNameFromFile = (fileName: string) => {
-      // Remove extension and common CV words
-      let cleanName = fileName
-        .replace(/\.(pdf|doc|docx)$/i, '')
-        .replace(/\b(cv|resume|curriculum| vitae)\b/gi, '')
-        .replace(/[_-]/g, ' ')
-        .trim();
-
-      // Handle different naming patterns
-      if (cleanName.includes(' ')) {
-        // Already has spaces, assume it's "First Last"
-        return cleanName.split(' ').slice(0, 2).map(word =>
-          word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-        ).join(' ');
-      } else if (cleanName.length > 6) {
-        // Single word, try to split camelCase or find name-like patterns
-        const camelCaseMatch = cleanName.match(/([a-z]+)([A-Z][a-z]+)/);
-        if (camelCaseMatch) {
-          return `${camelCaseMatch[1].charAt(0).toUpperCase()}${camelCaseMatch[1].slice(1)} ${camelCaseMatch[2]}`;
-        }
-      }
-
-      // Fallback to generic name
-      return 'Alex Johnson';
-    };
-
-    // Generate template-specific improvements
-    const templateImprovements = {
-      'Classic Professional': [
-        'Applied clean, traditional design with serif typography',
-        'Used professional color scheme (navy and gray)',
-        'Enhanced readability with optimal line spacing',
-        'Added subtle borders and dividers for Classic Professional template'
-      ],
-      'Modern Clean': [
-        'Applied minimalist design with sans-serif fonts',
-        'Used modern color palette with accent colors',
-        'Optimized whitespace and visual hierarchy',
-        'Added contemporary layout elements for Modern Clean template'
-      ],
-      'Minimalist': [
-        'Applied ultra-clean design with maximum whitespace',
-        'Used monochromatic color scheme',
-        'Focused on typography and content hierarchy',
-        'Removed visual clutter for maximum impact in Minimalist template'
-      ]
-    };
-
-    const extractedData = {
-      name: extractNameFromFile(fileName),
-      title: professionData.profession,
-      email: `${extractNameFromFile(fileName).toLowerCase().replace(/\s+/g, '.')}@email.com`,
-      phone: '+1 (555) 123-4567',
-      experience: getExperienceLevel(fileSize, fileName),
-      skills: professionData.skills,
-      education: professionData.profession.includes('Software') ? 'Bachelor of Computer Science' :
-                 professionData.profession.includes('Design') ? 'Bachelor of Fine Arts' :
-                 professionData.profession.includes('Data') ? 'Bachelor of Statistics' :
-                 'Bachelor of Business Administration',
-      template: selectedTemplate
-    };
-
-    setResultData({
-      template: `${selectedTemplate} Template`,
-      improvements: [
-        `Analyzed ${file.name} (${(file.size / 1024).toFixed(0)}KB)`,
-        ...templateImprovements[selectedTemplate as keyof typeof templateImprovements],
-        'Enhanced visual hierarchy with modern typography',
-        'Optimized content layout for better readability',
-        'Added professional design elements'
-      ],
-      parsedData: extractedData,
-      accuracy: Math.floor(88 + Math.random() * 8), // 88-96% accuracy
-      fileInfo: {
-        name: file.name,
-        size: file.size,
-        type: file.type,
-        selectedTemplate: selectedTemplate
-      },
-      downloadUrl: '#'
-    });
-    setShowResult(true);
   };
 
   if (!isPro) {
