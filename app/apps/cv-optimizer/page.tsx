@@ -9,7 +9,7 @@ const CVMockup = ({ type }: { type: 'modern' | 'classic' | 'creative' }) => {
     modern: (
       <div className="bg-white text-gray-900 p-6 h-full flex flex-col relative">
         {/* Vellon Stamp */}
-        <div className="absolute top-4 right-4 opacity-20">
+        <div className="absolute top-4 right-4 opacity-40 drop-shadow-sm">
           <img src="/vellon-stamp.png" alt="Vellon" className="w-16 h-16 object-contain" />
         </div>
 
@@ -129,7 +129,7 @@ const CVMockup = ({ type }: { type: 'modern' | 'classic' | 'creative' }) => {
     classic: (
       <div className="bg-white text-gray-900 p-6 h-full flex flex-col relative">
         {/* Vellon Stamp */}
-        <div className="absolute top-4 right-4 opacity-20">
+        <div className="absolute top-4 right-4 opacity-40 drop-shadow-sm">
           <img src="/vellon-stamp.png" alt="Vellon" className="w-16 h-16 object-contain" />
         </div>
 
@@ -247,7 +247,7 @@ const CVMockup = ({ type }: { type: 'modern' | 'classic' | 'creative' }) => {
     creative: (
       <div className="bg-gradient-to-br from-accent/5 to-accent/10 text-gray-900 p-6 h-full flex flex-col relative">
         {/* Vellon Stamp */}
-        <div className="absolute top-4 right-4 opacity-20">
+        <div className="absolute top-4 right-4 opacity-40 drop-shadow-sm">
           <img src="/vellon-stamp.png" alt="Vellon" className="w-16 h-16 object-contain" />
         </div>
 
