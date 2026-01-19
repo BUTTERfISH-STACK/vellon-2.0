@@ -998,9 +998,6 @@ export default function CVOptimizerPage() {
               <span className="text-primary font-bold text-sm">Employers don't care about the fancy looks. They care about who they pay, doing the work, being eligible for the role.</span>
             </div>
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-primary bg-clip-text text-transparent mb-6">
-            CV Optimizer
-          </h1>
           <p className="max-w-3xl mx-auto text-xl text-text-muted mb-8 leading-relaxed">
             Create a professional, ATS-ready CV with our intuitive form builder.
           </p>
