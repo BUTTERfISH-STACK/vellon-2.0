@@ -3,12 +3,13 @@
 :root {
   --background: #0f0f0f;
   --foreground: #ffffff;
-  --accent: #007bff;
+  --accent: #f59e0b;
   --surface: #1a1a1a;
   --surface-light: #262626;
   --text-muted: #a3a3a3;
   --border: #404040;
   --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-glow: 0 0 20px rgba(245, 158, 11, 0.3);
 }
 
 @theme inline {
@@ -49,4 +50,8 @@ body {
 
 .animate-fade-in-up {
   animation: fadeInUp 0.6s ease-out;
+}
+
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #f59e0b 0%, #f97316 50%, #ea580c 100%);
 }

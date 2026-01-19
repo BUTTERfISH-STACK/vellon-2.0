@@ -26,7 +26,7 @@ module.exports = {
         },
         glow: {
           '0%, 100%': { boxShadow: 'var(--shadow-glow)' },
-          '50%': { boxShadow: '0 0 30px rgba(139, 92, 246, 0.5)' },
+          '50%': { boxShadow: '0 0 30px rgba(245, 158, 11, 0.4)' },
         },
       },
       fontFamily: {
