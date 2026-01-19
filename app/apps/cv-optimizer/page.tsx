@@ -1003,9 +1003,22 @@ export default function CVOptimizerPage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-surface-light backdrop-blur-sm rounded-2xl shadow-premium p-8 border border-border/50">
               <div className="mb-6 p-4 bg-gradient-primary/10 rounded-xl border border-primary/20">
-                <p className="text-primary text-sm font-medium">
-                  <strong>Free Plan:</strong> Create professional CVs with watermark. Upgrade to Pro for unlimited generation and premium features.
-                </p>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-green-600 text-sm">✓</span>
+                    <span className="text-primary text-sm font-medium"><strong>Free Plan:</strong> Basic CV optimization with watermark</span>
+                  </div>
+                  <div className="border-t border-primary/20 pt-3">
+                    <p className="text-primary text-sm font-semibold mb-2">Pro Plan Benefits:</p>
+                    <ul className="space-y-1 text-sm text-primary/90">
+                      <li>• Premium Creative & Modern CV templates (shown above)</li>
+                      <li>• No watermark on downloads</li>
+                      <li>• Unlimited CV exports</li>
+                      <li>• Advanced ATS optimization</li>
+                      <li>• Priority support</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
 
               {isEditing ? (
