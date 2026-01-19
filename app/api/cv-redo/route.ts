@@ -160,14 +160,11 @@ function extractCVData(text: string, fileName: string) {
   return {
     name: nameMatch ? nameMatch[1].trim() : extractNameFromFilename(fileName),
     title: professionData.profession,
-    email: emailMatch ? emailMatch[1] : `${extractNameFromFilename(fileName).toLowerCase().replace(/\s+/g, '.')}@email.com`,
-    phone: phoneMatch ? phoneMatch[1] : '+1 (555) 123-4567',
+    email: emailMatch ? emailMatch[1] : null,
+    phone: phoneMatch ? phoneMatch[1] : null,
     experience,
     skills: professionData.skills,
-    education: professionData.profession.includes('Software') ? 'Bachelor of Computer Science' :
-               professionData.profession.includes('Design') ? 'Bachelor of Fine Arts' :
-               professionData.profession.includes('Data') ? 'Bachelor of Statistics' :
-               'Bachelor of Business Administration',
+    education: null,
     keywords: professionData.keywords
   };
 }
