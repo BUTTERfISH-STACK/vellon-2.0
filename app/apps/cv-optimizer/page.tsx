@@ -1002,21 +1002,95 @@ export default function CVOptimizerPage() {
         <section className="py-16 sm:py-24">
           <div className="max-w-4xl mx-auto">
             <div className="bg-surface-light backdrop-blur-sm rounded-2xl shadow-premium p-8 border border-border/50">
-              <div className="mb-6 p-4 bg-gradient-primary/10 rounded-xl border border-primary/20">
-                <div className="space-y-3">
-                  <div className="flex items-center gap-2">
-                    <span className="text-green-600 text-sm">✓</span>
-                    <span className="text-primary text-sm font-medium"><strong>Free Plan:</strong> Basic CV optimization with watermark</span>
+              <div className="mb-8">
+                <div className="bg-gradient-to-r from-accent/10 to-accent/5 p-6 rounded-2xl border border-accent/20 mb-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                      <span className="text-white text-sm font-bold">✓</span>
+                    </div>
+                    <span className="text-accent font-semibold">Free Plan Active</span>
                   </div>
-                  <div className="border-t border-primary/20 pt-3">
-                    <p className="text-primary text-sm font-semibold mb-2">Pro Plan Benefits:</p>
-                    <ul className="space-y-1 text-sm text-primary/90">
-                      <li>• Premium Creative & Modern CV templates (shown above)</li>
-                      <li>• No watermark on downloads</li>
-                      <li>• Unlimited CV exports</li>
-                      <li>• Advanced ATS optimization</li>
-                      <li>• Priority support</li>
-                    </ul>
+                  <p className="text-gray-700 text-sm mb-4">You're currently using the free tier with basic CV optimization and watermark.</p>
+                  <div className="bg-white/50 p-4 rounded-lg">
+                    <p className="text-accent font-bold text-sm mb-2">🚀 Unlock Pro Power - Only R59/month</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2">
+                          <span className="text-accent">✨</span>
+                          <span className="font-medium">Premium Templates</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-accent">🎯</span>
+                          <span className="font-medium">ATS Score Analysis</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-accent">📄</span>
+                          <span className="font-medium">Cover Letter Generator</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-accent">🎨</span>
+                          <span className="font-medium">Custom Branding</span>
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2">
+                          <span className="text-accent">📊</span>
+                          <span className="font-medium">Application Tracking</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-accent">🔄</span>
+                          <span className="font-medium">Unlimited Exports</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-accent">⚡</span>
+                          <span className="font-medium">Priority Support</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-accent">🎪</span>
+                          <span className="font-medium">Advanced AI Features</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-accent to-accent/80 p-6 rounded-2xl text-white">
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <h3 className="text-xl font-bold">Pro Beast Mode</h3>
+                      <p className="text-accent/90">Professional CV tools that get you hired</p>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold">R59<span className="text-sm font-normal">/month</span></div>
+                      <div className="text-xs text-accent/80">Cancel anytime</div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div className="bg-white/10 p-4 rounded-lg">
+                      <div className="text-accent font-bold text-lg mb-1">🎨 Premium Templates</div>
+                      <p className="text-sm text-white/90">Creative & Modern designs that stand out</p>
+                    </div>
+                    <div className="bg-white/10 p-4 rounded-lg">
+                      <div className="text-accent font-bold text-lg mb-1">🎯 ATS Optimization</div>
+                      <p className="text-sm text-white/90">95%+ pass rate with scoring analysis</p>
+                    </div>
+                    <div className="bg-white/10 p-4 rounded-lg">
+                      <div className="text-accent font-bold text-lg mb-1">📈 Success Tracking</div>
+                      <p className="text-sm text-white/90">Monitor applications & interview rates</p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <a
+                      href="/pricing"
+                      className="flex-1 bg-white text-accent font-bold py-3 px-6 rounded-xl hover:bg-gray-100 transition-colors text-center"
+                    >
+                      Upgrade to Pro Now
+                    </a>
+                    <div className="text-xs text-accent/80 text-center sm:text-left">
+                      💎 14-day free trial • No setup fees • Instant activation
+                    </div>
                   </div>
                 </div>
               </div>
