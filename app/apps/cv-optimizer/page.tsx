@@ -550,6 +550,28 @@ export default function CVOptimizerPage() {
           <p className="max-w-3xl mx-auto text-xl text-text-muted mb-8 leading-relaxed">
             Create a professional, ATS-ready CV with our intuitive form builder.
           </p>
+
+          {/* CV Mockup Slideshow */}
+          <div className="max-w-4xl mx-auto mb-12">
+            <div className="relative overflow-hidden rounded-2xl bg-surface border border-border">
+              <div className="aspect-[3/4] bg-gradient-to-br from-surface-light to-surface flex items-center justify-center">
+                <div className="text-center text-text-muted">
+                  <div className="w-24 h-32 mx-auto mb-4 bg-accent/20 rounded-lg flex items-center justify-center">
+                    <svg className="w-12 h-12 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <p className="text-sm font-medium">Professional CV Preview</p>
+                  <p className="text-xs text-text-muted mt-1">ATS-Optimized Layout</p>
+                </div>
+              </div>
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                <div className="w-2 h-2 bg-accent rounded-full"></div>
+                <div className="w-2 h-2 bg-border rounded-full"></div>
+                <div className="w-2 h-2 bg-border rounded-full"></div>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section className="py-16 sm:py-24">
