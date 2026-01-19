@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "autoprefixer": "^10.4.23",
+    "jspdf": "^4.0.0",
     "mammoth": "^1.11.0",
     "multer": "^2.0.2",
     "next": "16.1.3",
