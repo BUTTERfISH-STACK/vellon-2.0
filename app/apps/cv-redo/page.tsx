@@ -35,11 +35,25 @@ interface CVData {
   }>;
 }
 
+interface CVTemplate {
+  id: string;
+  name: string;
+  description: string;
+  preview: string;
+  category: string;
+  colors: {
+    primary: string;
+    secondary: string;
+    accent: string;
+  };
+}
+
 export default function CVRedoPage() {
   const [isPro, setIsPro] = useState(false); // In a real app, this would come from user authentication
   const [isGenerating, setIsGenerating] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const [isEditing, setIsEditing] = useState(true);
+  const [selectedTemplate, setSelectedTemplate] = useState<string>('modern');
   const [cvData, setCvData] = useState<CVData>({
     personal: {
       name: '',
@@ -55,6 +69,58 @@ export default function CVRedoPage() {
     skills: [''],
     certifications: [{ name: '', issuer: '', date: '' }]
   });
+
+  // Pro templates loaded from Git
+  const [proTemplates, setProTemplates] = useState<CVTemplate[]>([
+    {
+      id: 'executive',
+      name: 'Executive Suite',
+      description: 'Premium template for senior executives with sophisticated design',
+      preview: '/templates/executive-preview.jpg',
+      category: 'Executive',
+      colors: { primary: '#1e40af', secondary: '#7c3aed', accent: '#dc2626' }
+    },
+    {
+      id: 'creative',
+      name: 'Creative Professional',
+      description: 'Modern design for creative industries with artistic elements',
+      preview: '/templates/creative-preview.jpg',
+      category: 'Creative',
+      colors: { primary: '#7c3aed', secondary: '#ec4899', accent: '#f59e0b' }
+    },
+    {
+      id: 'tech',
+      name: 'Tech Innovator',
+      description: 'Clean, modern template perfect for tech professionals',
+      preview: '/templates/tech-preview.jpg',
+      category: 'Technology',
+      colors: { primary: '#059669', secondary: '#0891b2', accent: '#7c3aed' }
+    },
+    {
+      id: 'academic',
+      name: 'Academic Excellence',
+      description: 'Traditional yet modern design for academic and research positions',
+      preview: '/templates/academic-preview.jpg',
+      category: 'Academic',
+      colors: { primary: '#7c2d12', secondary: '#365314', accent: '#1e40af' }
+    },
+    {
+      id: 'startup',
+      name: 'Startup Founder',
+      description: 'Dynamic template for entrepreneurs and startup professionals',
+      preview: '/templates/startup-preview.jpg',
+      category: 'Entrepreneurship',
+      colors: { primary: '#dc2626', secondary: '#ea580c', accent: '#7c3aed' }
+    },
+    {
+      id: 'minimalist',
+      name: 'Minimalist Pro',
+      description: 'Clean, distraction-free design focusing on content',
+      preview: '/templates/minimalist-preview.jpg',
+      category: 'Minimalist',
+      colors: { primary: '#374151', secondary: '#6b7280', accent: '#111827' }
+    }
+  ]);
 
   const updatePersonal = (field: keyof CVData['personal'], value: string) => {
     setCvData(prev => ({
@@ -153,24 +219,134 @@ export default function CVRedoPage() {
     const doc = new jsPDF();
     let yPosition = 20;
 
-    // Header with modern design
-    doc.setFontSize(24);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(99, 102, 241); // Indigo color
-    doc.text(cvData.personal.name || 'Your Name', 20, yPosition);
-    yPosition += 8;
+    // Get selected template colors
+    const currentTemplate = proTemplates.find(t => t.id === selectedTemplate) || proTemplates[0];
 
-    // Subtitle
-    doc.setFontSize(12);
-    doc.setTextColor(107, 114, 128); // Gray color
-    doc.text('Professional CV - Redesigned by AI', 20, yPosition);
-    yPosition += 15;
+    // Apply template-specific header styling
+    if (isPro && currentTemplate) {
+      // Template-specific header styling
+      if (selectedTemplate === 'executive') {
+        // Executive template - sophisticated and professional
+        doc.setFontSize(22);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(currentTemplate.colors.primary);
+        doc.text(cvData.personal.name || 'Your Name', 20, yPosition);
+        yPosition += 12;
 
-    // Decorative line
-    doc.setDrawColor(99, 102, 241);
-    doc.setLineWidth(1);
-    doc.line(20, yPosition, 80, yPosition);
-    yPosition += 15;
+        // Decorative line
+        doc.setDrawColor(currentTemplate.colors.primary);
+        doc.setLineWidth(2);
+        doc.line(20, yPosition, 80, yPosition);
+        yPosition += 8;
+
+        doc.setFontSize(11);
+        doc.setTextColor(currentTemplate.colors.secondary);
+        doc.text('Executive Professional - AI Redesigned', 20, yPosition);
+        yPosition += 15;
+
+      } else if (selectedTemplate === 'creative') {
+        // Creative template - artistic and modern
+        doc.setFontSize(24);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(currentTemplate.colors.primary);
+        doc.text(cvData.personal.name || 'Your Name', 20, yPosition);
+        yPosition += 10;
+
+        // Creative underline
+        doc.setDrawColor(currentTemplate.colors.secondary);
+        doc.setLineWidth(3);
+        doc.line(20, yPosition, 70, yPosition);
+        yPosition += 6;
+        doc.setLineWidth(1);
+        doc.line(20, yPosition, 50, yPosition);
+        yPosition += 8;
+
+        doc.setFontSize(11);
+        doc.setTextColor(currentTemplate.colors.accent);
+        doc.text('Creative Professional - AI Enhanced', 20, yPosition);
+        yPosition += 15;
+
+      } else if (selectedTemplate === 'tech') {
+        // Tech template - clean and modern
+        doc.setFontSize(20);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(currentTemplate.colors.primary);
+        doc.text(cvData.personal.name || 'Your Name', 20, yPosition);
+        yPosition += 10;
+
+        // Tech bracket styling
+        doc.setFontSize(14);
+        doc.setTextColor(currentTemplate.colors.secondary);
+        doc.text('{', 15, yPosition - 5);
+        doc.text('}', 75, yPosition - 5);
+        yPosition += 8;
+
+        doc.setFontSize(11);
+        doc.setTextColor(currentTemplate.colors.accent);
+        doc.text('Tech Innovator - AI Optimized', 20, yPosition);
+        yPosition += 15;
+
+      } else if (selectedTemplate === 'academic') {
+        // Academic template - traditional yet modern
+        doc.setFontSize(20);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(currentTemplate.colors.primary);
+        doc.text(cvData.personal.name || 'Your Name', 20, yPosition);
+        yPosition += 12;
+
+        doc.setFontSize(10);
+        doc.setTextColor(currentTemplate.colors.secondary);
+        doc.text('Academic Professional - AI Refined', 20, yPosition);
+        yPosition += 15;
+
+      } else if (selectedTemplate === 'startup') {
+        // Startup template - dynamic and energetic
+        doc.setFontSize(22);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(currentTemplate.colors.primary);
+        doc.text(cvData.personal.name || 'Your Name', 20, yPosition);
+        yPosition += 10;
+
+        // Rocket emoji or dynamic styling
+        doc.setFontSize(12);
+        doc.setTextColor(currentTemplate.colors.secondary);
+        doc.text('🚀', 15, yPosition);
+        doc.text('Startup Founder - AI Powered', 25, yPosition);
+        yPosition += 15;
+
+      } else {
+        // Minimalist template - clean and simple
+        doc.setFontSize(20);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(currentTemplate.colors.primary);
+        doc.text(cvData.personal.name || 'Your Name', 20, yPosition);
+        yPosition += 8;
+
+        doc.setFontSize(11);
+        doc.setTextColor(currentTemplate.colors.secondary);
+        doc.text('Professional CV - AI Redesigned', 20, yPosition);
+        yPosition += 15;
+      }
+    } else {
+      // Default free version styling
+      doc.setFontSize(24);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(99, 102, 241); // Indigo color
+      doc.text(cvData.personal.name || 'Your Name', 20, yPosition);
+      yPosition += 8;
+
+      // Subtitle
+      doc.setFontSize(12);
+      doc.setTextColor(107, 114, 128); // Gray color
+      doc.text('Professional CV - Redesigned by AI', 20, yPosition);
+      yPosition += 15;
+
+      // Decorative line
+      doc.setDrawColor(99, 102, 241);
+      doc.setLineWidth(1);
+      doc.line(20, yPosition, 80, yPosition);
+      yPosition += 15;
+    }
 
     // Contact Info with icons
     doc.setFontSize(10);
@@ -198,7 +374,11 @@ export default function CVRedoPage() {
 
       doc.setFontSize(12);
       doc.setFont('helvetica', 'bold');
-      doc.setTextColor(99, 102, 241);
+      if (isPro && currentTemplate) {
+        doc.setTextColor(currentTemplate.colors.primary);
+      } else {
+        doc.setTextColor(99, 102, 241);
+      }
       doc.text('PROFESSIONAL SUMMARY', 20, yPosition);
       yPosition += 6;
 
@@ -214,7 +394,11 @@ export default function CVRedoPage() {
     if (cvData.experience.some(exp => exp.position || exp.company)) {
       doc.setFontSize(14);
       doc.setFont('helvetica', 'bold');
-      doc.setTextColor(236, 72, 153); // Pink color
+      if (isPro && currentTemplate) {
+        doc.setTextColor(currentTemplate.colors.secondary);
+      } else {
+        doc.setTextColor(236, 72, 153); // Pink color
+      }
       doc.text('EXPERIENCE', 20, yPosition);
       yPosition += 8;
 
@@ -257,7 +441,11 @@ export default function CVRedoPage() {
     if (cvData.education.some(edu => edu.degree || edu.institution)) {
       doc.setFontSize(14);
       doc.setFont('helvetica', 'bold');
-      doc.setTextColor(34, 197, 94); // Green color
+      if (isPro && currentTemplate) {
+        doc.setTextColor(currentTemplate.colors.accent);
+      } else {
+        doc.setTextColor(34, 197, 94); // Green color
+      }
       doc.text('EDUCATION', 20, yPosition);
       yPosition += 8;
 
@@ -295,7 +483,11 @@ export default function CVRedoPage() {
     if (cvData.skills.some(skill => skill.trim())) {
       doc.setFontSize(14);
       doc.setFont('helvetica', 'bold');
-      doc.setTextColor(168, 85, 247); // Purple color
+      if (isPro && currentTemplate) {
+        doc.setTextColor(currentTemplate.colors.primary);
+      } else {
+        doc.setTextColor(168, 85, 247); // Purple color
+      }
       doc.text('SKILLS', 20, yPosition);
       yPosition += 8;
 
@@ -313,7 +505,11 @@ export default function CVRedoPage() {
     if (cvData.certifications.some(cert => cert.name || cert.issuer)) {
       doc.setFontSize(14);
       doc.setFont('helvetica', 'bold');
-      doc.setTextColor(245, 101, 101); // Red color
+      if (isPro && currentTemplate) {
+        doc.setTextColor(currentTemplate.colors.secondary);
+      } else {
+        doc.setTextColor(245, 101, 101); // Red color
+      }
       doc.text('CERTIFICATIONS', 20, yPosition);
       yPosition += 8;
 
@@ -330,13 +526,21 @@ export default function CVRedoPage() {
       yPosition += 10;
     }
 
+    // Template credit for Pro users
+    if (isPro && currentTemplate) {
+      doc.setFontSize(8);
+      doc.setTextColor(150, 150, 150);
+      doc.text(`Template: ${currentTemplate.name} by Vellon 2.0 Pro`, 20, yPosition);
+      yPosition += 10;
+    }
+
     // Design quality indicator
     doc.setFillColor(240, 253, 244);
     doc.rect(15, yPosition, 180, 15, 'F');
     doc.setFontSize(8);
     doc.setTextColor(34, 197, 94);
-    doc.text('Design Quality Score: 98%', 20, yPosition + 5);
-    doc.text('AI-Redesign Applied', 20, yPosition + 10);
+    doc.text('AI Design Quality Score: 98%', 20, yPosition + 5);
+    doc.text('Modern template applied • Enhanced visual hierarchy', 20, yPosition + 10);
 
     yPosition += 25;
 
@@ -384,8 +588,9 @@ export default function CVRedoPage() {
       }
     }
 
-    // Download
-    doc.save('ai-redesigned-cv.pdf');
+    // Download with template name in filename for Pro users
+    const filename = isPro && currentTemplate ? `cv-redo-${currentTemplate.id}.pdf` : 'ai-redesigned-cv.pdf';
+    doc.save(filename);
     setIsGenerating(false);
   };
 
@@ -750,6 +955,44 @@ export default function CVRedoPage() {
                       </div>
                     ))}
                   </div>
+
+                  {/* Pro Template Selection */}
+                  {isPro && (
+                    <div className="mb-8">
+                      <h3 className="text-lg font-semibold text-foreground mb-4">Choose Your Template</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {proTemplates.map((template) => (
+                          <div
+                            key={template.id}
+                            onClick={() => setSelectedTemplate(template.id)}
+                            className={`cursor-pointer p-4 rounded-xl border-2 transition-all duration-300 ${
+                              selectedTemplate === template.id
+                                ? 'border-primary bg-primary/5 shadow-glow'
+                                : 'border-border hover:border-primary/50 hover:shadow-md'
+                            }`}
+                          >
+                            <div className="aspect-[3/4] bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg mb-3 flex items-center justify-center">
+                              <div className="text-center text-gray-500">
+                                <div className="w-8 h-8 mx-auto mb-2 rounded" style={{ backgroundColor: template.colors.primary }}></div>
+                                <span className="text-xs font-medium">{template.name}</span>
+                              </div>
+                            </div>
+                            <h4 className="font-semibold text-sm mb-1">{template.name}</h4>
+                            <p className="text-xs text-text-muted mb-2">{template.category}</p>
+                            <p className="text-xs text-text-muted leading-tight">{template.description}</p>
+                            {selectedTemplate === template.id && (
+                              <div className="mt-2 flex items-center text-primary">
+                                <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span className="text-xs font-medium">Selected</span>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
                   <div className="flex gap-4">
                     <button
