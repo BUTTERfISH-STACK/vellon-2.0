@@ -1,12 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import puppeteer from 'puppeteer';
 
-const themeMap: { [key: string]: string } = {
-  'flat': 'jsonresume-theme-flat',
-  'paper': 'jsonresume-theme-paper',
-  'elegant': 'jsonresume-theme-elegant',
-  'kendall': 'jsonresume-theme-kendall',
-  'stackoverflow': 'jsonresume-theme-stackoverflow',
+// Import themes statically to avoid dynamic require issues with Turbopack
+const flatTheme = require('jsonresume-theme-flat');
+const paperTheme = require('jsonresume-theme-paper');
+const elegantTheme = require('jsonresume-theme-elegant');
+const kendallTheme = require('jsonresume-theme-kendall');
+// Removed stackoverflow theme due to Turbopack compatibility issues
+
+const themeMap: { [key: string]: any } = {
+  'flat': flatTheme,
+  'paper': paperTheme,
+  'elegant': elegantTheme,
+  'kendall': kendallTheme,
 };
 
 export async function POST(request: NextRequest) {
@@ -32,7 +38,7 @@ export async function POST(request: NextRequest) {
     const pdfBuffer = await page.pdf({ format: 'A4' });
     await browser.close();
 
-    return new Response(pdfBuffer, {
+    return new Response(pdfBuffer as any, {
       headers: {
         'Content-Type': 'application/pdf',
       },
