@@ -78,7 +78,7 @@ export default function CVOptimizerPage() {
       description: 'A modern curriculum vitae template with clean design and professional layout, inspired by LaTeX moderncv',
       preview: '/templates/moderncv-preview.jpg',
       category: 'Modern',
-      colors: { primary: '#1e40af', secondary: '#7c3aed', accent: '#dc2626' }
+      colors: { primary: '#000000', secondary: '#000000', accent: '#000000' }
     },
     {
       id: 'academic',
