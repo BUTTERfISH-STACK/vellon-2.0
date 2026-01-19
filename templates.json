@@ -1,58 +1,86 @@
 [
   {
-    "id": "flat",
-    "name": "Flat",
-    "description": "Clean and minimal template with a flat design aesthetic, perfect for modern professionals",
-    "preview": "/templates/flat-preview.png",
+    "id": "moderncv",
+    "name": "Modern CV",
+    "description": "A modern curriculum vitae template with clean design and professional layout, inspired by LaTeX moderncv",
+    "preview": "/templates/moderncv-preview.jpg",
     "category": "Modern",
-    "package": "jsonresume-theme-flat",
+    "package": "jsonresume-theme-moderncv",
     "colors": {
-      "primary": "#2c3e50",
-      "secondary": "#3498db",
-      "accent": "#e74c3c"
+      "primary": "#000000",
+      "secondary": "#000000",
+      "accent": "#000000"
     },
-    "features": ["Clean Design", "Minimal Layout", "Professional Look"]
+    "features": ["Clean Design", "Professional Layout", "LaTeX Inspired"]
   },
   {
-    "id": "paper",
-    "name": "Paper",
-    "description": "Traditional paper-style template that mimics a printed document with elegant typography",
-    "preview": "/templates/paper-preview.png",
+    "id": "academic",
+    "name": "Academic CV",
+    "description": "Traditional academic CV template suitable for researchers and academics, with formal layout",
+    "preview": "/templates/academic-preview.jpg",
+    "category": "Academic",
+    "package": "jsonresume-theme-academic",
+    "colors": {
+      "primary": "#7c3aed",
+      "secondary": "#ec4899",
+      "accent": "#f59e0b"
+    },
+    "features": ["Formal Layout", "Research Focused", "Traditional Style"]
+  },
+  {
+    "id": "banking",
+    "name": "Banking CV",
+    "description": "Professional CV template designed for banking and finance professionals",
+    "preview": "/templates/banking-preview.jpg",
+    "category": "Finance",
+    "package": "jsonresume-theme-banking",
+    "colors": {
+      "primary": "#059669",
+      "secondary": "#0891b2",
+      "accent": "#7c3aed"
+    },
+    "features": ["Finance Focused", "Professional Design", "Industry Specific"]
+  },
+  {
+    "id": "engineering",
+    "name": "Engineering CV",
+    "description": "Technical CV template for engineering professionals with emphasis on skills and projects",
+    "preview": "/templates/engineering-preview.jpg",
+    "category": "Engineering",
+    "package": "jsonresume-theme-engineering",
+    "colors": {
+      "primary": "#7c2d12",
+      "secondary": "#365314",
+      "accent": "#1e40af"
+    },
+    "features": ["Technical Focus", "Skills Emphasis", "Project Highlighting"]
+  },
+  {
+    "id": "creative",
+    "name": "Creative CV",
+    "description": "Creative and artistic CV template for designers and creative professionals",
+    "preview": "/templates/creative-preview.jpg",
+    "category": "Creative",
+    "package": "jsonresume-theme-creative",
+    "colors": {
+      "primary": "#dc2626",
+      "secondary": "#ea580c",
+      "accent": "#7c3aed"
+    },
+    "features": ["Artistic Design", "Creative Layout", "Visual Appeal"]
+  },
+  {
+    "id": "classic",
+    "name": "Classic CV",
+    "description": "Classic and timeless CV template with elegant typography and clean layout",
+    "preview": "/templates/classic-preview.jpg",
     "category": "Classic",
-    "package": "jsonresume-theme-paper",
+    "package": "jsonresume-theme-classic",
     "colors": {
-      "primary": "#2c3e50",
-      "secondary": "#34495e",
-      "accent": "#e67e22"
+      "primary": "#374151",
+      "secondary": "#6b7280",
+      "accent": "#111827"
     },
-    "features": ["Paper Style", "Elegant Typography", "Traditional Layout"]
-  },
-  {
-    "id": "elegant",
-    "name": "Elegant",
-    "description": "Sophisticated template with refined styling and premium visual elements",
-    "preview": "/templates/elegant-preview.png",
-    "category": "Premium",
-    "package": "jsonresume-theme-elegant",
-    "colors": {
-      "primary": "#2c3e50",
-      "secondary": "#9b59b6",
-      "accent": "#e74c3c"
-    },
-    "features": ["Sophisticated Design", "Premium Elements", "Refined Styling"]
-  },
-  {
-    "id": "kendall",
-    "name": "Kendall",
-    "description": "Modern template with a focus on readability and clean section separation",
-    "preview": "/templates/kendall-preview.png",
-    "category": "Modern",
-    "package": "jsonresume-theme-kendall",
-    "colors": {
-      "primary": "#2c3e50",
-      "secondary": "#27ae60",
-      "accent": "#f39c12"
-    },
-    "features": ["High Readability", "Clean Sections", "Modern Layout"]
+    "features": ["Elegant Typography", "Clean Layout", "Timeless Design"]
   }
 ]

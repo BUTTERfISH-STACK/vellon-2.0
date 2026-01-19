@@ -115,7 +115,7 @@ export default function CVRedoPage() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const [isEditing, setIsEditing] = useState(true);
-  const [selectedTemplate, setSelectedTemplate] = useState<string>('modern');
+  const [selectedTemplate, setSelectedTemplate] = useState<string>('creative');
   const [cvData, setCvData] = useState<CVData>({
     personal: {
       name: '',
