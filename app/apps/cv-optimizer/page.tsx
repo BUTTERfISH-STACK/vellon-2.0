@@ -7,118 +7,207 @@ import jsPDF from 'jspdf';
 const CVMockup = ({ type }: { type: 'modern' | 'classic' | 'creative' }) => {
   const mockups = {
     modern: (
-      <div className="bg-white text-gray-900 p-6 h-full flex flex-col">
+      <div className="bg-white text-gray-900 p-6 h-full flex flex-col relative">
+        {/* Vellon Stamp */}
+        <div className="absolute top-4 right-4 opacity-20">
+          <img src="/vellon-stamp.png" alt="Vellon" className="w-16 h-16 object-contain" />
+        </div>
+
         <div className="text-center mb-6 pb-4 border-b-2 border-accent">
           <h2 className="text-xl font-bold mb-2">Sarah Nkosi</h2>
           <p className="text-sm text-gray-600">Senior Data Scientist</p>
-          <div className="text-xs text-gray-500 mt-1">
+          <div className="text-xs text-gray-500 mt-2 space-y-1">
             <p>Johannesburg, South Africa | sarah.nkosi@email.com</p>
-            <p>+27 82 123 4567 | linkedin.com/in/sarahnkosi</p>
+            <p>+27 82 123 4567 | linkedin.com/in/sarahnkosi | github.com/snkosi</p>
           </div>
         </div>
         <div className="flex-1 space-y-4">
           <div>
-            <h3 className="font-semibold text-accent mb-2">PROFESSIONAL EXPERIENCE</h3>
-            <div className="space-y-3">
+            <h3 className="font-semibold text-accent mb-3 text-sm uppercase tracking-wide">Professional Summary</h3>
+            <p className="text-sm text-gray-700 leading-relaxed">
+              Experienced data scientist with 5+ years in machine learning and predictive analytics.
+              Proven track record of developing ML solutions that drive business value and operational efficiency.
+              Expertise in Python, R, and cloud platforms.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-semibold text-accent mb-3 text-sm uppercase tracking-wide">Professional Experience</h3>
+            <div className="space-y-4">
               <div>
-                <div className="flex justify-between">
-                  <span className="font-medium">Senior Data Scientist</span>
+                <div className="flex justify-between items-start mb-1">
+                  <span className="font-semibold text-gray-900">Senior Data Scientist</span>
                   <span className="text-sm text-gray-600">2021-Present</span>
                 </div>
-                <p className="text-sm text-gray-600 font-medium">Santam Insurance</p>
-                <ul className="text-sm text-gray-700 mt-1 space-y-1">
-                  <li>• Developed ML models reducing claims processing time by 40%</li>
-                  <li>• Led team of 5 data scientists on predictive analytics projects</li>
-                  <li>• Implemented automated reporting systems saving 15 hours/week</li>
+                <p className="text-sm text-accent font-medium mb-2">Santam Insurance, Johannesburg</p>
+                <ul className="text-sm text-gray-700 space-y-1">
+                  <li>• Developed machine learning models reducing claims processing time by 40%</li>
+                  <li>• Led cross-functional team of 5 data scientists on predictive analytics initiatives</li>
+                  <li>• Implemented automated reporting systems saving 15 hours/week in manual reporting</li>
+                  <li>• Built customer risk profiling models improving underwriting accuracy by 25%</li>
+                  <li>• Collaborated with actuarial team to enhance pricing models using advanced statistics</li>
                 </ul>
               </div>
               <div>
-                <div className="flex justify-between">
-                  <span className="font-medium">Data Analyst</span>
+                <div className="flex justify-between items-start mb-1">
+                  <span className="font-semibold text-gray-900">Data Analyst</span>
                   <span className="text-sm text-gray-600">2019-2021</span>
                 </div>
-                <p className="text-sm text-gray-600 font-medium">FNB Banking Group</p>
-                <ul className="text-sm text-gray-700 mt-1 space-y-1">
-                  <li>• Built customer segmentation models using Python/R</li>
-                  <li>• Created dashboards for executive decision-making</li>
+                <p className="text-sm text-accent font-medium mb-2">FNB Banking Group, Johannesburg</p>
+                <ul className="text-sm text-gray-700 space-y-1">
+                  <li>• Built customer segmentation models using Python and SQL for targeted marketing</li>
+                  <li>• Created executive dashboards using Tableau and Power BI for C-suite reporting</li>
+                  <li>• Conducted A/B testing analysis improving digital campaign ROI by 35%</li>
+                  <li>• Developed ETL pipelines for real-time data processing</li>
+                </ul>
+              </div>
+              <div>
+                <div className="flex justify-between items-start mb-1">
+                  <span className="font-semibold text-gray-900">Junior Data Analyst</span>
+                  <span className="text-sm text-gray-600">2017-2019</span>
+                </div>
+                <p className="text-sm text-accent font-medium mb-2">Discovery Health, Johannesburg</p>
+                <ul className="text-sm text-gray-700 space-y-1">
+                  <li>• Performed statistical analysis on healthcare claims data</li>
+                  <li>• Created automated reports using R and Excel for business stakeholders</li>
+                  <li>• Assisted in developing predictive models for customer retention</li>
                 </ul>
               </div>
             </div>
           </div>
           <div>
-            <h3 className="font-semibold text-accent mb-2">TECHNICAL SKILLS</h3>
-            <div className="flex flex-wrap gap-1">
-              <span className="text-xs bg-accent/10 text-accent px-2 py-1 rounded">Python</span>
-              <span className="text-xs bg-accent/10 text-accent px-2 py-1 rounded">R</span>
-              <span className="text-xs bg-accent/10 text-accent px-2 py-1 rounded">SQL</span>
-              <span className="text-xs bg-accent/10 text-accent px-2 py-1 rounded">TensorFlow</span>
-              <span className="text-xs bg-accent/10 text-accent px-2 py-1 rounded">Tableau</span>
-              <span className="text-xs bg-accent/10 text-accent px-2 py-1 rounded">Power BI</span>
+            <h3 className="font-semibold text-accent mb-3 text-sm uppercase tracking-wide">Technical Skills</h3>
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <span className="font-medium text-sm text-gray-900">Programming:</span>
+                <p className="text-sm text-gray-700">Python, R, SQL, SAS</p>
+              </div>
+              <div>
+                <span className="font-medium text-sm text-gray-900">ML/AI:</span>
+                <p className="text-sm text-gray-700">TensorFlow, scikit-learn, PyTorch</p>
+              </div>
+              <div>
+                <span className="font-medium text-sm text-gray-900">Visualization:</span>
+                <p className="text-sm text-gray-700">Tableau, Power BI, matplotlib</p>
+              </div>
+              <div>
+                <span className="font-medium text-sm text-gray-900">Cloud:</span>
+                <p className="text-sm text-gray-700">AWS, Azure, Google Cloud</p>
+              </div>
             </div>
           </div>
           <div>
-            <h3 className="font-semibold text-accent mb-2">EDUCATION</h3>
-            <div>
-              <div className="flex justify-between">
-                <span className="font-medium">MSc Data Science</span>
-                <span className="text-sm text-gray-600">2017-2019</span>
+            <h3 className="font-semibold text-accent mb-3 text-sm uppercase tracking-wide">Education & Certifications</h3>
+            <div className="space-y-2">
+              <div>
+                <div className="flex justify-between">
+                  <span className="font-semibold text-gray-900">MSc Data Science</span>
+                  <span className="text-sm text-gray-600">2017-2019</span>
+                </div>
+                <p className="text-sm text-gray-600">University of Cape Town</p>
+                <p className="text-xs text-gray-500">Distinction | Thesis: "Machine Learning Applications in Insurance Risk Assessment"</p>
               </div>
-              <p className="text-sm text-gray-600">University of Cape Town</p>
+              <div>
+                <div className="flex justify-between">
+                  <span className="font-semibold text-gray-900">BSc Statistics & Computer Science</span>
+                  <span className="text-sm text-gray-600">2013-2016</span>
+                </div>
+                <p className="text-sm text-gray-600">University of the Witwatersrand</p>
+              </div>
+              <div className="mt-3">
+                <p className="text-sm font-medium text-gray-900">Certifications:</p>
+                <ul className="text-sm text-gray-700 space-y-1">
+                  <li>• AWS Certified Machine Learning - Specialty (2023)</li>
+                  <li>• Google Cloud Professional Data Engineer (2022)</li>
+                  <li>• SAS Certified Advanced Analytics Professional (2021)</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </div>
     ),
     classic: (
-      <div className="bg-white text-gray-900 p-6 h-full flex flex-col">
+      <div className="bg-white text-gray-900 p-6 h-full flex flex-col relative">
+        {/* Vellon Stamp */}
+        <div className="absolute top-4 right-4 opacity-20">
+          <img src="/vellon-stamp.png" alt="Vellon" className="w-16 h-16 object-contain" />
+        </div>
+
         <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold mb-1">Thabo Mthembu</h2>
+          <h2 className="text-2xl font-bold mb-2">Thabo Mthembu</h2>
           <div className="text-sm text-gray-600 space-y-1">
-            <p>Project Manager | Johannesburg, South Africa</p>
+            <p>Senior Project Manager | Johannesburg, South Africa</p>
             <p>thabo.mthembu@outlook.com | +27 71 987 6543</p>
-            <p>linkedin.com/in/thabomthembu | github.com/thabom</p>
+            <p>linkedin.com/in/thabomthembu | pmp-certified-pm</p>
           </div>
         </div>
-        <div className="flex-1 space-y-4">
+        <div className="flex-1 space-y-5">
           <div>
-            <h3 className="font-bold text-lg mb-2 border-b border-gray-300 pb-1">PROFESSIONAL EXPERIENCE</h3>
-            <div className="space-y-4">
+            <h3 className="font-bold text-lg mb-3 border-b-2 border-gray-300 pb-1">PROFESSIONAL SUMMARY</h3>
+            <p className="text-sm text-gray-700 leading-relaxed">
+              Accomplished project manager with 8+ years of experience leading large-scale infrastructure and technology projects
+              in the telecommunications and energy sectors. Proven expertise in Agile methodologies, stakeholder management,
+              and delivering complex projects on time and within budget. PMP certified with a track record of managing
+              multi-million rand projects across Southern Africa.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-bold text-lg mb-3 border-b-2 border-gray-300 pb-1">PROFESSIONAL EXPERIENCE</h3>
+            <div className="space-y-5">
               <div>
-                <div className="flex justify-between font-semibold">
+                <div className="flex justify-between font-bold text-gray-900">
                   <span>Senior Project Manager</span>
                   <span className="text-sm">2020-Present</span>
                 </div>
-                <p className="text-sm italic mb-2">MTN Group, Johannesburg</p>
+                <p className="text-sm italic mb-2 font-medium">MTN Group, Johannesburg</p>
                 <ul className="text-sm space-y-1 ml-4">
-                  <li>• Managed R250M+ telecommunications infrastructure projects</li>
-                  <li>• Led cross-functional teams of 25+ members across 3 countries</li>
-                  <li>• Implemented Agile methodologies reducing project delivery time by 30%</li>
-                  <li>• Achieved 98% on-time project completion rate</li>
+                  <li>• Led R250M+ telecommunications infrastructure deployment across 3 African countries</li>
+                  <li>• Managed cross-functional teams of 25+ members including engineering, procurement, and operations</li>
+                  <li>• Implemented Agile/Scrum methodologies reducing project delivery time by 30%</li>
+                  <li>• Achieved 98% on-time project completion rate and 15% cost savings through vendor negotiations</li>
+                  <li>• Directed stakeholder engagement with C-suite executives and government regulators</li>
+                  <li>• Developed comprehensive risk management frameworks and contingency plans</li>
                 </ul>
               </div>
               <div>
-                <div className="flex justify-between font-semibold">
-                  <span>Project Coordinator</span>
+                <div className="flex justify-between font-bold text-gray-900">
+                  <span>Project Manager</span>
                   <span className="text-sm">2017-2020</span>
                 </div>
-                <p className="text-sm italic mb-2">Eskom Holdings, Pretoria</p>
+                <p className="text-sm italic mb-2 font-medium">Eskom Holdings, Pretoria</p>
                 <ul className="text-sm space-y-1 ml-4">
-                  <li>• Coordinated maintenance projects for power distribution network</li>
-                  <li>• Managed budgets up to R50M and vendor relationships</li>
-                  <li>• Developed risk management frameworks</li>
+                  <li>• Coordinated R50M+ maintenance and upgrade projects for national power distribution network</li>
+                  <li>• Managed vendor relationships and contracts for specialized electrical equipment procurement</li>
+                  <li>• Developed comprehensive project documentation and compliance reporting</li>
+                  <li>• Implemented safety protocols resulting in zero lost-time incidents on managed projects</li>
+                  <li>• Led change management initiatives for technology upgrades across multiple sites</li>
+                </ul>
+              </div>
+              <div>
+                <div className="flex justify-between font-bold text-gray-900">
+                  <span>Project Coordinator</span>
+                  <span className="text-sm">2014-2017</span>
+                </div>
+                <p className="text-sm italic mb-2 font-medium">Transnet SOC Ltd, Johannesburg</p>
+                <ul className="text-sm space-y-1 ml-4">
+                  <li>• Supported project managers on R100M+ rail infrastructure modernization projects</li>
+                  <li>• Coordinated between engineering teams, contractors, and regulatory bodies</li>
+                  <li>• Managed project documentation, schedules, and budget tracking</li>
+                  <li>• Assisted in procurement processes and vendor performance evaluation</li>
                 </ul>
               </div>
             </div>
           </div>
           <div>
-            <h3 className="font-bold text-lg mb-2 border-b border-gray-300 pb-1">EDUCATION</h3>
-            <div className="space-y-2">
+            <h3 className="font-bold text-lg mb-3 border-b-2 border-gray-300 pb-1">EDUCATION</h3>
+            <div className="space-y-3">
               <div>
                 <div className="flex justify-between font-semibold">
                   <span>Master of Business Administration (MBA)</span>
                   <span className="text-sm">2015-2017</span>
                 </div>
                 <p className="text-sm italic">University of Johannesburg</p>
+                <p className="text-xs text-gray-500">Specialization: Project Management | Graduated Cum Laude</p>
               </div>
               <div>
                 <div className="flex justify-between font-semibold">
@@ -126,94 +215,170 @@ const CVMockup = ({ type }: { type: 'modern' | 'classic' | 'creative' }) => {
                   <span className="text-sm">2011-2015</span>
                 </div>
                 <p className="text-sm italic">University of Pretoria</p>
+                <p className="text-xs text-gray-500">Dean's List | Engineering Council of South Africa Accredited</p>
               </div>
             </div>
           </div>
           <div>
-            <h3 className="font-bold text-lg mb-2 border-b border-gray-300 pb-1">CERTIFICATIONS</h3>
-            <ul className="text-sm space-y-1">
-              <li>• PRINCE2 Practitioner (2022)</li>
-              <li>• PMP (Project Management Professional) (2021)</li>
-              <li>• Scrum Master Certification (2019)</li>
-            </ul>
+            <h3 className="font-bold text-lg mb-3 border-b-2 border-gray-300 pb-1">CERTIFICATIONS & SKILLS</h3>
+            <div className="grid grid-cols-1 gap-3">
+              <div>
+                <p className="text-sm font-semibold text-gray-900">Project Management Certifications:</p>
+                <ul className="text-sm space-y-1 ml-2">
+                  <li>• Project Management Professional (PMP) - PMI (2021)</li>
+                  <li>• PRINCE2 Practitioner - AXELOS (2022)</li>
+                  <li>• Scrum Master Certification - Scrum Alliance (2019)</li>
+                  <li>• Microsoft Project Expert Certification (2018)</li>
+                </ul>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-gray-900">Technical Skills:</p>
+                <p className="text-sm">MS Project, Primavera P6, JIRA, SAP, AutoCAD, Risk Management Software</p>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-gray-900">Soft Skills:</p>
+                <p className="text-sm">Stakeholder Management, Risk Assessment, Budget Control, Team Leadership, Negotiation</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     ),
     creative: (
-      <div className="bg-gradient-to-br from-accent/5 to-accent/10 text-gray-900 p-6 h-full flex flex-col">
+      <div className="bg-gradient-to-br from-accent/5 to-accent/10 text-gray-900 p-6 h-full flex flex-col relative">
+        {/* Vellon Stamp */}
+        <div className="absolute top-4 right-4 opacity-20">
+          <img src="/vellon-stamp.png" alt="Vellon" className="w-16 h-16 object-contain" />
+        </div>
+
         <div className="text-center mb-6">
-          <div className="w-16 h-16 bg-accent rounded-full mx-auto mb-4 flex items-center justify-center">
+          <div className="w-16 h-16 bg-accent rounded-full mx-auto mb-4 flex items-center justify-center shadow-lg">
             <span className="text-white font-bold text-xl">LM</span>
           </div>
           <h2 className="text-2xl font-bold mb-2">Lerato Molefe</h2>
-          <p className="text-accent font-medium">UX/UI Designer & Front-end Developer</p>
-          <div className="text-xs text-gray-600 mt-2">
-            <p>Cape Town | lerato.molefe@gmail.com</p>
-            <p>+27 84 567 8901 | behance.net/leratomolefe</p>
+          <p className="text-accent font-semibold text-lg">Senior UX/UI Designer & Front-end Developer</p>
+          <div className="text-xs text-gray-600 mt-3 space-y-1">
+            <p>Cape Town, South Africa | lerato.molefe@gmail.com</p>
+            <p>+27 84 567 8901 | behance.net/leratomolefe | linkedin.com/in/leratomolefe</p>
           </div>
         </div>
-        <div className="flex-1 space-y-4">
+        <div className="flex-1 space-y-5">
           <div>
-            <h3 className="font-bold text-accent mb-3 flex items-center gap-2">
-              <span className="w-2 h-2 bg-accent rounded-full"></span>
-              EXPERIENCE
+            <h3 className="font-bold text-accent mb-4 flex items-center gap-2 text-lg">
+              <span className="w-3 h-3 bg-accent rounded-full"></span>
+              PROFESSIONAL SUMMARY
+            </h3>
+            <p className="text-sm text-gray-700 leading-relaxed bg-white/40 p-4 rounded-lg border border-white/30">
+              Innovative UX/UI designer with 6+ years of experience creating user-centered digital experiences.
+              Passionate about solving complex problems through design thinking and cutting-edge technology.
+              Expertise in full-stack design development with a focus on accessibility and inclusive design.
+              Proven track record of increasing user engagement and business metrics through strategic design interventions.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-bold text-accent mb-4 flex items-center gap-2 text-lg">
+              <span className="w-3 h-3 bg-accent rounded-full"></span>
+              PROFESSIONAL EXPERIENCE
+            </h3>
+            <div className="space-y-4">
+              <div className="bg-white/70 p-5 rounded-xl border border-white/50 shadow-sm">
+                <div className="flex justify-between items-start mb-3">
+                  <div>
+                    <span className="font-bold text-lg text-gray-900">Senior UX/UI Designer</span>
+                    <p className="text-accent font-semibold">Takealot Group (e-commerce leader)</p>
+                  </div>
+                  <span className="text-xs text-gray-600 bg-accent/10 px-3 py-1 rounded-full font-medium">2022-Present</span>
+                </div>
+                <ul className="text-sm space-y-2 text-gray-700">
+                  <li>• Led complete redesign of e-commerce platform resulting in 35% increase in conversion rates</li>
+                  <li>• Established comprehensive design system serving 50+ products and 200+ designers</li>
+                  <li>• Conducted extensive user research with 500+ participants across South Africa</li>
+                  <li>• Implemented accessibility standards (WCAG 2.1 AA) across all digital touchpoints</li>
+                  <li>• Mentored junior designers and established UX best practices company-wide</li>
+                  <li>• Collaborated with product and engineering teams using Agile methodologies</li>
+                </ul>
+              </div>
+              <div className="bg-white/70 p-5 rounded-xl border border-white/50 shadow-sm">
+                <div className="flex justify-between items-start mb-3">
+                  <div>
+                    <span className="font-bold text-lg text-gray-900">UX Designer & Developer</span>
+                    <p className="text-accent font-semibold">Jumo (World Bank Group)</p>
+                  </div>
+                  <span className="text-xs text-gray-600 bg-accent/10 px-3 py-1 rounded-full font-medium">2019-2022</span>
+                </div>
+                <ul className="text-sm space-y-2 text-gray-700">
+                  <li>• Designed financial inclusion products for underserved markets across Africa</li>
+                  <li>• Created mobile-first solutions optimized for low-connectivity environments</li>
+                  <li>• Developed interactive prototypes using Framer and Principle</li>
+                  <li>• Conducted field research in rural communities to inform product design</li>
+                  <li>• Built responsive web applications using React and TypeScript</li>
+                  <li>• Presented design concepts to World Bank executives and government stakeholders</li>
+                </ul>
+              </div>
+              <div className="bg-white/70 p-5 rounded-xl border border-white/50 shadow-sm">
+                <div className="flex justify-between items-start mb-3">
+                  <div>
+                    <span className="font-bold text-lg text-gray-900">Digital Designer</span>
+                    <p className="text-accent font-semibold">Virgin Active South Africa</p>
+                  </div>
+                  <span className="text-xs text-gray-600 bg-accent/10 px-3 py-1 rounded-full font-medium">2017-2019</span>
+                </div>
+                <ul className="text-sm space-y-2 text-gray-700">
+                  <li>• Redesigned mobile app interface increasing user retention by 40%</li>
+                  <li>• Created marketing collateral and digital campaigns for fitness brand</li>
+                  <li>• Developed interactive touch-screen experiences for gym locations</li>
+                  <li>• Collaborated with marketing team on customer journey optimization</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 className="font-bold text-accent mb-4 flex items-center gap-2 text-lg">
+              <span className="w-3 h-3 bg-accent rounded-full"></span>
+              SKILLS & EXPERTISE
+            </h3>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="bg-white/70 px-4 py-3 rounded-lg border border-white/50">
+                <span className="font-semibold text-sm text-gray-900 block mb-1">Design Tools</span>
+                <p className="text-sm text-gray-700">Figma, Sketch, Adobe Creative Suite, InVision</p>
+              </div>
+              <div className="bg-white/70 px-4 py-3 rounded-lg border border-white/50">
+                <span className="font-semibold text-sm text-gray-900 block mb-1">Development</span>
+                <p className="text-sm text-gray-700">React, TypeScript, HTML/CSS, JavaScript</p>
+              </div>
+              <div className="bg-white/70 px-4 py-3 rounded-lg border border-white/50">
+                <span className="font-semibold text-sm text-gray-900 block mb-1">Prototyping</span>
+                <p className="text-sm text-gray-700">Framer, Principle, After Effects</p>
+              </div>
+              <div className="bg-white/70 px-4 py-3 rounded-lg border border-white/50">
+                <span className="font-semibold text-sm text-gray-900 block mb-1">Research</span>
+                <p className="text-sm text-gray-700">User Testing, Analytics, A/B Testing</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 className="font-bold text-accent mb-4 flex items-center gap-2 text-lg">
+              <span className="w-3 h-3 bg-accent rounded-full"></span>
+              EDUCATION & ACHIEVEMENTS
             </h3>
             <div className="space-y-3">
-              <div className="bg-white/60 p-4 rounded-lg border border-white/50">
+              <div className="bg-white/70 p-4 rounded-lg border border-white/50">
                 <div className="flex justify-between items-start mb-2">
-                  <div>
-                    <span className="font-semibold text-lg">Senior UX Designer</span>
-                    <p className="text-accent font-medium">Takealot.com</p>
-                  </div>
-                  <span className="text-xs text-gray-500 bg-white/50 px-2 py-1 rounded">2022-Present</span>
+                  <span className="font-bold text-gray-900">Bachelor of Design (Digital)</span>
+                  <span className="text-sm text-gray-600 bg-accent/10 px-2 py-1 rounded">2015-2018</span>
                 </div>
-                <ul className="text-sm space-y-1 text-gray-700">
-                  <li>• Redesigned e-commerce platform increasing conversion by 35%</li>
-                  <li>• Led design system implementation for 50+ products</li>
-                  <li>• Conducted user research with 500+ participants</li>
+                <p className="text-sm text-accent font-medium">Cape Peninsula University of Technology</p>
+                <p className="text-xs text-gray-600 mt-1">First Class Honours | Best Graduate Project Award</p>
+              </div>
+              <div className="bg-white/70 p-4 rounded-lg border border-white/50">
+                <p className="text-sm font-semibold text-gray-900 mb-2">Certifications & Awards</p>
+                <ul className="text-sm text-gray-700 space-y-1">
+                  <li>• Google UX Design Professional Certificate (2023)</li>
+                  <li>• Adobe Certified Expert - XD (2022)</li>
+                  <li>• AIGA Design Competition Winner (2021)</li>
+                  <li>• South African Design Excellence Award (2020)</li>
                 </ul>
               </div>
-              <div className="bg-white/60 p-4 rounded-lg border border-white/50">
-                <div className="flex justify-between items-start mb-2">
-                  <div>
-                    <span className="font-semibold text-lg">UX Designer</span>
-                    <p className="text-accent font-medium">Jumo (World Bank)</p>
-                  </div>
-                  <span className="text-xs text-gray-500 bg-white/50 px-2 py-1 rounded">2019-2022</span>
-                </div>
-                <ul className="text-sm space-y-1 text-gray-700">
-                  <li>• Designed financial inclusion products for emerging markets</li>
-                  <li>• Created mobile-first solutions for low-connectivity environments</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div>
-            <h3 className="font-bold text-accent mb-3 flex items-center gap-2">
-              <span className="w-2 h-2 bg-accent rounded-full"></span>
-              SKILLS & TOOLS
-            </h3>
-            <div className="grid grid-cols-2 gap-2">
-              <div className="bg-white/60 px-3 py-2 rounded-lg text-center text-sm font-medium border border-white/50">Figma</div>
-              <div className="bg-white/60 px-3 py-2 rounded-lg text-center text-sm font-medium border border-white/50">Sketch</div>
-              <div className="bg-white/60 px-3 py-2 rounded-lg text-center text-sm font-medium border border-white/50">React</div>
-              <div className="bg-white/60 px-3 py-2 rounded-lg text-center text-sm font-medium border border-white/50">TypeScript</div>
-              <div className="bg-white/60 px-3 py-2 rounded-lg text-center text-sm font-medium border border-white/50">Adobe Creative Suite</div>
-              <div className="bg-white/60 px-3 py-2 rounded-lg text-center text-sm font-medium border border-white/50">Prototyping</div>
-            </div>
-          </div>
-          <div>
-            <h3 className="font-bold text-accent mb-3 flex items-center gap-2">
-              <span className="w-2 h-2 bg-accent rounded-full"></span>
-              EDUCATION
-            </h3>
-            <div className="bg-white/60 p-3 rounded-lg border border-white/50">
-              <div className="flex justify-between">
-                <span className="font-semibold">BDes Digital Design</span>
-                <span className="text-sm text-gray-600">2015-2018</span>
-              </div>
-              <p className="text-sm text-accent font-medium">Cape Peninsula University of Technology</p>
             </div>
           </div>
         </div>
