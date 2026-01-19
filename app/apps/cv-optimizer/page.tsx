@@ -73,51 +73,51 @@ export default function CVOptimizerPage() {
   // Pro templates loaded from Git
   const [proTemplates, setProTemplates] = useState<CVTemplate[]>([
     {
-      id: 'executive',
-      name: 'Executive Suite',
-      description: 'Premium template for senior executives with sophisticated design',
-      preview: '/templates/executive-preview.jpg',
-      category: 'Executive',
+      id: 'moderncv',
+      name: 'Modern CV',
+      description: 'A modern curriculum vitae template with clean design and professional layout, inspired by LaTeX moderncv',
+      preview: '/templates/moderncv-preview.jpg',
+      category: 'Modern',
       colors: { primary: '#1e40af', secondary: '#7c3aed', accent: '#dc2626' }
     },
     {
-      id: 'creative',
-      name: 'Creative Professional',
-      description: 'Modern design for creative industries with artistic elements',
-      preview: '/templates/creative-preview.jpg',
-      category: 'Creative',
+      id: 'academic',
+      name: 'Academic CV',
+      description: 'Traditional academic CV template suitable for researchers and academics, with formal layout',
+      preview: '/templates/academic-preview.jpg',
+      category: 'Academic',
       colors: { primary: '#7c3aed', secondary: '#ec4899', accent: '#f59e0b' }
     },
     {
-      id: 'tech',
-      name: 'Tech Innovator',
-      description: 'Clean, modern template perfect for tech professionals',
-      preview: '/templates/tech-preview.jpg',
-      category: 'Technology',
+      id: 'banking',
+      name: 'Banking CV',
+      description: 'Professional CV template designed for banking and finance professionals',
+      preview: '/templates/banking-preview.jpg',
+      category: 'Finance',
       colors: { primary: '#059669', secondary: '#0891b2', accent: '#7c3aed' }
     },
     {
-      id: 'academic',
-      name: 'Academic Excellence',
-      description: 'Traditional yet modern design for academic and research positions',
-      preview: '/templates/academic-preview.jpg',
-      category: 'Academic',
+      id: 'engineering',
+      name: 'Engineering CV',
+      description: 'Technical CV template for engineering professionals with emphasis on skills and projects',
+      preview: '/templates/engineering-preview.jpg',
+      category: 'Engineering',
       colors: { primary: '#7c2d12', secondary: '#365314', accent: '#1e40af' }
     },
     {
-      id: 'startup',
-      name: 'Startup Founder',
-      description: 'Dynamic template for entrepreneurs and startup professionals',
-      preview: '/templates/startup-preview.jpg',
-      category: 'Entrepreneurship',
+      id: 'creative',
+      name: 'Creative CV',
+      description: 'Creative and artistic CV template for designers and creative professionals',
+      preview: '/templates/creative-preview.jpg',
+      category: 'Creative',
       colors: { primary: '#dc2626', secondary: '#ea580c', accent: '#7c3aed' }
     },
     {
-      id: 'minimalist',
-      name: 'Minimalist Pro',
-      description: 'Clean, distraction-free design focusing on content',
-      preview: '/templates/minimalist-preview.jpg',
-      category: 'Minimalist',
+      id: 'classic',
+      name: 'Classic CV',
+      description: 'Classic and timeless CV template with elegant typography and clean layout',
+      preview: '/templates/classic-preview.jpg',
+      category: 'Classic',
       colors: { primary: '#374151', secondary: '#6b7280', accent: '#111827' }
     }
   ]);
