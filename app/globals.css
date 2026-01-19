@@ -1,20 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0f0f23;
-  --foreground: #ffffff;
-  --primary: #8b5cf6;
-  --primary-dark: #7c3aed;
-  --secondary: #06b6d4;
-  --accent: #f59e0b;
-  --surface: #1a1a2e;
-  --surface-light: #16213e;
-  --text-muted: #94a3b8;
-  --border: #334155;
-  --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
-  --gradient-secondary: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  --shadow-premium: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  --shadow-glow: 0 0 20px rgba(139, 92, 246, 0.3);
+  --background: #fef7f0;
+  --foreground: #2d3748;
+  --primary: #e6a85c;
+  --primary-dark: #d48c3a;
+  --secondary: #f4a261;
+  --accent: #e76f51;
+  --surface: #ffffff;
+  --surface-light: #faf9f7;
+  --text-muted: #718096;
+  --border: #e2e8f0;
+  --gradient-primary: linear-gradient(135deg, #e6a85c 0%, #f4a261 100%);
+  --gradient-secondary: linear-gradient(135deg, #fef7f0 0%, #faf9f7 100%);
+  --gradient-warm: linear-gradient(135deg, #fef7f0 0%, #f4e4bc 50%, #e6a85c 100%);
+  --shadow-premium: 0 20px 25px -5px rgba(230, 168, 92, 0.1), 0 10px 10px -5px rgba(230, 168, 92, 0.04);
+  --shadow-glow: 0 0 20px rgba(230, 168, 92, 0.3);
+  --shadow-warm: 0 4px 6px -1px rgba(230, 168, 92, 0.1), 0 2px 4px -1px rgba(230, 168, 92, 0.06);
 }
 
 @theme inline {
@@ -31,16 +33,17 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
   :root {
-    --background: #ffffff;
-    --foreground: #0f172a;
-    --surface: #f8fafc;
-    --surface-light: #ffffff;
-    --text-muted: #64748b;
-    --border: #e2e8f0;
-    --shadow-premium: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    --shadow-glow: 0 0 20px rgba(139, 92, 246, 0.2);
+    --background: #2d1b14;
+    --foreground: #fef7f0;
+    --surface: #3d2b20;
+    --surface-light: #4a3528;
+    --text-muted: #d4b08a;
+    --border: #5d4a3a;
+    --shadow-premium: 0 20px 25px -5px rgba(230, 168, 92, 0.15), 0 10px 10px -5px rgba(230, 168, 92, 0.08);
+    --shadow-glow: 0 0 20px rgba(230, 168, 92, 0.4);
+    --shadow-warm: 0 4px 6px -1px rgba(230, 168, 92, 0.15), 0 2px 4px -1px rgba(230, 168, 92, 0.08);
   }
 }
 
@@ -73,7 +76,34 @@ body {
     box-shadow: var(--shadow-glow);
   }
   50% {
-    box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+    box-shadow: 0 0 30px rgba(230, 168, 92, 0.6);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes parallax-slow {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50px);
+  }
+}
+
+@keyframes parallax-fast {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100px);
   }
 }
 
@@ -83,4 +113,13 @@ body {
 
 .animate-glow {
   animation: glow 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 3s ease-in-out infinite;
+  animation-delay: 1.5s;
 }
