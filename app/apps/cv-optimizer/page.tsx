@@ -3,6 +3,115 @@
 import { useState, useEffect } from 'react';
 import jsPDF from 'jspdf';
 
+// CV Mockup Component
+const CVMockup = ({ type }: { type: 'modern' | 'classic' | 'creative' }) => {
+  const mockups = {
+    modern: (
+      <div className="bg-white text-gray-900 p-6 h-full flex flex-col">
+        <div className="text-center mb-6 pb-4 border-b-2 border-accent">
+          <h2 className="text-xl font-bold mb-2">John Smith</h2>
+          <p className="text-sm text-gray-600">Software Developer</p>
+        </div>
+        <div className="flex-1 space-y-4">
+          <div>
+            <h3 className="font-semibold text-accent mb-2">EXPERIENCE</h3>
+            <div className="space-y-2">
+              <div>
+                <div className="flex justify-between">
+                  <span className="font-medium">Senior Developer</span>
+                  <span className="text-sm text-gray-600">2022-Present</span>
+                </div>
+                <p className="text-sm text-gray-600">Tech Corp</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 className="font-semibold text-accent mb-2">SKILLS</h3>
+            <div className="flex flex-wrap gap-1">
+              <span className="text-xs bg-accent/10 text-accent px-2 py-1 rounded">React</span>
+              <span className="text-xs bg-accent/10 text-accent px-2 py-1 rounded">TypeScript</span>
+              <span className="text-xs bg-accent/10 text-accent px-2 py-1 rounded">Node.js</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    ),
+    classic: (
+      <div className="bg-white text-gray-900 p-6 h-full flex flex-col">
+        <div className="text-center mb-6">
+          <h2 className="text-2xl font-bold mb-1">John Smith</h2>
+          <div className="text-sm text-gray-600 space-y-1">
+            <p>123 Main Street, Cape Town</p>
+            <p>john@email.com | +27 123 456 7890</p>
+          </div>
+        </div>
+        <div className="flex-1 space-y-4">
+          <div>
+            <h3 className="font-bold text-lg mb-2 border-b border-gray-300 pb-1">PROFESSIONAL EXPERIENCE</h3>
+            <div className="space-y-3">
+              <div>
+                <div className="flex justify-between font-semibold">
+                  <span>Senior Software Developer</span>
+                  <span className="text-sm">2022-Present</span>
+                </div>
+                <p className="text-sm italic mb-1">Technology Solutions Inc.</p>
+                <ul className="text-sm space-y-1 ml-4">
+                  <li>• Led development of web applications</li>
+                  <li>• Mentored junior developers</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    ),
+    creative: (
+      <div className="bg-gradient-to-br from-accent/5 to-accent/10 text-gray-900 p-6 h-full flex flex-col">
+        <div className="text-center mb-6">
+          <div className="w-16 h-16 bg-accent rounded-full mx-auto mb-4 flex items-center justify-center">
+            <span className="text-white font-bold text-xl">JS</span>
+          </div>
+          <h2 className="text-2xl font-bold mb-2">John Smith</h2>
+          <p className="text-accent font-medium">Creative Developer</p>
+        </div>
+        <div className="flex-1 space-y-4">
+          <div>
+            <h3 className="font-bold text-accent mb-2 flex items-center gap-2">
+              <span className="w-2 h-2 bg-accent rounded-full"></span>
+              EXPERIENCE
+            </h3>
+            <div className="space-y-2">
+              <div className="bg-white/50 p-3 rounded-lg">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <span className="font-semibold">Lead Developer</span>
+                    <p className="text-sm text-gray-600">Innovation Studio</p>
+                  </div>
+                  <span className="text-xs text-gray-500">2021-2023</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 className="font-bold text-accent mb-2 flex items-center gap-2">
+              <span className="w-2 h-2 bg-accent rounded-full"></span>
+              SKILLS
+            </h3>
+            <div className="grid grid-cols-2 gap-2">
+              <div className="bg-white/50 px-3 py-2 rounded-lg text-center text-sm font-medium">UI/UX Design</div>
+              <div className="bg-white/50 px-3 py-2 rounded-lg text-center text-sm font-medium">React</div>
+              <div className="bg-white/50 px-3 py-2 rounded-lg text-center text-sm font-medium">Node.js</div>
+              <div className="bg-white/50 px-3 py-2 rounded-lg text-center text-sm font-medium">Figma</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  };
+
+  return mockups[type];
+};
+
 interface CVData {
   personal: {
     name: string;
@@ -54,6 +163,16 @@ export default function CVOptimizerPage() {
   const [showPreview, setShowPreview] = useState(false);
   const [isEditing, setIsEditing] = useState(true);
   const [selectedTemplate, setSelectedTemplate] = useState<string>('universal');
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = ['modern', 'classic', 'creative'] as const;
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
   const [cvData, setCvData] = useState<CVData>({
     personal: {
       name: '',
@@ -553,22 +672,32 @@ export default function CVOptimizerPage() {
 
           {/* CV Mockup Slideshow */}
           <div className="max-w-4xl mx-auto mb-12">
-            <div className="relative overflow-hidden rounded-2xl bg-surface border border-border">
-              <div className="aspect-[3/4] bg-gradient-to-br from-surface-light to-surface flex items-center justify-center">
-                <div className="text-center text-text-muted">
-                  <div className="w-24 h-32 mx-auto mb-4 bg-accent/20 rounded-lg flex items-center justify-center">
-                    <svg className="w-12 h-12 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
+            <div className="relative overflow-hidden rounded-2xl bg-surface border border-border shadow-lg">
+              <div className="aspect-[3/4] relative">
+                {slides.map((slide, index) => (
+                  <div
+                    key={slide}
+                    className={`absolute inset-0 transition-opacity duration-500 ${
+                      index === currentSlide ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  >
+                    <CVMockup type={slide} />
                   </div>
-                  <p className="text-sm font-medium">Professional CV Preview</p>
-                  <p className="text-xs text-text-muted mt-1">ATS-Optimized Layout</p>
-                </div>
+                ))}
               </div>
               <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                <div className="w-2 h-2 bg-accent rounded-full"></div>
-                <div className="w-2 h-2 bg-border rounded-full"></div>
-                <div className="w-2 h-2 bg-border rounded-full"></div>
+                {slides.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentSlide(index)}
+                    className={`w-2 h-2 rounded-full transition-colors ${
+                      index === currentSlide ? 'bg-accent' : 'bg-border hover:bg-accent/50'
+                    }`}
+                  />
+                ))}
+              </div>
+              <div className="absolute top-4 right-4 bg-accent/10 text-accent px-3 py-1 rounded-full text-xs font-medium">
+                {slides[currentSlide].charAt(0).toUpperCase() + slides[currentSlide].slice(1)} Style
               </div>
             </div>
           </div>
