@@ -965,17 +965,28 @@ export default function CVOptimizerPage() {
           {/* CV Mockup Slideshow */}
           <div className="max-w-4xl mx-auto mb-12">
             <div className="relative overflow-hidden rounded-2xl bg-surface border border-border shadow-lg">
-              <div className="aspect-[3/4] relative">
-                {slides.map((slide, index) => (
-                  <div
-                    key={slide}
-                    className={`absolute inset-0 transition-opacity duration-500 ${
-                      index === currentSlide ? 'opacity-100' : 'opacity-0'
-                    }`}
-                  >
-                    <CVMockup type={slide} />
-                  </div>
-                ))}
+              <div className="aspect-[3/4] relative bg-white rounded-lg overflow-hidden">
+                <img
+                  src="/cv-creative.png"
+                  alt="Creative CV Design"
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                    currentSlide === 0 ? 'opacity-100' : 'opacity-0'
+                  }`}
+                />
+                <img
+                  src="/cv-modern.png"
+                  alt="Modern CV Design"
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                    currentSlide === 1 ? 'opacity-100' : 'opacity-0'
+                  }`}
+                />
+                <img
+                  src="/cv-classic.png"
+                  alt="Classic CV Design"
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                    currentSlide === 2 ? 'opacity-100' : 'opacity-0'
+                  }`}
+                />
               </div>
               <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
                 {slides.map((_, index) => (
@@ -989,7 +1000,7 @@ export default function CVOptimizerPage() {
                 ))}
               </div>
               <div className="absolute top-4 right-4 bg-accent/10 text-accent px-3 py-1 rounded-full text-xs font-medium">
-                {slides[currentSlide].charAt(0).toUpperCase() + slides[currentSlide].slice(1)} Style
+                {currentSlide === 0 ? 'Creative' : currentSlide === 1 ? 'Modern' : 'Classic'} Style
               </div>
             </div>
           </div>
