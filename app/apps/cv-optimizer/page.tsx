@@ -442,7 +442,7 @@ export default function CVOptimizerPage() {
   const [selectedTemplate, setSelectedTemplate] = useState<string>('universal');
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const slides = ['modern', 'classic', 'creative'] as const;
+  const slides = ['creative', 'modern'] as const;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -980,13 +980,6 @@ export default function CVOptimizerPage() {
                     currentSlide === 1 ? 'opacity-100' : 'opacity-0'
                   }`}
                 />
-                <img
-                  src="/cv-minimalist.png"
-                  alt="Minimalist CV Design"
-                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-                    currentSlide === 2 ? 'opacity-100' : 'opacity-0'
-                  }`}
-                />
               </div>
               <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
                 {slides.map((_, index) => (
@@ -1000,7 +993,7 @@ export default function CVOptimizerPage() {
                 ))}
               </div>
               <div className="absolute top-4 right-4 bg-accent/10 text-accent px-3 py-1 rounded-full text-xs font-medium">
-                {currentSlide === 0 ? 'Creative' : currentSlide === 1 ? 'Modern' : 'Minimalist'} Style
+                {currentSlide === 0 ? 'Creative Pro' : 'Modern Pro'} Template
               </div>
             </div>
           </div>
