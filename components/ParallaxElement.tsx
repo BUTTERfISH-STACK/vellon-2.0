@@ -22,12 +22,11 @@ export default function ParallaxElement({
 
     const initRellax = async () => {
       try {
-        const Rellax = (await import('rellax')).default as any;
+        const Rellax = (await import('rellax')).default;
         if (elementRef.current) {
           rellax = new Rellax(elementRef.current, {
             speed: speed,
             center: false,
-            wrapper: null,
             round: true,
             vertical: true,
             horizontal: false
