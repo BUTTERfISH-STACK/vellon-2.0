@@ -16,9 +16,11 @@ const themeMap: { [key: string]: any } = {
 
 export async function POST(request: NextRequest) {
   try {
-    const { data, template, isPro } = await request.json();
+    const { data, templateId, isPro } = await request.json();
 
-    const themePackage = themeMap[template];
+    // For now, map templateId to a default theme. Full integration with Reactive Resume templates requires more setup.
+    const defaultTheme = 'flat';
+    const themePackage = themeMap[defaultTheme];
     if (!themePackage) {
       return NextResponse.json({ error: 'Theme not found' }, { status: 400 });
     }

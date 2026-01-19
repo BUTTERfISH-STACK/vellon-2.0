@@ -1,58 +1,62 @@
 [
   {
-    "id": "universal",
-    "name": "Universal CV",
-    "description": "Clean and professional CV template suitable for all industries and career levels",
-    "preview": "/templates/universal-preview.jpg",
-    "category": "Basic",
-    "package": "jsonresume-theme-universal",
-    "colors": {
-      "primary": "#2563eb",
-      "secondary": "#64748b",
-      "accent": "#f59e0b"
-    },
-    "features": ["Clean Design", "Professional", "Universal Appeal"]
+    "id": "azurill",
+    "name": "Azurill",
+    "preview": "/templates/azurill.jpg"
   },
   {
-    "id": "moderncv",
-    "name": "Modern CV",
-    "description": "A modern curriculum vitae template with clean design and professional layout, inspired by LaTeX moderncv",
-    "preview": "/templates/moderncv-preview.jpg",
-    "category": "Modern",
-    "package": "jsonresume-theme-moderncv",
-    "colors": {
-      "primary": "#000000",
-      "secondary": "#000000",
-      "accent": "#000000"
-    },
-    "features": ["Clean Design", "Professional Layout", "LaTeX Inspired"]
+    "id": "bronzor",
+    "name": "Bronzor",
+    "preview": "/templates/bronzor.jpg"
   },
   {
-    "id": "creative",
-    "name": "Creative CV",
-    "description": "Creative and artistic CV template for designers and creative professionals",
-    "preview": "/templates/creative-preview.jpg",
-    "category": "Creative",
-    "package": "jsonresume-theme-creative",
-    "colors": {
-      "primary": "#dc2626",
-      "secondary": "#ea580c",
-      "accent": "#7c3aed"
-    },
-    "features": ["Artistic Design", "Creative Layout", "Visual Appeal"]
+    "id": "chikorita",
+    "name": "Chikorita",
+    "preview": "/templates/chikorita.jpg"
   },
   {
-    "id": "classic",
-    "name": "Classic CV",
-    "description": "Classic and timeless CV template with elegant typography and clean layout",
-    "preview": "/templates/classic-preview.jpg",
-    "category": "Classic",
-    "package": "jsonresume-theme-classic",
-    "colors": {
-      "primary": "#374151",
-      "secondary": "#6b7280",
-      "accent": "#111827"
-    },
-    "features": ["Elegant Typography", "Clean Layout", "Timeless Design"]
+    "id": "ditto",
+    "name": "Ditto",
+    "preview": "/templates/ditto.jpg"
+  },
+  {
+    "id": "gengar",
+    "name": "Gengar",
+    "preview": "/templates/gengar.jpg"
+  },
+  {
+    "id": "glalie",
+    "name": "Glalie",
+    "preview": "/templates/glalie.jpg"
+  },
+  {
+    "id": "kakuna",
+    "name": "Kakuna",
+    "preview": "/templates/kakuna.jpg"
+  },
+  {
+    "id": "leafish",
+    "name": "Leafish",
+    "preview": "/templates/leafish.jpg"
+  },
+  {
+    "id": "nosepass",
+    "name": "Nosepass",
+    "preview": "/templates/nosepass.jpg"
+  },
+  {
+    "id": "onyx",
+    "name": "Onyx",
+    "preview": "/templates/onyx.jpg"
+  },
+  {
+    "id": "pikachu",
+    "name": "Pikachu",
+    "preview": "/templates/pikachu.jpg"
+  },
+  {
+    "id": "rhyhorn",
+    "name": "Rhyhorn",
+    "preview": "/templates/rhyhorn.jpg"
   }
 ]
