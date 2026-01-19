@@ -1,183 +1,199 @@
-import ParallaxElement from "../components/ParallaxElement";
-
 export default function Home() {
   return (
     <div className="min-h-screen">
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-        <section className="relative text-center py-24 sm:py-40 lg:py-48 overflow-hidden">
-          {/* Enhanced Background Elements with Parallax */}
-          <ParallaxElement speed={-1} className="absolute inset-0 opacity-30">
-            <div className="absolute top-16 left-16 w-40 h-40 bg-gradient-primary rounded-full blur-3xl animate-float shadow-bioluminescent"></div>
-            <div className="absolute bottom-16 right-16 w-48 h-48 bg-secondary rounded-full blur-3xl animate-float-delayed shadow-bioluminescent"></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-56 h-56 bg-accent rounded-full blur-3xl opacity-25 shadow-bioluminescent"></div>
-          </ParallaxElement>
-
-          {/* Enhanced Floating decorative elements */}
-          <ParallaxElement speed={-0.5} className="absolute top-24 right-24 opacity-20">
-            <div className="w-20 h-20 bg-gradient-primary rounded-lg rotate-45 animate-float shadow-glow"></div>
-          </ParallaxElement>
-          <ParallaxElement speed={-0.8} className="absolute bottom-40 left-20 opacity-15">
-            <div className="w-16 h-16 bg-secondary rounded-full animate-float-delayed shadow-glow"></div>
-          </ParallaxElement>
-          <ParallaxElement speed={-0.3} className="absolute top-48 left-1/4 opacity-25">
-            <div className="w-12 h-12 bg-accent rounded-lg animate-float shadow-glow"></div>
-          </ParallaxElement>
-
-          <ParallaxElement speed={-0.5} className="relative z-10">
-            <div className="inline-flex items-center gap-2 p-1 bg-gradient-primary rounded-full mb-8 animate-glow shadow-warm">
-              <div className="bg-surface px-5 py-2.5 rounded-full">
-                <span className="text-primary font-semibold text-sm tracking-wide">✨ AI-Powered CV Tools</span>
-              </div>
-            </div>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight bg-gradient-primary bg-clip-text text-transparent mb-8 leading-[0.9] animate-fade-in-up">
-              Premium SaaS Platform<br />
-              <span className="text-foreground/90">for CV Optimization</span>
-            </h1>
-            <p className="max-w-4xl mx-auto text-xl sm:text-2xl text-text-muted mb-12 leading-relaxed animate-fade-in-up font-light">
-              Transform your CV into a professional masterpiece with our AI-powered tools.
-              Stand out in the competitive job market and land your dream role with confidence.
-            </p>
-            <ParallaxElement speed={-0.2}>
-              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in-up">
-                <a
-                  href="/pricing"
-                  className="group inline-flex items-center gap-3 bg-gradient-primary text-white font-bold py-5 px-10 rounded-2xl hover:shadow-glow hover:scale-105 transition-all duration-300 shadow-premium text-lg"
-                >
-                  Get Started Free
-                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </a>
-                <a
-                  href="/about"
-                  className="inline-flex items-center gap-3 bg-surface-light backdrop-blur-sm text-foreground font-semibold py-5 px-10 rounded-2xl border-2 border-border hover:bg-surface hover:border-primary/50 hover:scale-105 transition-all duration-300 shadow-premium text-lg"
-                >
-                  Learn More
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                  </svg>
-                </a>
-              </div>
-            </ParallaxElement>
-          </ParallaxElement>
+        {/* Hero Section */}
+        <section className="text-center py-24 sm:py-40 lg:py-48">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
+            Get Hired Faster With an ATS-Optimized CV
+          </h1>
+          <p className="max-w-4xl mx-auto text-xl sm:text-2xl text-text-muted mb-12 leading-relaxed">
+            AI-powered CV optimization and professional redesign — built for modern hiring systems.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <a
+              href="/apps/cv-optimizer"
+              className="inline-flex items-center gap-3 bg-accent text-white font-bold py-5 px-10 rounded-2xl hover:bg-accent/90 transition-colors text-lg"
+            >
+              Optimize My CV
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
+            <a
+              href="#how-it-works"
+              className="inline-flex items-center gap-3 bg-surface text-white font-semibold py-5 px-10 rounded-2xl border-2 border-border hover:bg-surface-light transition-colors text-lg"
+            >
+              See How It Works
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </a>
+          </div>
         </section>
 
-        <section className="py-24 sm:py-32 lg:py-40 relative overflow-hidden">
-          {/* Enhanced Floating background elements */}
-          <ParallaxElement speed={-0.8} className="absolute top-24 right-24 opacity-20">
-            <div className="w-32 h-32 bg-gradient-primary rounded-full blur-2xl shadow-bioluminescent"></div>
-          </ParallaxElement>
-          <ParallaxElement speed={-1.2} className="absolute bottom-24 left-24 opacity-15">
-            <div className="w-40 h-40 bg-secondary rounded-full blur-3xl shadow-bioluminescent"></div>
-          </ParallaxElement>
-          <ParallaxElement speed={-0.6} className="absolute top-1/2 left-12 opacity-12">
-            <div className="w-28 h-28 bg-accent rounded-full blur-2xl shadow-bioluminescent"></div>
-          </ParallaxElement>
-
-          <ParallaxElement speed={-0.3}>
-            <div className="text-center mb-16 animate-fade-in-up">
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black bg-gradient-primary bg-clip-text text-transparent mb-6 leading-tight">
-                Our Tools
-              </h2>
-              <p className="text-xl sm:text-2xl text-text-muted font-light max-w-3xl mx-auto leading-relaxed">
-                Free basic tools with premium upgrades powered by advanced AI technology
-              </p>
+        {/* Trust Signals */}
+        <section className="py-16 bg-surface rounded-2xl px-8 mb-24">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+            <div>
+              <div className="text-2xl mb-2">🔧</div>
+              <p className="text-sm">Built for ATS systems</p>
             </div>
-          </ParallaxElement>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-            <ParallaxElement speed={-0.1}>
-              <div className="group bg-surface-light backdrop-blur-sm rounded-3xl shadow-premium p-10 hover:shadow-glow hover:scale-[1.02] transition-all duration-500 border border-border/50 hover:border-primary/30 animate-fade-in-up h-full">
-                <div className="mb-8 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <span className="bg-green-500/20 text-green-400 text-sm font-bold px-4 py-2 rounded-full border border-green-500/30 tracking-wide">
-                      FREE
-                    </span>
-                    <span className="bg-gradient-primary text-white text-sm font-bold px-4 py-2 rounded-full tracking-wide">
-                      PRO UPGRADE
-                    </span>
-                  </div>
-                  <div className="w-12 h-12 bg-gradient-primary rounded-2xl flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                  </div>
-                </div>
-                <h2 className="text-3xl lg:text-4xl font-black text-foreground mb-6 group-hover:text-primary transition-colors leading-tight">
-                  CV Optimizer
-                </h2>
-                <p className="text-text-muted mb-8 leading-relaxed text-lg font-light">
-                  Optimize your CV for applicant tracking systems (ATS) and dramatically improve your chances of getting noticed by top recruiters and hiring managers.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <a
-                    href="/apps/cv-optimizer"
-                    className="group inline-flex items-center justify-center gap-3 bg-gradient-primary text-white font-bold py-4 px-8 rounded-2xl hover:shadow-glow hover:scale-105 transition-all duration-300 text-lg"
-                  >
-                    Try Free Now
-                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
-                  </a>
-                  <a
-                    href="/pricing"
-                    className="inline-flex items-center justify-center gap-3 bg-surface text-foreground font-semibold py-4 px-8 rounded-2xl border-2 border-border hover:bg-surface-light hover:border-primary/50 hover:scale-105 transition-all duration-300 text-lg"
-                  >
-                    Go Pro
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </ParallaxElement>
-
-            <ParallaxElement speed={-0.2}>
-              <div className="group bg-surface-light backdrop-blur-sm rounded-3xl shadow-premium p-10 hover:shadow-glow hover:scale-[1.02] transition-all duration-500 border border-border/50 hover:border-primary/30 animate-fade-in-up h-full">
-                <div className="mb-8 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <span className="bg-green-500/20 text-green-400 text-sm font-bold px-4 py-2 rounded-full border border-green-500/30 tracking-wide">
-                      FREE
-                    </span>
-                    <span className="bg-gradient-primary text-white text-sm font-bold px-4 py-2 rounded-full tracking-wide">
-                      PRO UPGRADE
-                    </span>
-                  </div>
-                  <div className="w-12 h-12 bg-secondary rounded-2xl flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                    </svg>
-                  </div>
-                </div>
-                <h2 className="text-3xl lg:text-4xl font-black text-foreground mb-6 group-hover:text-primary transition-colors leading-tight">
-                  CV Redo
-                </h2>
-                <p className="text-text-muted mb-8 leading-relaxed text-lg font-light">
-                  Completely redesign your CV with modern, professional templates and layouts that create lasting impressions and showcase your unique value proposition.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <a
-                    href="/apps/cv-redo"
-                    className="group inline-flex items-center justify-center gap-3 bg-gradient-primary text-white font-bold py-4 px-8 rounded-2xl hover:shadow-glow hover:scale-105 transition-all duration-300 text-lg"
-                  >
-                    Try Free Now
-                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
-                  </a>
-                  <a
-                    href="/pricing"
-                    className="inline-flex items-center justify-center gap-3 bg-surface text-foreground font-semibold py-4 px-8 rounded-2xl border-2 border-border hover:bg-surface-light hover:border-primary/50 hover:scale-105 transition-all duration-300 text-lg"
-                  >
-                    Go Pro
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </ParallaxElement>
+            <div>
+              <div className="text-2xl mb-2">🇿🇦</div>
+              <p className="text-sm">Used by job seekers across South Africa</p>
+            </div>
+            <div>
+              <div className="text-2xl mb-2">⚡</div>
+              <p className="text-sm">Instant results</p>
+            </div>
+            <div>
+              <div className="text-2xl mb-2">💰</div>
+              <p className="text-sm">Affordable pricing</p>
+            </div>
           </div>
+        </section>
+
+        {/* How It Works */}
+        <section id="how-it-works" className="py-24">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-6">How It Works</h2>
+            <p className="text-xl text-text-muted max-w-3xl mx-auto">Simple steps to optimize your CV</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">1</div>
+              <h3 className="text-2xl font-semibold mb-4">Upload or paste your CV</h3>
+              <p className="text-text-muted">Simply upload your existing CV or paste the content directly</p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">2</div>
+              <h3 className="text-2xl font-semibold mb-4">We optimize it for ATS + recruiters</h3>
+              <p className="text-text-muted">Our AI enhances keywords, formatting, and structure for better visibility</p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">3</div>
+              <h3 className="text-2xl font-semibold mb-4">Download a clean, professional CV</h3>
+              <p className="text-text-muted">Get your optimized CV ready to impress employers</p>
+            </div>
+          </div>
+        </section>
+
+        {/* What You Get */}
+        <section className="py-24 bg-surface rounded-2xl px-8 mb-24">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-6">What You Get</h2>
+            <p className="text-xl text-text-muted max-w-3xl mx-auto">Professional CV optimization features</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="flex items-start gap-4">
+              <div className="text-green-400 text-2xl">✔</div>
+              <div>
+                <h3 className="font-semibold mb-2">ATS keyword optimization</h3>
+                <p className="text-text-muted">Tailored keywords to pass ATS filters</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="text-green-400 text-2xl">✔</div>
+              <div>
+                <h3 className="font-semibold mb-2">Clean professional formatting</h3>
+                <p className="text-text-muted">Modern, readable layout</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="text-green-400 text-2xl">✔</div>
+              <div>
+                <h3 className="font-semibold mb-2">CV redo & rewrite</h3>
+                <p className="text-text-muted">Complete content enhancement</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="text-green-400 text-2xl">✔</div>
+              <div>
+                <h3 className="font-semibold mb-2">PDF export</h3>
+                <p className="text-text-muted">Download-ready format</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="text-green-400 text-2xl">✔</div>
+              <div>
+                <h3 className="font-semibold mb-2">Industry-ready structure</h3>
+                <p className="text-text-muted">Optimized for your field</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="text-green-400 text-2xl">✔</div>
+              <div>
+                <h3 className="font-semibold mb-2">Human-readable + machine-readable</h3>
+                <p className="text-text-muted">Appeals to both recruiters and ATS</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing */}
+        <section className="py-24">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-6">Pricing</h2>
+            <p className="text-xl text-text-muted max-w-3xl mx-auto">Simple, honest pricing</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="bg-surface rounded-2xl p-8 border border-border">
+              <h3 className="text-2xl font-bold mb-4">Free</h3>
+              <p className="text-text-muted mb-6">Basic CV optimization</p>
+              <ul className="space-y-2 mb-8">
+                <li>Watermark</li>
+                <li>1 export</li>
+              </ul>
+              <a
+                href="/apps/cv-optimizer"
+                className="inline-block bg-surface-light text-white font-semibold py-3 px-6 rounded-2xl border border-border hover:bg-surface transition-colors w-full text-center"
+              >
+                Try Free
+              </a>
+            </div>
+            <div className="bg-accent rounded-2xl p-8 text-white relative">
+              <div className="absolute top-4 right-4 bg-white text-accent px-3 py-1 rounded-full text-sm font-bold">POPULAR</div>
+              <h3 className="text-2xl font-bold mb-4">Pro</h3>
+              <p className="mb-6">Unlimited CV optimization</p>
+              <div className="text-3xl font-bold mb-6">R59 / month</div>
+              <ul className="space-y-2 mb-8">
+                <li>CV redo</li>
+                <li>No watermark</li>
+                <li>ATS-ready exports</li>
+              </ul>
+              <a
+                href="/pricing"
+                className="inline-block bg-white text-accent font-semibold py-3 px-6 rounded-2xl hover:bg-gray-100 transition-colors w-full text-center"
+              >
+                Upgrade to Pro
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Why Vellon */}
+        <section className="py-24 bg-surface rounded-2xl px-8 mb-24">
+          <div className="text-center">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-6">Why Vellon?</h2>
+            <p className="text-xl text-text-muted max-w-3xl mx-auto">
+              We built Vellon to help people get jobs — not to overcharge them. No recruiters. No agencies. Just tools that work.
+            </p>
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <section className="py-24 text-center">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-6">Ready to improve your CV?</h2>
+          <a
+            href="/apps/cv-optimizer"
+            className="inline-flex items-center gap-3 bg-accent text-white font-bold py-5 px-10 rounded-2xl hover:bg-accent/90 transition-colors text-lg"
+          >
+            Optimize My CV Now
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
         </section>
       </main>
     </div>

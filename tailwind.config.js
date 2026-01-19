@@ -7,26 +7,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: 'var(--primary)',
-        'primary-dark': 'var(--primary-dark)',
-        secondary: 'var(--secondary)',
         accent: 'var(--accent)',
         surface: 'var(--surface)',
         'surface-light': 'var(--surface-light)',
         'text-muted': 'var(--text-muted)',
         border: 'var(--border)',
       },
-      backgroundImage: {
-        'gradient-primary': 'var(--gradient-primary)',
-        'gradient-secondary': 'var(--gradient-secondary)',
-      },
       boxShadow: {
-        'premium': 'var(--shadow-premium)',
-        'glow': 'var(--shadow-glow)',
+        'shadow': 'var(--shadow)',
       },
       animation: {
         'fade-in-up': 'fadeInUp 0.6s ease-out',
-        'glow': 'glow 2s ease-in-out infinite',
       },
       keyframes: {
         fadeInUp: {
