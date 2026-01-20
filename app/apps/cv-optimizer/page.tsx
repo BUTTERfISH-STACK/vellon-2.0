@@ -915,71 +915,20 @@ export default function CVOptimizerPage() {
                 </div>
               )}
 
-              {/* Pro Upgrade Section */}
-              <div className="mt-12 pt-8 border-t border-border/50">
-                <div className="bg-gradient-to-br from-rose-500 via-pink-500 to-purple-600 p-8 rounded-3xl text-white shadow-2xl relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 to-pink-400/20 animate-pulse"></div>
-                  <div className="relative z-10">
-                    <div className="text-center mb-6">
-                      <h3 className="text-3xl font-bold mb-3 bg-gradient-to-r from-yellow-200 to-pink-200 bg-clip-text text-transparent">Ready for Unlimited Power?</h3>
-                      <p className="text-pink-100 text-lg">Unlock all features and remove limitations</p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8 text-sm">
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-3 p-3 bg-white/15 backdrop-blur-sm rounded-xl border border-white/20">
-                          <span className="text-yellow-200 text-xl">🎨</span>
-                          <span className="font-semibold">Unlimited Templates & Designs</span>
-                        </div>
-                        <div className="flex items-center gap-3 p-3 bg-white/15 backdrop-blur-sm rounded-xl border border-white/20">
-                          <span className="text-yellow-200 text-xl">🔄</span>
-                          <span className="font-semibold">Unlimited Exports</span>
-                        </div>
-                        <div className="flex items-center gap-3 p-3 bg-white/15 backdrop-blur-sm rounded-xl border border-white/20">
-                          <span className="text-yellow-200 text-xl">📄</span>
-                          <span className="font-semibold">Cover Letter Generator</span>
-                        </div>
-                        <div className="flex items-center gap-3 p-3 bg-white/15 backdrop-blur-sm rounded-xl border border-white/20">
-                          <span className="text-yellow-200 text-xl">⚡</span>
-                          <span className="font-semibold">Priority Support</span>
-                        </div>
-                      </div>
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-3 p-3 bg-white/15 backdrop-blur-sm rounded-xl border border-white/20">
-                          <span className="text-yellow-200 text-xl">🎯</span>
-                          <span className="font-semibold">Advanced ATS Optimization</span>
-                        </div>
-                        <div className="flex items-center gap-3 p-3 bg-white/15 backdrop-blur-sm rounded-xl border border-white/20">
-                          <span className="text-yellow-200 text-xl">📊</span>
-                          <span className="font-semibold">Application Tracking</span>
-                        </div>
-                        <div className="flex items-center gap-3 p-3 bg-white/15 backdrop-blur-sm rounded-xl border border-white/20">
-                          <span className="text-yellow-200 text-xl">🎨</span>
-                          <span className="font-semibold">Custom Branding</span>
-                        </div>
-                        <div className="flex items-center gap-3 p-3 bg-white/15 backdrop-blur-sm rounded-xl border border-white/20">
-                          <span className="text-yellow-200 text-xl">🚫</span>
-                          <span className="font-semibold">No Watermarks</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="text-center">
-                      <div className="inline-block bg-white/20 backdrop-blur-sm px-6 py-3 rounded-2xl border border-white/30 mb-6">
-                        <div className="text-4xl font-bold mb-1">R59<span className="text-xl font-normal text-pink-200">/month</span></div>
-                        <div className="text-sm text-pink-200">Cancel anytime • Instant activation</div>
-                      </div>
-                      <a
-                        href="/apps/cv-redo"
-                        className="inline-flex items-center gap-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 font-bold py-4 px-10 rounded-2xl hover:from-yellow-300 hover:to-orange-400 transition-all duration-300 text-lg shadow-xl hover:shadow-2xl transform hover:scale-105"
-                      >
-                        <span className="flex items-center justify-center gap-2">
-                          <span className="text-2xl">🚀</span>
-                          <span>Upgrade to Pro</span>
-                        </span>
-                      </a>
-                    </div>
-                  </div>
+              {/* Simple Pro Upgrade Notice */}
+              <div className="mt-8 text-center">
+                <div className="bg-accent/5 border border-accent/20 rounded-xl p-6">
+                  <h3 className="text-lg font-semibold text-accent mb-2">Ready to unlock unlimited features?</h3>
+                  <p className="text-text-muted text-sm mb-4">
+                    Remove watermarks, unlimited exports, premium templates, and priority support
+                  </p>
+                  <a
+                    href="/pricing"
+                    className="inline-flex items-center gap-2 bg-gradient-primary text-background font-semibold py-2 px-6 rounded-xl hover:shadow-glow transition-all duration-200"
+                  >
+                    <span>Upgrade to Pro</span>
+                    <span className="text-sm">R59/month</span>
+                  </a>
                 </div>
               </div>
             </div>

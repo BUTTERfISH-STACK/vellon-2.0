@@ -1,6 +1,48 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+
 export default function AppsPage() {
+  const [showUpgradeSuccess, setShowUpgradeSuccess] = useState(false);
+
+  useEffect(() => {
+    // Check for upgrade success query param
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('upgrade') === 'success') {
+      setShowUpgradeSuccess(true);
+      // Remove the query param from URL
+      const newUrl = window.location.pathname;
+      window.history.replaceState({}, '', newUrl);
+      // Hide success message after 5 seconds
+      setTimeout(() => setShowUpgradeSuccess(false), 5000);
+    }
+  }, []);
+
   return (
     <div className="min-h-screen">
+      {/* Upgrade Success Message */}
+      {showUpgradeSuccess && (
+        <div className="fixed top-4 right-4 z-50 bg-green-500 text-white px-6 py-4 rounded-xl shadow-lg animate-fade-in-up">
+          <div className="flex items-center">
+            <svg className="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+            </svg>
+            <div>
+              <p className="font-semibold">Pro Trial Started! 🎉</p>
+              <p className="text-sm text-green-100">Your premium features are now unlocked for 14 days.</p>
+            </div>
+            <button
+              onClick={() => setShowUpgradeSuccess(false)}
+              className="ml-4 text-green-200 hover:text-white"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
+
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         <section className="text-center py-24">
           <h1 className="text-5xl sm:text-6xl font-bold mb-8">Our Tools</h1>
