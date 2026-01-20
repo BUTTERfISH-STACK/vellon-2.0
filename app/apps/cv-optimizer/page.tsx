@@ -473,49 +473,6 @@ export default function CVOptimizerPage() {
 
               {isEditing ? (
                 <div className="space-y-8">
-                  {/* Background Selection - Pro Only */}
-                  {isPro && (
-                    <div>
-                      <h3 className="text-lg font-semibold text-foreground mb-4">CV Background (Pro Feature)</h3>
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {proBackgrounds.map((bg, index) => (
-                          <button
-                            key={index}
-                            onClick={() => setSelectedBackground(bg)}
-                            className={`relative rounded-xl overflow-hidden border-2 transition-all duration-200 ${
-                              selectedBackground === bg ? 'border-accent shadow-glow' : 'border-border hover:border-accent/70'
-                            }`}
-                          >
-                            <img
-                              src={bg}
-                              alt={`Background ${index + 1}`}
-                              className="w-full h-20 object-cover"
-                            />
-                            {selectedBackground === bg && (
-                              <div className="absolute inset-0 bg-accent/20 flex items-center justify-center">
-                                <svg className="w-6 h-6 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                </svg>
-                              </div>
-                            )}
-                          </button>
-                        ))}
-                        <button
-                          onClick={() => setSelectedBackground(null)}
-                          className={`rounded-xl p-4 border-2 transition-all duration-200 ${
-                            selectedBackground === null ? 'border-accent shadow-glow' : 'border-border hover:border-accent/70'
-                          }`}
-                        >
-                          <div className="text-center">
-                            <svg className="w-8 h-8 mx-auto text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                            </svg>
-                            <span className="block text-sm mt-2 font-medium text-foreground">No Background</span>
-                          </div>
-                        </button>
-                      </div>
-                    </div>
-                  )}
 
                   {/* Personal Information */}
                   <div>
