@@ -31,50 +31,40 @@ export default function Pricing() {
         <section className="py-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Free Plan */}
-            <div className="bg-surface rounded-2xl p-8 border border-border shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <div className="bg-surface rounded-2xl p-8 border border-border shadow-lg">
               <div className="text-center mb-6">
-                <div className="inline-block bg-gradient-primary/10 px-4 py-2 rounded-full mb-4">
-                  <span className="text-primary font-bold text-sm">🎯 FREE FOREVER</span>
-                </div>
                 <h3 className="text-2xl font-bold mb-2">Free</h3>
                 <div className="text-3xl font-bold text-foreground mb-2">R0</div>
                 <p className="text-sm text-text-muted">Start building your career today</p>
               </div>
 
               <ul className="space-y-3 mb-8">
-                <li className="flex items-center bg-gradient-primary/5 p-3 rounded-lg">
-                  <svg className="w-5 h-5 text-primary mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <li className="flex items-center">
+                  <svg className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-sm font-medium">Professional CV builder</span>
+                  <span className="text-sm">Professional CV builder</span>
                 </li>
-                <li className="flex items-center bg-gradient-primary/5 p-3 rounded-lg">
-                  <svg className="w-5 h-5 text-primary mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <li className="flex items-center">
+                  <svg className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-sm font-medium">PDF download with Vellon branding</span>
+                  <span className="text-sm">PDF download with Vellon branding</span>
                 </li>
-                <li className="flex items-center bg-gradient-primary/5 p-3 rounded-lg">
-                  <svg className="w-5 h-5 text-primary mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <li className="flex items-center">
+                  <svg className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-sm font-medium">Perfect for entry-level positions</span>
-                </li>
-                <li className="flex items-center bg-gradient-primary/5 p-3 rounded-lg">
-                  <svg className="w-5 h-5 text-primary mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <span className="text-sm font-medium">Basic background selection</span>
+                  <span className="text-sm">Perfect for entry-level positions</span>
                 </li>
               </ul>
 
               <a
                 href="/apps/cv-optimizer"
-                className="inline-block bg-gradient-primary text-white font-semibold py-3 px-6 rounded-2xl hover:shadow-glow hover:scale-105 transition-all duration-200 w-full text-center"
+                className="inline-block bg-surface-light text-foreground font-semibold py-3 px-6 rounded-2xl border border-border hover:bg-surface hover:shadow-md transition-all duration-200 w-full text-center"
               >
                 Get Started Free
               </a>
-              <p className="text-xs text-text-muted/70 text-center mt-3">No credit card required • Instant access</p>
             </div>
 
             {/* Pro Plan */}
