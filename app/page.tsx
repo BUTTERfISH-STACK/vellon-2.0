@@ -1,31 +1,38 @@
 export default function Home() {
   return (
     <div className="min-h-screen">
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
         {/* Hero Section */}
-        <section className="text-center py-24 sm:py-40 lg:py-48">
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
-            Get Hired Faster With an ATS-Optimized CV
+        <section className="text-center py-32 sm:py-48 lg:py-56 animate-fade-in-up">
+          <div className="mb-8">
+            <span className="inline-block px-6 py-3 bg-gradient-primary/10 border border-accent/20 rounded-full text-accent font-semibold text-sm tracking-wide uppercase mb-8">
+              Premium CV Optimization
+            </span>
+          </div>
+          <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold mb-10 leading-tight tracking-tight">
+            <span className="text-gradient-gold">Elevate</span> Your Career
+            <br />
+            <span className="text-foreground">With Precision</span>
           </h1>
-          <p className="max-w-4xl mx-auto text-xl sm:text-2xl text-text-muted mb-12 leading-relaxed">
-            AI-powered CV optimization and professional redesign — built for modern hiring systems.
+          <p className="max-w-4xl mx-auto text-xl sm:text-2xl text-text-muted mb-16 leading-relaxed font-light">
+            Sophisticated AI-powered CV optimization and professional redesign — engineered for discerning professionals in competitive markets.
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
             <a
               href="/apps/cv-optimizer"
-              className="inline-flex items-center gap-3 bg-accent text-white font-bold py-5 px-10 rounded-2xl hover:bg-accent/90 transition-colors text-lg"
+              className="inline-flex items-center gap-4 bg-gradient-primary text-background font-bold py-6 px-12 rounded-2xl hover:shadow-glow transition-all duration-300 text-xl shadow-premium transform hover:scale-105"
             >
               Optimize My CV
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
             </a>
             <a
               href="#how-it-works"
-              className="inline-flex items-center gap-3 bg-surface text-white font-semibold py-5 px-10 rounded-2xl border-2 border-border hover:bg-surface-light transition-colors text-lg"
+              className="inline-flex items-center gap-4 bg-surface-light text-foreground font-semibold py-6 px-12 rounded-2xl border-2 border-border/50 hover:border-accent/50 hover:bg-surface transition-all duration-300 text-xl shadow-premium"
             >
-              See How It Works
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              Discover Excellence
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
             </a>
@@ -33,167 +40,248 @@ export default function Home() {
         </section>
 
         {/* Trust Signals */}
-        <section className="py-16 bg-surface rounded-2xl px-8 mb-24">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-2xl mb-2">🔧</div>
-              <p className="text-sm">Built for ATS systems</p>
+        <section className="py-20 bg-gradient-elegant rounded-3xl px-12 mb-32 shadow-premium animate-scale-in">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-center">
+            <div className="group">
+              <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-premium group-hover:shadow-glow transition-all duration-300">
+                <span className="text-2xl">🎯</span>
+              </div>
+              <p className="text-lg font-medium text-foreground">ATS-Optimized</p>
+              <p className="text-text-muted mt-2">Engineered for modern recruitment systems</p>
             </div>
-            <div>
-              <div className="text-2xl mb-2">🇿🇦</div>
-              <p className="text-sm">Used by job seekers across South Africa</p>
+            <div className="group">
+              <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-premium group-hover:shadow-glow transition-all duration-300">
+                <span className="text-2xl">🇿🇦</span>
+              </div>
+              <p className="text-lg font-medium text-foreground">South African Focus</p>
+              <p className="text-text-muted mt-2">Trusted by professionals across the nation</p>
             </div>
-            <div>
-              <div className="text-2xl mb-2">⚡</div>
-              <p className="text-sm">Instant results</p>
+            <div className="group">
+              <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-premium group-hover:shadow-glow transition-all duration-300">
+                <span className="text-2xl">⚡</span>
+              </div>
+              <p className="text-lg font-medium text-foreground">Instant Excellence</p>
+              <p className="text-text-muted mt-2">Professional results in moments</p>
             </div>
-            <div>
-              <div className="text-2xl mb-2">💰</div>
-              <p className="text-sm">Affordable pricing</p>
+            <div className="group">
+              <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-premium group-hover:shadow-glow transition-all duration-300">
+                <span className="text-2xl">💎</span>
+              </div>
+              <p className="text-lg font-medium text-foreground">Premium Quality</p>
+              <p className="text-text-muted mt-2">Sophisticated tools for serious careers</p>
             </div>
           </div>
         </section>
 
         {/* How It Works */}
-        <section id="how-it-works" className="py-24">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-6">How It Works</h2>
-            <p className="text-xl text-text-muted max-w-3xl mx-auto">Simple steps to optimize your CV</p>
+        <section id="how-it-works" className="py-32 animate-slide-in-left">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl sm:text-6xl font-bold mb-8 text-gradient-gold">The Process</h2>
+            <p className="text-xl text-text-muted max-w-3xl mx-auto font-light">Three refined steps to professional excellence</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">1</div>
-              <h3 className="text-2xl font-semibold mb-4">Upload or paste your CV</h3>
-              <p className="text-text-muted">Simply upload your existing CV or paste the content directly</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+            <div className="text-center group">
+              <div className="w-20 h-20 bg-gradient-primary rounded-3xl flex items-center justify-center mx-auto mb-8 text-3xl font-bold shadow-premium group-hover:shadow-glow transition-all duration-300 transform group-hover:scale-110">1</div>
+              <h3 className="text-3xl font-bold mb-6 text-foreground">Input Your Information</h3>
+              <p className="text-text-muted text-lg leading-relaxed">Provide your professional details through our sophisticated interface</p>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">2</div>
-              <h3 className="text-2xl font-semibold mb-4">We optimize it for ATS + recruiters</h3>
-              <p className="text-text-muted">Our AI enhances keywords, formatting, and structure for better visibility</p>
+            <div className="text-center group">
+              <div className="w-20 h-20 bg-gradient-primary rounded-3xl flex items-center justify-center mx-auto mb-8 text-3xl font-bold shadow-premium group-hover:shadow-glow transition-all duration-300 transform group-hover:scale-110">2</div>
+              <h3 className="text-3xl font-bold mb-6 text-foreground">AI Optimization</h3>
+              <p className="text-text-muted text-lg leading-relaxed">Advanced algorithms enhance keywords, structure, and presentation</p>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">3</div>
-              <h3 className="text-2xl font-semibold mb-4">Download a clean, professional CV</h3>
-              <p className="text-text-muted">Get your optimized CV ready to impress employers</p>
+            <div className="text-center group">
+              <div className="w-20 h-20 bg-gradient-primary rounded-3xl flex items-center justify-center mx-auto mb-8 text-3xl font-bold shadow-premium group-hover:shadow-glow transition-all duration-300 transform group-hover:scale-110">3</div>
+              <h3 className="text-3xl font-bold mb-6 text-foreground">Receive Excellence</h3>
+              <p className="text-text-muted text-lg leading-relaxed">Download your professionally optimized CV, ready for success</p>
             </div>
           </div>
         </section>
 
         {/* What You Get */}
-        <section className="py-24 bg-surface rounded-2xl px-8 mb-24">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-6">What You Get</h2>
-            <p className="text-xl text-text-muted max-w-3xl mx-auto">Professional CV optimization features</p>
+        <section className="py-32 bg-gradient-elegant rounded-3xl px-12 mb-32 shadow-premium animate-slide-in-right">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl sm:text-6xl font-bold mb-8 text-gradient-gold">Professional Excellence</h2>
+            <p className="text-xl text-text-muted max-w-3xl mx-auto font-light">Sophisticated features designed for career advancement</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="flex items-start gap-4">
-              <div className="text-green-400 text-2xl">✔</div>
-              <div>
-                <h3 className="font-semibold mb-2">ATS keyword optimization</h3>
-                <p className="text-text-muted">Tailored keywords to pass ATS filters</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            <div className="group bg-surface-light/50 backdrop-blur-sm p-8 rounded-2xl border border-border/30 hover:border-accent/50 transition-all duration-300 hover:shadow-premium">
+              <div className="w-14 h-14 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 shadow-premium">
+                <span className="text-2xl">🎯</span>
               </div>
+              <h3 className="text-2xl font-bold mb-4 text-foreground">ATS Optimization</h3>
+              <p className="text-text-muted text-lg leading-relaxed">Precision keyword integration for maximum system compatibility</p>
             </div>
-            <div className="flex items-start gap-4">
-              <div className="text-green-400 text-2xl">✔</div>
-              <div>
-                <h3 className="font-semibold mb-2">Clean professional formatting</h3>
-                <p className="text-text-muted">Modern, readable layout</p>
+            <div className="group bg-surface-light/50 backdrop-blur-sm p-8 rounded-2xl border border-border/30 hover:border-accent/50 transition-all duration-300 hover:shadow-premium">
+              <div className="w-14 h-14 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 shadow-premium">
+                <span className="text-2xl">✨</span>
               </div>
+              <h3 className="text-2xl font-bold mb-4 text-foreground">Refined Formatting</h3>
+              <p className="text-text-muted text-lg leading-relaxed">Elegant, professional layouts that command attention</p>
             </div>
-            <div className="flex items-start gap-4">
-              <div className="text-green-400 text-2xl">✔</div>
-              <div>
-                <h3 className="font-semibold mb-2">CV redo & rewrite</h3>
-                <p className="text-text-muted">Complete content enhancement</p>
+            <div className="group bg-surface-light/50 backdrop-blur-sm p-8 rounded-2xl border border-border/30 hover:border-accent/50 transition-all duration-300 hover:shadow-premium">
+              <div className="w-14 h-14 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 shadow-premium">
+                <span className="text-2xl">🔄</span>
               </div>
+              <h3 className="text-2xl font-bold mb-4 text-foreground">Content Enhancement</h3>
+              <p className="text-text-muted text-lg leading-relaxed">Comprehensive rewriting for maximum impact</p>
             </div>
-            <div className="flex items-start gap-4">
-              <div className="text-green-400 text-2xl">✔</div>
-              <div>
-                <h3 className="font-semibold mb-2">PDF export</h3>
-                <p className="text-text-muted">Download-ready format</p>
+            <div className="group bg-surface-light/50 backdrop-blur-sm p-8 rounded-2xl border border-border/30 hover:border-accent/50 transition-all duration-300 hover:shadow-premium">
+              <div className="w-14 h-14 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 shadow-premium">
+                <span className="text-2xl">📄</span>
               </div>
+              <h3 className="text-2xl font-bold mb-4 text-foreground">Premium Export</h3>
+              <p className="text-text-muted text-lg leading-relaxed">Polished PDF output ready for professional use</p>
             </div>
-            <div className="flex items-start gap-4">
-              <div className="text-green-400 text-2xl">✔</div>
-              <div>
-                <h3 className="font-semibold mb-2">Industry-ready structure</h3>
-                <p className="text-text-muted">Optimized for your field</p>
+            <div className="group bg-surface-light/50 backdrop-blur-sm p-8 rounded-2xl border border-border/30 hover:border-accent/50 transition-all duration-300 hover:shadow-premium">
+              <div className="w-14 h-14 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 shadow-premium">
+                <span className="text-2xl">🏢</span>
               </div>
+              <h3 className="text-2xl font-bold mb-4 text-foreground">Industry Tailoring</h3>
+              <p className="text-text-muted text-lg leading-relaxed">Optimized structure for your specific field</p>
             </div>
-            <div className="flex items-start gap-4">
-              <div className="text-green-400 text-2xl">✔</div>
-              <div>
-                <h3 className="font-semibold mb-2">Human-readable + machine-readable</h3>
-                <p className="text-text-muted">Appeals to both recruiters and ATS</p>
+            <div className="group bg-surface-light/50 backdrop-blur-sm p-8 rounded-2xl border border-border/30 hover:border-accent/50 transition-all duration-300 hover:shadow-premium">
+              <div className="w-14 h-14 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 shadow-premium">
+                <span className="text-2xl">🎨</span>
               </div>
+              <h3 className="text-2xl font-bold mb-4 text-foreground">Dual Optimization</h3>
+              <p className="text-text-muted text-lg leading-relaxed">Appeals to both human recruiters and automated systems</p>
             </div>
           </div>
         </section>
 
         {/* Pricing */}
-        <section className="py-24">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-6">Pricing</h2>
-            <p className="text-xl text-text-muted max-w-3xl mx-auto">Simple, honest pricing</p>
+        <section className="py-32 animate-scale-in">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl sm:text-6xl font-bold mb-8 text-gradient-gold">Investment in Excellence</h2>
+            <p className="text-xl text-text-muted max-w-3xl mx-auto font-light">Transparent pricing for professional results</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <div className="bg-surface rounded-2xl p-8 border border-border">
-              <h3 className="text-2xl font-bold mb-4">Free</h3>
-              <p className="text-text-muted mb-6">Basic CV optimization</p>
-              <ul className="space-y-2 mb-8">
-                <li>Watermark</li>
-                <li>1 export</li>
-              </ul>
-              <a
-                href="/apps/cv-optimizer"
-                className="inline-block bg-surface-light text-white font-semibold py-3 px-6 rounded-2xl border border-border hover:bg-surface transition-colors w-full text-center"
-              >
-                Try Free
-              </a>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+            <div className="bg-gradient-elegant rounded-3xl p-10 border border-border/50 shadow-premium hover:shadow-glow transition-all duration-300">
+              <div className="text-center">
+                <h3 className="text-3xl font-bold mb-4 text-foreground">Essential</h3>
+                <p className="text-text-muted mb-8 text-lg">Professional CV optimization</p>
+                <div className="text-4xl font-bold mb-8 text-gradient-gold">Free</div>
+                <ul className="space-y-4 mb-10 text-left">
+                  <li className="flex items-center gap-3">
+                    <div className="w-6 h-6 bg-accent/20 rounded-full flex items-center justify-center">
+                      <span className="text-accent text-sm">✓</span>
+                    </div>
+                    <span className="text-foreground">ATS keyword optimization</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <div className="w-6 h-6 bg-accent/20 rounded-full flex items-center justify-center">
+                      <span className="text-accent text-sm">✓</span>
+                    </div>
+                    <span className="text-foreground">Professional formatting</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <div className="w-6 h-6 bg-accent/20 rounded-full flex items-center justify-center">
+                      <span className="text-accent text-sm">✓</span>
+                    </div>
+                    <span className="text-foreground">Single PDF export</span>
+                  </li>
+                </ul>
+                <a
+                  href="/apps/cv-optimizer"
+                  className="inline-block bg-gradient-primary text-background font-bold py-4 px-8 rounded-2xl hover:shadow-glow transition-all duration-300 w-full text-center text-lg shadow-premium"
+                >
+                  Get Started
+                </a>
+              </div>
             </div>
-            <div className="bg-accent rounded-2xl p-8 text-white relative">
-              <div className="absolute top-4 right-4 bg-white text-accent px-3 py-1 rounded-full text-sm font-bold">POPULAR</div>
-              <h3 className="text-2xl font-bold mb-4">Pro</h3>
-              <p className="mb-6">Unlimited CV optimization</p>
-              <div className="text-3xl font-bold mb-6">R59 / month</div>
-              <ul className="space-y-2 mb-8">
-                <li>CV redo</li>
-                <li>No watermark</li>
-                <li>ATS-ready exports</li>
-              </ul>
-              <a
-                href="/pricing"
-                className="inline-block bg-white text-accent font-semibold py-3 px-6 rounded-2xl hover:bg-gray-100 transition-colors w-full text-center"
-              >
-                Upgrade to Pro
-              </a>
+            <div className="bg-gradient-primary rounded-3xl p-10 text-background relative shadow-premium hover:shadow-glow transition-all duration-300 transform hover:scale-105">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <div className="bg-gradient-primary text-background px-6 py-2 rounded-full text-sm font-bold shadow-premium">
+                  MOST POPULAR
+                </div>
+              </div>
+              <div className="text-center">
+                <h3 className="text-3xl font-bold mb-4">Professional</h3>
+                <p className="mb-8 text-lg opacity-90">Complete career enhancement suite</p>
+                <div className="text-5xl font-bold mb-8">R59<span className="text-2xl font-normal opacity-75">/month</span></div>
+                <ul className="space-y-4 mb-10 text-left">
+                  <li className="flex items-center gap-3">
+                    <div className="w-6 h-6 bg-background/20 rounded-full flex items-center justify-center">
+                      <span className="text-background text-sm">✓</span>
+                    </div>
+                    <span>Advanced AI optimization</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <div className="w-6 h-6 bg-background/20 rounded-full flex items-center justify-center">
+                      <span className="text-background text-sm">✓</span>
+                    </div>
+                    <span>Premium templates</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <div className="w-6 h-6 bg-background/20 rounded-full flex items-center justify-center">
+                      <span className="text-background text-sm">✓</span>
+                    </div>
+                    <span>Unlimited exports</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <div className="w-6 h-6 bg-background/20 rounded-full flex items-center justify-center">
+                      <span className="text-background text-sm">✓</span>
+                    </div>
+                    <span>Priority support</span>
+                  </li>
+                </ul>
+                <a
+                  href="/pricing"
+                  className="inline-block bg-background text-accent font-bold py-4 px-8 rounded-2xl hover:bg-background/90 transition-all duration-300 w-full text-center text-lg shadow-premium"
+                >
+                  Upgrade to Pro
+                </a>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Why Vellon */}
-        <section className="py-24 bg-surface rounded-2xl px-8 mb-24">
-          <div className="text-center">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-6">Why Vellon?</h2>
-            <p className="text-xl text-text-muted max-w-3xl mx-auto">
-              We built Vellon to help people get jobs — not to overcharge them. No recruiters. No agencies. Just tools that work.
+        <section className="py-32 bg-gradient-elegant rounded-3xl px-12 mb-32 shadow-premium animate-fade-in-up">
+          <div className="text-center max-w-4xl mx-auto">
+            <h2 className="text-5xl sm:text-6xl font-bold mb-10 text-gradient-gold">Why Choose Vellon?</h2>
+            <p className="text-2xl text-text-muted leading-relaxed font-light">
+              We crafted Vellon for ambitious professionals who demand excellence. No intermediaries, no compromises — just sophisticated tools engineered for career advancement in competitive markets.
             </p>
+            <div className="mt-12 flex flex-wrap justify-center gap-8 text-lg">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center shadow-premium">
+                  <span className="text-background text-sm">✓</span>
+                </div>
+                <span className="text-foreground font-medium">Direct to Professional</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center shadow-premium">
+                  <span className="text-background text-sm">✓</span>
+                </div>
+                <span className="text-foreground font-medium">No Hidden Agendas</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center shadow-premium">
+                  <span className="text-background text-sm">✓</span>
+                </div>
+                <span className="text-foreground font-medium">Results-Driven</span>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* Final CTA */}
-        <section className="py-24 text-center">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-6">Ready to improve your CV?</h2>
-          <a
-            href="/apps/cv-optimizer"
-            className="inline-flex items-center gap-3 bg-accent text-white font-bold py-5 px-10 rounded-2xl hover:bg-accent/90 transition-colors text-lg"
-          >
-            Optimize My CV Now
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </a>
+        <section className="py-32 text-center animate-scale-in">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-5xl sm:text-6xl font-bold mb-10 text-gradient-gold">Elevate Your Career Today</h2>
+            <p className="text-xl text-text-muted mb-12 font-light">Join thousands of professionals who have transformed their career trajectory</p>
+            <a
+              href="/apps/cv-optimizer"
+              className="inline-flex items-center gap-4 bg-gradient-primary text-background font-bold py-6 px-12 rounded-2xl hover:shadow-glow transition-all duration-300 text-xl shadow-premium transform hover:scale-105"
+            >
+              Begin Your Transformation
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
+          </div>
         </section>
       </main>
     </div>

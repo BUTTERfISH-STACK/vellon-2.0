@@ -993,48 +993,48 @@ export default function CVOptimizerPage() {
       )}
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-        <section className="text-center py-20 sm:py-32 animate-fade-in-up">
-          <div className="inline-block p-1 bg-gradient-primary rounded-full mb-6 animate-glow">
-            <div className="bg-surface px-4 py-2 rounded-full">
-              <h2 className="text-primary font-bold text-lg">Employers don't care about the fancy looks. They care about who they pay, doing the work, being eligible for the role.</h2>
+        <section className="text-center py-24 sm:py-40 animate-fade-in-up">
+          <div className="inline-block p-2 bg-gradient-primary/20 rounded-full mb-8 shadow-premium">
+            <div className="bg-gradient-elegant px-8 py-4 rounded-full border border-accent/30">
+              <h2 className="text-accent font-bold text-xl tracking-wide">Professional excellence begins with presentation</h2>
             </div>
           </div>
-          <p className="max-w-3xl mx-auto text-xl text-text-muted mb-8 leading-relaxed">
-            Create a professional, ATS-ready CV with our intuitive form builder.
+          <p className="max-w-4xl mx-auto text-2xl text-text-muted mb-12 leading-relaxed font-light">
+            Craft a sophisticated, ATS-optimized CV with our premium form builder designed for career advancement.
           </p>
 
           {/* CV Mockup Slideshow */}
-          <div className="max-w-4xl mx-auto mb-12">
-            <div className="relative overflow-hidden rounded-2xl bg-surface border border-border shadow-lg">
-              <div className="aspect-[3/4] relative bg-white rounded-lg overflow-hidden">
+          <div className="max-w-5xl mx-auto mb-16">
+            <div className="relative overflow-hidden rounded-3xl bg-gradient-elegant border border-border/50 shadow-premium">
+              <div className="aspect-[3/4] relative bg-gradient-to-br from-surface to-surface-light rounded-2xl overflow-hidden">
                 <img
                   src="/cv-creative.png"
                   alt="Creative CV Design"
-                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-                    currentSlide === 0 ? 'opacity-100' : 'opacity-0'
+                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
+                    currentSlide === 0 ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
                   }`}
                 />
                 <img
                   src="/cv-modern.png"
                   alt="Modern CV Design"
-                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-                    currentSlide === 1 ? 'opacity-100' : 'opacity-0'
+                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
+                    currentSlide === 1 ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
                   }`}
                 />
               </div>
-              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+              <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3">
                 {slides.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentSlide(index)}
-                    className={`w-2 h-2 rounded-full transition-colors ${
-                      index === currentSlide ? 'bg-accent' : 'bg-border hover:bg-accent/50'
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      index === currentSlide ? 'bg-accent shadow-glow' : 'bg-border/50 hover:bg-accent/70'
                     }`}
                   />
                 ))}
               </div>
-              <div className="absolute top-4 right-4 bg-accent/10 text-accent px-3 py-1 rounded-full text-xs font-medium">
-                {currentSlide === 0 ? 'Creative Pro' : 'Modern Pro'} Template
+              <div className="absolute top-6 right-6 bg-gradient-primary/20 backdrop-blur-sm text-accent px-4 py-2 rounded-full text-sm font-semibold border border-accent/30">
+                {currentSlide === 0 ? 'Creative Professional' : 'Modern Executive'} Template
               </div>
             </div>
           </div>
@@ -1042,7 +1042,7 @@ export default function CVOptimizerPage() {
 
         <section className="py-16 sm:py-24">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-surface-light backdrop-blur-sm rounded-2xl shadow-premium p-8 border border-border/50">
+            <div className="bg-gradient-elegant backdrop-blur-sm rounded-3xl shadow-premium p-12 border border-border/30">
               <div className="mb-8">
                 {!isPro && (
                   <div className="bg-gradient-to-r from-accent/10 to-accent/5 p-6 rounded-2xl border border-accent/20 mb-6">
