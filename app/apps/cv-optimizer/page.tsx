@@ -474,7 +474,7 @@ export default function CVOptimizerPage() {
               {isEditing ? (
                 <div className="space-y-8">
                   {/* Background Selection - Pro Only */}
-                  {isPro && (
+                  {isPro ? (
                     <div>
                       <h3 className="text-lg font-semibold text-foreground mb-4">CV Background (Pro Feature)</h3>
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -514,6 +514,17 @@ export default function CVOptimizerPage() {
                           </div>
                         </button>
                       </div>
+                    </div>
+                  ) : (
+                    <div className="bg-surface rounded-xl p-6 border border-border/50">
+                      <h3 className="text-lg font-semibold text-foreground mb-2">CV Background (Pro Feature)</h3>
+                      <p className="text-text-muted mb-4">This feature is available in the Pro tier only. Upgrade to unlock premium backgrounds and enhance your CV.</p>
+                      <button
+                        onClick={() => window.location.href = '/pricing'}
+                        className="bg-gradient-primary text-background px-6 py-3 rounded-lg font-medium hover:shadow-glow transition-all duration-200"
+                      >
+                        Upgrade to Pro
+                      </button>
                     </div>
                   )}
 
