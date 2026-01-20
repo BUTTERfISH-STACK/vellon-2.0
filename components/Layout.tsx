@@ -1,8 +1,82 @@
 import Link from "next/link";
 
+import { useEffect, useRef } from "react";
+
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    // Set canvas size
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    // Particle system for interactive background
+    const particles: { x: number; y: number; size: number; speedX: number; speedY: number; color: string }[] = [];
+    const particleCount = 100;
+
+    // Initialize particles
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 3 + 1,
+        speedX: Math.random() * 2 - 1,
+        speedY: Math.random() * 2 - 1,
+        color: `hsl(${Math.random() * 60 + 180}, 70%, 50%)`,
+      });
+    }
+
+    // Animation loop
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw particles
+      particles.forEach((particle) => {
+        ctx.fillStyle = particle.color;
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Update particle position
+        particle.x += particle.speedX;
+        particle.y += particle.speedY;
+
+        // Bounce off edges
+        if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
+        if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
+      });
+
+      requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    // Handle window resize
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-surface via-surface-light to-surface">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-surface via-surface-light to-surface relative overflow-hidden">
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 -z-10 opacity-30"
+        style={{ pointerEvents: "none" }}
+      />
       <header className="bg-gradient-elegant border-b border-border/30 sticky top-0 z-50 backdrop-blur-xl bg-opacity-95">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="flex justify-between items-center py-8">
