@@ -27,9 +27,6 @@ export default function Pricing() {
     <div className="min-h-screen">
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         <section className="text-center py-24">
-          <h1 className="text-5xl sm:text-6xl font-bold mb-8 bg-gradient-primary bg-clip-text text-transparent">
-            Simple, Honest Pricing
-          </h1>
           <p className="max-w-4xl mx-auto text-xl text-text-muted mb-12">
             Choose the plan that fits your career goals
           </p>
