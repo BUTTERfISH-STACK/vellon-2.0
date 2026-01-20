@@ -119,9 +119,24 @@ export default function Home() {
                 <div className="text-xs font-semibold text-text-muted tracking-wider">FEATURED IN</div>
                 <div className="w-px h-4 bg-border"></div>
                 <div className="flex items-center gap-4">
-                  <div className="px-3 py-1 bg-surface-light/50 rounded text-xs font-medium text-text-muted">Business Day</div>
-                  <div className="px-3 py-1 bg-surface-light/50 rounded text-xs font-medium text-text-muted">Fin24</div>
-                  <div className="px-3 py-1 bg-surface-light/50 rounded text-xs font-medium text-text-muted">IOL</div>
+                  <div className="flex items-center gap-2 px-3 py-2 bg-surface-light/50 rounded-lg hover:bg-surface-light/70 transition-colors">
+                    <svg className="w-4 h-4 text-text-muted" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6zm2 2h8v1H6V8zm0 3h6v1H6v-1z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-xs font-medium text-text-muted">Business Day</span>
+                  </div>
+                  <div className="flex items-center gap-2 px-3 py-2 bg-surface-light/50 rounded-lg hover:bg-surface-light/70 transition-colors">
+                    <svg className="w-4 h-4 text-text-muted" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6zm2 2h8v1H6V8zm0 3h6v1H6v-1z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-xs font-medium text-text-muted">Fin24</span>
+                  </div>
+                  <div className="flex items-center gap-2 px-3 py-2 bg-surface-light/50 rounded-lg hover:bg-surface-light/70 transition-colors">
+                    <svg className="w-4 h-4 text-text-muted" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6zm2 2h8v1H6V8zm0 3h6v1H6v-1z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-xs font-medium text-text-muted">IOL</span>
+                  </div>
                 </div>
               </div>
             </div>
