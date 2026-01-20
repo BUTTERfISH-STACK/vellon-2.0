@@ -364,14 +364,14 @@ export default function CVOptimizerProPage() {
             <div className="relative overflow-hidden rounded-3xl bg-gradient-elegant border border-border/50 shadow-premium">
               <div className="aspect-[3/4] relative bg-gradient-to-br from-surface to-surface-light rounded-2xl overflow-hidden">
                 <img
-                  src="/ATS Friendly Modern CV Resume.png"
+                  src="/White Black Minimalist Professional Resume.png"
                   alt="Creative CV Design"
                   className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
                     currentSlide === 0 ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
                   }`}
                 />
                 <img
-                  src="/Minimalist Modern Professional CV Resume.png"
+                  src="/Modern Professional CV Resume.png"
                   alt="Modern CV Design"
                   className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
                     currentSlide === 1 ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
