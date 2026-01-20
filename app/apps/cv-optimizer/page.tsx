@@ -915,22 +915,6 @@ export default function CVOptimizerPage() {
                 </div>
               )}
 
-              {/* Professional Career Upgrade Notice */}
-              <div className="mt-8 text-center">
-                <div className="bg-accent/5 border border-accent/20 rounded-xl p-6">
-                  <h3 className="text-lg font-semibold text-accent mb-2">Take your career to the next level</h3>
-                  <p className="text-text-muted text-sm mb-4">
-                    Join thousands of South Africans who landed better jobs with Vellon's Pro features
-                  </p>
-                  <a
-                    href="/pricing"
-                    className="inline-flex items-center gap-2 bg-gradient-primary text-background font-semibold py-2 px-6 rounded-xl hover:shadow-glow transition-all duration-200"
-                  >
-                    <span>Start Your Pro Journey</span>
-                    <span className="text-sm">R59/month</span>
-                  </a>
-                </div>
-              </div>
             </div>
           </div>
         </section>
