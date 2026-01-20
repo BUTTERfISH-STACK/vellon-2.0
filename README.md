@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vellon CV Redo with Ambassador Program
 
-## Getting Started
+A production-ready SaaS application for CV optimization with referral-based commissions.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- One-time paid CV redo (R119.99)
+- Ambassador program with R35 per successful referral
+- Email-only magic link authentication
+- Yoco payment integration
+- Referral tracking and commission attribution
+- Ambassador dashboard
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Frontend**: Next.js (App Router)
+- **Backend**: Next.js API routes
+- **Database**: PostgreSQL with Prisma ORM
+- **Auth**: NextAuth.js with email magic links
+- **Payments**: Yoco API
+- **Styling**: TailwindCSS
+- **Deployment**: Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Setup
 
-## Learn More
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Copy `.env.example` to `.env.local` and fill in the values
+4. Set up PostgreSQL database
+5. Run Prisma migrations: `npm run db:migrate`
+6. Generate Prisma client: `npm run db:generate`
+7. Start development server: `npm run dev`
 
-To learn more about Next.js, take a look at the following resources:
+## Environment Variables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `DATABASE_URL`: PostgreSQL connection string
+- `NEXTAUTH_SECRET`: Random secret for NextAuth
+- `NEXTAUTH_URL`: Your app URL
+- `YOCO_SECRET_KEY`: Yoco API secret key
+- `EMAIL_SERVER_HOST`: SMTP host
+- `EMAIL_SERVER_PORT`: SMTP port
+- `EMAIL_SERVER_USER`: SMTP username
+- `EMAIL_SERVER_PASSWORD`: SMTP password
+- `EMAIL_FROM`: From email address
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+1. Push to GitHub
+2. Connect to Vercel
+3. Set environment variables in Vercel dashboard
+4. Deploy
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Database Schema
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- User: email, role
+- Ambassador: referralCode, totalEarnings
+- ReferralClick: referralCode, ipAddress
+- Payment: userId, amount, status, referralCode, ambassadorCommission
+
+## API Routes
+
+- `/api/auth/[...nextauth]`: Authentication
+- `/api/ambassador`: Create ambassador
+- `/api/dashboard`: Ambassador stats
+- `/api/payment/initiate`: Start Yoco checkout
+- `/api/payment/webhook`: Handle Yoco webhooks
+
+## Pages
+
+- `/`: Landing page
+- `/ambassador`: Ambassador sign-up
+- `/checkout`: Payment checkout
+- `/dashboard`: Ambassador dashboard
+- `/payment/success`: Payment success
+
+## Security
+
+- No self-referrals
+- One commission per paid CV
+- Rate limiting (to be implemented)
+- Input validation
+
+## License
+
+MIT
