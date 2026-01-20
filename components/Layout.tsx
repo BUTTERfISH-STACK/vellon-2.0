@@ -74,19 +74,21 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-surface via-surface-light to-surface relative overflow-hidden">
+    <div className="min-h-screen flex flex-col relative overflow-hidden">
       {/* Background Video */}
       <video
         autoPlay
         muted
         loop
         playsInline
-        className="absolute inset-0 w-full h-full object-cover -z-20"
+        className="absolute inset-0 w-full h-full object-cover -z-30"
         style={{ pointerEvents: "none" }}
       >
         <source src="/background-video.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
+      {/* Background Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-surface via-surface-light to-surface -z-20"></div>
       <canvas
         ref={canvasRef}
         className="absolute inset-0 -z-10 opacity-30"
