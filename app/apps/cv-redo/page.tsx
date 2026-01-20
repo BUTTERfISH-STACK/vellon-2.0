@@ -722,28 +722,55 @@ export default function CVRedoPage() {
         <section className="text-center py-24 sm:py-36 lg:py-44 animate-fade-in-up">
           <div className="inline-flex items-center gap-2 p-1 bg-gradient-primary rounded-full mb-8 animate-glow shadow-warm">
             <div className="bg-surface px-5 py-2.5 rounded-full">
-              <span className="text-primary font-bold text-sm tracking-wide">🎨 AI CV REDO</span>
+              <span className="text-primary font-bold text-sm tracking-wide">🚀 AI CV REDO</span>
             </div>
           </div>
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight bg-gradient-primary bg-clip-text text-transparent mb-8 leading-[0.9]">
-            AI-Powered CV Redesign
+            Transform Your CV
           </h1>
           <p className="max-w-4xl mx-auto text-xl sm:text-2xl text-text-muted mb-12 leading-relaxed font-light">
-            Fill out your information and let our AI completely redesign your CV with modern templates, professional layouts, and stunning visual enhancements.
+            Give your career a fresh start. Our AI completely redesigns your CV with modern templates that impress South African employers and get you noticed.
           </p>
+          <div className="flex flex-wrap justify-center gap-4 text-sm">
+            <div className="flex items-center gap-2 bg-surface/50 px-4 py-2 rounded-full">
+              <span className="text-green-500">✓</span>
+              <span>ATS-Optimized</span>
+            </div>
+            <div className="flex items-center gap-2 bg-surface/50 px-4 py-2 rounded-full">
+              <span className="text-green-500">✓</span>
+              <span>Professional Templates</span>
+            </div>
+            <div className="flex items-center gap-2 bg-surface/50 px-4 py-2 rounded-full">
+              <span className="text-green-500">✓</span>
+              <span>Instant Download</span>
+            </div>
+          </div>
         </section>
 
         <section className="py-24 sm:py-32 lg:py-40">
           <div className="max-w-4xl mx-auto">
             <div className="bg-surface-light backdrop-blur-sm rounded-3xl shadow-premium p-10 border border-border/50">
               <div className="mb-8 p-6 bg-gradient-primary/10 rounded-2xl border border-primary/20">
-                <p className="text-primary text-sm font-medium">
-                  <strong>Free Plan:</strong> AI-powered CV redesign with modern templates. Upgrade to Pro for premium designs and advanced customization.
-                </p>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-primary text-sm font-medium mb-2">
+                      <strong>Free Plan:</strong> AI-powered CV redesign with modern templates
+                    </p>
+                    <p className="text-text-muted text-xs">
+                      Upgrade to Pro for premium designs and unlimited customizations
+                    </p>
+                  </div>
+                  <a
+                    href="/pricing"
+                    className="bg-gradient-primary text-background px-4 py-2 rounded-lg text-sm font-semibold hover:shadow-glow transition-all duration-200"
+                  >
+                    Go Pro
+                  </a>
+                </div>
                 {sampleCVTemplates.length > 0 && (
                   <div className="mt-3 flex items-center gap-2">
                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-xs text-green-600 font-medium">{sampleCVTemplates.length} Sample CV Templates Loaded</span>
+                    <span className="text-xs text-green-600 font-medium">{sampleCVTemplates.length} Sample CV Templates Available</span>
                   </div>
                 )}
               </div>
@@ -817,15 +844,18 @@ export default function CVRedoPage() {
                     </div>
                   </div>
 
-                  {/* Sample CV Templates */}
+                  {/* Enhanced Sample CV Templates */}
                   {sampleCVTemplates.length > 0 && (
                     <div className="mb-8">
-                      <h3 className="text-lg font-semibold text-foreground mb-4">Quick Start: Load Sample CV Data</h3>
+                      <div className="text-center mb-6">
+                        <h3 className="text-xl font-bold text-foreground mb-2">🚀 Quick Start with Sample Data</h3>
+                        <p className="text-text-muted">Click any profile below to instantly populate the form and see how your CV will look</p>
+                      </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {sampleCVTemplates.map((template) => (
+                        {sampleCVTemplates.slice(0, 6).map((template) => (
                           <div
                             key={template.id}
-                            className="p-4 bg-surface rounded-xl border border-border/50 hover:border-primary/50 transition-all duration-200 cursor-pointer group"
+                            className="p-4 bg-gradient-to-br from-surface to-surface-light rounded-xl border border-border/50 hover:border-primary/50 hover:shadow-lg transition-all duration-300 cursor-pointer group"
                             onClick={() => {
                               // Load sample data into form
                               if (template.data.basics) {
@@ -864,18 +894,34 @@ export default function CVRedoPage() {
                               }
                             }}
                           >
-                            <h4 className="font-semibold text-sm mb-2">{template.name}</h4>
-                            <p className="text-xs text-text-muted mb-3">{template.description}</p>
-                            <div className="flex items-center text-primary group-hover:text-primary/80 transition-colors">
-                              <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                              </svg>
-                              <span className="text-xs font-medium">Load Sample Data</span>
+                            <div className="flex items-center gap-3 mb-3">
+                              <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
+                                <span className="text-white font-bold text-sm">{template.name.charAt(0)}</span>
+                              </div>
+                              <div>
+                                <h4 className="font-semibold text-sm text-foreground">{template.name}</h4>
+                                <p className="text-xs text-text-muted">{template.description}</p>
+                              </div>
+                            </div>
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center text-primary group-hover:text-primary/80 transition-colors">
+                                <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                </svg>
+                                <span className="text-xs font-medium">Load Sample</span>
+                              </div>
+                              <span className="text-xs text-text-muted bg-surface px-2 py-1 rounded-full">
+                                {template.data.work?.length || 0} jobs
+                              </span>
                             </div>
                           </div>
                         ))}
                       </div>
-                      <p className="text-xs text-text-muted mt-2">Click any template to instantly populate the form with sample data for testing.</p>
+                      <div className="text-center mt-4">
+                        <p className="text-xs text-text-muted">
+                          💡 <strong>Pro tip:</strong> Loading sample data helps you see exactly how your CV will look with our AI redesign
+                        </p>
+                      </div>
                     </div>
                   )}
 
@@ -1136,274 +1182,47 @@ export default function CVRedoPage() {
                     ))}
                   </div>
 
-                  {/* Enhanced Pro Template Selection */}
+                  {/* Simplified Template Selection */}
                   {isPro && (
-                    <div className="mb-12">
-                      <div className="text-center mb-8">
-                        <h3 className="text-3xl font-black text-foreground mb-4 bg-gradient-primary bg-clip-text text-transparent">
-                          Choose Your Perfect Template
-                        </h3>
-                        <p className="text-lg text-text-muted max-w-2xl mx-auto">
-                          Select from our premium collection of industry-specific templates, each crafted by AI for maximum impact and professional appeal.
-                        </p>
+                    <div className="mb-8">
+                      <div className="text-center mb-6">
+                        <h3 className="text-xl font-bold text-foreground mb-2">🎨 Choose Your Professional Template</h3>
+                        <p className="text-text-muted">Select from our premium AI-designed templates</p>
                       </div>
 
-                      {/* Search and Filter Controls */}
-                      <div className="mb-8 space-y-4">
-                        <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
-                          {/* Search Bar */}
-                          <div className="relative flex-1 max-w-md">
-                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                              <svg className="h-5 w-5 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                              </svg>
-                            </div>
-                            <input
-                              type="text"
-                              placeholder="Search templates..."
-                              value={templateSearch}
-                              onChange={(e) => setTemplateSearch(e.target.value)}
-                              className="w-full pl-10 pr-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 text-foreground placeholder-text-muted"
-                            />
-                          </div>
-
-                          {/* Category Filter */}
-                          <div className="flex flex-wrap gap-2 justify-center">
-                            {categories.map((category) => (
-                              <button
-                                key={category}
-                                onClick={() => setTemplateFilter(category)}
-                                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                                  templateFilter === category
-                                    ? 'bg-primary text-white shadow-glow'
-                                    : 'bg-surface text-text-muted hover:bg-surface-light hover:text-foreground border border-border'
-                                }`}
-                              >
-                                {category === 'all' ? 'All Templates' : category}
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Results Count */}
-                        <div className="text-center">
-                          <span className="text-sm text-text-muted">
-                            Showing {filteredTemplates.length} of {proTemplates.length} templates
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Template Grid */}
-                      {(
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        {filteredTemplates.map((template, index) => (
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {proTemplates.map((template) => (
                           <div
                             key={template.id}
                             onClick={() => setSelectedTemplate(template.id)}
-                            className={`group cursor-pointer relative overflow-hidden rounded-2xl border-2 transition-all duration-500 hover:scale-105 hover:shadow-2xl ${
+                            className={`p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 hover:shadow-lg ${
                               selectedTemplate === template.id
-                                ? 'border-primary bg-gradient-to-br from-primary/10 to-secondary/10 shadow-glow scale-105'
-                                : 'border-border hover:border-primary/50 bg-surface hover:shadow-xl'
+                                ? 'border-primary bg-primary/5 shadow-glow'
+                                : 'border-border hover:border-primary/50 bg-surface'
                             }`}
-                            style={{ animationDelay: `${index * 100}ms` }}
                           >
-                            {/* Template Preview - Actual CV Layout */}
-                            <div className="aspect-[4/5] relative overflow-hidden bg-white border border-gray-200">
-                              <div className="p-4 h-full flex flex-col">
-                                {/* Header */}
-                                <div className="text-center mb-4 pb-2 border-b" style={{ borderColor: template.colors.primary }}>
-                                  <h3 className="text-lg font-bold mb-1" style={{ color: template.colors.primary }}>
-                                    John Doe
-                                  </h3>
-                                  <p className="text-sm text-gray-600">Software Developer</p>
-                                </div>
-
-                                {/* Contact Info */}
-                                <div className="mb-3 text-xs text-gray-600 space-y-1">
-                                  <div>📧 john@example.com</div>
-                                  <div>📱 (555) 123-4567</div>
-                                  <div>🌐 johndoe.dev</div>
-                                </div>
-
-                                {/* Summary */}
-                                <div className="mb-3">
-                                  <h4 className="text-sm font-semibold mb-1" style={{ color: template.colors.secondary }}>
-                                    Summary
-                                  </h4>
-                                  <p className="text-xs text-gray-700 leading-tight">
-                                    Experienced software developer with 5+ years of expertise in full-stack development.
-                                  </p>
-                                </div>
-
-                                {/* Experience */}
-                                <div className="mb-3">
-                                  <h4 className="text-sm font-semibold mb-1" style={{ color: template.colors.secondary }}>
-                                    Experience
-                                  </h4>
-                                  <div className="text-xs">
-                                    <div className="font-medium" style={{ color: template.colors.primary }}>
-                                      Senior Developer
-                                    </div>
-                                    <div className="text-gray-600">Tech Corp • 2020-2023</div>
-                                    <div className="text-gray-700 mt-1">
-                                      Led development of web applications using React and Node.js
-                                    </div>
-                                  </div>
-                                </div>
-
-                                {/* Skills */}
-                                <div className="mb-3">
-                                  <h4 className="text-sm font-semibold mb-1" style={{ color: template.colors.secondary }}>
-                                    Skills
-                                  </h4>
-                                  <div className="flex flex-wrap gap-1">
-                                    <span className="px-2 py-1 rounded text-xs font-medium"
-                                          style={{ backgroundColor: `${template.colors.primary}20`, color: template.colors.primary }}>
-                                      JavaScript
-                                    </span>
-                                    <span className="px-2 py-1 rounded text-xs font-medium"
-                                          style={{ backgroundColor: `${template.colors.secondary}20`, color: template.colors.secondary }}>
-                                      React
-                                    </span>
-                                    <span className="px-2 py-1 rounded text-xs font-medium"
-                                          style={{ backgroundColor: `${template.colors.accent}20`, color: template.colors.accent }}>
-                                      Node.js
-                                    </span>
-                                  </div>
-                                </div>
-
-                                {/* Education */}
-                                <div className="mt-auto">
-                                  <h4 className="text-sm font-semibold mb-1" style={{ color: template.colors.secondary }}>
-                                    Education
-                                  </h4>
-                                  <div className="text-xs">
-                                    <div className="font-medium" style={{ color: template.colors.primary }}>
-                                      Bachelor of Computer Science
-                                    </div>
-                                    <div className="text-gray-600">University of Technology • 2016-2020</div>
-                                  </div>
-                                </div>
-                              </div>
-
-                              {/* Template Badge */}
-                              <div className="absolute top-2 right-2 px-2 py-1 rounded-full text-xs font-bold text-white"
-                                   style={{ backgroundColor: template.colors.primary }}>
-                                {template.name}
-                              </div>
-                            </div>
-
-                            {/* Selection Indicator */}
-                            {selectedTemplate === template.id && (
-                              <div className="absolute top-3 right-3 w-8 h-8 bg-primary rounded-full flex items-center justify-center shadow-lg animate-bounce">
-                                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                                </svg>
-                              </div>
-                            )}
-
-                            {/* Hover Overlay */}
-                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                              <div className="text-center">
-                                <div className="w-12 h-12 mx-auto mb-2 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            <div className="flex items-center justify-between mb-3">
+                              <h4 className="font-semibold text-foreground">{template.name}</h4>
+                              {selectedTemplate === template.id && (
+                                <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                   </svg>
                                 </div>
-                                <span className="text-white font-semibold text-sm">Preview Template</span>
-                              </div>
+                              )}
                             </div>
-
-                            {/* Template Info */}
-                            <div className="p-5">
-                              <div className="flex items-start justify-between mb-2">
-                                <h4 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors duration-200">
-                                  {template.name}
-                                </h4>
-                                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                                  template.category === 'Executive' ? 'bg-purple-100 text-purple-800' :
-                                  template.category === 'Technology' ? 'bg-blue-100 text-blue-800' :
-                                  template.category === 'Creative' ? 'bg-pink-100 text-pink-800' :
-                                  template.category === 'Academic' ? 'bg-green-100 text-green-800' :
-                                  template.category === 'Finance' ? 'bg-yellow-100 text-yellow-800' :
-                                  'bg-gray-100 text-gray-800'
-                                }`}>
-                                  {template.category}
-                                </span>
-                              </div>
-
-                              <p className="text-sm text-text-muted leading-relaxed mb-3 line-clamp-3">
-                                {template.description}
-                              </p>
-
-                              {/* Color Palette */}
-                              <div className="flex items-center gap-2 mb-3">
-                                <span className="text-xs text-text-muted font-medium">Colors:</span>
-                                <div className="flex gap-1">
-                                  <div className="w-4 h-4 rounded-full border border-border/50" style={{ backgroundColor: template.colors.primary }}></div>
-                                  <div className="w-4 h-4 rounded-full border border-border/50" style={{ backgroundColor: template.colors.secondary }}></div>
-                                  <div className="w-4 h-4 rounded-full border border-border/50" style={{ backgroundColor: template.colors.accent }}></div>
-                                </div>
-                              </div>
-
-                              {/* Features */}
-                              <div className="flex flex-wrap gap-1">
-                                <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full font-medium">
-                                  AI Optimized
-                                </span>
-                                <span className="px-2 py-1 bg-secondary/10 text-secondary text-xs rounded-full font-medium">
-                                  Premium
-                                </span>
-                                <span className="px-2 py-1 bg-accent/10 text-accent text-xs rounded-full font-medium">
-                                  Professional
-                                </span>
-                              </div>
+                            <p className="text-sm text-text-muted mb-3">{template.description}</p>
+                            <div className="flex gap-1 mb-3">
+                              <div className="w-4 h-4 rounded-full" style={{ backgroundColor: template.colors.primary }}></div>
+                              <div className="w-4 h-4 rounded-full" style={{ backgroundColor: template.colors.secondary }}></div>
+                              <div className="w-4 h-4 rounded-full" style={{ backgroundColor: template.colors.accent }}></div>
                             </div>
-
-                            {/* Selection Animation */}
-                            {selectedTemplate === template.id && (
-                              <div className="absolute inset-0 border-4 border-primary rounded-2xl animate-pulse pointer-events-none"></div>
-                            )}
+                            <div className="text-xs text-primary font-medium">
+                              ✓ AI Optimized • ✓ Professional • ✓ ATS-Friendly
+                            </div>
                           </div>
                         ))}
-                        </div>
-                      )}
-
-                      {/* No Results */}
-                      {filteredTemplates.length === 0 && (
-                        <div className="text-center py-12">
-                          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-surface flex items-center justify-center">
-                            <svg className="w-8 h-8 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
-                          </div>
-                          <h4 className="text-lg font-semibold text-foreground mb-2">No templates found</h4>
-                          <p className="text-text-muted">Try adjusting your search or filter criteria</p>
-                        </div>
-                      )}
-
-                      {/* Template Stats */}
-                      {isPro && (
-                        <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                          <div className="p-4 bg-surface rounded-xl border border-border/50">
-                            <div className="text-2xl font-black text-primary">{proTemplates.length}</div>
-                            <div className="text-sm text-text-muted">Pro Templates</div>
-                          </div>
-                          <div className="p-4 bg-surface rounded-xl border border-border/50">
-                            <div className="text-2xl font-black text-secondary">{categories.length - 1}</div>
-                            <div className="text-sm text-text-muted">Categories</div>
-                          </div>
-                          <div className="p-4 bg-surface rounded-xl border border-border/50">
-                            <div className="text-2xl font-black text-accent">∞</div>
-                            <div className="text-sm text-text-muted">Customizations</div>
-                          </div>
-                          <div className="p-4 bg-surface rounded-xl border border-border/50">
-                            <div className="text-2xl font-black text-primary">AI</div>
-                            <div className="text-sm text-text-muted">Powered Design</div>
-                          </div>
-                        </div>
-                      )}
+                      </div>
                     </div>
                   )}
 
@@ -1412,7 +1231,7 @@ export default function CVRedoPage() {
                       onClick={handlePreview}
                       className="flex-1 bg-gradient-primary text-white font-semibold py-4 px-6 rounded-xl hover:shadow-glow hover:scale-105 transition-all duration-200 shadow-premium"
                     >
-                      Preview AI Redesign
+                      Preview Your Professional CV
                     </button>
                   </div>
                 </div>
@@ -1420,7 +1239,7 @@ export default function CVRedoPage() {
                 /* Preview Mode */
                 <div className="space-y-6">
                   <div className="flex justify-between items-center">
-                    <h3 className="text-xl font-semibold text-foreground">AI-Redesign Preview</h3>
+                    <h3 className="text-xl font-semibold text-foreground">Your Professional CV Preview</h3>
                     <div className="flex gap-2">
                       <button
                         onClick={handleEdit}
