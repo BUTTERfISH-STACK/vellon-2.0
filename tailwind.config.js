@@ -22,6 +22,11 @@ module.exports = {
         'glow': 'var(--shadow-glow)',
         'premium': 'var(--shadow-premium)',
       },
+      backgroundImage: {
+        'gradient-primary': 'linear-gradient(135deg, #d4af37 0%, #b8860b 50%, #daa520 100%)',
+        'gradient-elegant': 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%)',
+        'gradient-gold': 'linear-gradient(135deg, #d4af37, #f4e87c)',
+      },
       animation: {
         'fade-in-up': 'fadeInUp 0.6s ease-out',
       },

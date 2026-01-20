@@ -3,39 +3,128 @@ export default function Home() {
     <div className="min-h-screen">
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
         {/* Hero Section */}
-        <section className="text-center py-32 sm:py-48 lg:py-56 animate-fade-in-up">
-          <div className="mb-8">
-            <span className="inline-block px-6 py-3 bg-gradient-primary/10 border border-accent/20 rounded-full text-accent font-semibold text-sm tracking-wide uppercase mb-8">
-              Premium CV Optimization
-            </span>
+        <section className="text-center py-32 sm:py-48 lg:py-56 animate-fade-in-up relative overflow-hidden">
+          {/* Background Elements */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-primary rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 right-10 w-40 h-40 bg-accent rounded-full blur-3xl"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-gradient-gold rounded-full blur-3xl opacity-10"></div>
           </div>
-          <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold mb-10 leading-tight tracking-tight">
-            <span className="text-gradient-gold">Elevate</span> <span className="animate-flicker-slow">Your Career</span>
-            <br />
-            <span className="text-foreground">With Precision</span>
-          </h1>
-          <p className="max-w-4xl mx-auto text-xl sm:text-2xl text-text-muted mb-16 leading-relaxed font-light">
-            Sophisticated AI-powered CV optimization and professional redesign — engineered for discerning professionals in competitive markets.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
-            <a
-              href="/apps/cv-optimizer"
-              className="inline-flex items-center gap-4 bg-gradient-primary text-background font-bold py-6 px-12 rounded-2xl hover:shadow-glow transition-all duration-300 text-xl shadow-premium transform hover:scale-105"
-            >
-              Optimize My CV
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </a>
-            <a
-              href="#how-it-works"
-              className="inline-flex items-center gap-4 bg-surface-light text-foreground font-semibold py-6 px-12 rounded-2xl border-2 border-border/50 hover:border-accent/50 hover:bg-surface transition-all duration-300 text-xl shadow-premium"
-            >
-              Discover Excellence
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-              </svg>
-            </a>
+
+          <div className="relative z-10">
+            <div className="mb-8">
+              <span className="inline-block px-6 py-3 bg-gradient-primary/10 border border-accent/20 rounded-full text-accent font-semibold text-sm tracking-wide uppercase mb-4">
+                Premium CV Optimization
+              </span>
+              <div className="flex justify-center items-center gap-6 text-sm text-text-muted">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                  <span>AI-Powered</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-accent rounded-full animate-pulse"></div>
+                  <span>ATS-Optimized</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-gradient-primary rounded-full animate-pulse"></div>
+                  <span>Professional Results</span>
+                </div>
+              </div>
+            </div>
+
+            <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold mb-10 leading-tight tracking-tight">
+              <span className="text-gradient-gold">Elevate</span> <span className="animate-flicker-slow">Your Career</span>
+              <br />
+              <span className="text-foreground">With Precision</span>
+            </h1>
+
+            <p className="max-w-4xl mx-auto text-xl sm:text-2xl text-text-muted mb-8 leading-relaxed font-light">
+              Sophisticated AI-powered CV optimization and professional redesign — engineered for discerning professionals in competitive markets.
+            </p>
+
+            {/* Key Benefits */}
+            <div className="max-w-5xl mx-auto mb-12">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+                <div className="bg-surface-light/30 backdrop-blur-sm p-6 rounded-2xl border border-border/20">
+                  <div className="w-12 h-12 bg-gradient-primary rounded-2xl flex items-center justify-center mb-4 shadow-premium">
+                    <span className="text-2xl">🎯</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-foreground mb-2">Smart Optimization</h3>
+                  <p className="text-text-muted text-sm">AI analyzes job requirements and optimizes your CV for maximum impact</p>
+                </div>
+                <div className="bg-surface-light/30 backdrop-blur-sm p-6 rounded-2xl border border-border/20">
+                  <div className="w-12 h-12 bg-gradient-primary rounded-2xl flex items-center justify-center mb-4 shadow-premium">
+                    <span className="text-2xl">⚡</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-foreground mb-2">Instant Results</h3>
+                  <p className="text-text-muted text-sm">Professional CV ready in minutes, not hours</p>
+                </div>
+                <div className="bg-surface-light/30 backdrop-blur-sm p-6 rounded-2xl border border-border/20">
+                  <div className="w-12 h-12 bg-gradient-primary rounded-2xl flex items-center justify-center mb-4 shadow-premium">
+                    <span className="text-2xl">🏆</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-foreground mb-2">Proven Success</h3>
+                  <p className="text-text-muted text-sm">Used by thousands of professionals who landed their dream jobs</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Statistics */}
+            <div className="max-w-4xl mx-auto mb-12">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-gradient-gold mb-2">10K+</div>
+                  <div className="text-sm text-text-muted">CVs Optimized</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-gradient-gold mb-2">95%</div>
+                  <div className="text-sm text-text-muted">Success Rate</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-gradient-gold mb-2">24/7</div>
+                  <div className="text-sm text-text-muted">AI Support</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-gradient-gold mb-2">RSA</div>
+                  <div className="text-sm text-text-muted">Local Focus</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
+              <a
+                href="/apps/cv-optimizer"
+                className="inline-flex items-center gap-4 bg-gradient-primary text-background font-bold py-6 px-12 rounded-2xl hover:shadow-glow transition-all duration-300 text-xl shadow-premium transform hover:scale-105"
+              >
+                Optimize My CV
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </a>
+              <a
+                href="#how-it-works"
+                className="inline-flex items-center gap-4 bg-surface-light text-foreground font-semibold py-6 px-12 rounded-2xl border-2 border-border/50 hover:border-accent/50 hover:bg-surface transition-all duration-300 text-xl shadow-premium"
+              >
+                Discover Excellence
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </a>
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="mt-16 pt-8 border-t border-border/20">
+              <p className="text-sm text-text-muted mb-6">Trusted by professionals at leading South African companies</p>
+              <div className="flex justify-center items-center gap-8 opacity-60">
+                <div className="text-xs font-semibold text-text-muted tracking-wider">FEATURED IN</div>
+                <div className="w-px h-4 bg-border"></div>
+                <div className="flex items-center gap-4">
+                  <div className="px-3 py-1 bg-surface-light/50 rounded text-xs font-medium text-text-muted">Business Day</div>
+                  <div className="px-3 py-1 bg-surface-light/50 rounded text-xs font-medium text-text-muted">Fin24</div>
+                  <div className="px-3 py-1 bg-surface-light/50 rounded text-xs font-medium text-text-muted">IOL</div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
