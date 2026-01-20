@@ -435,32 +435,10 @@ interface CVTemplate {
 }
 
 export default function CVOptimizerPage() {
-  const [trialDaysLeft, setTrialDaysLeft] = useState<number | null>(null);
-
   const [isPro, setIsPro] = useState(() => {
     if (typeof window !== 'undefined') {
       const status = localStorage.getItem('vellon_pro_status');
-      if (status === 'true') return true;
-      if (status === 'trial') {
-        const trialEnd = localStorage.getItem('vellon_pro_trial_end');
-        if (trialEnd) {
-          const endDate = new Date(trialEnd);
-          const now = new Date();
-          if (now < endDate) {
-            // Calculate days left
-            const diffTime = endDate.getTime() - now.getTime();
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            setTrialDaysLeft(diffDays);
-            return true;
-          } else {
-            // Trial expired, clean up
-            localStorage.removeItem('vellon_pro_status');
-            localStorage.removeItem('vellon_pro_trial_end');
-            return false;
-          }
-        }
-      }
-      return false;
+      return status === 'true';
     }
     return false;
   });
@@ -999,8 +977,8 @@ export default function CVOptimizerPage() {
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
             </svg>
             <div>
-              <p className="font-semibold">14-Day Free Trial Activated! 🎉</p>
-              <p className="text-sm text-green-100">Your premium features are now unlocked for 14 days.</p>
+              <p className="font-semibold">Pro Upgrade Successful! 🎉</p>
+              <p className="text-sm text-green-100">Your premium features are now unlocked.</p>
             </div>
             <button
               onClick={() => setShowUpgradeSuccess(false)}
@@ -1066,19 +1044,6 @@ export default function CVOptimizerPage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-surface-light backdrop-blur-sm rounded-2xl shadow-premium p-8 border border-border/50">
               <div className="mb-8">
-                {isPro && trialDaysLeft !== null && (
-                  <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-xl border border-blue-200 mb-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                        <span className="text-white text-sm font-bold">⏰</span>
-                      </div>
-                      <div>
-                        <span className="text-blue-800 font-semibold">Free Trial Active</span>
-                        <p className="text-blue-600 text-sm">{trialDaysLeft} days remaining</p>
-                      </div>
-                    </div>
-                  </div>
-                )}
                 {!isPro && (
                   <div className="bg-gradient-to-r from-accent/10 to-accent/5 p-6 rounded-2xl border border-accent/20 mb-6">
                     <div className="flex items-center gap-3 mb-4">
@@ -1191,7 +1156,7 @@ export default function CVOptimizerPage() {
                       </a>
                       <div className="text-sm text-pink-200 text-center sm:text-left flex items-center justify-center sm:justify-start gap-2">
                         <span className="text-lg">💎</span>
-                        <span>14-day free trial • No setup fees • Instant activation</span>
+                        <span>No setup fees • Instant activation</span>
                       </div>
                     </div>
                   </div>
