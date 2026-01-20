@@ -365,6 +365,15 @@ export default function CVOptimizerFreePage() {
             Create a professional CV that gets you noticed by South African employers. ATS-optimized and designed for career success.
           </p>
 
+          <div className="flex justify-center mb-12">
+            <a
+              href="/apps/cv-redo"
+              className="bg-gradient-primary text-background font-semibold py-3 px-8 rounded-full hover:shadow-glow hover:scale-105 transition-all duration-200 shadow-premium"
+            >
+              🚀 Try AI CV Redo - Transform Your CV Instantly
+            </a>
+          </div>
+
           {/* CV Mockup Slideshow */}
           <div className="max-w-5xl mx-auto mb-16">
             <div className="relative overflow-hidden rounded-3xl bg-gradient-elegant border border-border/50 shadow-premium">
