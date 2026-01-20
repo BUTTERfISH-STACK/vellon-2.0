@@ -319,7 +319,7 @@ export default function Home() {
                   href="/pricing"
                   className="inline-block bg-background text-accent font-bold py-4 px-8 rounded-2xl hover:bg-background/90 transition-all duration-300 w-full text-center text-lg shadow-premium"
                 >
-                  Upgrade to Pro
+                  View Pricing
                 </a>
               </div>
             </div>

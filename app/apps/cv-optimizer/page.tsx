@@ -530,7 +530,7 @@ export default function CVOptimizerPage() {
                         onClick={() => window.location.href = '/pricing'}
                         className="bg-gradient-primary text-background px-6 py-3 rounded-lg font-medium hover:shadow-glow transition-all duration-200"
                       >
-                        Upgrade to Pro
+                        View Pricing
                       </button>
                     </div>
                   )}
