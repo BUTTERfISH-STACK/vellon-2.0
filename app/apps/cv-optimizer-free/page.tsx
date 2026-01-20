@@ -405,17 +405,6 @@ export default function CVOptimizerFreePage() {
 
               {isEditing ? (
                 <div className="space-y-8">
-                  {/* Upgrade to Pro Section */}
-                  <div className="bg-surface rounded-xl p-6 border border-border/50">
-                    <h3 className="text-lg font-semibold text-foreground mb-2">Upgrade to Pro for Premium Features</h3>
-                    <p className="text-text-muted mb-4">Unlock advanced features including premium CV backgrounds, unlimited entries, and more.</p>
-                    <button
-                      onClick={() => window.location.href = '/pricing'}
-                      className="bg-gradient-primary text-background px-6 py-3 rounded-lg font-medium hover:shadow-glow transition-all duration-200"
-                    >
-                      Upgrade to Pro
-                    </button>
-                  </div>
 
                   {/* Personal Information */}
                   <div>
