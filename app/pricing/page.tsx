@@ -60,7 +60,7 @@ export default function Pricing() {
               </ul>
 
               <a
-                href="/apps/cv-optimizer"
+                href="/apps/cv-redo"
                 className="inline-block bg-surface-light text-foreground font-semibold py-3 px-6 rounded-2xl border border-border hover:bg-surface hover:shadow-md transition-all duration-200 w-full text-center"
               >
                 Get Started Free
