@@ -18,8 +18,8 @@ export default function Pricing() {
       localStorage.setItem('vellon_pro_trial_end', trialEndDate.toISOString());
       localStorage.setItem('vellon_pro_status', 'trial');
       setIsProcessing(false);
-      // Redirect to apps page with success message
-      router.push('/apps?upgrade=success');
+      // Redirect to cv-optimizer page with success message
+      router.push('/apps/cv-optimizer?upgrade=success');
     }, 2000);
   };
 
@@ -63,7 +63,7 @@ export default function Pricing() {
               </ul>
 
               <a
-                href="/apps"
+                href="/apps/cv-optimizer"
                 className="inline-block bg-surface-light text-foreground font-semibold py-3 px-6 rounded-2xl border border-border hover:bg-surface hover:shadow-md transition-all duration-200 w-full text-center"
               >
                 Get Started Free
