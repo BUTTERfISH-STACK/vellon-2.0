@@ -135,7 +135,7 @@ export default function About() {
                   className="w-32 h-32 rounded-full mx-auto mb-6 object-cover border-4 border-primary/20"
                 />
                 <h3 className="text-xl sm:text-2xl font-black text-foreground mb-2">Founder & CEO</h3>
-                <p className="text-primary font-semibold mb-4 text-sm sm:text-base">Rean van der Merwe</p>
+                <p className="text-primary font-semibold mb-4 text-sm sm:text-base">Rean v Aswegen</p>
                 <p className="text-text-muted leading-relaxed text-sm sm:text-base">
                   Visionary leader with a passion for leveraging AI to democratize career opportunities. Former tech entrepreneur with 10+ years in the industry.
                 </p>
@@ -150,7 +150,7 @@ export default function About() {
                   className="w-32 h-32 rounded-full mx-auto mb-6 object-cover border-4 border-secondary/20"
                 />
                 <h3 className="text-xl sm:text-2xl font-black text-foreground mb-2">Co-Founder & CTO</h3>
-                <p className="text-secondary font-semibold mb-4 text-sm sm:text-base">Thabo Mthembu</p>
+                <p className="text-secondary font-semibold mb-4 text-sm sm:text-base">Megan Smith</p>
                 <p className="text-text-muted leading-relaxed text-sm sm:text-base">
                   AI expert and software architect specializing in machine learning applications. PhD in Computer Science with focus on natural language processing.
                 </p>
