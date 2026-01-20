@@ -437,7 +437,7 @@ export default function CVOptimizerPage() {
                 <h2 className="text-3xl font-bold text-gradient-gold mb-4">Professional CV Builder</h2>
                 <p className="text-text-muted text-lg">Build your career with a CV that gets results. Start free and upgrade when you're ready to land your dream job.</p>
                 <div className="mt-4 p-4 bg-accent/10 rounded-xl border border-accent/20">
-                  <p className="text-accent font-medium">Free plan: Perfect for getting started • Upgrade to Pro for unlimited professional features</p>
+                  <p className="text-accent font-medium">Professional CV Builder • AI-powered optimization • ATS-friendly results</p>
                 </div>
               </div>
 
