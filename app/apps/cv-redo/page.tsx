@@ -111,7 +111,17 @@ interface CVTemplate {
 }
 
 export default function CVRedoPage() {
-  const [isPro, setIsPro] = useState(true); // Set to true for development - in production this would come from user authentication
+  const [isPro, setIsPro] = useState(() => {
+    // Check if user has pro status from localStorage
+    if (typeof window !== 'undefined') {
+      const proStatus = localStorage.getItem('vellon_pro_status');
+      const trialEnd = localStorage.getItem('vellon_pro_trial_end');
+      if (proStatus === 'active' || (trialEnd && new Date(trialEnd) > new Date())) {
+        return true;
+      }
+    }
+    return false;
+  });
   const [isGenerating, setIsGenerating] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const [isEditing, setIsEditing] = useState(true);
@@ -248,10 +258,12 @@ export default function CVRedoPage() {
   };
 
   const addExperience = () => {
-    setCvData(prev => ({
-      ...prev,
-      experience: [...prev.experience, { position: '', company: '', startDate: '', endDate: '', description: '' }]
-    }));
+    if (isPro || cvData.experience.length < 2) { // Free limit: 2 experiences
+      setCvData(prev => ({
+        ...prev,
+        experience: [...prev.experience, { position: '', company: '', startDate: '', endDate: '', description: '' }]
+      }));
+    }
   };
 
   const removeExperience = (index: number) => {
@@ -269,10 +281,12 @@ export default function CVRedoPage() {
   };
 
   const addEducation = () => {
-    setCvData(prev => ({
-      ...prev,
-      education: [...prev.education, { degree: '', institution: '', startDate: '', endDate: '', gpa: '' }]
-    }));
+    if (isPro || cvData.education.length < 1) { // Free limit: 1 education
+      setCvData(prev => ({
+        ...prev,
+        education: [...prev.education, { degree: '', institution: '', startDate: '', endDate: '', gpa: '' }]
+      }));
+    }
   };
 
   const removeEducation = (index: number) => {
@@ -290,10 +304,12 @@ export default function CVRedoPage() {
   };
 
   const addSkill = () => {
-    setCvData(prev => ({
-      ...prev,
-      skills: [...prev.skills, '']
-    }));
+    if (isPro || cvData.skills.length < 5) { // Free limit: 5 skills
+      setCvData(prev => ({
+        ...prev,
+        skills: [...prev.skills, '']
+      }));
+    }
   };
 
   const removeSkill = (index: number) => {
@@ -311,10 +327,12 @@ export default function CVRedoPage() {
   };
 
   const addCertification = () => {
-    setCvData(prev => ({
-      ...prev,
-      certifications: [...prev.certifications, { name: '', issuer: '', date: '' }]
-    }));
+    if (isPro || cvData.certifications.length < 2) { // Free limit: 2 certifications
+      setCvData(prev => ({
+        ...prev,
+        certifications: [...prev.certifications, { name: '', issuer: '', date: '' }]
+      }));
+    }
   };
 
   const removeCertification = (index: number) => {
@@ -502,7 +520,7 @@ export default function CVRedoPage() {
       yPosition += summaryLines.length * 4 + 10;
     }
 
-    // Experience with modern styling
+    // Experience with modern styling (limited to 2 entries for free)
     if (cvData.experience.some(exp => exp.position || exp.company)) {
       doc.setFontSize(14);
       doc.setFont('helvetica', 'bold');
@@ -514,7 +532,8 @@ export default function CVRedoPage() {
       doc.text('EXPERIENCE', 20, yPosition);
       yPosition += 8;
 
-      cvData.experience.forEach(exp => {
+      const experienceToShow = isPro ? cvData.experience : cvData.experience.slice(0, 2);
+      experienceToShow.forEach(exp => {
         if (exp.position || exp.company) {
           // Position with background highlight
           doc.setFillColor(254, 243, 199); // Light yellow
@@ -549,7 +568,7 @@ export default function CVRedoPage() {
       yPosition += 5;
     }
 
-    // Education with styling
+    // Education with styling (limited to 1 entry for free)
     if (cvData.education.some(edu => edu.degree || edu.institution)) {
       doc.setFontSize(14);
       doc.setFont('helvetica', 'bold');
@@ -561,7 +580,8 @@ export default function CVRedoPage() {
       doc.text('EDUCATION', 20, yPosition);
       yPosition += 8;
 
-      cvData.education.forEach(edu => {
+      const educationToShow = isPro ? cvData.education : cvData.education.slice(0, 1);
+      educationToShow.forEach(edu => {
         if (edu.degree || edu.institution) {
           doc.setFillColor(240, 253, 244); // Light green
           doc.rect(18, yPosition - 3, 100, 8, 'F');
@@ -591,7 +611,7 @@ export default function CVRedoPage() {
       yPosition += 5;
     }
 
-    // Skills with modern design
+    // Skills with modern design (limited to 5 for free)
     if (cvData.skills.some(skill => skill.trim())) {
       doc.setFontSize(14);
       doc.setFont('helvetica', 'bold');
@@ -607,13 +627,14 @@ export default function CVRedoPage() {
       doc.setFont('helvetica', 'normal');
       doc.setTextColor(0, 0, 0);
 
-      const skillsText = cvData.skills.filter(skill => skill.trim()).join(' • ');
+      const skillsToShow = isPro ? cvData.skills.filter(skill => skill.trim()) : cvData.skills.filter(skill => skill.trim()).slice(0, 5);
+      const skillsText = skillsToShow.join(' • ');
       const skillsLines = doc.splitTextToSize(skillsText, 170);
       doc.text(skillsLines, 20, yPosition);
       yPosition += skillsLines.length * 4 + 10;
     }
 
-    // Certifications
+    // Certifications (limited to 2 for free)
     if (cvData.certifications.some(cert => cert.name || cert.issuer)) {
       doc.setFontSize(14);
       doc.setFont('helvetica', 'bold');
@@ -625,7 +646,8 @@ export default function CVRedoPage() {
       doc.text('CERTIFICATIONS', 20, yPosition);
       yPosition += 8;
 
-      cvData.certifications.forEach(cert => {
+      const certificationsToShow = isPro ? cvData.certifications : cvData.certifications.slice(0, 2);
+      certificationsToShow.forEach(cert => {
         if (cert.name || cert.issuer) {
           doc.setFontSize(9);
           doc.setFont('helvetica', 'normal');
@@ -756,8 +778,11 @@ export default function CVRedoPage() {
                     <p className="text-primary text-sm font-medium mb-2">
                       <strong>Free Plan:</strong> AI-powered CV redesign with modern templates
                     </p>
+                    <p className="text-text-muted text-xs mb-2">
+                      Free limits: 2 experiences, 1 education, 5 skills, 2 certifications, watermark included
+                    </p>
                     <p className="text-text-muted text-xs">
-                      Upgrade to Pro for premium designs and unlimited customizations
+                      Upgrade to Pro for unlimited features and premium templates
                     </p>
                   </div>
                   <a
@@ -940,13 +965,17 @@ export default function CVRedoPage() {
                   {/* Experience */}
                   <div>
                     <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-lg font-semibold text-foreground">Work Experience</h3>
-                      <button
-                        onClick={addExperience}
-                        className="bg-gradient-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-glow transition-all duration-200"
-                      >
-                        + Add Experience
-                      </button>
+                      <h3 className="text-lg font-semibold text-foreground">
+                        Work Experience {!isPro && `(${cvData.experience.length}/2)`}
+                      </h3>
+                      {(isPro || cvData.experience.length < 2) && (
+                        <button
+                          onClick={addExperience}
+                          className="bg-gradient-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-glow transition-all duration-200"
+                        >
+                          + Add Experience
+                        </button>
+                      )}
                     </div>
                     {cvData.experience.map((exp, index) => (
                       <div key={index} className="mb-6 p-4 bg-surface rounded-xl border border-border/50">
@@ -1017,13 +1046,17 @@ export default function CVRedoPage() {
                   {/* Education */}
                   <div>
                     <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-lg font-semibold text-foreground">Education</h3>
-                      <button
-                        onClick={addEducation}
-                        className="bg-gradient-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-glow transition-all duration-200"
-                      >
-                        + Add Education
-                      </button>
+                      <h3 className="text-lg font-semibold text-foreground">
+                        Education {!isPro && `(${cvData.education.length}/1)`}
+                      </h3>
+                      {(isPro || cvData.education.length < 1) && (
+                        <button
+                          onClick={addEducation}
+                          className="bg-gradient-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-glow transition-all duration-200"
+                        >
+                          + Add Education
+                        </button>
+                      )}
                     </div>
                     {cvData.education.map((edu, index) => (
                       <div key={index} className="mb-6 p-4 bg-surface rounded-xl border border-border/50">
@@ -1094,13 +1127,17 @@ export default function CVRedoPage() {
                   {/* Skills */}
                   <div>
                     <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-lg font-semibold text-foreground">Skills</h3>
-                      <button
-                        onClick={addSkill}
-                        className="bg-gradient-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-glow transition-all duration-200"
-                      >
-                        + Add Skill
-                      </button>
+                      <h3 className="text-lg font-semibold text-foreground">
+                        Skills {!isPro && `(${cvData.skills.filter(s => s.trim()).length}/5)`}
+                      </h3>
+                      {(isPro || cvData.skills.length < 5) && (
+                        <button
+                          onClick={addSkill}
+                          className="bg-gradient-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-glow transition-all duration-200"
+                        >
+                          + Add Skill
+                        </button>
+                      )}
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {cvData.skills.map((skill, index) => (
@@ -1128,13 +1165,17 @@ export default function CVRedoPage() {
                   {/* Certifications */}
                   <div>
                     <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-lg font-semibold text-foreground">Certifications (Optional)</h3>
-                      <button
-                        onClick={addCertification}
-                        className="bg-gradient-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-glow transition-all duration-200"
-                      >
-                        + Add Certification
-                      </button>
+                      <h3 className="text-lg font-semibold text-foreground">
+                        Certifications (Optional) {!isPro && `(${cvData.certifications.filter(c => c.name.trim()).length}/2)`}
+                      </h3>
+                      {(isPro || cvData.certifications.length < 2) && (
+                        <button
+                          onClick={addCertification}
+                          className="bg-gradient-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-glow transition-all duration-200"
+                        >
+                          + Add Certification
+                        </button>
+                      )}
                     </div>
                     {cvData.certifications.map((cert, index) => (
                       <div key={index} className="mb-4 p-4 bg-surface rounded-xl border border-border/50">
