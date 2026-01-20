@@ -214,7 +214,7 @@ export default function CVOptimizerPage() {
 
                     <div className="text-center">
                       <a
-                        href="/pricing"
+                        href="/apps/cv-redo"
                         className="inline-flex items-center gap-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 font-bold py-5 px-12 rounded-2xl hover:from-yellow-300 hover:to-orange-400 transition-all duration-300 text-xl shadow-xl hover:shadow-2xl transform hover:scale-105"
                       >
                         <span className="flex items-center justify-center gap-2">
