@@ -93,7 +93,7 @@ export default function Home() {
 
             <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
               <a
-                href="/apps/cv-optimizer"
+                href="/apps/cv-optimizer-free"
                 className="inline-flex items-center gap-4 bg-gradient-primary text-background font-bold py-6 px-12 rounded-2xl hover:shadow-glow transition-all duration-300 text-xl shadow-premium transform hover:scale-105"
               >
                 Optimize My CV
