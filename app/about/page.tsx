@@ -10,10 +10,10 @@ export default function About() {
               <span className="text-primary font-bold text-sm tracking-wide">🚀 OUR MISSION</span>
             </div>
           </div>
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight bg-gradient-primary bg-clip-text text-transparent mb-8 leading-[0.9]">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight bg-gradient-primary bg-clip-text text-transparent mb-8 leading-[0.9]">
             About Vellon 2.0
           </h1>
-          <p className="max-w-4xl mx-auto text-xl sm:text-2xl text-text-muted mb-12 leading-relaxed font-light">
+          <p className="max-w-4xl mx-auto text-lg sm:text-xl lg:text-2xl text-text-muted mb-12 leading-relaxed font-light px-4 sm:px-0">
             We're on a mission to revolutionize CV creation and optimization using cutting-edge AI technology that empowers every professional to land their dream job.
           </p>
         </section>
@@ -134,9 +134,9 @@ export default function About() {
                   alt="Founder & CEO"
                   className="w-32 h-32 rounded-full mx-auto mb-6 object-cover border-4 border-primary/20"
                 />
-                <h3 className="text-2xl font-black text-foreground mb-2">Founder & CEO</h3>
-                <p className="text-primary font-semibold mb-4">Rean van der Merwe</p>
-                <p className="text-text-muted leading-relaxed">
+                <h3 className="text-xl sm:text-2xl font-black text-foreground mb-2">Founder & CEO</h3>
+                <p className="text-primary font-semibold mb-4 text-sm sm:text-base">Rean van der Merwe</p>
+                <p className="text-text-muted leading-relaxed text-sm sm:text-base">
                   Visionary leader with a passion for leveraging AI to democratize career opportunities. Former tech entrepreneur with 10+ years in the industry.
                 </p>
               </div>
@@ -149,9 +149,9 @@ export default function About() {
                   alt="Co-Founder & CTO"
                   className="w-32 h-32 rounded-full mx-auto mb-6 object-cover border-4 border-secondary/20"
                 />
-                <h3 className="text-2xl font-black text-foreground mb-2">Co-Founder & CTO</h3>
-                <p className="text-secondary font-semibold mb-4">Thabo Mthembu</p>
-                <p className="text-text-muted leading-relaxed">
+                <h3 className="text-xl sm:text-2xl font-black text-foreground mb-2">Co-Founder & CTO</h3>
+                <p className="text-secondary font-semibold mb-4 text-sm sm:text-base">Thabo Mthembu</p>
+                <p className="text-text-muted leading-relaxed text-sm sm:text-base">
                   AI expert and software architect specializing in machine learning applications. PhD in Computer Science with focus on natural language processing.
                 </p>
               </div>
@@ -169,9 +169,11 @@ export default function About() {
             </p>
             <div className="bg-surface-light backdrop-blur-sm rounded-3xl shadow-premium p-12 border border-border/50 max-w-2xl mx-auto">
               <div className="flex items-center justify-center mb-6">
-                <div className="w-24 h-24 bg-red-600 rounded-2xl flex items-center justify-center">
-                  <span className="text-white font-black text-2xl">V</span>
-                </div>
+                <img
+                  src="/png-clipart-vodafone-australia-business-vodafone-new-zealand-logo-business-text-people (1).png"
+                  alt="Vodacom Logo"
+                  className="w-24 h-24 object-contain"
+                />
               </div>
               <h3 className="text-2xl font-black text-foreground mb-4">Vodacom Partnership</h3>
               <p className="text-text-muted leading-relaxed mb-6">

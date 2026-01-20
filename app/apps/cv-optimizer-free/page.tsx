@@ -375,9 +375,9 @@ export default function CVOptimizerFreePage() {
           </div>
 
           {/* CV Mockup Slideshow */}
-          <div className="max-w-5xl mx-auto mb-16">
-            <div className="relative overflow-hidden rounded-3xl bg-gradient-elegant border border-border/50 shadow-premium">
-              <div className="aspect-[3/4] relative bg-gradient-to-br from-surface to-surface-light rounded-2xl overflow-hidden">
+          <div className="max-w-5xl mx-auto mb-16 px-4 sm:px-0">
+            <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-elegant border border-border/50 shadow-premium">
+              <div className="aspect-[3/4] relative bg-gradient-to-br from-surface to-surface-light rounded-xl sm:rounded-2xl overflow-hidden">
                 <img
                   src="/White Black Minimalist Professional Resume.png"
                   alt="White Black Minimalist CV Design"
@@ -454,7 +454,7 @@ export default function CVOptimizerFreePage() {
                           type="text"
                           value={cvData.personal.name}
                           onChange={(e) => updatePersonal('name', e.target.value)}
-                          className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted"
+                          className="w-full px-4 py-4 sm:py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted text-base"
                           placeholder="John Doe"
                         />
                       </div>
@@ -464,7 +464,7 @@ export default function CVOptimizerFreePage() {
                           type="email"
                           value={cvData.personal.email}
                           onChange={(e) => updatePersonal('email', e.target.value)}
-                          className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted"
+                          className="w-full px-4 py-4 sm:py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted text-base"
                           placeholder="john@example.com"
                         />
                       </div>
@@ -518,7 +518,7 @@ export default function CVOptimizerFreePage() {
                       value={cvData.summary}
                       onChange={(e) => setCvData(prev => ({ ...prev, summary: e.target.value }))}
                       rows={4}
-                      className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted resize-none"
+                      className="w-full px-4 py-4 sm:py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted resize-none text-base"
                       placeholder="Write a compelling professional summary highlighting your key strengths and career goals..."
                     />
                   </div>
@@ -771,7 +771,7 @@ export default function CVOptimizerFreePage() {
                   <div className="flex gap-4">
                     <button
                       onClick={handlePreview}
-                      className="flex-1 bg-gradient-primary text-background font-semibold py-4 px-6 rounded-xl hover:shadow-glow hover:scale-105 transition-all duration-200 shadow-premium"
+                      className="flex-1 bg-gradient-primary text-background font-semibold py-5 sm:py-4 px-6 rounded-xl hover:shadow-glow hover:scale-105 transition-all duration-200 shadow-premium text-base sm:text-sm"
                     >
                       Preview CV
                     </button>

@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -117,13 +118,57 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </svg>
               </a>
               {/* Mobile menu button */}
-              <button className="md:hidden p-3 rounded-2xl bg-surface-light border border-border/50 hover:border-accent/50 transition-all duration-300 hover:shadow-premium">
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="md:hidden p-3 rounded-2xl bg-surface-light border border-border/50 hover:border-accent/50 transition-all duration-300 hover:shadow-premium"
+              >
                 <svg className="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
                 </svg>
               </button>
             </div>
           </div>
+
+          {/* Mobile Menu */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden border-t border-border/50 bg-surface-light/95 backdrop-blur-xl">
+              <div className="px-6 py-6 space-y-4">
+                <Link
+                  href="/"
+                  className="block text-text-muted hover:text-accent transition-all duration-300 font-medium text-lg py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Home
+                </Link>
+                <Link
+                  href="/about"
+                  className="block text-text-muted hover:text-accent transition-all duration-300 font-medium text-lg py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  About
+                </Link>
+                <Link
+                  href="/pricing"
+                  className="block text-text-muted hover:text-accent transition-all duration-300 font-medium text-lg py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Pricing
+                </Link>
+                <div className="pt-4 border-t border-border/50">
+                  <a
+                    href="/pricing"
+                    className="inline-flex items-center gap-3 bg-gradient-primary text-background font-bold py-3 px-6 rounded-2xl hover:shadow-glow transition-all duration-300 w-full justify-center"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Get Started
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </header>
       <main className="flex-grow">{children}</main>

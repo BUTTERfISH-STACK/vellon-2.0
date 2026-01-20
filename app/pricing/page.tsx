@@ -61,7 +61,7 @@ export default function Pricing() {
 
               <a
                 href="https://velloncareers.co.za/apps/cv-optimizer-free"
-                className="inline-block bg-surface-light text-foreground font-semibold py-3 px-6 rounded-2xl border border-border hover:bg-surface hover:shadow-md transition-all duration-200 w-full text-center"
+                className="inline-block bg-surface-light text-foreground font-semibold py-4 sm:py-3 px-6 rounded-2xl border border-border hover:bg-surface hover:shadow-md transition-all duration-200 w-full text-center text-base sm:text-sm"
               >
                 Get Started Free
               </a>
