@@ -117,6 +117,85 @@ export default function About() {
         </section>
 
         <section className="py-24 sm:py-32 lg:py-40">
+          <div className="text-center mb-16 animate-fade-in-up">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black bg-gradient-primary bg-clip-text text-transparent mb-6 leading-tight">
+              Meet the Team
+            </h2>
+            <p className="text-xl sm:text-2xl text-text-muted font-light max-w-3xl mx-auto leading-relaxed">
+              The passionate individuals behind Vellon 2.0 who are dedicated to transforming careers across South Africa
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
+            <div className="text-center group animate-fade-in-up">
+              <div className="bg-surface-light backdrop-blur-sm rounded-3xl shadow-premium p-8 h-full hover:shadow-glow hover:scale-[1.02] transition-all duration-500 border border-border/50 hover:border-primary/30">
+                <img
+                  src="/WhatsApp Image 2025-10-19 at 07.47.06_09d44daa.jpg"
+                  alt="Founder & CEO"
+                  className="w-32 h-32 rounded-full mx-auto mb-6 object-cover border-4 border-primary/20"
+                />
+                <h3 className="text-2xl font-black text-foreground mb-2">Founder & CEO</h3>
+                <p className="text-primary font-semibold mb-4">Rean van der Merwe</p>
+                <p className="text-text-muted leading-relaxed">
+                  Visionary leader with a passion for leveraging AI to democratize career opportunities. Former tech entrepreneur with 10+ years in the industry.
+                </p>
+              </div>
+            </div>
+
+            <div className="text-center group animate-fade-in-up">
+              <div className="bg-surface-light backdrop-blur-sm rounded-3xl shadow-premium p-8 h-full hover:shadow-glow hover:scale-[1.02] transition-all duration-500 border border-border/50 hover:border-primary/30">
+                <img
+                  src="/WhatsApp Image 2026-01-11 at 8.41.37 PM.jpeg"
+                  alt="Co-Founder & CTO"
+                  className="w-32 h-32 rounded-full mx-auto mb-6 object-cover border-4 border-secondary/20"
+                />
+                <h3 className="text-2xl font-black text-foreground mb-2">Co-Founder & CTO</h3>
+                <p className="text-secondary font-semibold mb-4">Thabo Mthembu</p>
+                <p className="text-text-muted leading-relaxed">
+                  AI expert and software architect specializing in machine learning applications. PhD in Computer Science with focus on natural language processing.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-24 sm:py-32 lg:py-40">
+          <div className="text-center animate-fade-in-up">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black bg-gradient-primary bg-clip-text text-transparent mb-8 leading-tight">
+              Proudly Sponsored by Vodacom
+            </h2>
+            <p className="text-xl sm:text-2xl text-text-muted mb-12 font-light max-w-4xl mx-auto leading-relaxed">
+              We're honored to partner with Vodacom, South Africa's leading telecommunications company, in our mission to connect talent with opportunity.
+            </p>
+            <div className="bg-surface-light backdrop-blur-sm rounded-3xl shadow-premium p-12 border border-border/50 max-w-2xl mx-auto">
+              <div className="flex items-center justify-center mb-6">
+                <div className="w-24 h-24 bg-red-600 rounded-2xl flex items-center justify-center">
+                  <span className="text-white font-black text-2xl">V</span>
+                </div>
+              </div>
+              <h3 className="text-2xl font-black text-foreground mb-4">Vodacom Partnership</h3>
+              <p className="text-text-muted leading-relaxed mb-6">
+                Through our partnership with Vodacom, we're able to provide cutting-edge career tools to South African professionals at no cost, helping bridge the digital divide and create equal opportunities for all.
+              </p>
+              <div className="flex items-center justify-center gap-4 text-sm text-text-muted">
+                <div className="flex items-center gap-2">
+                  <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+                  </svg>
+                  <span>Supporting Local Talent</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+                  </svg>
+                  <span>Empowering Communities</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-24 sm:py-32 lg:py-40">
           <div className="text-center animate-fade-in-up">
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black bg-gradient-primary bg-clip-text text-transparent mb-8 leading-tight">
               Ready to Transform Your CV?
