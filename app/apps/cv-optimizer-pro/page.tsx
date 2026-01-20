@@ -35,13 +35,11 @@ interface CVData {
   }>;
 }
 
-export default function CVOptimizerPage() {
+export default function CVOptimizerProPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [showUpgradeSuccess, setShowUpgradeSuccess] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const [isEditing, setIsEditing] = useState(true);
-  const [isPro, setIsPro] = useState(false);
   const [selectedBackground, setSelectedBackground] = useState<string | null>(null);
   const [cvData, setCvData] = useState<CVData>({
     personal: {
@@ -68,36 +66,11 @@ export default function CVOptimizerPage() {
     '/Blue Simple Professional CV Resume.png'
   ];
 
-
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    // Check if user is pro
-    const proStatus = localStorage.getItem('vellon_pro_status');
-    setIsPro(proStatus === 'active');
-
-    // Check for upgrade success query param
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('upgrade') === 'success') {
-      setShowUpgradeSuccess(true);
-      // Remove the query param from URL
-      const newUrl = window.location.pathname;
-      window.history.replaceState({}, '', newUrl);
-      // Hide success message after 5 seconds
-      setTimeout(() => setShowUpgradeSuccess(false), 5000);
-    }
-
-    // Redirect to appropriate page based on user tier
-    if (proStatus === 'active') {
-      window.location.href = '/apps/cv-optimizer-pro';
-    } else {
-      window.location.href = '/apps/cv-optimizer-free';
-    }
   }, []);
 
   const updatePersonal = (field: keyof CVData['personal'], value: string) => {
@@ -115,12 +88,10 @@ export default function CVOptimizerPage() {
   };
 
   const addExperience = () => {
-    if (cvData.experience.length < 2) { // Free limit: 2 experiences
-      setCvData(prev => ({
-        ...prev,
-        experience: [...prev.experience, { position: '', company: '', startDate: '', endDate: '', description: '' }]
-      }));
-    }
+    setCvData(prev => ({
+      ...prev,
+      experience: [...prev.experience, { position: '', company: '', startDate: '', endDate: '', description: '' }]
+    }));
   };
 
   const removeExperience = (index: number) => {
@@ -138,12 +109,10 @@ export default function CVOptimizerPage() {
   };
 
   const addEducation = () => {
-    if (cvData.education.length < 1) { // Free limit: 1 education
-      setCvData(prev => ({
-        ...prev,
-        education: [...prev.education, { degree: '', institution: '', startDate: '', endDate: '', gpa: '' }]
-      }));
-    }
+    setCvData(prev => ({
+      ...prev,
+      education: [...prev.education, { degree: '', institution: '', startDate: '', endDate: '', gpa: '' }]
+    }));
   };
 
   const removeEducation = (index: number) => {
@@ -161,12 +130,10 @@ export default function CVOptimizerPage() {
   };
 
   const addSkill = () => {
-    if (cvData.skills.length < 5) { // Free limit: 5 skills
-      setCvData(prev => ({
-        ...prev,
-        skills: [...prev.skills, '']
-      }));
-    }
+    setCvData(prev => ({
+      ...prev,
+      skills: [...prev.skills, '']
+    }));
   };
 
   const removeSkill = (index: number) => {
@@ -184,12 +151,10 @@ export default function CVOptimizerPage() {
   };
 
   const addCertification = () => {
-    if (cvData.certifications.length < 2) { // Free limit: 2 certifications
-      setCvData(prev => ({
-        ...prev,
-        certifications: [...prev.certifications, { name: '', issuer: '', date: '' }]
-      }));
-    }
+    setCvData(prev => ({
+      ...prev,
+      certifications: [...prev.certifications, { name: '', issuer: '', date: '' }]
+    }));
   };
 
   const removeCertification = (index: number) => {
@@ -205,7 +170,7 @@ export default function CVOptimizerPage() {
     const doc = new jsPDF();
     let yPosition = 20;
 
-    // Add background for both free and pro users
+    // Add background for pro users
     if (selectedBackground) {
       try {
         const img = new Image();
@@ -219,7 +184,7 @@ export default function CVOptimizerPage() {
       }
     }
 
-    // Free version styling
+    // Pro version styling
     doc.setFontSize(20);
     doc.setFont('helvetica', 'bold');
     doc.text(cvData.personal.name || 'Your Name', 20, yPosition);
@@ -266,14 +231,14 @@ export default function CVOptimizerPage() {
       yPosition += summaryLines.length * 5 + 10;
     }
 
-    // Experience (limited to 2 entries for free)
+    // Experience (unlimited for pro)
     if (cvData.experience.some(exp => exp.position || exp.company)) {
       doc.setFontSize(14);
       doc.setFont('helvetica', 'bold');
       doc.text('EXPERIENCE', 20, yPosition);
       yPosition += 8;
 
-      cvData.experience.slice(0, 2).forEach(exp => {
+      cvData.experience.forEach(exp => {
         if (exp.position || exp.company) {
           doc.setFontSize(12);
           doc.setFont('helvetica', 'bold');
@@ -299,14 +264,14 @@ export default function CVOptimizerPage() {
       yPosition += 5;
     }
 
-    // Education (limited to 1 entry for free)
+    // Education (unlimited for pro)
     if (cvData.education.some(edu => edu.degree || edu.institution)) {
       doc.setFontSize(14);
       doc.setFont('helvetica', 'bold');
       doc.text('EDUCATION', 20, yPosition);
       yPosition += 8;
 
-      cvData.education.slice(0, 1).forEach(edu => {
+      cvData.education.forEach(edu => {
         if (edu.degree || edu.institution) {
           doc.setFontSize(12);
           doc.setFont('helvetica', 'bold');
@@ -329,7 +294,7 @@ export default function CVOptimizerPage() {
       yPosition += 5;
     }
 
-    // Skills (limited to 5 for free)
+    // Skills (unlimited for pro)
     if (cvData.skills.some(skill => skill.trim())) {
       doc.setFontSize(14);
       doc.setFont('helvetica', 'bold');
@@ -338,20 +303,20 @@ export default function CVOptimizerPage() {
       doc.setFontSize(10);
       doc.setFont('helvetica', 'normal');
       doc.setTextColor(0, 0, 0);
-      const skillsText = cvData.skills.filter(skill => skill.trim()).slice(0, 5).join(', ');
+      const skillsText = cvData.skills.filter(skill => skill.trim()).join(', ');
       const skillsLines = doc.splitTextToSize(skillsText, 170);
       doc.text(skillsLines, 20, yPosition);
       yPosition += skillsLines.length * 5 + 10;
     }
 
-    // Certifications (limited to 2 for free)
+    // Certifications (unlimited for pro)
     if (cvData.certifications.some(cert => cert.name || cert.issuer)) {
       doc.setFontSize(14);
       doc.setFont('helvetica', 'bold');
       doc.text('CERTIFICATIONS', 20, yPosition);
       yPosition += 8;
 
-      cvData.certifications.slice(0, 2).forEach(cert => {
+      cvData.certifications.forEach(cert => {
         if (cert.name || cert.issuer) {
           doc.setFontSize(10);
           doc.setFont('helvetica', 'normal');
@@ -364,19 +329,7 @@ export default function CVOptimizerPage() {
       yPosition += 10;
     }
 
-    // Watermark for free version only
-    if (!isPro) {
-      try {
-        // Use a simple text watermark instead of image to avoid loading issues
-        doc.setFontSize(8);
-        doc.setTextColor(150, 150, 150);
-        doc.text('Generated by Vellon 2.0 CV Optimizer - Free Version', 20, yPosition);
-        yPosition += 5;
-        doc.text('Upgrade to Pro for advanced features and remove watermark', 20, yPosition);
-      } catch (error) {
-        console.warn('Failed to add watermark:', error);
-      }
-    }
+    // No watermark for pro version
 
     const filename = 'professional-cv.pdf';
     doc.save(filename);
@@ -393,32 +346,8 @@ export default function CVOptimizerPage() {
     setShowPreview(false);
   };
 
-
   return (
     <div className="min-h-screen">
-      {/* Upgrade Success Message */}
-      {showUpgradeSuccess && (
-        <div className="fixed top-4 right-4 z-50 bg-green-500 text-white px-6 py-4 rounded-xl shadow-lg animate-fade-in-up">
-          <div className="flex items-center">
-            <svg className="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-            </svg>
-            <div>
-              <p className="font-semibold">Pro Upgrade Successful! 🎉</p>
-              <p className="text-sm text-green-100">Your premium features are now unlocked.</p>
-            </div>
-            <button
-              onClick={() => setShowUpgradeSuccess(false)}
-              className="ml-4 text-green-200 hover:text-white"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      )}
-
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         <section className="text-center py-24 sm:py-40 animate-fade-in-up">
           <div className="inline-block p-2 bg-gradient-primary/20 rounded-full mb-8 shadow-premium">
@@ -481,59 +410,46 @@ export default function CVOptimizerPage() {
               {isEditing ? (
                 <div className="space-y-8">
                   {/* Background Selection - Pro Only */}
-                  {isPro ? (
-                    <div>
-                      <h3 className="text-lg font-semibold text-foreground mb-4">CV Background (Pro Feature)</h3>
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {proBackgrounds.map((bg, index) => (
-                          <button
-                            key={index}
-                            onClick={() => setSelectedBackground(bg)}
-                            className={`relative rounded-xl overflow-hidden border-2 transition-all duration-200 ${
-                              selectedBackground === bg ? 'border-accent shadow-glow' : 'border-border hover:border-accent/70'
-                            }`}
-                          >
-                            <img
-                              src={bg}
-                              alt={`Background ${index + 1}`}
-                              className="w-full h-20 object-cover"
-                            />
-                            {selectedBackground === bg && (
-                              <div className="absolute inset-0 bg-accent/20 flex items-center justify-center">
-                                <svg className="w-6 h-6 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                </svg>
-                              </div>
-                            )}
-                          </button>
-                        ))}
+                  <div>
+                    <h3 className="text-lg font-semibold text-foreground mb-4">CV Background (Pro Feature)</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                      {proBackgrounds.map((bg, index) => (
                         <button
-                          onClick={() => setSelectedBackground(null)}
-                          className={`rounded-xl p-4 border-2 transition-all duration-200 ${
-                            selectedBackground === null ? 'border-accent shadow-glow' : 'border-border hover:border-accent/70'
+                          key={index}
+                          onClick={() => setSelectedBackground(bg)}
+                          className={`relative rounded-xl overflow-hidden border-2 transition-all duration-200 ${
+                            selectedBackground === bg ? 'border-accent shadow-glow' : 'border-border hover:border-accent/70'
                           }`}
                         >
-                          <div className="text-center">
-                            <svg className="w-8 h-8 mx-auto text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                            </svg>
-                            <span className="block text-sm mt-2 font-medium text-foreground">No Background</span>
-                          </div>
+                          <img
+                            src={bg}
+                            alt={`Background ${index + 1}`}
+                            className="w-full h-20 object-cover"
+                          />
+                          {selectedBackground === bg && (
+                            <div className="absolute inset-0 bg-accent/20 flex items-center justify-center">
+                              <svg className="w-6 h-6 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                          )}
                         </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="bg-surface rounded-xl p-6 border border-border/50">
-                      <h3 className="text-lg font-semibold text-foreground mb-2">CV Background (Pro Feature)</h3>
-                      <p className="text-text-muted mb-4">This feature is available in the Pro tier only. Upgrade to unlock premium backgrounds and enhance your CV.</p>
+                      ))}
                       <button
-                        onClick={() => window.location.href = '/pricing'}
-                        className="bg-gradient-primary text-background px-6 py-3 rounded-lg font-medium hover:shadow-glow transition-all duration-200"
+                        onClick={() => setSelectedBackground(null)}
+                        className={`rounded-xl p-4 border-2 transition-all duration-200 ${
+                          selectedBackground === null ? 'border-accent shadow-glow' : 'border-border hover:border-accent/70'
+                        }`}
                       >
-                        Upgrade to Pro
+                        <div className="text-center">
+                          <svg className="w-8 h-8 mx-auto text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                          </svg>
+                          <span className="block text-sm mt-2 font-medium text-foreground">No Background</span>
+                        </div>
                       </button>
                     </div>
-                  )}
+                  </div>
 
                   {/* Personal Information */}
                   <div>
@@ -617,15 +533,13 @@ export default function CVOptimizerPage() {
                   {/* Experience */}
                   <div>
                     <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-lg font-semibold text-foreground">Work Experience ({cvData.experience.length}/2)</h3>
-                      {cvData.experience.length < 2 && (
-                        <button
-                          onClick={addExperience}
-                          className="bg-gradient-primary text-background px-4 py-2 rounded-lg text-sm font-medium hover:shadow-glow transition-all duration-200"
-                        >
-                          + Add Experience
-                        </button>
-                      )}
+                      <h3 className="text-lg font-semibold text-foreground">Work Experience (Unlimited)</h3>
+                      <button
+                        onClick={addExperience}
+                        className="bg-gradient-primary text-background px-4 py-2 rounded-lg text-sm font-medium hover:shadow-glow transition-all duration-200"
+                      >
+                        + Add Experience
+                      </button>
                     </div>
                     {cvData.experience.map((exp, index) => (
                       <div key={index} className="mb-6 p-4 bg-surface rounded-xl border border-border/50">
@@ -696,15 +610,13 @@ export default function CVOptimizerPage() {
                   {/* Education */}
                   <div>
                     <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-lg font-semibold text-foreground">Education ({cvData.education.length}/1)</h3>
-                      {cvData.education.length < 1 && (
-                        <button
-                          onClick={addEducation}
-                          className="bg-gradient-primary text-background px-4 py-2 rounded-lg text-sm font-medium hover:shadow-glow transition-all duration-200"
-                        >
-                          + Add Education
-                        </button>
-                      )}
+                      <h3 className="text-lg font-semibold text-foreground">Education (Unlimited)</h3>
+                      <button
+                        onClick={addEducation}
+                        className="bg-gradient-primary text-background px-4 py-2 rounded-lg text-sm font-medium hover:shadow-glow transition-all duration-200"
+                      >
+                        + Add Education
+                      </button>
                     </div>
                     {cvData.education.map((edu, index) => (
                       <div key={index} className="mb-6 p-4 bg-surface rounded-xl border border-border/50">
@@ -767,15 +679,13 @@ export default function CVOptimizerPage() {
                   {/* Skills */}
                   <div>
                     <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-lg font-semibold text-foreground">Skills ({cvData.skills.filter(s => s.trim()).length}/5)</h3>
-                      {cvData.skills.length < 5 && (
-                        <button
-                          onClick={addSkill}
-                          className="bg-gradient-primary text-background px-4 py-2 rounded-lg text-sm font-medium hover:shadow-glow transition-all duration-200"
-                        >
-                          + Add Skill
-                        </button>
-                      )}
+                      <h3 className="text-lg font-semibold text-foreground">Skills (Unlimited)</h3>
+                      <button
+                        onClick={addSkill}
+                        className="bg-gradient-primary text-background px-4 py-2 rounded-lg text-sm font-medium hover:shadow-glow transition-all duration-200"
+                      >
+                        + Add Skill
+                      </button>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {cvData.skills.map((skill, index) => (
@@ -803,15 +713,13 @@ export default function CVOptimizerPage() {
                   {/* Certifications */}
                   <div>
                     <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-lg font-semibold text-foreground">Certifications ({cvData.certifications.filter(c => c.name.trim()).length}/2)</h3>
-                      {cvData.certifications.length < 2 && (
-                        <button
-                          onClick={addCertification}
-                          className="bg-gradient-primary text-background px-4 py-2 rounded-lg text-sm font-medium hover:shadow-glow transition-all duration-200"
-                        >
-                          + Add Certification
-                        </button>
-                      )}
+                      <h3 className="text-lg font-semibold text-foreground">Certifications (Unlimited)</h3>
+                      <button
+                        onClick={addCertification}
+                        className="bg-gradient-primary text-background px-4 py-2 rounded-lg text-sm font-medium hover:shadow-glow transition-all duration-200"
+                      >
+                        + Add Certification
+                      </button>
                     </div>
                     {cvData.certifications.map((cert, index) => (
                       <div key={index} className="mb-4 p-4 bg-surface rounded-xl border border-border/50">
@@ -1002,19 +910,7 @@ export default function CVOptimizerPage() {
                       </div>
                     )}
 
-                    {/* Watermark for free version only */}
-                    {!isPro && (
-                      <div className="mt-8 pt-4 border-t border-border/50 text-center">
-                        <div className="inline-block bg-accent/10 px-4 py-2 rounded-lg border border-accent/20">
-                          <p className="text-xs text-accent font-medium">
-                            Generated by Vellon 2.0 CV Optimizer - Free Version
-                          </p>
-                          <p className="text-xs text-text-muted/60 mt-1">
-                            Upgrade to Pro to remove watermark and unlock unlimited features
-                          </p>
-                        </div>
-                      </div>
-                    )}
+                    {/* No watermark for pro version */}
                   </div>
                 </div>
               )}
