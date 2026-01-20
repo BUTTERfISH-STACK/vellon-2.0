@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-surface via-surface-light to-surface">
       <header className="bg-gradient-elegant border-b border-border/30 sticky top-0 z-50 backdrop-blur-xl bg-opacity-95">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="flex justify-between items-center py-8">
