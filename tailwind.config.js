@@ -7,14 +7,20 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        accent: 'var(--accent)',
-        surface: 'var(--surface)',
-        'surface-light': 'var(--surface-light)',
-        'text-muted': 'var(--text-muted)',
-        border: 'var(--border)',
+        background: 'var(--color-background)',
+        foreground: 'var(--color-foreground)',
+        accent: 'var(--color-accent)',
+        surface: 'var(--color-surface)',
+        'surface-light': 'var(--color-surface-light)',
+        'text-muted': 'var(--color-text-muted)',
+        border: 'var(--color-border)',
+        primary: '#d4af37',
+        secondary: '#f4e87c',
       },
       boxShadow: {
         'shadow': 'var(--shadow)',
+        'glow': 'var(--shadow-glow)',
+        'premium': 'var(--shadow-premium)',
       },
       animation: {
         'fade-in-up': 'fadeInUp 0.6s ease-out',

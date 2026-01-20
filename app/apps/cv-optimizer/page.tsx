@@ -1,18 +1,61 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import jsPDF from 'jspdf';
 
+interface CVData {
+  personal: {
+    name: string;
+    email: string;
+    phone: string;
+    address: string;
+    linkedin: string;
+    website: string;
+  };
+  summary: string;
+  experience: Array<{
+    position: string;
+    company: string;
+    startDate: string;
+    endDate: string;
+    description: string;
+  }>;
+  education: Array<{
+    degree: string;
+    institution: string;
+    startDate: string;
+    endDate: string;
+    gpa: string;
+  }>;
+  skills: string[];
+  certifications: Array<{
+    name: string;
+    issuer: string;
+    date: string;
+  }>;
+}
 
 export default function CVOptimizerPage() {
-  const [isPro, setIsPro] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const status = localStorage.getItem('vellon_pro_status');
-      return status === 'true';
-    }
-    return false;
-  });
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showUpgradeSuccess, setShowUpgradeSuccess] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
+  const [isEditing, setIsEditing] = useState(true);
+  const [cvData, setCvData] = useState<CVData>({
+    personal: {
+      name: '',
+      email: '',
+      phone: '',
+      address: '',
+      linkedin: '',
+      website: ''
+    },
+    summary: '',
+    experience: [{ position: '', company: '', startDate: '', endDate: '', description: '' }],
+    education: [{ degree: '', institution: '', startDate: '', endDate: '', gpa: '' }],
+    skills: [''],
+    certifications: [{ name: '', issuer: '', date: '' }]
+  });
 
   const slides = ['creative', 'modern'] as const;
 
@@ -28,7 +71,6 @@ export default function CVOptimizerPage() {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('upgrade') === 'success') {
       setShowUpgradeSuccess(true);
-      setIsPro(true);
       // Remove the query param from URL
       const newUrl = window.location.pathname;
       window.history.replaceState({}, '', newUrl);
@@ -36,6 +78,283 @@ export default function CVOptimizerPage() {
       setTimeout(() => setShowUpgradeSuccess(false), 5000);
     }
   }, []);
+
+  const updatePersonal = (field: keyof CVData['personal'], value: string) => {
+    setCvData(prev => ({
+      ...prev,
+      personal: { ...prev.personal, [field]: value }
+    }));
+  };
+
+  const updateExperience = (index: number, field: keyof CVData['experience'][0], value: string) => {
+    setCvData(prev => ({
+      ...prev,
+      experience: prev.experience.map((exp, i) => i === index ? { ...exp, [field]: value } : exp)
+    }));
+  };
+
+  const addExperience = () => {
+    if (cvData.experience.length < 2) { // Free limit: 2 experiences
+      setCvData(prev => ({
+        ...prev,
+        experience: [...prev.experience, { position: '', company: '', startDate: '', endDate: '', description: '' }]
+      }));
+    }
+  };
+
+  const removeExperience = (index: number) => {
+    setCvData(prev => ({
+      ...prev,
+      experience: prev.experience.filter((_, i) => i !== index)
+    }));
+  };
+
+  const updateEducation = (index: number, field: keyof CVData['education'][0], value: string) => {
+    setCvData(prev => ({
+      ...prev,
+      education: prev.education.map((edu, i) => i === index ? { ...edu, [field]: value } : edu)
+    }));
+  };
+
+  const addEducation = () => {
+    if (cvData.education.length < 1) { // Free limit: 1 education
+      setCvData(prev => ({
+        ...prev,
+        education: [...prev.education, { degree: '', institution: '', startDate: '', endDate: '', gpa: '' }]
+      }));
+    }
+  };
+
+  const removeEducation = (index: number) => {
+    setCvData(prev => ({
+      ...prev,
+      education: prev.education.filter((_, i) => i !== index)
+    }));
+  };
+
+  const updateSkill = (index: number, value: string) => {
+    setCvData(prev => ({
+      ...prev,
+      skills: prev.skills.map((skill, i) => i === index ? value : skill)
+    }));
+  };
+
+  const addSkill = () => {
+    if (cvData.skills.length < 5) { // Free limit: 5 skills
+      setCvData(prev => ({
+        ...prev,
+        skills: [...prev.skills, '']
+      }));
+    }
+  };
+
+  const removeSkill = (index: number) => {
+    setCvData(prev => ({
+      ...prev,
+      skills: prev.skills.filter((_, i) => i !== index)
+    }));
+  };
+
+  const updateCertification = (index: number, field: keyof CVData['certifications'][0], value: string) => {
+    setCvData(prev => ({
+      ...prev,
+      certifications: prev.certifications.map((cert, i) => i === index ? { ...cert, [field]: value } : cert)
+    }));
+  };
+
+  const addCertification = () => {
+    if (cvData.certifications.length < 2) { // Free limit: 2 certifications
+      setCvData(prev => ({
+        ...prev,
+        certifications: [...prev.certifications, { name: '', issuer: '', date: '' }]
+      }));
+    }
+  };
+
+  const removeCertification = (index: number) => {
+    setCvData(prev => ({
+      ...prev,
+      certifications: prev.certifications.filter((_, i) => i !== index)
+    }));
+  };
+
+  const generatePDF = async () => {
+    setIsGenerating(true);
+
+    const doc = new jsPDF();
+    let yPosition = 20;
+
+    // Free version styling
+    doc.setFontSize(20);
+    doc.setFont('helvetica', 'bold');
+    doc.text(cvData.personal.name || 'Your Name', 20, yPosition);
+    yPosition += 10;
+
+    // Contact Info
+    doc.setFontSize(10);
+    doc.setTextColor(0, 0, 0);
+    doc.setFont('helvetica', 'normal');
+    if (cvData.personal.email) {
+      doc.text(`Email: ${cvData.personal.email}`, 20, yPosition);
+      yPosition += 6;
+    }
+    if (cvData.personal.phone) {
+      doc.text(`Phone: ${cvData.personal.phone}`, 20, yPosition);
+      yPosition += 6;
+    }
+    if (cvData.personal.address) {
+      doc.text(`Address: ${cvData.personal.address}`, 20, yPosition);
+      yPosition += 6;
+    }
+    if (cvData.personal.linkedin) {
+      doc.text(`LinkedIn: ${cvData.personal.linkedin}`, 20, yPosition);
+      yPosition += 6;
+    }
+    if (cvData.personal.website) {
+      doc.text(`Website: ${cvData.personal.website}`, 20, yPosition);
+      yPosition += 6;
+    }
+
+    yPosition += 10;
+
+    // Summary
+    if (cvData.summary) {
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.text('PROFESSIONAL SUMMARY', 20, yPosition);
+      yPosition += 8;
+      doc.setFontSize(10);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(0, 0, 0);
+      const summaryLines = doc.splitTextToSize(cvData.summary, 170);
+      doc.text(summaryLines, 20, yPosition);
+      yPosition += summaryLines.length * 5 + 10;
+    }
+
+    // Experience (limited to 2 entries for free)
+    if (cvData.experience.some(exp => exp.position || exp.company)) {
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.text('EXPERIENCE', 20, yPosition);
+      yPosition += 8;
+
+      cvData.experience.slice(0, 2).forEach(exp => {
+        if (exp.position || exp.company) {
+          doc.setFontSize(12);
+          doc.setFont('helvetica', 'bold');
+          doc.setTextColor(0, 0, 0);
+          doc.text(exp.position, 20, yPosition);
+          yPosition += 6;
+          doc.setFontSize(10);
+          doc.setFont('helvetica', 'italic');
+          const companyText = exp.company + (exp.startDate || exp.endDate ? ` | ${exp.startDate} - ${exp.endDate}` : '');
+          doc.text(companyText, 20, yPosition);
+          yPosition += 6;
+          if (exp.description) {
+            doc.setFont('helvetica', 'normal');
+            const descLines = doc.splitTextToSize(exp.description, 160);
+            descLines.forEach((line: string) => {
+              doc.text('• ' + line, 25, yPosition);
+              yPosition += 5;
+            });
+          }
+          yPosition += 5;
+        }
+      });
+      yPosition += 5;
+    }
+
+    // Education (limited to 1 entry for free)
+    if (cvData.education.some(edu => edu.degree || edu.institution)) {
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.text('EDUCATION', 20, yPosition);
+      yPosition += 8;
+
+      cvData.education.slice(0, 1).forEach(edu => {
+        if (edu.degree || edu.institution) {
+          doc.setFontSize(12);
+          doc.setFont('helvetica', 'bold');
+          doc.setTextColor(0, 0, 0);
+          doc.text(edu.degree, 20, yPosition);
+          yPosition += 6;
+          doc.setFontSize(10);
+          doc.setFont('helvetica', 'italic');
+          const eduText = edu.institution + (edu.startDate || edu.endDate ? ` | ${edu.startDate} - ${edu.endDate}` : '');
+          doc.text(eduText, 20, yPosition);
+          yPosition += 6;
+          if (edu.gpa) {
+            doc.setFont('helvetica', 'normal');
+            doc.text(`GPA: ${edu.gpa}`, 20, yPosition);
+            yPosition += 5;
+          }
+          yPosition += 5;
+        }
+      });
+      yPosition += 5;
+    }
+
+    // Skills (limited to 5 for free)
+    if (cvData.skills.some(skill => skill.trim())) {
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.text('SKILLS', 20, yPosition);
+      yPosition += 8;
+      doc.setFontSize(10);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(0, 0, 0);
+      const skillsText = cvData.skills.filter(skill => skill.trim()).slice(0, 5).join(', ');
+      const skillsLines = doc.splitTextToSize(skillsText, 170);
+      doc.text(skillsLines, 20, yPosition);
+      yPosition += skillsLines.length * 5 + 10;
+    }
+
+    // Certifications (limited to 2 for free)
+    if (cvData.certifications.some(cert => cert.name || cert.issuer)) {
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.text('CERTIFICATIONS', 20, yPosition);
+      yPosition += 8;
+
+      cvData.certifications.slice(0, 2).forEach(cert => {
+        if (cert.name || cert.issuer) {
+          doc.setFontSize(10);
+          doc.setFont('helvetica', 'normal');
+          doc.setTextColor(0, 0, 0);
+          const certText = cert.name + (cert.issuer ? ` - ${cert.issuer}` : '') + (cert.date ? ` (${cert.date})` : '');
+          doc.text('• ' + certText, 20, yPosition);
+          yPosition += 6;
+        }
+      });
+      yPosition += 10;
+    }
+
+    // Watermark for free version
+    try {
+      // Use a simple text watermark instead of image to avoid loading issues
+      doc.setFontSize(8);
+      doc.setTextColor(150, 150, 150);
+      doc.text('Generated by Vellon 2.0 CV Optimizer - Free Version', 20, yPosition);
+      yPosition += 5;
+      doc.text('Upgrade to Pro for advanced features and remove watermark', 20, yPosition);
+    } catch (error) {
+      console.warn('Failed to add watermark:', error);
+    }
+
+    const filename = 'professional-cv.pdf';
+    doc.save(filename);
+    setIsGenerating(false);
+  };
+
+  const handlePreview = () => {
+    setShowPreview(true);
+    setIsEditing(false);
+  };
+
+  const handleEdit = () => {
+    setIsEditing(true);
+    setShowPreview(false);
+  };
 
 
   return (
@@ -112,114 +431,551 @@ export default function CVOptimizerPage() {
         </section>
 
         <section className="py-16 sm:py-24">
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-gradient-elegant backdrop-blur-sm rounded-3xl shadow-premium p-12 border border-border/30">
-              <div className="mb-8">
-                <div className="bg-gradient-to-br from-rose-500 via-pink-500 to-purple-600 p-10 rounded-3xl text-white shadow-2xl relative overflow-hidden">
+          <div className="max-w-6xl mx-auto">
+            <div className="bg-gradient-elegant backdrop-blur-sm rounded-3xl shadow-premium p-8 border border-border/30">
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-gradient-gold mb-4">Free CV Optimizer</h2>
+                <p className="text-text-muted text-lg">Create a professional CV with basic features. Upgrade to Pro for unlimited access.</p>
+                <div className="mt-4 p-4 bg-accent/10 rounded-xl border border-accent/20">
+                  <p className="text-accent font-medium">Free limits: 2 experiences, 1 education, 5 skills, 2 certifications, watermark included</p>
+                </div>
+              </div>
+
+              {isEditing ? (
+                <div className="space-y-8">
+                  {/* Personal Information */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-foreground mb-4">Personal Information</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-foreground mb-2">Full Name</label>
+                        <input
+                          type="text"
+                          value={cvData.personal.name}
+                          onChange={(e) => updatePersonal('name', e.target.value)}
+                          className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted"
+                          placeholder="John Doe"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-foreground mb-2">Email</label>
+                        <input
+                          type="email"
+                          value={cvData.personal.email}
+                          onChange={(e) => updatePersonal('email', e.target.value)}
+                          className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted"
+                          placeholder="john@example.com"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-foreground mb-2">Phone</label>
+                        <input
+                          type="tel"
+                          value={cvData.personal.phone}
+                          onChange={(e) => updatePersonal('phone', e.target.value)}
+                          className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted"
+                          placeholder="+1 (555) 123-4567"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-foreground mb-2">Address</label>
+                        <input
+                          type="text"
+                          value={cvData.personal.address}
+                          onChange={(e) => updatePersonal('address', e.target.value)}
+                          className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted"
+                          placeholder="City, State, Country"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-foreground mb-2">LinkedIn</label>
+                        <input
+                          type="url"
+                          value={cvData.personal.linkedin}
+                          onChange={(e) => updatePersonal('linkedin', e.target.value)}
+                          className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted"
+                          placeholder="https://linkedin.com/in/johndoe"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-foreground mb-2">Website</label>
+                        <input
+                          type="url"
+                          value={cvData.personal.website}
+                          onChange={(e) => updatePersonal('website', e.target.value)}
+                          className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted"
+                          placeholder="https://johndoe.com"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Professional Summary */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-foreground mb-4">Professional Summary</h3>
+                    <textarea
+                      value={cvData.summary}
+                      onChange={(e) => setCvData(prev => ({ ...prev, summary: e.target.value }))}
+                      rows={4}
+                      className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted resize-none"
+                      placeholder="Write a compelling professional summary highlighting your key strengths and career goals..."
+                    />
+                  </div>
+
+                  {/* Experience */}
+                  <div>
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-lg font-semibold text-foreground">Work Experience ({cvData.experience.length}/2)</h3>
+                      {cvData.experience.length < 2 && (
+                        <button
+                          onClick={addExperience}
+                          className="bg-gradient-primary text-background px-4 py-2 rounded-lg text-sm font-medium hover:shadow-glow transition-all duration-200"
+                        >
+                          + Add Experience
+                        </button>
+                      )}
+                    </div>
+                    {cvData.experience.map((exp, index) => (
+                      <div key={index} className="mb-6 p-4 bg-surface rounded-xl border border-border/50">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                          <div>
+                            <label className="block text-sm font-medium text-foreground mb-2">Position</label>
+                            <input
+                              type="text"
+                              value={exp.position}
+                              onChange={(e) => updateExperience(index, 'position', e.target.value)}
+                              className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted"
+                              placeholder="Software Developer"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-foreground mb-2">Company</label>
+                            <input
+                              type="text"
+                              value={exp.company}
+                              onChange={(e) => updateExperience(index, 'company', e.target.value)}
+                              className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted"
+                              placeholder="Tech Corp"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-foreground mb-2">Start Date</label>
+                            <input
+                              type="text"
+                              value={exp.startDate}
+                              onChange={(e) => updateExperience(index, 'startDate', e.target.value)}
+                              className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted"
+                              placeholder="Jan 2020"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-foreground mb-2">End Date</label>
+                            <input
+                              type="text"
+                              value={exp.endDate}
+                              onChange={(e) => updateExperience(index, 'endDate', e.target.value)}
+                              className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted"
+                              placeholder="Present"
+                            />
+                          </div>
+                        </div>
+                        <div className="mb-4">
+                          <label className="block text-sm font-medium text-foreground mb-2">Description</label>
+                          <textarea
+                            value={exp.description}
+                            onChange={(e) => updateExperience(index, 'description', e.target.value)}
+                            rows={3}
+                            className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted resize-none"
+                            placeholder="Describe your responsibilities and achievements..."
+                          />
+                        </div>
+                        {cvData.experience.length > 1 && (
+                          <button
+                            onClick={() => removeExperience(index)}
+                            className="text-red-500 text-sm hover:text-red-700 transition-colors"
+                          >
+                            Remove Experience
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Education */}
+                  <div>
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-lg font-semibold text-foreground">Education ({cvData.education.length}/1)</h3>
+                      {cvData.education.length < 1 && (
+                        <button
+                          onClick={addEducation}
+                          className="bg-gradient-primary text-background px-4 py-2 rounded-lg text-sm font-medium hover:shadow-glow transition-all duration-200"
+                        >
+                          + Add Education
+                        </button>
+                      )}
+                    </div>
+                    {cvData.education.map((edu, index) => (
+                      <div key={index} className="mb-6 p-4 bg-surface rounded-xl border border-border/50">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                          <div>
+                            <label className="block text-sm font-medium text-foreground mb-2">Degree</label>
+                            <input
+                              type="text"
+                              value={edu.degree}
+                              onChange={(e) => updateEducation(index, 'degree', e.target.value)}
+                              className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted"
+                              placeholder="Bachelor of Computer Science"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-foreground mb-2">Institution</label>
+                            <input
+                              type="text"
+                              value={edu.institution}
+                              onChange={(e) => updateEducation(index, 'institution', e.target.value)}
+                              className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted"
+                              placeholder="University of Technology"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-foreground mb-2">Start Date</label>
+                            <input
+                              type="text"
+                              value={edu.startDate}
+                              onChange={(e) => updateEducation(index, 'startDate', e.target.value)}
+                              className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted"
+                              placeholder="2016"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-foreground mb-2">End Date</label>
+                            <input
+                              type="text"
+                              value={edu.endDate}
+                              onChange={(e) => updateEducation(index, 'endDate', e.target.value)}
+                              className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted"
+                              placeholder="2020"
+                            />
+                          </div>
+                        </div>
+                        <div className="mb-4">
+                          <label className="block text-sm font-medium text-foreground mb-2">GPA (Optional)</label>
+                          <input
+                            type="text"
+                            value={edu.gpa}
+                            onChange={(e) => updateEducation(index, 'gpa', e.target.value)}
+                            className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted"
+                            placeholder="3.8/4.0"
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Skills */}
+                  <div>
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-lg font-semibold text-foreground">Skills ({cvData.skills.filter(s => s.trim()).length}/5)</h3>
+                      {cvData.skills.length < 5 && (
+                        <button
+                          onClick={addSkill}
+                          className="bg-gradient-primary text-background px-4 py-2 rounded-lg text-sm font-medium hover:shadow-glow transition-all duration-200"
+                        >
+                          + Add Skill
+                        </button>
+                      )}
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {cvData.skills.map((skill, index) => (
+                        <div key={index} className="flex gap-2">
+                          <input
+                            type="text"
+                            value={skill}
+                            onChange={(e) => updateSkill(index, e.target.value)}
+                            className="flex-1 px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted"
+                            placeholder="JavaScript"
+                          />
+                          {cvData.skills.length > 1 && (
+                            <button
+                              onClick={() => removeSkill(index)}
+                              className="text-red-500 px-3 py-3 hover:text-red-700 transition-colors"
+                            >
+                              ×
+                            </button>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Certifications */}
+                  <div>
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-lg font-semibold text-foreground">Certifications ({cvData.certifications.filter(c => c.name.trim()).length}/2)</h3>
+                      {cvData.certifications.length < 2 && (
+                        <button
+                          onClick={addCertification}
+                          className="bg-gradient-primary text-background px-4 py-2 rounded-lg text-sm font-medium hover:shadow-glow transition-all duration-200"
+                        >
+                          + Add Certification
+                        </button>
+                      )}
+                    </div>
+                    {cvData.certifications.map((cert, index) => (
+                      <div key={index} className="mb-4 p-4 bg-surface rounded-xl border border-border/50">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                          <div>
+                            <label className="block text-sm font-medium text-foreground mb-2">Certification Name</label>
+                            <input
+                              type="text"
+                              value={cert.name}
+                              onChange={(e) => updateCertification(index, 'name', e.target.value)}
+                              className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted"
+                              placeholder="AWS Certified Developer"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-foreground mb-2">Issuer</label>
+                            <input
+                              type="text"
+                              value={cert.issuer}
+                              onChange={(e) => updateCertification(index, 'issuer', e.target.value)}
+                              className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted"
+                              placeholder="Amazon Web Services"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-foreground mb-2">Date</label>
+                            <input
+                              type="text"
+                              value={cert.date}
+                              onChange={(e) => updateCertification(index, 'date', e.target.value)}
+                              className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200 text-foreground placeholder-text-muted"
+                              placeholder="2023"
+                            />
+                          </div>
+                        </div>
+                        {cvData.certifications.length > 1 && (
+                          <button
+                            onClick={() => removeCertification(index)}
+                            className="text-red-500 text-sm mt-2 hover:text-red-700 transition-colors"
+                          >
+                            Remove Certification
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex gap-4">
+                    <button
+                      onClick={handlePreview}
+                      className="flex-1 bg-gradient-primary text-background font-semibold py-4 px-6 rounded-xl hover:shadow-glow hover:scale-105 transition-all duration-200 shadow-premium"
+                    >
+                      Preview CV
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                /* Preview Mode */
+                <div className="space-y-6">
+                  <div className="flex justify-between items-center">
+                    <h3 className="text-xl font-semibold text-foreground">CV Preview</h3>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={handleEdit}
+                        className="bg-surface text-foreground px-4 py-2 rounded-lg text-sm font-medium border border-border hover:bg-surface-light transition-all duration-200"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={generatePDF}
+                        disabled={isGenerating}
+                        className="bg-gradient-primary text-background px-4 py-2 rounded-lg text-sm font-medium hover:shadow-glow transition-all duration-200 disabled:opacity-50"
+                      >
+                        {isGenerating ? 'Generating...' : 'Download PDF'}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="bg-surface rounded-xl p-8 border border-border/50 shadow-premium">
+                    {/* Header */}
+                    <div className="text-center mb-6 pb-4 border-b-2 border-accent">
+                      <h2 className="text-2xl font-bold text-foreground mb-2">{cvData.personal.name || 'Your Name'}</h2>
+                      <div className="text-sm text-text-muted space-y-1">
+                        {cvData.personal.email && <p>📧 {cvData.personal.email}</p>}
+                        {cvData.personal.phone && <p>📱 {cvData.personal.phone}</p>}
+                        {cvData.personal.address && <p>📍 {cvData.personal.address}</p>}
+                        {cvData.personal.linkedin && <p>💼 {cvData.personal.linkedin}</p>}
+                        {cvData.personal.website && <p>🌐 {cvData.personal.website}</p>}
+                      </div>
+                    </div>
+
+                    {/* Summary */}
+                    {cvData.summary && (
+                      <div className="mb-6">
+                        <h3 className="text-lg font-semibold text-accent mb-3 uppercase tracking-wide">Professional Summary</h3>
+                        <p className="text-text-muted leading-relaxed">{cvData.summary}</p>
+                      </div>
+                    )}
+
+                    {/* Experience */}
+                    {cvData.experience.some(exp => exp.position || exp.company) && (
+                      <div className="mb-6">
+                        <h3 className="text-lg font-semibold text-secondary mb-3 uppercase tracking-wide">Experience</h3>
+                        {cvData.experience.map((exp, index) => (
+                          exp.position || exp.company ? (
+                            <div key={index} className="mb-4">
+                              <div className="flex justify-between items-start mb-2">
+                                <h4 className="font-semibold text-foreground">{exp.position}</h4>
+                                <span className="text-sm text-text-muted">
+                                  {exp.startDate} - {exp.endDate}
+                                </span>
+                              </div>
+                              <p className="text-accent font-medium mb-2">{exp.company}</p>
+                              {exp.description && (
+                                <ul className="text-text-muted text-sm space-y-1">
+                                  {exp.description.split('\n').map((line, i) => (
+                                    line.trim() && <li key={i} className="flex items-start gap-2">
+                                      <span className="text-secondary mt-1">•</span>
+                                      <span>{line.trim()}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
+                            </div>
+                          ) : null
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Education */}
+                    {cvData.education.some(edu => edu.degree || edu.institution) && (
+                      <div className="mb-6">
+                        <h3 className="text-lg font-semibold text-accent mb-3 uppercase tracking-wide">Education</h3>
+                        {cvData.education.map((edu, index) => (
+                          edu.degree || edu.institution ? (
+                            <div key={index} className="mb-4">
+                              <div className="flex justify-between items-start mb-2">
+                                <h4 className="font-semibold text-foreground">{edu.degree}</h4>
+                                <span className="text-sm text-text-muted">
+                                  {edu.startDate} - {edu.endDate}
+                                </span>
+                              </div>
+                              <p className="text-primary font-medium mb-1">{edu.institution}</p>
+                              {edu.gpa && <p className="text-sm text-text-muted">GPA: {edu.gpa}</p>}
+                            </div>
+                          ) : null
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Skills */}
+                    {cvData.skills.some(skill => skill.trim()) && (
+                      <div className="mb-6">
+                        <h3 className="text-lg font-semibold text-primary mb-3 uppercase tracking-wide">Skills</h3>
+                        <div className="flex flex-wrap gap-2">
+                          {cvData.skills.filter(skill => skill.trim()).map((skill, index) => (
+                            <span key={index} className="bg-accent/10 text-accent px-3 py-1 rounded-full text-sm border border-accent/20">
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Certifications */}
+                    {cvData.certifications.some(cert => cert.name || cert.issuer) && (
+                      <div className="mb-6">
+                        <h3 className="text-lg font-semibold text-secondary mb-3 uppercase tracking-wide">Certifications</h3>
+                        {cvData.certifications.map((cert, index) => (
+                          cert.name || cert.issuer ? (
+                            <div key={index} className="mb-2">
+                              <span className="font-medium text-foreground">{cert.name}</span>
+                              {cert.issuer && <span className="text-text-muted"> - {cert.issuer}</span>}
+                              {cert.date && <span className="text-sm text-text-muted ml-2">({cert.date})</span>}
+                            </div>
+                          ) : null
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Watermark */}
+                    <div className="mt-8 pt-4 border-t border-border/50 text-center">
+                      <div className="inline-block bg-accent/10 px-4 py-2 rounded-lg border border-accent/20">
+                        <p className="text-xs text-accent font-medium">
+                          Generated by Vellon 2.0 CV Optimizer - Free Version
+                        </p>
+                        <p className="text-xs text-text-muted/60 mt-1">
+                          Upgrade to Pro to remove watermark and unlock unlimited features
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Pro Upgrade Section */}
+              <div className="mt-12 pt-8 border-t border-border/50">
+                <div className="bg-gradient-to-br from-rose-500 via-pink-500 to-purple-600 p-8 rounded-3xl text-white shadow-2xl relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 to-pink-400/20 animate-pulse"></div>
                   <div className="relative z-10">
-                    <div className="text-center mb-8">
-                      <h3 className="text-4xl font-bold mb-4 bg-gradient-to-r from-yellow-200 to-pink-200 bg-clip-text text-transparent">Professional Excellence</h3>
-                      <p className="text-pink-100 text-xl leading-relaxed">Transform your career with professional-grade CV tools</p>
+                    <div className="text-center mb-6">
+                      <h3 className="text-3xl font-bold mb-3 bg-gradient-to-r from-yellow-200 to-pink-200 bg-clip-text text-transparent">Ready for Unlimited Power?</h3>
+                      <p className="text-pink-100 text-lg">Unlock all features and remove limitations</p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10 text-sm">
-                      <div className="space-y-4">
-                        <div className="flex items-center gap-4 p-4 bg-white/15 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/25 transition-all duration-300 shadow-lg">
-                          <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-premium">
-                            <span className="text-2xl">🎨</span>
-                          </div>
-                          <div>
-                            <span className="font-bold text-lg text-yellow-200 block">Premium Templates</span>
-                            <span className="text-pink-100">Creative & Modern designs that stand out</span>
-                          </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8 text-sm">
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-3 p-3 bg-white/15 backdrop-blur-sm rounded-xl border border-white/20">
+                          <span className="text-yellow-200 text-xl">🎨</span>
+                          <span className="font-semibold">Unlimited Templates & Designs</span>
                         </div>
-                        <div className="flex items-center gap-4 p-4 bg-white/15 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/25 transition-all duration-300 shadow-lg">
-                          <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-premium">
-                            <span className="text-2xl">🎯</span>
-                          </div>
-                          <div>
-                            <span className="font-bold text-lg text-yellow-200 block">ATS Optimization</span>
-                            <span className="text-pink-100">95%+ pass rate with scoring analysis</span>
-                          </div>
+                        <div className="flex items-center gap-3 p-3 bg-white/15 backdrop-blur-sm rounded-xl border border-white/20">
+                          <span className="text-yellow-200 text-xl">🔄</span>
+                          <span className="font-semibold">Unlimited Exports</span>
                         </div>
-                        <div className="flex items-center gap-4 p-4 bg-white/15 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/25 transition-all duration-300 shadow-lg">
-                          <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-premium">
-                            <span className="text-2xl">📄</span>
-                          </div>
-                          <div>
-                            <span className="font-bold text-lg text-yellow-200 block">Cover Letter Generator</span>
-                            <span className="text-pink-100">AI-powered professional cover letters</span>
-                          </div>
+                        <div className="flex items-center gap-3 p-3 bg-white/15 backdrop-blur-sm rounded-xl border border-white/20">
+                          <span className="text-yellow-200 text-xl">📄</span>
+                          <span className="font-semibold">Cover Letter Generator</span>
                         </div>
-                        <div className="flex items-center gap-4 p-4 bg-white/15 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/25 transition-all duration-300 shadow-lg">
-                          <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-premium">
-                            <span className="text-2xl">🎨</span>
-                          </div>
-                          <div>
-                            <span className="font-bold text-lg text-yellow-200 block">Custom Branding</span>
-                            <span className="text-pink-100">Personalized design elements</span>
-                          </div>
+                        <div className="flex items-center gap-3 p-3 bg-white/15 backdrop-blur-sm rounded-xl border border-white/20">
+                          <span className="text-yellow-200 text-xl">⚡</span>
+                          <span className="font-semibold">Priority Support</span>
                         </div>
                       </div>
-                      <div className="space-y-4">
-                        <div className="flex items-center gap-4 p-4 bg-white/15 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/25 transition-all duration-300 shadow-lg">
-                          <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-premium">
-                            <span className="text-2xl">📊</span>
-                          </div>
-                          <div>
-                            <span className="font-bold text-lg text-yellow-200 block">Application Tracking</span>
-                            <span className="text-pink-100">Monitor applications & interview rates</span>
-                          </div>
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-3 p-3 bg-white/15 backdrop-blur-sm rounded-xl border border-white/20">
+                          <span className="text-yellow-200 text-xl">🎯</span>
+                          <span className="font-semibold">Advanced ATS Optimization</span>
                         </div>
-                        <div className="flex items-center gap-4 p-4 bg-white/15 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/25 transition-all duration-300 shadow-lg">
-                          <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-premium">
-                            <span className="text-2xl">🔄</span>
-                          </div>
-                          <div>
-                            <span className="font-bold text-lg text-yellow-200 block">Unlimited Exports</span>
-                            <span className="text-pink-100">Download as many times as needed</span>
-                          </div>
+                        <div className="flex items-center gap-3 p-3 bg-white/15 backdrop-blur-sm rounded-xl border border-white/20">
+                          <span className="text-yellow-200 text-xl">📊</span>
+                          <span className="font-semibold">Application Tracking</span>
                         </div>
-                        <div className="flex items-center gap-4 p-4 bg-white/15 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/25 transition-all duration-300 shadow-lg">
-                          <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-premium">
-                            <span className="text-2xl">⚡</span>
-                          </div>
-                          <div>
-                            <span className="font-bold text-lg text-yellow-200 block">Priority Support</span>
-                            <span className="text-pink-100">24/7 expert assistance</span>
-                          </div>
+                        <div className="flex items-center gap-3 p-3 bg-white/15 backdrop-blur-sm rounded-xl border border-white/20">
+                          <span className="text-yellow-200 text-xl">🎨</span>
+                          <span className="font-semibold">Custom Branding</span>
                         </div>
-                        <div className="flex items-center gap-4 p-4 bg-white/15 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/25 transition-all duration-300 shadow-lg">
-                          <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-premium">
-                            <span className="text-2xl">🎪</span>
-                          </div>
-                          <div>
-                            <span className="font-bold text-lg text-yellow-200 block">Advanced AI Features</span>
-                            <span className="text-pink-100">Next-generation optimization</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="text-center mb-8">
-                      <div className="inline-block bg-white/20 backdrop-blur-sm px-8 py-4 rounded-2xl border border-white/30 mb-6">
-                        <div className="text-5xl font-bold mb-2">R59<span className="text-2xl font-normal text-pink-200">/month</span></div>
-                        <div className="text-sm text-pink-200 flex items-center justify-center gap-2">
-                          <span>💫</span>
-                          <span>Cancel anytime • No setup fees • Instant activation</span>
+                        <div className="flex items-center gap-3 p-3 bg-white/15 backdrop-blur-sm rounded-xl border border-white/20">
+                          <span className="text-yellow-200 text-xl">🚫</span>
+                          <span className="font-semibold">No Watermarks</span>
                         </div>
                       </div>
                     </div>
 
                     <div className="text-center">
+                      <div className="inline-block bg-white/20 backdrop-blur-sm px-6 py-3 rounded-2xl border border-white/30 mb-6">
+                        <div className="text-4xl font-bold mb-1">R59<span className="text-xl font-normal text-pink-200">/month</span></div>
+                        <div className="text-sm text-pink-200">Cancel anytime • Instant activation</div>
+                      </div>
                       <a
                         href="/apps/cv-redo"
-                        className="inline-flex items-center gap-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 font-bold py-5 px-12 rounded-2xl hover:from-yellow-300 hover:to-orange-400 transition-all duration-300 text-xl shadow-xl hover:shadow-2xl transform hover:scale-105"
+                        className="inline-flex items-center gap-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 font-bold py-4 px-10 rounded-2xl hover:from-yellow-300 hover:to-orange-400 transition-all duration-300 text-lg shadow-xl hover:shadow-2xl transform hover:scale-105"
                       >
                         <span className="flex items-center justify-center gap-2">
                           <span className="text-2xl">🚀</span>
-                          <span>Upgrade to Pro Now</span>
+                          <span>Upgrade to Pro</span>
                         </span>
                       </a>
                     </div>
@@ -227,7 +983,6 @@ export default function CVOptimizerPage() {
                 </div>
               </div>
             </div>
-
           </div>
         </section>
       </main>
