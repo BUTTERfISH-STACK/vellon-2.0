@@ -79,7 +79,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <ul className="space-y-4">
                 <li><Link href="/about" className="text-text-muted hover:text-accent transition-all duration-300 text-lg">About</Link></li>
                 <li><a href="#" className="text-text-muted hover:text-accent transition-all duration-300 text-lg">Contact</a></li>
-                <li><a href="#" className="text-text-muted hover:text-accent transition-all duration-300 text-lg">Privacy</a></li>
+                <li><Link href="/terms" className="text-text-muted hover:text-accent transition-all duration-300 text-lg">Terms & Policy</Link></li>
               </ul>
             </div>
           </div>

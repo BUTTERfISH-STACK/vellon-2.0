@@ -12,11 +12,8 @@ export default function Pricing() {
 
     // Simulate payment processing
     setTimeout(() => {
-      // Set pro trial status with expiration (14 days from now)
-      const trialEndDate = new Date();
-      trialEndDate.setDate(trialEndDate.getDate() + 14);
-      localStorage.setItem('vellon_pro_trial_end', trialEndDate.toISOString());
-      localStorage.setItem('vellon_pro_status', 'trial');
+      // Set pro status
+      localStorage.setItem('vellon_pro_status', 'active');
       setIsProcessing(false);
       // Redirect to cv-optimizer page with success message
       router.push('/apps/cv-optimizer?upgrade=success');
@@ -81,7 +78,7 @@ export default function Pricing() {
                 <div className="text-3xl font-bold mb-2">
                   R59 <span className="text-lg font-normal opacity-90">/ month</span>
                 </div>
-                <p className="text-white/80 text-sm">14-day free trial • Cancel anytime</p>
+                <p className="text-white/80 text-sm">Unlock premium career tools • Cancel anytime</p>
               </div>
 
               <ul className="space-y-3 mb-8">
@@ -131,7 +128,7 @@ export default function Pricing() {
                     Starting Your Career Boost...
                   </div>
                 ) : (
-                  'Start Your Career Journey'
+                  'Upgrade to Pro Now'
                 )}
               </button>
             </div>
@@ -139,7 +136,7 @@ export default function Pricing() {
 
           <div className="text-center mt-12">
             <p className="text-text-muted text-sm">
-              Join thousands of South Africans who landed their dream jobs with Vellon • 14-day money-back guarantee • Cancel anytime
+              Join thousands of South Africans who landed their dream jobs with Vellon • Cancel anytime
             </p>
           </div>
         </section>
