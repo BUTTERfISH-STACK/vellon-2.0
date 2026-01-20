@@ -27,8 +27,8 @@ export default function Pricing() {
     <div className="min-h-screen">
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         <section className="text-center py-12">
-          <h1 className="text-4xl font-bold text-gradient-gold mb-4">Simple Pricing</h1>
-          <p className="text-xl text-text-muted">Everything you need to create professional CVs</p>
+          <h1 className="text-4xl font-bold text-gradient-gold mb-4">Land Your Dream Job</h1>
+          <p className="text-xl text-text-muted">Professional CV tools designed for South African job seekers</p>
         </section>
 
         <section className="py-8">
@@ -38,7 +38,7 @@ export default function Pricing() {
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold mb-2">Free</h3>
                 <div className="text-3xl font-bold text-foreground mb-2">R0</div>
-                <p className="text-sm text-text-muted">No credit card required</p>
+                <p className="text-sm text-text-muted">Start building your career today</p>
               </div>
 
               <ul className="space-y-3 mb-8">
@@ -46,19 +46,19 @@ export default function Pricing() {
                   <svg className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-sm">Basic CV builder</span>
+                  <span className="text-sm">Professional CV builder</span>
                 </li>
                 <li className="flex items-center">
                   <svg className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-sm">PDF download with watermark</span>
+                  <span className="text-sm">PDF download with Vellon branding</span>
                 </li>
                 <li className="flex items-center">
                   <svg className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-sm">Limited to 2 experiences, 1 education</span>
+                  <span className="text-sm">Perfect for entry-level positions</span>
                 </li>
               </ul>
 
@@ -95,25 +95,25 @@ export default function Pricing() {
                   <svg className="w-5 h-5 text-white mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-sm">Unlimited PDF downloads</span>
+                  <span className="text-sm">Unlimited professional downloads</span>
                 </li>
                 <li className="flex items-center">
                   <svg className="w-5 h-5 text-white mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-sm">No watermarks</span>
+                  <span className="text-sm">ATS-optimized for South African employers</span>
                 </li>
                 <li className="flex items-center">
                   <svg className="w-5 h-5 text-white mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-sm">Premium templates</span>
+                  <span className="text-sm">Premium South African CV templates</span>
                 </li>
                 <li className="flex items-center">
                   <svg className="w-5 h-5 text-white mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-sm">Priority support</span>
+                  <span className="text-sm">Priority career support</span>
                 </li>
               </ul>
 
@@ -128,10 +128,10 @@ export default function Pricing() {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    Starting Trial...
+                    Starting Your Career Boost...
                   </div>
                 ) : (
-                  'Start Free Trial'
+                  'Start Your Career Journey'
                 )}
               </button>
             </div>
@@ -139,7 +139,7 @@ export default function Pricing() {
 
           <div className="text-center mt-12">
             <p className="text-text-muted text-sm">
-              14-day money-back guarantee • No setup fees • Cancel anytime
+              Join thousands of South Africans who landed their dream jobs with Vellon • 14-day money-back guarantee • Cancel anytime
             </p>
           </div>
         </section>

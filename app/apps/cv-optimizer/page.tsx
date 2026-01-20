@@ -386,11 +386,11 @@ export default function CVOptimizerPage() {
         <section className="text-center py-24 sm:py-40 animate-fade-in-up">
           <div className="inline-block p-2 bg-gradient-primary/20 rounded-full mb-8 shadow-premium">
             <div className="bg-gradient-elegant px-8 py-4 rounded-full border border-accent/30">
-              <h2 className="text-accent font-bold text-xl tracking-wide">Professional excellence begins with presentation</h2>
+              <h2 className="text-accent font-bold text-xl tracking-wide">Your career deserves the best presentation</h2>
             </div>
           </div>
           <p className="max-w-4xl mx-auto text-2xl text-text-muted mb-12 leading-relaxed font-light">
-            Craft a sophisticated, ATS-optimized CV with our premium form builder designed for career advancement.
+            Create a professional CV that gets you noticed by South African employers. ATS-optimized and designed for career success.
           </p>
 
           {/* CV Mockup Slideshow */}
@@ -434,10 +434,10 @@ export default function CVOptimizerPage() {
           <div className="max-w-6xl mx-auto">
             <div className="bg-gradient-elegant backdrop-blur-sm rounded-3xl shadow-premium p-8 border border-border/30">
               <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold text-gradient-gold mb-4">Free CV Optimizer</h2>
-                <p className="text-text-muted text-lg">Create a professional CV with basic features. Upgrade to Pro for unlimited access.</p>
+                <h2 className="text-3xl font-bold text-gradient-gold mb-4">Professional CV Builder</h2>
+                <p className="text-text-muted text-lg">Build your career with a CV that gets results. Start free and upgrade when you're ready to land your dream job.</p>
                 <div className="mt-4 p-4 bg-accent/10 rounded-xl border border-accent/20">
-                  <p className="text-accent font-medium">Free limits: 2 experiences, 1 education, 5 skills, 2 certifications, watermark included</p>
+                  <p className="text-accent font-medium">Free plan: Perfect for getting started • Upgrade to Pro for unlimited professional features</p>
                 </div>
               </div>
 
@@ -915,18 +915,18 @@ export default function CVOptimizerPage() {
                 </div>
               )}
 
-              {/* Simple Pro Upgrade Notice */}
+              {/* Professional Career Upgrade Notice */}
               <div className="mt-8 text-center">
                 <div className="bg-accent/5 border border-accent/20 rounded-xl p-6">
-                  <h3 className="text-lg font-semibold text-accent mb-2">Ready to unlock unlimited features?</h3>
+                  <h3 className="text-lg font-semibold text-accent mb-2">Take your career to the next level</h3>
                   <p className="text-text-muted text-sm mb-4">
-                    Remove watermarks, unlimited exports, premium templates, and priority support
+                    Join thousands of South Africans who landed better jobs with Vellon's Pro features
                   </p>
                   <a
                     href="/pricing"
                     className="inline-flex items-center gap-2 bg-gradient-primary text-background font-semibold py-2 px-6 rounded-xl hover:shadow-glow transition-all duration-200"
                   >
-                    <span>Upgrade to Pro</span>
+                    <span>Start Your Pro Journey</span>
                     <span className="text-sm">R59/month</span>
                   </a>
                 </div>

@@ -68,7 +68,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </span>
               </div>
               <p className="text-text-muted leading-relaxed max-w-lg text-lg">
-                Premium AI-powered CV optimization for discerning professionals. Elevate your career with sophisticated tools designed for success.
+                Empowering South African job seekers with professional CV tools. Transform your career with tools designed to help you land your dream job.
               </p>
             </div>
             <div>
@@ -90,7 +90,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
           <div className="border-t border-border/50 pt-10 text-center">
             <p className="text-text-muted font-medium text-lg">
-              © 2024 Vellon. All rights reserved. Crafted for professional excellence.
+              © 2024 Vellon. All rights reserved. Empowering South African careers.
             </p>
           </div>
         </div>
