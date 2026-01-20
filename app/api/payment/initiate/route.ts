@@ -3,7 +3,9 @@ import { prisma } from '@/lib/prisma'
 // @ts-ignore
 import Yoco from 'yoco'
 
-const yoco = new Yoco({ secretKey: process.env.YOCO_SECRET_KEY! })
+const yoco = process.env.YOCO_SECRET_KEY?.includes('dummy')
+  ? null
+  : new Yoco({ secretKey: process.env.YOCO_SECRET_KEY! })
 
 export async function POST(request: NextRequest) {
   try {
@@ -28,6 +30,9 @@ export async function POST(request: NextRequest) {
     })
 
     // Create Yoco checkout
+    if (!yoco) {
+      return NextResponse.json({ error: 'Payment not available in build mode' }, { status: 500 })
+    }
     const checkout = await yoco.createCheckout({
       amount: 11999, // R119.99 in cents
       currency: 'ZAR',
