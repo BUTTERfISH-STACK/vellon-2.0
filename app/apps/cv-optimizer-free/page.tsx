@@ -387,6 +387,11 @@ export default function CVOptimizerFreePage() {
                     currentSlide === 3 ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
                   }`}
                 />
+                <img
+                  src="/WhatsApp_Image_2026-01-19_at_10.34.05_AM-removebg-preview.png"
+                  alt="Watermark"
+                  className="absolute inset-0 w-full h-full object-contain opacity-30 pointer-events-none"
+                />
               </div>
               <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3">
                 {slides.map((_, index) => (
