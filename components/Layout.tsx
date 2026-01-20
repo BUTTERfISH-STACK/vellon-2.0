@@ -9,9 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="flex items-center">
               <Link href="/" className="group flex items-center gap-3">
                 <div className="w-10 h-10 bg-accent rounded-2xl flex items-center justify-center">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
+                  <img src="/logo.png" alt="Vellon Logo" className="w-6 h-6" />
                 </div>
                 <span className="text-2xl font-bold text-foreground">
                   Vellon
@@ -59,9 +57,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="md:col-span-2">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-accent rounded-2xl flex items-center justify-center">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
+                  <img src="/logo.png" alt="Vellon Logo" className="w-6 h-6" />
                 </div>
                 <span className="text-2xl font-bold text-foreground">
                   Vellon
