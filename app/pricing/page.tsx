@@ -76,7 +76,7 @@ export default function Pricing() {
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold mb-2">Complete career enhancement suite</h3>
                 <div className="text-3xl font-bold mb-2">
-                  R59 <span className="text-lg font-normal opacity-90">one-time</span>
+                  R59 <span className="text-lg font-normal opacity-90">one-time payment</span>
                 </div>
                 <p className="text-white/80 text-sm">Everything you need for career success • Lifetime access</p>
               </div>
