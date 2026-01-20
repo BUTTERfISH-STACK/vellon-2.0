@@ -39,7 +39,7 @@ export default function Home() {
             </h1>
 
             <p className="max-w-4xl mx-auto text-xl sm:text-2xl text-text-muted mb-8 leading-relaxed font-light">
-              Sophisticated AI-powered CV optimization and professional redesign — engineered for discerning professionals in competitive markets.
+              Sophisticated AI-powered CV optimization — engineered for discerning professionals in competitive South African markets.
             </p>
 
             {/* Key Benefits */}

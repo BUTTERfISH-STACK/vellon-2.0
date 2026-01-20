@@ -21,10 +21,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 Home
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
               </Link>
-              <Link href="/apps" className="text-text-muted hover:text-accent transition-all duration-300 font-medium text-lg relative group">
-                Apps
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
-              </Link>
               <Link href="/about" className="text-text-muted hover:text-accent transition-all duration-300 font-medium text-lg relative group">
                 About
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
@@ -75,7 +71,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <h3 className="font-bold text-foreground mb-6 text-xl tracking-wide">Product</h3>
               <ul className="space-y-4">
                 <li><Link href="/apps/cv-optimizer" className="text-text-muted hover:text-accent transition-all duration-300 text-lg">CV Optimizer</Link></li>
-                <li><Link href="/apps/cv-redo" className="text-text-muted hover:text-accent transition-all duration-300 text-lg">CV Redo</Link></li>
                 <li><Link href="/pricing" className="text-text-muted hover:text-accent transition-all duration-300 text-lg">Pricing</Link></li>
               </ul>
             </div>
