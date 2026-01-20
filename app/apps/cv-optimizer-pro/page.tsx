@@ -41,6 +41,7 @@ export default function CVOptimizerProPage() {
   const [showPreview, setShowPreview] = useState(false);
   const [isEditing, setIsEditing] = useState(true);
   const [selectedBackground, setSelectedBackground] = useState<string | null>(null);
+  const [upgradeSuccess, setUpgradeSuccess] = useState(false);
   const [cvData, setCvData] = useState<CVData>({
     personal: {
       name: '',
@@ -71,6 +72,24 @@ export default function CVOptimizerProPage() {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 3000);
     return () => clearInterval(interval);
+  }, []);
+
+  // Check for successful upgrade
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('upgrade') === 'success') {
+        // Set pro status
+        localStorage.setItem('vellon_pro_status', 'active');
+        // Set trial end to far future (effectively permanent)
+        const futureDate = new Date();
+        futureDate.setFullYear(futureDate.getFullYear() + 10);
+        localStorage.setItem('vellon_pro_trial_end', futureDate.toISOString());
+        setUpgradeSuccess(true);
+        // Clean up URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+    }
   }, []);
 
   const updatePersonal = (field: keyof CVData['personal'], value: string) => {
@@ -348,6 +367,12 @@ export default function CVOptimizerProPage() {
 
   return (
     <div className="min-h-screen">
+      {/* Success Message */}
+      {upgradeSuccess && (
+        <div className="bg-green-500 text-white px-4 py-3 text-center font-medium">
+          🎉 Welcome to Vellon Pro! Your upgrade was successful. Enjoy unlimited features and premium templates.
+        </div>
+      )}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         <section className="text-center py-24 sm:py-40 animate-fade-in-up">
           <div className="inline-block p-2 bg-gradient-primary/20 rounded-full mb-8 shadow-premium">

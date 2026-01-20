@@ -115,7 +115,7 @@ export default function Pricing() {
               </ul>
 
               <button
-                onClick={() => window.location.href = 'https://pay.yoco.com/r/mEDgNy'}
+                onClick={() => window.location.href = 'https://pay.yoco.com/r/mEDgNy?success_url=https://velloncareers.co.za/apps/cv-optimizer-pro?upgrade=success&cancel_url=https://velloncareers.co.za/pricing'}
                 className="inline-block bg-white text-accent font-bold py-3 px-6 rounded-2xl hover:bg-gray-100 hover:shadow-lg transition-all duration-200 w-full text-center"
               >
                 Upgrade to Pro Now
