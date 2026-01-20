@@ -99,8 +99,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div className="flex justify-between items-center py-8">
             <div className="flex items-center">
               <Link href="/" className="group flex items-center gap-4 transition-all duration-300">
-                <div className="w-12 h-12 bg-gradient-primary rounded-2xl flex items-center justify-center shadow-premium group-hover:shadow-glow transition-all duration-300">
-                  <img src="/logo.png" alt="Vellon Logo" className="w-7 h-7 filter brightness-0 invert" />
+                <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center shadow-premium group-hover:shadow-glow transition-all duration-300">
+                  <img src="/new-logo.png" alt="Vellon Logo" className="w-12 h-12 object-contain" />
                 </div>
                 <span className="text-3xl font-bold text-gradient-gold tracking-tight">
                   Vellon
@@ -191,8 +191,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
             <div className="md:col-span-2">
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 bg-gradient-primary rounded-2xl flex items-center justify-center shadow-premium">
-                  <img src="/logo.png" alt="Vellon Logo" className="w-7 h-7 filter brightness-0 invert" />
+                <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center shadow-premium">
+                  <img src="/new-logo.png" alt="Vellon Logo" className="w-12 h-12 object-contain" />
                 </div>
                 <span className="text-3xl font-bold text-gradient-gold">
                   Vellon
