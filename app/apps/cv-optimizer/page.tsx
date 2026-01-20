@@ -435,6 +435,8 @@ interface CVTemplate {
 }
 
 export default function CVOptimizerPage() {
+  const [trialDaysLeft, setTrialDaysLeft] = useState<number | null>(null);
+
   const [isPro, setIsPro] = useState(() => {
     if (typeof window !== 'undefined') {
       const status = localStorage.getItem('vellon_pro_status');
@@ -468,7 +470,6 @@ export default function CVOptimizerPage() {
   const [selectedTemplate, setSelectedTemplate] = useState<string>('universal');
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showUpgradeSuccess, setShowUpgradeSuccess] = useState(false);
-  const [trialDaysLeft, setTrialDaysLeft] = useState<number | null>(null);
 
   const slides = ['creative', 'modern'] as const;
 
