@@ -877,9 +877,19 @@ export default function CVOptimizerPage() {
                     </div>
                   </div>
 
-                  <div className="bg-surface rounded-xl p-8 border border-border/50 shadow-premium">
+                  <div className="bg-surface rounded-xl p-8 border border-border/50 shadow-premium relative">
+                    {/* Background Image for Preview */}
+                    {selectedBackground && (
+                      <div className="absolute inset-0 -z-10 opacity-20">
+                        <img
+                          src={selectedBackground}
+                          alt="Selected Background"
+                          className="w-full h-full object-cover rounded-xl"
+                        />
+                      </div>
+                    )}
                     {/* Header */}
-                    <div className="text-center mb-6 pb-4 border-b-2 border-accent">
+                    <div className="text-center mb-6 pb-4 border-b-2 border-accent relative">
                       <h2 className="text-2xl font-bold text-foreground mb-2">{cvData.personal.name || 'Your Name'}</h2>
                       <div className="text-sm text-text-muted space-y-1">
                         {cvData.personal.email && <p>📧 {cvData.personal.email}</p>}
