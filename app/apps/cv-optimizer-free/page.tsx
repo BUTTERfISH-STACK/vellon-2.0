@@ -56,7 +56,7 @@ export default function CVOptimizerFreePage() {
     certifications: [{ name: '', issuer: '', date: '' }]
   });
 
-  const slides = ['creative', 'modern'] as const;
+  const slides = ['white', 'blue', 'modern', 'red'] as const;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -360,17 +360,31 @@ export default function CVOptimizerFreePage() {
             <div className="relative overflow-hidden rounded-3xl bg-gradient-elegant border border-border/50 shadow-premium">
               <div className="aspect-[3/4] relative bg-gradient-to-br from-surface to-surface-light rounded-2xl overflow-hidden">
                 <img
-                  src="/ATS Friendly Modern CV Resume.png"
-                  alt="Creative CV Design"
+                  src="/White Black Minimalist Professional Resume.png"
+                  alt="White Black Minimalist CV Design"
                   className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
                     currentSlide === 0 ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
                   }`}
                 />
                 <img
-                  src="/Minimalist Modern Professional CV Resume.png"
-                  alt="Modern CV Design"
+                  src="/Blue and Gray Simple Professional CV Resume.png"
+                  alt="Blue Gray Simple CV Design"
                   className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
                     currentSlide === 1 ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                  }`}
+                />
+                <img
+                  src="/Modern Professional CV Resume.png"
+                  alt="Modern Professional CV Design"
+                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
+                    currentSlide === 2 ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                  }`}
+                />
+                <img
+                  src="/Red Black Bold Graphic Designer Resume.png"
+                  alt="Red Black Bold CV Design"
+                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
+                    currentSlide === 3 ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
                   }`}
                 />
               </div>
@@ -386,7 +400,7 @@ export default function CVOptimizerFreePage() {
                 ))}
               </div>
               <div className="absolute top-6 right-6 bg-gradient-primary/20 backdrop-blur-sm text-accent px-4 py-2 rounded-full text-sm font-semibold border border-accent/30">
-                {currentSlide === 0 ? 'Creative Professional' : 'Modern Executive'} Template
+                {currentSlide === 0 ? 'Minimalist White' : currentSlide === 1 ? 'Simple Blue Gray' : currentSlide === 2 ? 'Modern Professional' : 'Bold Red Black'} Template
               </div>
             </div>
           </div>
