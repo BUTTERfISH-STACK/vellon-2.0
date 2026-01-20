@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
+import { db } from '@/lib/db'
 import { randomBytes } from 'crypto'
 
 export async function POST(request: NextRequest) {
@@ -11,12 +11,10 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if user already exists
-    const existingUser = await prisma.user.findUnique({
-      where: { email },
-      include: { ambassador: true }
-    })
+    const existingUser = await db.findUserByEmail(email)
+    const existingAmbassador = existingUser ? await db.findAmbassadorByUserId(existingUser.id) : null
 
-    if (existingUser?.ambassador) {
+    if (existingAmbassador) {
       return NextResponse.json({ error: 'Already an ambassador' }, { status: 400 })
     }
 
@@ -24,20 +22,15 @@ export async function POST(request: NextRequest) {
 
     if (!existingUser) {
       // Create user
-      const newUser = await prisma.user.create({
-        data: {
-          email,
-          role: 'AMBASSADOR'
-        }
+      const newUser = await db.createUser({
+        email,
+        role: 'AMBASSADOR'
       })
       userId = newUser.id
     } else {
       // Update role if not already ambassador
       if (existingUser.role !== 'AMBASSADOR') {
-        await prisma.user.update({
-          where: { id: existingUser.id },
-          data: { role: 'AMBASSADOR' }
-        })
+        await db.updateUser(existingUser.id, { role: 'AMBASSADOR' })
       }
       userId = existingUser.id
     }
@@ -46,11 +39,9 @@ export async function POST(request: NextRequest) {
     const referralCode = randomBytes(8).toString('hex')
 
     // Create ambassador
-    await prisma.ambassador.create({
-      data: {
-        userId,
-        referralCode
-      }
+    await db.createAmbassador({
+      userId,
+      referralCode
     })
 
     return NextResponse.json({

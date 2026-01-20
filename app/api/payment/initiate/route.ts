@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
+import { db } from '@/lib/db'
 // @ts-ignore
 import Yoco from 'yoco'
 
@@ -16,17 +16,15 @@ export async function POST(request: NextRequest) {
     }
 
     // Find or create user
-    let user = await prisma.user.findUnique({ where: { email } })
+    let user = await db.findUserByEmail(email)
     if (!user) {
-      user = await prisma.user.create({ data: { email } })
+      user = await db.createUser({ email })
     }
 
     // Create pending payment
-    const payment = await prisma.payment.create({
-      data: {
-        userId: user.id,
-        referralCode: referralCode || null
-      }
+    const payment = await db.createPayment({
+      userId: user.id,
+      referralCode: referralCode || undefined
     })
 
     // Create Yoco checkout
