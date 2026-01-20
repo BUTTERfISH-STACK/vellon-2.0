@@ -272,7 +272,7 @@ export default function Home() {
                   </li>
                 </ul>
                 <a
-                  href="/apps/cv-optimizer"
+                  href="/apps/cv-optimizer-free"
                   className="inline-block bg-gradient-primary text-background font-bold py-4 px-8 rounded-2xl hover:shadow-glow transition-all duration-300 w-full text-center text-lg shadow-premium"
                 >
                   Get Started
@@ -362,7 +362,7 @@ export default function Home() {
             <h2 className="text-5xl sm:text-6xl font-bold mb-10 text-gradient-gold">Elevate Your Career Today</h2>
             <p className="text-xl text-text-muted mb-12 font-light">Join thousands of professionals who have transformed their career trajectory</p>
             <a
-              href="/apps/cv-optimizer"
+              href="/apps/cv-optimizer-free"
               className="inline-flex items-center gap-4 bg-gradient-primary text-background font-bold py-6 px-12 rounded-2xl hover:shadow-glow transition-all duration-300 text-xl shadow-premium transform hover:scale-105"
             >
               Begin Your Transformation
