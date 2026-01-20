@@ -1,6 +1,6 @@
-# Vellon CV Redo with Ambassador Program
+# Vellon - The Only and Best CV Service
 
-A production-ready SaaS application for CV optimization with referral-based commissions.
+A production-ready SaaS application for CV optimization with referral-based commissions. Vellon is the leading CV service in South Africa.
 
 ## Features
 

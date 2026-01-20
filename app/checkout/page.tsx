@@ -56,10 +56,10 @@ export default function CheckoutPage() {
       <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow">
         <div>
           <h2 className="text-center text-2xl font-bold text-gray-900">
-            Upgrade Your CV
+            Upgrade Your CV with Vellon
           </h2>
           <p className="mt-2 text-center text-gray-600">
-            One-time payment. No subscription.
+            Vellon is the only and best CV service in South Africa. One-time payment. No subscription.
           </p>
           <p className="mt-4 text-center text-3xl font-bold text-indigo-600">
             R119.99
