@@ -10,7 +10,7 @@ export default function Home() {
             </span>
           </div>
           <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold mb-10 leading-tight tracking-tight">
-            <span className="text-gradient-gold">Elevate</span> Your Career
+            <span className="text-gradient-gold">Elevate</span> <span className="animate-flicker-slow">Your Career</span>
             <br />
             <span className="text-foreground">With Precision</span>
           </h1>

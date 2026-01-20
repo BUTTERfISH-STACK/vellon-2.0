@@ -92,6 +92,15 @@ body {
   animation: scaleIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-flicker-slow {
+  animation: flicker 3s ease-in-out infinite;
+}
+
 .bg-gradient-primary {
   background: linear-gradient(135deg, #d4af37 0%, #b8860b 50%, #daa520 100%);
 }
