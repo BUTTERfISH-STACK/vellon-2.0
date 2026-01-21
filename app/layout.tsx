@@ -31,6 +31,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <div className="fixed inset-0 -z-10 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100"></div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-[80vw] h-[80vw] max-w-[800px] max-h-[800px] opacity-5 blur-3xl animate-pulse-slow" style={{ backgroundImage: "url('/vellon-watermark.jpg')", backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center" }}></div>
+          </div>
+        </div>
         <Providers>
           <Suspense fallback={null}>
             <ReferralTracker />
