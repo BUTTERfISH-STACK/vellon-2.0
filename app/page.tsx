@@ -1,3 +1,5 @@
+import StarRating from '@/components/StarRating'
+
 export default function Home() {
   return (
     <div className="min-h-screen">
@@ -71,7 +73,7 @@ export default function Home() {
 
             {/* Statistics */}
             <div className="max-w-4xl mx-auto mb-12">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-gradient-gold mb-2">10K+</div>
                   <div className="text-sm text-text-muted">CVs Optimized</div>
@@ -87,6 +89,12 @@ export default function Home() {
                 <div className="text-center">
                   <div className="text-3xl font-bold text-gradient-gold mb-2">RSA</div>
                   <div className="text-sm text-text-muted">Local Focus</div>
+                </div>
+                <div className="text-center">
+                  <div className="flex flex-col items-center">
+                    <StarRating rating={4.9} size="lg" showValue={true} />
+                    <div className="text-sm text-text-muted mt-1">User Rating</div>
+                  </div>
                 </div>
               </div>
             </div>
