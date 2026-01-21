@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { db } from '@/lib/db'
+import { prisma } from '@/lib/db'
 // @ts-ignore
 import Yoco from 'yoco'
 
@@ -9,35 +9,30 @@ const yoco = process.env.YOCO_SECRET_KEY?.includes('dummy')
 
 export async function POST(request: NextRequest) {
   try {
-    const { email, referralCode } = await request.json()
+    // Read referral cookie
+    const referralCode = request.cookies.get('vellon_ref')?.value
 
-    if (!email) {
-      return NextResponse.json({ error: 'Email is required' }, { status: 400 })
-    }
-
-    // Find or create user
-    let user = await db.findUserByEmail(email)
-    if (!user) {
-      user = await db.createUser({ email })
-    }
-
-    // Create pending payment
-    const payment = await db.createPayment({
-      userId: user.id,
-      referralCode: referralCode || undefined
+    // Create pending purchase
+    const purchase = await prisma.purchase.create({
+      data: {
+        referral_code: referralCode || null,
+        ambassador_commission: referralCode ? 3500 : 0
+      }
     })
 
     // Create Yoco checkout
     if (!yoco) {
       return NextResponse.json({ error: 'Payment not available in build mode' }, { status: 500 })
     }
+
+    const domain = process.env.NEXT_PUBLIC_DOMAIN || 'https://yourdomain.co'
     const checkout = await yoco.createCheckout({
       amount: 11999, // R119.99 in cents
       currency: 'ZAR',
-      successUrl: `${process.env.NEXTAUTH_URL}/payment/success?paymentId=${payment.id}`,
-      cancelUrl: `${process.env.NEXTAUTH_URL}/checkout`,
+      successUrl: `${domain}/payment/success?purchaseId=${purchase.id}`,
+      cancelUrl: `${domain}/checkout`,
       metadata: {
-        paymentId: payment.id
+        purchaseId: purchase.id
       }
     })
 

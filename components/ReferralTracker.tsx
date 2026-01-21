@@ -9,16 +9,17 @@ export default function ReferralTracker() {
   useEffect(() => {
     const ref = searchParams.get('ref')
     if (ref) {
-      // Store in localStorage
-      localStorage.setItem('referralCode', ref)
-
       // Store in cookie (30 days)
       const expires = new Date()
       expires.setTime(expires.getTime() + 30 * 24 * 60 * 60 * 1000)
-      document.cookie = `referralCode=${ref};expires=${expires.toUTCString()};path=/`
+      document.cookie = `vellon_ref=${ref};expires=${expires.toUTCString()};path=/`
 
-      // Optionally, track the click
-      // fetch('/api/track-click', { method: 'POST', body: JSON.stringify({ referralCode: ref, ipAddress: 'client-side' }) })
+      // Track the visit
+      fetch('/api/track-visit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ referral_code: ref })
+      }).catch(console.error)
     }
   }, [searchParams])
 

@@ -1,6 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { db } from '@/lib/db'
-import { randomBytes } from 'crypto'
+import { prisma } from '@/lib/db'
+
+function generateReferralCode(): string {
+  const chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
+  let code = ''
+  const length = Math.floor(Math.random() * 3) + 6 // 6-8 chars
+  for (let i = 0; i < length; i++) {
+    code += chars.charAt(Math.floor(Math.random() * chars.length))
+  }
+  return code
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -10,42 +19,37 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Email is required' }, { status: 400 })
     }
 
-    // Check if user already exists
-    const existingUser = await db.findUserByEmail(email)
-    const existingAmbassador = existingUser ? await db.findAmbassadorByUserId(existingUser.id) : null
+    // Check if ambassador already exists
+    const existingAmbassador = await prisma.ambassador.findUnique({
+      where: { email }
+    })
 
     if (existingAmbassador) {
       return NextResponse.json({ error: 'Already an ambassador' }, { status: 400 })
     }
 
-    let userId: string
-
-    if (!existingUser) {
-      // Create user
-      const newUser = await db.createUser({
-        email,
-        role: 'AMBASSADOR'
-      })
-      userId = newUser.id
-    } else {
-      // Update role if not already ambassador
-      if (existingUser.role !== 'AMBASSADOR') {
-        await db.updateUser(existingUser.id, { role: 'AMBASSADOR' })
-      }
-      userId = existingUser.id
-    }
-
     // Generate unique referral code
-    const referralCode = randomBytes(8).toString('hex')
+    let referralCode: string
+    let attempts = 0
+    do {
+      referralCode = generateReferralCode()
+      attempts++
+      if (attempts > 10) {
+        return NextResponse.json({ error: 'Failed to generate unique code' }, { status: 500 })
+      }
+    } while (await prisma.ambassador.findUnique({ where: { referral_code: referralCode } }))
 
     // Create ambassador
-    await db.createAmbassador({
-      userId,
-      referralCode
+    await prisma.ambassador.create({
+      data: {
+        email,
+        referral_code: referralCode
+      }
     })
 
+    const domain = process.env.NEXT_PUBLIC_DOMAIN || 'https://yourdomain.co'
     return NextResponse.json({
-      referralLink: `https://velloncareers.co.za/?ref=${referralCode}`,
+      referralLink: `${domain}?ref=${referralCode}`,
       referralCode
     })
   } catch (error) {

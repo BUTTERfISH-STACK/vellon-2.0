@@ -6,17 +6,16 @@ A production-ready SaaS application for CV optimization with referral-based comm
 
 - One-time paid CV redo (R119.99)
 - Ambassador program with R35 per successful referral
-- Email-only magic link authentication
+- Referral tracking via URL parameters
 - Yoco payment integration
-- Referral tracking and commission attribution
-- Ambassador dashboard
+- Commission attribution on successful payments
+- Ambassador status page
 
 ## Tech Stack
 
 - **Frontend**: Next.js (App Router)
 - **Backend**: Next.js API routes
 - **Database**: PostgreSQL with Prisma ORM
-- **Auth**: NextAuth.js with email magic links
 - **Payments**: Yoco API
 - **Styling**: TailwindCSS
 - **Deployment**: Vercel
@@ -27,41 +26,36 @@ A production-ready SaaS application for CV optimization with referral-based comm
 2. Install dependencies: `npm install`
 3. Copy `.env.example` to `.env.local` and fill in the values
 4. Set up PostgreSQL database
-5. Run Prisma migrations: `npm run db:migrate`
-6. Generate Prisma client: `npm run db:generate`
+5. Run Prisma migrations: `npx prisma migrate dev`
+6. Generate Prisma client: `npx prisma generate`
 7. Start development server: `npm run dev`
 
 ## Environment Variables
 
 - `DATABASE_URL`: PostgreSQL connection string
-- `NEXTAUTH_SECRET`: Random secret for NextAuth
-- `NEXTAUTH_URL`: Your app URL
 - `YOCO_SECRET_KEY`: Yoco API secret key
-- `EMAIL_SERVER_HOST`: SMTP host
-- `EMAIL_SERVER_PORT`: SMTP port
-- `EMAIL_SERVER_USER`: SMTP username
-- `EMAIL_SERVER_PASSWORD`: SMTP password
-- `EMAIL_FROM`: From email address
+- `YOCO_WEBHOOK_SECRET`: Yoco webhook secret for signature verification
+- `NEXT_PUBLIC_DOMAIN`: Your domain URL
 
 ## Deployment
 
 1. Push to GitHub
 2. Connect to Vercel
 3. Set environment variables in Vercel dashboard
-4. Deploy
+4. Run `npx prisma migrate deploy` in Vercel build command or post-build hook
+5. Deploy
 
 ## Database Schema
 
-- User: email, role
-- Ambassador: referralCode, totalEarnings
-- ReferralClick: referralCode, ipAddress
-- Payment: userId, amount, status, referralCode, ambassadorCommission
+- Ambassador: id, email, referral_code, total_earned, created_at
+- ReferralVisit: id, referral_code, created_at, ip_hash
+- Purchase: id, amount, referral_code, ambassador_commission, created_at, payment_reference
 
 ## API Routes
 
-- `/api/auth/[...nextauth]`: Authentication
 - `/api/ambassador`: Create ambassador
-- `/api/dashboard`: Ambassador stats
+- `/api/ambassador/status`: Get ambassador stats
+- `/api/track-visit`: Record referral visit
 - `/api/payment/initiate`: Start Yoco checkout
 - `/api/payment/webhook`: Handle Yoco webhooks
 
@@ -69,15 +63,16 @@ A production-ready SaaS application for CV optimization with referral-based comm
 
 - `/`: Landing page
 - `/ambassador`: Ambassador sign-up
+- `/ambassador/status`: Ambassador status
 - `/checkout`: Payment checkout
-- `/dashboard`: Ambassador dashboard
 - `/payment/success`: Payment success
 
 ## Security
 
-- No self-referrals
-- One commission per paid CV
-- Rate limiting (to be implemented)
+- No self-referrals (enforced by no user accounts)
+- One commission per purchase
+- Rate limiting on referral visits (5 per IP per 24h)
+- Webhook signature verification
 - Input validation
 
 ## License

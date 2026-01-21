@@ -1,0 +1,34 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Ambassador {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  referral_code String   @unique
+  total_earned  Int      @default(0)
+  created_at    DateTime @default(now())
+}
+
+model ReferralVisit {
+  id            String   @id @default(cuid())
+  referral_code String
+  created_at    DateTime @default(now())
+  ip_hash       String
+}
+
+model Purchase {
+  id                   String   @id @default(cuid())
+  amount               Int      @default(11999)
+  referral_code        String?
+  ambassador_commission Int     @default(0)
+  created_at           DateTime @default(now())
+  payment_reference    String   @unique
+}

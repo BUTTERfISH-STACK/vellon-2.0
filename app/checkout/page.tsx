@@ -1,33 +1,18 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 
 export default function CheckoutPage() {
-  const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
-  const router = useRouter()
-
-  useEffect(() => {
-    // Pre-fill email if logged in, but for now, leave empty
-  }, [])
 
   const handlePayment = async () => {
-    if (!email) {
-      alert('Please enter your email')
-      return
-    }
-
     setLoading(true)
-
-    // Get referral code from localStorage or cookie
-    const referralCode = localStorage.getItem('referralCode') || getCookie('referralCode')
 
     try {
       const res = await fetch('/api/payment/initiate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, referralCode })
+        body: JSON.stringify({})
       })
 
       const data = await res.json()
@@ -45,12 +30,6 @@ export default function CheckoutPage() {
     }
   }
 
-  const getCookie = (name: string) => {
-    const value = `; ${document.cookie}`
-    const parts = value.split(`; ${name}=`)
-    if (parts.length === 2) return parts.pop()?.split(';').shift()
-  }
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow">
@@ -66,19 +45,6 @@ export default function CheckoutPage() {
           </p>
         </div>
         <div className="space-y-4">
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              Email address
-            </label>
-            <input
-              id="email"
-              type="email"
-              required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
           <button
             onClick={handlePayment}
             disabled={loading}
