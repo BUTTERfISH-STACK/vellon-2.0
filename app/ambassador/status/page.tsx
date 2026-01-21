@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useSearchParams } from 'next/navigation'
 
 export default function AmbassadorStatusPage() {
   const [email, setEmail] = useState('')
@@ -13,7 +12,6 @@ export default function AmbassadorStatusPage() {
     referral_link: string
   } | null>(null)
   const [error, setError] = useState('')
-  const searchParams = useSearchParams()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()

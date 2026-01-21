@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 // @ts-ignore
 import Yoco from 'yoco'
+import { randomUUID } from 'crypto'
 
 const yoco = process.env.YOCO_SECRET_KEY?.includes('dummy')
   ? null
@@ -12,9 +13,13 @@ export async function POST(request: NextRequest) {
     // Read referral cookie
     const referralCode = request.cookies.get('vellon_ref')?.value
 
+    // Generate payment reference
+    const paymentReference = randomUUID()
+
     // Create pending purchase
     const purchase = await prisma.purchase.create({
       data: {
+        payment_reference: paymentReference,
         referral_code: referralCode || null,
         ambassador_commission: referralCode ? 3500 : 0
       }
