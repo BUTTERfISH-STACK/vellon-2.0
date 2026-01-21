@@ -31,7 +31,7 @@ export default function Pricing() {
         <section className="py-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Free Plan */}
-            <div className="bg-surface rounded-2xl p-8 border border-border shadow-lg text-white">
+            <div className="bg-surface rounded-2xl p-8 border border-border shadow-lg text-white hover:shadow-premium transition-all duration-300">
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold mb-2">Free</h3>
                 <div className="text-3xl font-bold text-foreground mb-2">R0</div>
@@ -86,7 +86,7 @@ export default function Pricing() {
             </div>
 
             {/* Pro Plan */}
-            <div className="bg-gradient-to-br from-accent to-accent/80 rounded-2xl p-8 text-white relative shadow-2xl border-2 border-accent">
+            <div className="bg-gradient-to-br from-accent to-accent/80 rounded-2xl p-8 text-white relative shadow-2xl border-2 border-accent hover:shadow-glow transition-all duration-300 transform hover:scale-105">
               <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-accent text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">
                 BEST VALUE
               </div>
@@ -145,6 +145,33 @@ export default function Pricing() {
             <p className="text-text-muted text-sm">
               Join thousands of South Africans who landed their dream jobs with Vellon • One-time purchase
             </p>
+            <div className="mt-8 pt-6 border-t border-border/20">
+              <p className="text-sm text-text-muted mb-6">Trusted by professionals at leading South African companies</p>
+              <div className="flex justify-center items-center gap-8 opacity-60">
+                <div className="text-xs font-semibold text-text-muted tracking-wider">FEATURED IN</div>
+                <div className="w-px h-4 bg-border"></div>
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2 px-3 py-2 bg-surface-light/50 rounded-lg hover:bg-surface-light/70 transition-colors">
+                    <svg className="w-4 h-4 text-text-muted" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6zm2 2h8v1H6V8zm0 3h6v1H6v-1z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-xs font-medium text-text-muted">Business Day</span>
+                  </div>
+                  <div className="flex items-center gap-2 px-3 py-2 bg-surface-light/50 rounded-lg hover:bg-surface-light/70 transition-colors">
+                    <svg className="w-4 h-4 text-text-muted" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6zm2 2h8v1H6V8zm0 3h6v1H6v-1z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-xs font-medium text-text-muted">Fin24</span>
+                  </div>
+                  <div className="flex items-center gap-2 px-3 py-2 bg-surface-light/50 rounded-lg hover:bg-surface-light/70 transition-colors">
+                    <svg className="w-4 h-4 text-text-muted" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6zm2 2h8v1H6V8zm0 3h6v1H6v-1z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-xs font-medium text-text-muted">IOL</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </main>

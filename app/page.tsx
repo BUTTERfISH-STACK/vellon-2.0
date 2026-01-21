@@ -12,6 +12,7 @@ export default function Home() {
             <div className="absolute bottom-20 right-10 w-40 h-40 bg-accent rounded-full blur-3xl"></div>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-gradient-gold rounded-full blur-3xl opacity-10"></div>
           </div>
+          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-accent/5"></div>
 
           <div className="relative z-10">
             <div className="mb-8">
@@ -181,6 +182,33 @@ export default function Home() {
               </div>
               <p className="text-lg font-medium text-foreground">Premium Quality</p>
               <p className="text-text-muted mt-2">Sophisticated tools for serious careers</p>
+            </div>
+          </div>
+          <div className="mt-12 pt-8 border-t border-border/20">
+            <p className="text-center text-text-muted">Trusted by professionals at leading South African companies</p>
+            <div className="flex justify-center items-center gap-8 mt-6 opacity-60">
+              <div className="text-xs font-semibold text-text-muted tracking-wider">FEATURED IN</div>
+              <div className="w-px h-4 bg-border"></div>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2 px-3 py-2 bg-surface-light/50 rounded-lg hover:bg-surface-light/70 transition-colors">
+                  <svg className="w-4 h-4 text-text-muted" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6zm2 2h8v1H6V8zm0 3h6v1H6v-1z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-xs font-medium text-text-muted">Business Day</span>
+                </div>
+                <div className="flex items-center gap-2 px-3 py-2 bg-surface-light/50 rounded-lg hover:bg-surface-light/70 transition-colors">
+                  <svg className="w-4 h-4 text-text-muted" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6zm2 2h8v1H6V8zm0 3h6v1H6v-1z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-xs font-medium text-text-muted">Fin24</span>
+                </div>
+                <div className="flex items-center gap-2 px-3 py-2 bg-surface-light/50 rounded-lg hover:bg-surface-light/70 transition-colors">
+                  <svg className="w-4 h-4 text-text-muted" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6zm2 2h8v1H6V8zm0 3h6v1H6v-1z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-xs font-medium text-text-muted">IOL</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -393,6 +421,33 @@ export default function Home() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
             </a>
+          </div>
+          <div className="mt-16 pt-8 border-t border-border/20">
+            <p className="text-sm text-text-muted mb-6">Trusted by professionals at leading South African companies</p>
+            <div className="flex justify-center items-center gap-8 opacity-60">
+              <div className="text-xs font-semibold text-text-muted tracking-wider">FEATURED IN</div>
+              <div className="w-px h-4 bg-border"></div>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2 px-3 py-2 bg-surface-light/50 rounded-lg hover:bg-surface-light/70 transition-colors">
+                  <svg className="w-4 h-4 text-text-muted" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6zm2 2h8v1H6V8zm0 3h6v1H6v-1z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-xs font-medium text-text-muted">Business Day</span>
+                </div>
+                <div className="flex items-center gap-2 px-3 py-2 bg-surface-light/50 rounded-lg hover:bg-surface-light/70 transition-colors">
+                  <svg className="w-4 h-4 text-text-muted" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6zm2 2h8v1H6V8zm0 3h6v1H6v-1z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-xs font-medium text-text-muted">Fin24</span>
+                </div>
+                <div className="flex items-center gap-2 px-3 py-2 bg-surface-light/50 rounded-lg hover:bg-surface-light/70 transition-colors">
+                  <svg className="w-4 h-4 text-text-muted" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6zm2 2h8v1H6V8zm0 3h6v1H6v-1z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-xs font-medium text-text-muted">IOL</span>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </main>
