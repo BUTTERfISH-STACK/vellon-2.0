@@ -1,6 +1,5 @@
 import { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import { prisma } from './db'
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -13,19 +12,6 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         if (!credentials?.email) {
           return null
-        }
-
-        // For ambassador login, check if email exists in ambassador table
-        const ambassador = await prisma.ambassador.findUnique({
-          where: { email: credentials.email }
-        })
-
-        if (ambassador) {
-          return {
-            id: ambassador.id,
-            email: ambassador.email,
-            role: 'ambassador'
-          }
         }
 
         return null

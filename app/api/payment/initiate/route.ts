@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/db'
 // @ts-ignore
 import Yoco from 'yoco'
 import { randomUUID } from 'crypto'
@@ -16,15 +15,6 @@ export async function POST(request: NextRequest) {
     // Generate payment reference
     const paymentReference = randomUUID()
 
-    // Create pending purchase
-    const purchase = await prisma.purchase.create({
-      data: {
-        payment_reference: paymentReference,
-        referral_code: referralCode || null,
-        ambassador_commission: referralCode ? 3500 : 0
-      }
-    })
-
     // Create Yoco checkout
     if (!yoco) {
       return NextResponse.json({ error: 'Payment not available in build mode' }, { status: 500 })
@@ -34,10 +24,10 @@ export async function POST(request: NextRequest) {
     const checkout = await yoco.createCheckout({
       amount: 11999, // R119.99 in cents
       currency: 'ZAR',
-      successUrl: `${domain}/payment/success?purchaseId=${purchase.id}`,
+      successUrl: `${domain}/payment/success`,
       cancelUrl: `${domain}/checkout`,
       metadata: {
-        purchaseId: purchase.id
+        purchaseId: paymentReference
       }
     })
 

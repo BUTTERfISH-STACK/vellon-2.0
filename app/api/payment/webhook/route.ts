@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/db'
 import crypto from 'crypto'
 
 export async function POST(request: NextRequest) {
@@ -28,38 +27,7 @@ export async function POST(request: NextRequest) {
 
       if (!paymentReference || !purchaseId) return NextResponse.json({ received: true })
 
-      // Find purchase by id
-      const purchase = await prisma.purchase.findUnique({
-        where: { id: purchaseId }
-      })
-
-      if (!purchase) {
-        console.error(`Purchase not found for id: ${purchaseId}`)
-        return NextResponse.json({ received: true })
-      }
-
-      // Update purchase with payment_reference
-      await prisma.purchase.update({
-        where: { id: purchaseId },
-        data: { payment_reference: paymentReference }
-      })
-
-      console.log(`Payment ${paymentReference} succeeded for purchase ${purchase.id}`)
-
-      // If referral_code exists, add commission to ambassador
-      if (purchase.referral_code) {
-        const ambassador = await prisma.ambassador.findUnique({
-          where: { referral_code: purchase.referral_code }
-        })
-
-        if (ambassador) {
-          await prisma.ambassador.update({
-            where: { id: ambassador.id },
-            data: { total_earned: { increment: 3500 } }
-          })
-          console.log(`Added R35 to ambassador ${ambassador.email}`)
-        }
-      }
+      console.log(`Payment ${paymentReference} succeeded for purchase ${purchaseId}`)
     }
 
     return NextResponse.json({ received: true })
