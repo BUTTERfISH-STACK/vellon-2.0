@@ -75,7 +75,7 @@ export default function Home() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12 sm:mb-20">
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-6 sm:mb-8 leading-tight tracking-tight">
-                <span className="text-gradient-gold">Elevate</span> Your Career
+                <span className="text-gradient-gold">Elevate</span> <span className="text-foreground" style={{ textShadow: '0 0 10px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4)' }}>Your Career</span>
                 <br />
                 <span className="text-foreground">With Precision</span>
               </h2>
