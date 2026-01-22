@@ -1,12 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { useEffect, useRef, useState } from "react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Hide header on apps page
+  const showHeader = pathname !== '/apps';
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -94,7 +99,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         className="absolute inset-0 -z-10 opacity-30"
         style={{ pointerEvents: "none" }}
       />
-      <header className="bg-gradient-elegant border-b border-border/30 sticky top-0 z-50 backdrop-blur-xl bg-opacity-95">
+      {showHeader && (
+        <header className="bg-gradient-elegant border-b border-border/30 sticky top-0 z-50 backdrop-blur-xl bg-opacity-95">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="flex justify-between items-center py-8">
             <div className="flex items-center">
@@ -196,6 +202,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           )}
         </div>
       </header>
+      )}
       <main className="flex-grow">{children}</main>
       <footer className="bg-gradient-elegant border-t border-border/30 mt-24 py-16">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
