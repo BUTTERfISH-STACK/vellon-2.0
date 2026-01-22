@@ -225,26 +225,6 @@ export default function About() {
                 </svg>
               </Link>
             </div>
-            <div className="mt-12 flex items-center justify-center gap-8 text-sm text-text-muted">
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                <span>No credit card required</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Free basic tools</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Cancel anytime</span>
-              </div>
-            </div>
           </div>
           <div className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-border/20">
             <p className="text-sm text-text-muted mb-4 sm:mb-6 text-center">Trusted by leading companies worldwide</p>

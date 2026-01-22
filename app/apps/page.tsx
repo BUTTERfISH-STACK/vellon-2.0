@@ -402,9 +402,6 @@ export default function AppsPage() {
                 View Premium Plans
               </Link>
             </div>
-            <p className="text-sm mt-6 opacity-75">
-              No credit card required • Cancel anytime • 30-day money-back guarantee
-            </p>
           </div>
         </section>
       </div>
