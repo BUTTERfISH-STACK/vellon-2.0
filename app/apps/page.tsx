@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import Layout from '@/components/Layout'
+import AdBanner from '@/components/AdBanner'
 
 export default function AppsPage() {
   const [activeTab, setActiveTab] = useState('all')
@@ -151,6 +152,19 @@ export default function AppsPage() {
                   Start Free
                 </Link>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Top Banner Ad */}
+        <section className="py-8 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-center">
+              <AdBanner
+                slot="2233445566"
+                format="horizontal"
+                className="max-w-4xl w-full"
+              />
             </div>
           </div>
         </section>
@@ -350,6 +364,19 @@ export default function AppsPage() {
           </div>
         </section>
 
+        {/* Middle Banner Ad */}
+        <section className="py-8 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-center">
+              <AdBanner
+                slot="3344556677"
+                format="rectangle"
+                className="max-w-md w-full"
+              />
+            </div>
+          </div>
+        </section>
+
         {/* FAQ Section */}
         <section className="py-20 bg-gray-50">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -377,6 +404,19 @@ export default function AppsPage() {
                 <h3 className="text-lg font-bold text-gray-900 mb-2">How long does it take to get results?</h3>
                 <p className="text-gray-600">Most tools provide instant results. CV optimization takes seconds, interview practice is immediate, and job matching happens in real-time.</p>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Bottom Banner Ad */}
+        <section className="py-8 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-center">
+              <AdBanner
+                slot="4455667788"
+                format="horizontal"
+                className="max-w-4xl w-full"
+              />
             </div>
           </div>
         </section>

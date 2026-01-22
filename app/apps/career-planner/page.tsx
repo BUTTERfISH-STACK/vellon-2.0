@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Layout from '@/components/Layout'
+import AdBanner from '@/components/AdBanner'
 
 interface RoadmapItem {
   year: number
@@ -168,6 +169,15 @@ export default function CareerPlannerPage() {
             </p>
           </div>
 
+          {/* Top Banner Ad */}
+          <div className="mb-6 sm:mb-8 flex justify-center px-4 sm:px-0">
+            <AdBanner
+              slot="5566778899"
+              format="horizontal"
+              className="max-w-4xl w-full"
+            />
+          </div>
+
           {/* Tab Navigation */}
           <div className="flex justify-center mb-8 px-4">
             <div className="bg-white rounded-xl p-1 shadow-lg border w-full max-w-md">
@@ -315,6 +325,15 @@ export default function CareerPlannerPage() {
               </div>
             </div>
           )}
+
+          {/* Middle Banner Ad */}
+          <div className="mb-6 sm:mb-8 flex justify-center px-4 sm:px-0">
+            <AdBanner
+              slot="6677889900"
+              format="rectangle"
+              className="max-w-md w-full"
+            />
+          </div>
 
           {activeTab === 'saved' && (
             <div className="bg-white p-4 sm:p-6 lg:p-8 rounded-2xl shadow-xl border border-gray-100 mx-4 sm:mx-0">
@@ -559,6 +578,15 @@ export default function CareerPlannerPage() {
                       </p>
                     </div>
                   </div>
+                </div>
+
+                {/* Bottom Banner Ad */}
+                <div className="mt-8 flex justify-center px-4 sm:px-0">
+                  <AdBanner
+                    slot="7788990011"
+                    format="horizontal"
+                    className="max-w-4xl w-full"
+                  />
                 </div>
               </div>
             </div>

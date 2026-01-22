@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Layout from '@/components/Layout'
+import AdBanner from '@/components/AdBanner'
 
 interface JobMatch {
   job_title: string
@@ -144,6 +145,15 @@ export default function JobMatchPage() {
             <p className="text-lg text-gray-600">Find your perfect job match using AI-powered analysis</p>
           </div>
 
+          {/* Top Banner Ad */}
+          <div className="mb-8 flex justify-center">
+            <AdBanner
+              slot="1234567890"
+              format="horizontal"
+              className="max-w-4xl w-full"
+            />
+          </div>
+
           <div className="bg-white p-8 rounded-xl shadow-lg mb-8 border border-gray-100">
             <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2">
               <span className="text-blue-600">🔍</span>
@@ -257,6 +267,15 @@ export default function JobMatchPage() {
                 {loading ? '🔍 Finding Jobs...' : '🚀 Find Matching Jobs'}
               </button>
             </div>
+          </div>
+
+          {/* Middle Banner Ad */}
+          <div className="mb-8 flex justify-center">
+            <AdBanner
+              slot="0987654321"
+              format="rectangle"
+              className="max-w-md w-full"
+            />
           </div>
 
           {jobs.length > 0 && (
@@ -412,6 +431,15 @@ export default function JobMatchPage() {
                   </button>
                 </div>
               )}
+
+              {/* Bottom Banner Ad */}
+              <div className="mt-8 flex justify-center">
+                <AdBanner
+                  slot="1122334455"
+                  format="horizontal"
+                  className="max-w-4xl w-full"
+                />
+              </div>
             </div>
           )}
         </div>
