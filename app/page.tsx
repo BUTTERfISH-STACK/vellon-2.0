@@ -318,7 +318,7 @@ export default function Home() {
                 <div className="text-center">
                   <h3 className="text-3xl font-bold mb-4">Professional</h3>
                   <p className="mb-8 text-lg opacity-90">Complete career enhancement suite</p>
-                  <div className="text-6xl font-black mb-8">R119.99<span className="text-2xl font-normal opacity-75"> once off</span></div>
+                  <div className="text-6xl font-black mb-8">R14.99 <span className="line-through text-white/60">R119.99</span><span className="text-2xl font-normal opacity-75"> once off</span></div>
                   <ul className="space-y-4 mb-10 text-left">
                     <li className="flex items-center gap-3">
                       <div className="w-6 h-6 bg-background/20 rounded-full flex items-center justify-center">
