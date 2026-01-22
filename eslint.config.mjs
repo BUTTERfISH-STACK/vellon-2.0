@@ -1,9 +1,10 @@
 import next from "eslint-config-next";
 
-export default [
+const config = [
   {
     ignores: [".next/**", "out/**", "build/**", "next-env.d.ts"],
   },
-  ...next.configs.recommended,
-  ...next.configs["core-web-vitals"],
+  ...next,
 ];
+
+export default config;
