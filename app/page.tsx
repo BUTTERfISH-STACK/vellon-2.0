@@ -54,12 +54,21 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="pt-6 sm:pt-4">
+                <div className="pt-6 sm:pt-4 space-y-4">
                   <a
-                    href="/apps/cv-optimizer-free"
+                    href="/apps"
                     className="inline-flex items-center justify-center gap-3 bg-red-600/25 backdrop-blur-sm text-red-300 font-semibold py-6 px-10 sm:py-5 sm:px-8 rounded-xl border border-red-500/40 hover:bg-red-600/35 hover:text-red-200 transition-all duration-300 text-lg sm:text-base shadow-premium min-h-[56px] sm:min-h-[48px] touch-manipulation w-full max-w-xs mx-auto"
                   >
-                    Launch Talent Scan
+                    Explore All Tools
+                    <svg className="w-6 h-6 sm:w-5 sm:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                  </a>
+                  <a
+                    href="/apps/cv-optimizer-free"
+                    className="inline-flex items-center justify-center gap-3 bg-white/10 backdrop-blur-sm text-white font-semibold py-6 px-10 sm:py-5 sm:px-8 rounded-xl border border-white/20 hover:bg-white/20 transition-all duration-300 text-lg sm:text-base shadow-premium min-h-[56px] sm:min-h-[48px] touch-manipulation w-full max-w-xs mx-auto"
+                  >
+                    Quick CV Scan
                     <svg className="w-6 h-6 sm:w-5 sm:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
