@@ -1,11 +1,14 @@
 'use client'
 
-import { useState } from 'react'
+import Link from 'next/link'
+import { useState, useEffect } from 'react'
 import Layout from '@/components/Layout'
 
 interface Question {
   text: string
   type: 'behavioral' | 'technical' | 'situational'
+  tips: string[]
+  example: string
 }
 
 interface Feedback {
@@ -17,6 +20,28 @@ interface Feedback {
     completeness: number
   }
   suggestions: string[]
+  strengths: string[]
+}
+
+const questionTips = {
+  behavioral: [
+    "Use the STAR method: Situation, Task, Action, Result",
+    "Focus on specific examples from your past experience",
+    "Quantify your achievements with numbers when possible",
+    "Show how you learned and grew from the experience"
+  ],
+  technical: [
+    "Be specific about technologies and tools you've used",
+    "Explain your thought process, not just the final answer",
+    "Admit what you don't know and show willingness to learn",
+    "Demonstrate problem-solving approach"
+  ],
+  situational: [
+    "Think about how you'd handle hypothetical scenarios",
+    "Show your decision-making process",
+    "Consider company values and culture fit",
+    "Balance honesty with positive outlook"
+  ]
 }
 
 export default function InterviewSimulatorPage() {
@@ -28,7 +53,20 @@ export default function InterviewSimulatorPage() {
   const [feedback, setFeedback] = useState<Feedback[]>([])
   const [overallScore, setOverallScore] = useState<number | null>(null)
   const [loading, setLoading] = useState(false)
-  const [step, setStep] = useState<'input' | 'questions' | 'feedback'>('input')
+  const [step, setStep] = useState<'intro' | 'setup' | 'practice' | 'questions' | 'feedback'>('intro')
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+  const [showTips, setShowTips] = useState(false)
+  const [timeLeft, setTimeLeft] = useState(180) // 3 minutes per question
+  const [isRecording, setIsRecording] = useState(false)
+
+  // Timer effect for questions
+  useEffect(() => {
+    let timer: NodeJS.Timeout
+    if (step === 'questions' && timeLeft > 0) {
+      timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000)
+    }
+    return () => clearTimeout(timer)
+  }, [step, timeLeft])
 
   const generateQuestions = async () => {
     if (!cvContent || !targetRole || !industry) {
@@ -48,16 +86,42 @@ export default function InterviewSimulatorPage() {
       if (data.questions) {
         setQuestions(data.questions.map((q: string, i: number) => ({
           text: q,
-          type: i < 5 ? 'behavioral' : i < 10 ? 'technical' : 'situational'
+          type: i < 5 ? 'behavioral' : i < 10 ? 'technical' : 'situational',
+          tips: questionTips[i < 5 ? 'behavioral' : i < 10 ? 'technical' : 'situational'],
+          example: `Example answer for ${i < 5 ? 'behavioral' : i < 10 ? 'technical' : 'situational'} questions...`
         })))
         setAnswers(new Array(data.questions.length).fill(''))
-        setStep('questions')
+        setStep('practice')
       }
     } catch (error) {
       console.error('Error:', error)
       alert('Failed to generate questions')
     }
     setLoading(false)
+  }
+
+  const startInterview = () => {
+    setStep('questions')
+    setCurrentQuestionIndex(0)
+    setTimeLeft(180)
+  }
+
+  const nextQuestion = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1)
+      setTimeLeft(180)
+      setShowTips(false)
+    } else {
+      submitAnswers()
+    }
+  }
+
+  const prevQuestion = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(currentQuestionIndex - 1)
+      setTimeLeft(180)
+      setShowTips(false)
+    }
   }
 
   const submitAnswers = async () => {
@@ -88,174 +152,447 @@ export default function InterviewSimulatorPage() {
   }
 
   const reset = () => {
-    setStep('input')
+    setStep('intro')
     setQuestions([])
     setAnswers([])
     setFeedback([])
     setOverallScore(null)
+    setCurrentQuestionIndex(0)
+    setShowTips(false)
+    setTimeLeft(180)
+  }
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60)
+    const secs = seconds % 60
+    return `${mins}:${secs.toString().padStart(2, '0')}`
   }
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gray-50 py-8">
-        <div className="max-w-4xl mx-auto px-4">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">AI Interview Simulator</h1>
+      {/* Custom Header */}
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <div className="flex items-center">
+              <Link href="/" className="group flex items-center gap-3 transition-all duration-300">
+                <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-premium group-hover:shadow-glow transition-all duration-300">
+                  <img src="/new-logo.png" alt="Vellon Logo" className="w-7 h-7 object-contain" />
+                </div>
+                <span className="text-2xl font-bold text-gradient-gold tracking-tight">Vellon</span>
+              </Link>
+            </div>
+            <div className="flex items-center gap-4">
+              <Link
+                href="/apps"
+                className="text-gray-600 hover:text-blue-600 transition-colors duration-300 font-medium"
+              >
+                ← Back to Tools
+              </Link>
+              <Link
+                href="/apps/cv-optimizer-free"
+                className="bg-gradient-primary text-white font-bold py-2 px-6 rounded-xl hover:shadow-glow transition-all duration-300 shadow-premium"
+              >
+                Start Free
+              </Link>
+            </div>
+          </div>
+        </div>
+      </header>
 
-          {step === 'input' && (
-            <div className="bg-white p-6 rounded-lg shadow">
-              <h2 className="text-xl font-semibold mb-4">Setup Your Interview</h2>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    CV Content
-                  </label>
-                  <textarea
-                    value={cvContent}
-                    onChange={(e) => setCvContent(e.target.value)}
-                    className="w-full h-32 p-3 border border-gray-300 rounded-md"
-                    placeholder="Paste your CV content here..."
-                  />
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+        {/* Intro Section */}
+        {step === 'intro' && (
+          <section className="py-20">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+              <div className="mb-12">
+                <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                  🎤 AI-Powered Interview Practice
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <h1 className="text-5xl md:text-6xl font-black mb-6 leading-tight">
+                  Master Your
+                  <span className="block text-blue-600">Interview Skills</span>
+                </h1>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                  Practice with realistic interview questions, get detailed AI feedback, and improve your performance with personalized coaching tips.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div className="bg-white p-6 rounded-xl shadow-lg">
+                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl">🎯</span>
+                  </div>
+                  <h3 className="text-lg font-bold mb-2">Realistic Questions</h3>
+                  <p className="text-gray-600">Behavioral, technical, and situational questions tailored to your role</p>
+                </div>
+                <div className="bg-white p-6 rounded-xl shadow-lg">
+                  <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl">📊</span>
+                  </div>
+                  <h3 className="text-lg font-bold mb-2">Detailed Feedback</h3>
+                  <p className="text-gray-600">AI analysis of clarity, confidence, relevance, and completeness</p>
+                </div>
+                <div className="bg-white p-6 rounded-xl shadow-lg">
+                  <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl">🚀</span>
+                  </div>
+                  <h3 className="text-lg font-bold mb-2">Practice Mode</h3>
+                  <p className="text-gray-600">Step-by-step guidance with tips and examples for each question type</p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => setStep('setup')}
+                className="bg-gradient-primary text-white font-bold py-4 px-8 rounded-xl hover:shadow-glow transition-all duration-300 shadow-premium transform hover:scale-105 text-lg"
+              >
+                Start Interview Practice
+              </button>
+            </div>
+          </section>
+        )}
+
+        {/* Setup Section */}
+        {step === 'setup' && (
+          <section className="py-16">
+            <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="bg-white rounded-2xl shadow-xl p-8">
+                <div className="text-center mb-8">
+                  <h2 className="text-3xl font-bold text-gray-900 mb-4">Setup Your Practice Session</h2>
+                  <p className="text-gray-600">Tell us about your target role so we can generate relevant questions</p>
+                </div>
+
+                <div className="space-y-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Target Role
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      Your CV/Resume Content
                     </label>
-                    <input
-                      type="text"
-                      value={targetRole}
-                      onChange={(e) => setTargetRole(e.target.value)}
-                      className="w-full p-3 border border-gray-300 rounded-md"
-                      placeholder="e.g., Software Engineer"
+                    <textarea
+                      value={cvContent}
+                      onChange={(e) => setCvContent(e.target.value)}
+                      className="w-full h-32 p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 resize-none"
+                      placeholder="Paste your CV content here to personalize questions..."
                     />
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Industry
-                    </label>
-                    <input
-                      type="text"
-                      value={industry}
-                      onChange={(e) => setIndustry(e.target.value)}
-                      className="w-full p-3 border border-gray-300 rounded-md"
-                      placeholder="e.g., Technology"
-                    />
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        Target Role
+                      </label>
+                      <input
+                        type="text"
+                        value={targetRole}
+                        onChange={(e) => setTargetRole(e.target.value)}
+                        className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                        placeholder="e.g., Software Engineer"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        Industry
+                      </label>
+                      <input
+                        type="text"
+                        value={industry}
+                        onChange={(e) => setIndustry(e.target.value)}
+                        className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                        placeholder="e.g., Technology"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <button
+                      onClick={() => setStep('intro')}
+                      className="flex-1 bg-gray-200 text-gray-700 font-semibold py-4 px-6 rounded-xl hover:bg-gray-300 transition-all duration-300"
+                    >
+                      ← Back
+                    </button>
+                    <button
+                      onClick={generateQuestions}
+                      disabled={loading || !targetRole || !industry}
+                      className="flex-1 bg-gradient-primary text-white font-bold py-4 px-6 rounded-xl hover:shadow-glow transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {loading ? 'Generating Questions...' : 'Generate Interview Questions'}
+                    </button>
                   </div>
                 </div>
-                <button
-                  onClick={generateQuestions}
-                  disabled={loading}
-                  className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 disabled:opacity-50"
-                >
-                  {loading ? 'Generating...' : 'Generate Interview Questions'}
-                </button>
               </div>
             </div>
-          )}
+          </section>
+        )}
 
-          {step === 'questions' && (
-            <div className="bg-white p-6 rounded-lg shadow">
-              <h2 className="text-xl font-semibold mb-4">Answer the Questions</h2>
+        {/* Practice Mode */}
+        {step === 'practice' && (
+          <section className="py-16">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <h2 className="text-4xl font-bold text-gray-900 mb-4">Practice Mode</h2>
+                <p className="text-xl text-gray-600">Review your questions and get familiar with the format before starting</p>
+              </div>
+
               <div className="space-y-6">
                 {questions.map((question, index) => (
-                  <div key={index} className="border-b pb-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className={`px-2 py-1 text-xs rounded ${
+                  <div key={index} className="bg-white rounded-xl shadow-lg p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className={`px-3 py-1 text-sm rounded-full font-medium ${
                         question.type === 'behavioral' ? 'bg-blue-100 text-blue-800' :
                         question.type === 'technical' ? 'bg-green-100 text-green-800' :
                         'bg-purple-100 text-purple-800'
                       }`}>
                         {question.type}
                       </span>
-                      <span className="font-medium">Question {index + 1}</span>
+                      <span className="text-lg font-semibold text-gray-900">Question {index + 1}</span>
                     </div>
-                    <p className="mb-3 text-gray-700">{question.text}</p>
-                    <textarea
-                      value={answers[index]}
-                      onChange={(e) => {
-                        const newAnswers = [...answers]
-                        newAnswers[index] = e.target.value
-                        setAnswers(newAnswers)
-                      }}
-                      className="w-full h-24 p-3 border border-gray-300 rounded-md"
-                      placeholder="Your answer..."
-                    />
+                    <p className="text-gray-700 text-lg leading-relaxed mb-4">{question.text}</p>
+
+                    <div className="bg-gray-50 rounded-lg p-4">
+                      <h4 className="font-semibold text-gray-900 mb-2">💡 Tips for answering:</h4>
+                      <ul className="space-y-1">
+                        {question.tips.slice(0, 2).map((tip, i) => (
+                          <li key={i} className="text-sm text-gray-600 flex items-start gap-2">
+                            <span className="text-blue-500 mt-1">•</span>
+                            {tip}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 ))}
-                <div className="flex gap-4">
-                  <button
-                    onClick={submitAnswers}
-                    disabled={loading}
-                    className="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700 disabled:opacity-50"
-                  >
-                    {loading ? 'Evaluating...' : 'Submit Answers'}
-                  </button>
-                  <button
-                    onClick={reset}
-                    className="bg-gray-600 text-white px-6 py-3 rounded-md hover:bg-gray-700"
-                  >
-                    Start Over
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {step === 'feedback' && (
-            <div className="space-y-6">
-              <div className="bg-white p-6 rounded-lg shadow">
-                <h2 className="text-xl font-semibold mb-4">Overall Performance</h2>
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-blue-600 mb-2">{overallScore}/100</div>
-                  <p className="text-gray-600">Overall Interview Score</p>
-                </div>
               </div>
 
-              <div className="bg-white p-6 rounded-lg shadow">
-                <h2 className="text-xl font-semibold mb-4">Detailed Feedback</h2>
-                <div className="space-y-4">
-                  {feedback.map((item, index) => (
-                    <div key={index} className="border rounded-lg p-4">
-                      <h3 className="font-medium mb-2">Question {item.question_index + 1}</h3>
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-3">
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-blue-600">{item.scores.clarity}</div>
-                          <div className="text-sm text-gray-600">Clarity</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-green-600">{item.scores.confidence}</div>
-                          <div className="text-sm text-gray-600">Confidence</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-purple-600">{item.scores.relevance}</div>
-                          <div className="text-sm text-gray-600">Relevance</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-orange-600">{item.scores.completeness}</div>
-                          <div className="text-sm text-gray-600">Completeness</div>
-                        </div>
-                      </div>
-                      <div>
-                        <h4 className="font-medium mb-2">Suggestions:</h4>
-                        <ul className="list-disc list-inside space-y-1">
-                          {item.suggestions.map((suggestion, i) => (
-                            <li key={i} className="text-sm text-gray-700">{suggestion}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+              <div className="text-center mt-12">
                 <button
-                  onClick={reset}
-                  className="mt-6 bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700"
+                  onClick={startInterview}
+                  className="bg-gradient-primary text-white font-bold py-4 px-8 rounded-xl hover:shadow-glow transition-all duration-300 shadow-premium transform hover:scale-105 text-lg"
                 >
-                  Practice Again
+                  Start Interview Practice
                 </button>
               </div>
             </div>
-          )}
-        </div>
+          </section>
+        )}
+
+        {/* Questions Section */}
+        {step === 'questions' && questions.length > 0 && (
+          <section className="py-16">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+              {/* Progress Bar */}
+              <div className="mb-8">
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-lg font-semibold text-gray-900">
+                    Question {currentQuestionIndex + 1} of {questions.length}
+                  </span>
+                  <span className={`text-lg font-mono ${timeLeft < 30 ? 'text-red-600' : 'text-gray-600'}`}>
+                    {formatTime(timeLeft)}
+                  </span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-3">
+                  <div
+                    className="bg-gradient-primary h-3 rounded-full transition-all duration-300"
+                    style={{ width: `${((currentQuestionIndex + 1) / questions.length) * 100}%` }}
+                  ></div>
+                </div>
+              </div>
+
+              {/* Current Question */}
+              <div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <span className={`px-4 py-2 text-sm rounded-full font-medium ${
+                    questions[currentQuestionIndex].type === 'behavioral' ? 'bg-blue-100 text-blue-800' :
+                    questions[currentQuestionIndex].type === 'technical' ? 'bg-green-100 text-green-800' :
+                    'bg-purple-100 text-purple-800'
+                  }`}>
+                    {questions[currentQuestionIndex].type} Question
+                  </span>
+                </div>
+
+                <h3 className="text-2xl font-bold text-gray-900 mb-6 leading-relaxed">
+                  {questions[currentQuestionIndex].text}
+                </h3>
+
+                <textarea
+                  value={answers[currentQuestionIndex]}
+                  onChange={(e) => {
+                    const newAnswers = [...answers]
+                    newAnswers[currentQuestionIndex] = e.target.value
+                    setAnswers(newAnswers)
+                  }}
+                  className="w-full h-40 p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 resize-none text-lg"
+                  placeholder="Type your answer here..."
+                />
+
+                {/* Tips Toggle */}
+                <div className="mt-6">
+                  <button
+                    onClick={() => setShowTips(!showTips)}
+                    className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium"
+                  >
+                    <span>{showTips ? '▼' : '▶'}</span>
+                    {showTips ? 'Hide' : 'Show'} Tips for Answering
+                  </button>
+
+                  {showTips && (
+                    <div className="mt-4 bg-blue-50 rounded-lg p-4">
+                      <h4 className="font-semibold text-blue-900 mb-3">💡 Tips for {questions[currentQuestionIndex].type} questions:</h4>
+                      <ul className="space-y-2">
+                        {questions[currentQuestionIndex].tips.map((tip, i) => (
+                          <li key={i} className="text-blue-800 flex items-start gap-2">
+                            <span className="text-blue-600 mt-1">•</span>
+                            {tip}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Navigation */}
+              <div className="flex justify-between items-center">
+                <button
+                  onClick={prevQuestion}
+                  disabled={currentQuestionIndex === 0}
+                  className="flex items-center gap-2 bg-gray-200 text-gray-700 font-semibold py-3 px-6 rounded-xl hover:bg-gray-300 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  ← Previous
+                </button>
+
+                <div className="text-center">
+                  <div className="text-sm text-gray-500 mb-2">Question {currentQuestionIndex + 1} of {questions.length}</div>
+                  <div className="flex gap-2">
+                    {questions.map((_, index) => (
+                      <div
+                        key={index}
+                        className={`w-3 h-3 rounded-full ${
+                          index === currentQuestionIndex ? 'bg-blue-600' :
+                          answers[index]?.trim() ? 'bg-green-500' : 'bg-gray-300'
+                        }`}
+                      ></div>
+                    ))}
+                  </div>
+                </div>
+
+                <button
+                  onClick={nextQuestion}
+                  disabled={!answers[currentQuestionIndex]?.trim()}
+                  className="flex items-center gap-2 bg-gradient-primary text-white font-semibold py-3 px-6 rounded-xl hover:shadow-glow transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {currentQuestionIndex === questions.length - 1 ? 'Submit Answers' : 'Next'} →
+                </button>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Feedback Section */}
+        {step === 'feedback' && (
+          <section className="py-16">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+              {/* Overall Score */}
+              <div className="text-center mb-12">
+                <div className="inline-block bg-white rounded-2xl shadow-xl p-8">
+                  <div className="text-6xl mb-4">🎉</div>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-2">Interview Complete!</h2>
+                  <div className="text-6xl font-black text-blue-600 mb-2">{overallScore}/100</div>
+                  <p className="text-xl text-gray-600">Your Overall Interview Score</p>
+                </div>
+              </div>
+
+              {/* Detailed Feedback */}
+              <div className="space-y-8">
+                {feedback.map((item, index) => (
+                  <div key={index} className="bg-white rounded-xl shadow-lg p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className={`px-3 py-1 text-sm rounded-full font-medium ${
+                        questions[item.question_index]?.type === 'behavioral' ? 'bg-blue-100 text-blue-800' :
+                        questions[item.question_index]?.type === 'technical' ? 'bg-green-100 text-green-800' :
+                        'bg-purple-100 text-purple-800'
+                      }`}>
+                        {questions[item.question_index]?.type}
+                      </span>
+                      <h3 className="text-xl font-bold text-gray-900">Question {item.question_index + 1}</h3>
+                    </div>
+
+                    <p className="text-gray-700 mb-6 italic">"{questions[item.question_index]?.text}"</p>
+
+                    {/* Scores */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
+                      <div className="text-center">
+                        <div className={`text-3xl font-bold mb-2 ${
+                          item.scores.clarity >= 7 ? 'text-green-600' :
+                          item.scores.clarity >= 4 ? 'text-yellow-600' : 'text-red-600'
+                        }`}>
+                          {item.scores.clarity}/10
+                        </div>
+                        <div className="text-sm text-gray-600 font-medium">Clarity</div>
+                      </div>
+                      <div className="text-center">
+                        <div className={`text-3xl font-bold mb-2 ${
+                          item.scores.confidence >= 7 ? 'text-green-600' :
+                          item.scores.confidence >= 4 ? 'text-yellow-600' : 'text-red-600'
+                        }`}>
+                          {item.scores.confidence}/10
+                        </div>
+                        <div className="text-sm text-gray-600 font-medium">Confidence</div>
+                      </div>
+                      <div className="text-center">
+                        <div className={`text-3xl font-bold mb-2 ${
+                          item.scores.relevance >= 7 ? 'text-green-600' :
+                          item.scores.relevance >= 4 ? 'text-yellow-600' : 'text-red-600'
+                        }`}>
+                          {item.scores.relevance}/10
+                        </div>
+                        <div className="text-sm text-gray-600 font-medium">Relevance</div>
+                      </div>
+                      <div className="text-center">
+                        <div className={`text-3xl font-bold mb-2 ${
+                          item.scores.completeness >= 7 ? 'text-green-600' :
+                          item.scores.completeness >= 4 ? 'text-yellow-600' : 'text-red-600'
+                        }`}>
+                          {item.scores.completeness}/10
+                        </div>
+                        <div className="text-sm text-gray-600 font-medium">Completeness</div>
+                      </div>
+                    </div>
+
+                    {/* Suggestions */}
+                    <div className="bg-blue-50 rounded-lg p-4">
+                      <h4 className="font-semibold text-blue-900 mb-3">💡 Improvement Suggestions:</h4>
+                      <ul className="space-y-2">
+                        {item.suggestions.map((suggestion, i) => (
+                          <li key={i} className="text-blue-800 flex items-start gap-2">
+                            <span className="text-blue-600 mt-1">•</span>
+                            {suggestion}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Action Buttons */}
+              <div className="text-center mt-12">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <button
+                    onClick={reset}
+                    className="bg-gradient-primary text-white font-bold py-4 px-8 rounded-xl hover:shadow-glow transition-all duration-300 shadow-premium"
+                  >
+                    Practice Again
+                  </button>
+                  <Link
+                    href="/apps"
+                    className="bg-gray-200 text-gray-700 font-bold py-4 px-8 rounded-xl hover:bg-gray-300 transition-all duration-300"
+                  >
+                    Back to Tools
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
       </div>
     </Layout>
   )
