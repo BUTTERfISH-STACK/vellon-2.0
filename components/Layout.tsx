@@ -112,6 +112,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 Home
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
               </Link>
+              <Link href="/apps" className="text-text-muted hover:text-accent transition-all duration-300 font-medium text-lg relative group">
+                Tools
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
+              </Link>
               <Link href="/about" className="text-text-muted hover:text-accent transition-all duration-300 font-medium text-lg relative group">
                 About
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
@@ -153,6 +157,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Home
+                </Link>
+                <Link
+                  href="/apps"
+                  className="block text-text-muted hover:text-accent transition-all duration-300 font-medium text-lg py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Tools
                 </Link>
                 <Link
                   href="/about"
