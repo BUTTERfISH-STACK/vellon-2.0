@@ -246,29 +246,27 @@ export default function About() {
               </div>
             </div>
           </div>
-          <div className="mt-16 pt-8 border-t border-border/20">
-            <p className="text-sm text-text-muted mb-6">Trusted by professionals at leading South African companies</p>
-            <div className="flex justify-center items-center gap-8 opacity-60">
-              <div className="text-xs font-semibold text-text-muted tracking-wider">FEATURED IN</div>
+          <div className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-border/20">
+            <p className="text-sm text-text-muted mb-4 sm:mb-6 text-center">Trusted by leading companies worldwide</p>
+            <div className="flex justify-center items-center gap-4 sm:gap-8 opacity-60">
+              <div className="text-xs font-semibold text-text-muted tracking-wider">TRUSTED BY</div>
               <div className="w-px h-4 bg-border"></div>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3 sm:gap-4 flex-wrap justify-center">
                 <div className="flex items-center gap-2 px-3 py-2 bg-surface-light/50 rounded-lg hover:bg-surface-light/70 transition-colors">
-                  <svg className="w-4 h-4 text-text-muted" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
-                  </svg>
-                  <span className="text-xs font-medium text-text-muted">Business Day</span>
+                  <img src="/lumi.svg" alt="Lumi" className="w-4 h-4" />
+                  <span className="text-xs font-medium text-text-muted">Lumi</span>
                 </div>
                 <div className="flex items-center gap-2 px-3 py-2 bg-surface-light/50 rounded-lg hover:bg-surface-light/70 transition-colors">
-                  <svg className="w-4 h-4 text-text-muted" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-                  </svg>
-                  <span className="text-xs font-medium text-text-muted">Fin24</span>
+                  <img src="/bitbucket.svg" alt="Bitbucket" className="w-4 h-4" />
+                  <span className="text-xs font-medium text-text-muted">Bitbucket</span>
                 </div>
                 <div className="flex items-center gap-2 px-3 py-2 bg-surface-light/50 rounded-lg hover:bg-surface-light/70 transition-colors">
-                  <svg className="w-4 h-4 text-text-muted" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-                  </svg>
-                  <span className="text-xs font-medium text-text-muted">IOL</span>
+                  <img src="/bizzabo.svg" alt="Bizzabo" className="w-4 h-4" />
+                  <span className="text-xs font-medium text-text-muted">Bizzabo</span>
+                </div>
+                <div className="flex items-center gap-2 px-3 py-2 bg-surface-light/50 rounded-lg hover:bg-surface-light/70 transition-colors">
+                  <img src="/lucid.svg" alt="Lucid" className="w-4 h-4" />
+                  <span className="text-xs font-medium text-text-muted">Lucid</span>
                 </div>
               </div>
             </div>
