@@ -77,7 +77,7 @@ export default function Home() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-white/10 rounded-full"></div>
 
                     {/* Atmospheric Glow */}
-                    <div className="absolute inset-0 bg-gradient-radial from-transparent via-blue-500/10 to-cyan-400/20 rounded-full animate-pulse-slow"></div>
+                    <div className="absolute inset-0 bg-gradient-radial from-transparent via-blue-500/10 to-cyan-400/20 rounded-full animate-pulse-slow shadow-[0_0_40px_rgba(59,130,246,0.3)]"></div>
                   </div>
 
                   {/* Floating Particles */}
