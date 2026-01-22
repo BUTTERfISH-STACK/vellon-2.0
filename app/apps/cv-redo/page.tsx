@@ -747,7 +747,7 @@ export default function CVRedoPage() {
               <span className="text-primary font-bold text-sm tracking-wide">🚀 AI CV REDO</span>
             </div>
           </div>
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight bg-gradient-primary bg-clip-text text-transparent mb-8 leading-[0.9]">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight bg-gradient-primary bg-clip-text text-transparent mb-8 leading-[0.9]" style={{ textShadow: '0 0 30px rgba(99, 102, 241, 0.5), 0 0 60px rgba(99, 102, 241, 0.3), 0 0 90px rgba(99, 102, 241, 0.1)' }}>
             Transform Your CV
           </h1>
           <p className="max-w-4xl mx-auto text-xl sm:text-2xl text-text-muted mb-12 leading-relaxed font-light">
@@ -802,9 +802,37 @@ export default function CVRedoPage() {
 
               {isEditing ? (
                 <div className="space-y-8">
+                  {/* Progress Indicator */}
+                  <div className="bg-gradient-to-r from-primary/10 to-secondary/10 backdrop-blur-sm p-6 rounded-2xl border border-primary/20">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-lg font-bold text-foreground">Form Completion</h3>
+                      <span className="text-sm text-text-muted">
+                        {Math.round(((cvData.personal.name ? 1 : 0) + (cvData.personal.email ? 1 : 0) + (cvData.personal.phone ? 1 : 0) + (cvData.summary ? 1 : 0) + (cvData.experience.some(e => e.position) ? 1 : 0) + (cvData.education.some(e => e.degree) ? 1 : 0) + (cvData.skills.some(s => s.trim()) ? 1 : 0)) / 7 * 100)}%
+                      </span>
+                    </div>
+                    <div className="w-full bg-surface rounded-full h-3">
+                      <div
+                        className="bg-gradient-to-r from-primary to-secondary h-3 rounded-full transition-all duration-500"
+                        style={{ width: `${Math.round(((cvData.personal.name ? 1 : 0) + (cvData.personal.email ? 1 : 0) + (cvData.personal.phone ? 1 : 0) + (cvData.summary ? 1 : 0) + (cvData.experience.some(e => e.position) ? 1 : 0) + (cvData.education.some(e => e.degree) ? 1 : 0) + (cvData.skills.some(s => s.trim()) ? 1 : 0)) / 7 * 100)}%` }}
+                      ></div>
+                    </div>
+                    <div className="flex justify-between text-xs text-text-muted mt-2">
+                      <span>Basic Info</span>
+                      <span>Experience</span>
+                      <span>Education</span>
+                      <span>Skills</span>
+                    </div>
+                  </div>
                   {/* Personal Information */}
-                  <div>
-                    <h3 className="text-lg font-semibold text-foreground mb-4">Personal Information</h3>
+                  <div className="group bg-gradient-to-br from-surface via-surface-light to-surface/80 backdrop-blur-sm p-6 rounded-2xl border border-border/30 hover:border-primary/50 transition-all duration-300 hover:shadow-glow">
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-premium">
+                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                      </div>
+                      <h3 className="text-xl font-bold text-foreground">Personal Information</h3>
+                    </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-medium text-foreground mb-2">Full Name</label>
@@ -951,23 +979,37 @@ export default function CVRedoPage() {
                   )}
 
                   {/* Professional Summary */}
-                  <div>
-                    <h3 className="text-lg font-semibold text-foreground mb-4">Professional Summary</h3>
+                  <div className="group bg-gradient-to-br from-surface via-surface-light to-surface/80 backdrop-blur-sm p-6 rounded-2xl border border-border/30 hover:border-secondary/50 transition-all duration-300 hover:shadow-glow">
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-10 h-10 bg-gradient-to-r from-secondary to-accent rounded-xl flex items-center justify-center shadow-premium">
+                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                      </div>
+                      <h3 className="text-xl font-bold text-foreground">Professional Summary</h3>
+                    </div>
                     <textarea
                       value={cvData.summary}
                       onChange={(e) => setCvData(prev => ({ ...prev, summary: e.target.value }))}
                       rows={4}
-                      className="w-full px-4 py-3 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 text-foreground placeholder-text-muted resize-none"
+                      className="w-full px-4 py-3 bg-surface/50 border border-border/50 rounded-xl focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-200 text-foreground placeholder-text-muted resize-none hover:bg-surface"
                       placeholder="Write a compelling professional summary that highlights your key strengths and career goals..."
                     />
                   </div>
 
                   {/* Experience */}
-                  <div>
-                    <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-lg font-semibold text-foreground">
-                        Work Experience {!isPro && `(${cvData.experience.length}/2)`}
-                      </h3>
+                  <div className="group bg-gradient-to-br from-surface via-surface-light to-surface/80 backdrop-blur-sm p-6 rounded-2xl border border-border/30 hover:border-accent/50 transition-all duration-300 hover:shadow-glow">
+                    <div className="flex justify-between items-center mb-6">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-gradient-to-r from-accent to-primary rounded-xl flex items-center justify-center shadow-premium">
+                          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m8 0V8a2 2 0 01-2 2H8a2 2 0 01-2-2V6m8 0H8" />
+                          </svg>
+                        </div>
+                        <h3 className="text-xl font-bold text-foreground">
+                          Work Experience {!isPro && `(${cvData.experience.length}/2)`}
+                        </h3>
+                      </div>
                       {(isPro || cvData.experience.length < 2) && (
                         <button
                           onClick={addExperience}
@@ -1044,11 +1086,18 @@ export default function CVRedoPage() {
                   </div>
 
                   {/* Education */}
-                  <div>
-                    <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-lg font-semibold text-foreground">
-                        Education {!isPro && `(${cvData.education.length}/1)`}
-                      </h3>
+                  <div className="group bg-gradient-to-br from-surface via-surface-light to-surface/80 backdrop-blur-sm p-6 rounded-2xl border border-border/30 hover:border-primary/50 transition-all duration-300 hover:shadow-glow">
+                    <div className="flex justify-between items-center mb-6">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-gradient-to-r from-primary to-secondary rounded-xl flex items-center justify-center shadow-premium">
+                          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                          </svg>
+                        </div>
+                        <h3 className="text-xl font-bold text-foreground">
+                          Education {!isPro && `(${cvData.education.length}/1)`}
+                        </h3>
+                      </div>
                       {(isPro || cvData.education.length < 1) && (
                         <button
                           onClick={addEducation}
@@ -1125,11 +1174,18 @@ export default function CVRedoPage() {
                   </div>
 
                   {/* Skills */}
-                  <div>
-                    <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-lg font-semibold text-foreground">
-                        Skills {!isPro && `(${cvData.skills.filter(s => s.trim()).length}/5)`}
-                      </h3>
+                  <div className="group bg-gradient-to-br from-surface via-surface-light to-surface/80 backdrop-blur-sm p-6 rounded-2xl border border-border/30 hover:border-accent/50 transition-all duration-300 hover:shadow-glow">
+                    <div className="flex justify-between items-center mb-6">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-gradient-to-r from-accent to-secondary rounded-xl flex items-center justify-center shadow-premium">
+                          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                          </svg>
+                        </div>
+                        <h3 className="text-xl font-bold text-foreground">
+                          Skills {!isPro && `(${cvData.skills.filter(s => s.trim()).length}/5)`}
+                        </h3>
+                      </div>
                       {(isPro || cvData.skills.length < 5) && (
                         <button
                           onClick={addSkill}
@@ -1163,11 +1219,18 @@ export default function CVRedoPage() {
                   </div>
 
                   {/* Certifications */}
-                  <div>
-                    <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-lg font-semibold text-foreground">
-                        Certifications (Optional) {!isPro && `(${cvData.certifications.filter(c => c.name.trim()).length}/2)`}
-                      </h3>
+                  <div className="group bg-gradient-to-br from-surface via-surface-light to-surface/80 backdrop-blur-sm p-6 rounded-2xl border border-border/30 hover:border-secondary/50 transition-all duration-300 hover:shadow-glow">
+                    <div className="flex justify-between items-center mb-6">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-gradient-to-r from-secondary to-accent rounded-xl flex items-center justify-center shadow-premium">
+                          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                        </div>
+                        <h3 className="text-xl font-bold text-foreground">
+                          Certifications (Optional) {!isPro && `(${cvData.certifications.filter(c => c.name.trim()).length}/2)`}
+                        </h3>
+                      </div>
                       {(isPro || cvData.certifications.length < 2) && (
                         <button
                           onClick={addCertification}
@@ -1303,10 +1366,10 @@ export default function CVRedoPage() {
                     <div className="relative mb-8 pb-6 border-b-2 border-primary">
                       <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-lg"></div>
                       <div className="relative text-center">
-                        <h2 className="text-3xl font-black text-foreground mb-3">{cvData.personal.name || 'Your Name'}</h2>
-                        <p className="text-primary font-semibold text-lg mb-4">Professional CV - AI Redesigned</p>
+                        <h2 className="text-3xl font-black text-foreground mb-3" style={{ textShadow: '0 0 20px rgba(99, 102, 241, 0.5), 0 0 40px rgba(99, 102, 241, 0.3)' }}>{cvData.personal.name || 'Your Name'}</h2>
+                        <p className="text-primary font-semibold text-lg mb-4" style={{ textShadow: '0 0 10px rgba(99, 102, 241, 0.6)' }}>Professional CV - AI Redesigned</p>
                         <div className="flex justify-center">
-                          <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+                          <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary rounded-full shadow-glow"></div>
                         </div>
                       </div>
                     </div>
