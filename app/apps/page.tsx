@@ -101,7 +101,7 @@ export default function AppsPage() {
     <Layout>
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700 text-white py-20">
+        <section className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700 text-white py-32">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <h1 className="text-5xl md:text-6xl font-black mb-6 leading-tight">
