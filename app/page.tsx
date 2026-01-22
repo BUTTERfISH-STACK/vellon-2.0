@@ -6,8 +6,17 @@ export default function Home() {
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
         {/* Hero Section */}
         <section className="min-h-screen flex items-center justify-center relative overflow-hidden px-4 sm:px-6 lg:px-8">
-          {/* Space Background */}
-          <div className="absolute inset-0 bg-black/90" style={{backgroundImage: 'url("/space-bg.jpg")', backgroundSize: 'cover', backgroundPosition: 'center'}}></div>
+          {/* Space Background Video */}
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            autoPlay
+            loop
+            muted
+            playsInline
+          >
+            <source src="/5747525-uhd_2160_3240_24fps.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-black/40"></div>
           
           {/* Cinematic Noise Overlay */}
           <div className="absolute inset-0 bg-noise opacity-10"></div>
