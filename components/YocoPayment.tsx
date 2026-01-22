@@ -99,7 +99,7 @@ export default function YocoPayment({ amount, currency = 'ZAR', onSuccess, onErr
         )}
       </button>
 
-      <div className="text-center text-xs text-text-muted">
+      <div className="text-center text-xs text-black">
         <p>Secure payment powered by Yoco</p>
         <p className="mt-1">🔒 SSL Encrypted • 💳 All major cards accepted</p>
       </div>
