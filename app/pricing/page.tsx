@@ -95,7 +95,7 @@ export default function Pricing() {
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold mb-2">Complete career enhancement suite</h3>
                 <div className="text-3xl font-bold mb-2">
-                  <span className="line-through text-white/60">R119.99</span> Special Offer
+                  R14.99 <span className="line-through text-white/60">R119.99</span>
                 </div>
                 <p className="text-white/80 text-sm">Limited time offer • One-time purchase</p>
               </div>
