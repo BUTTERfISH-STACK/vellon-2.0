@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
         {/* Hero Section */}
-        <section className="min-h-screen flex items-center justify-center relative overflow-hidden px-4 sm:px-6 lg:px-8">
+        <section className="min-h-screen flex items-center justify-center relative overflow-hidden px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
           {/* Space Background Video */}
           <video
             className="absolute inset-0 w-full h-full object-cover"
@@ -42,11 +42,11 @@ export default function Home() {
               {/* Left Content */}
               <div className="text-left space-y-8">
                 <div className="space-y-6">
-                  <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-tight tracking-tighter">
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight tracking-tighter">
                     Vellon × The Future<br/>
                     <span className="text-white/80">of Talent</span>
                   </h1>
-                  <p className="text-xl sm:text-2xl text-white/60 max-w-lg leading-relaxed font-light">
+                  <p className="text-lg sm:text-xl md:text-2xl text-white/60 max-w-lg leading-relaxed font-light">
                     From Earth to orbit — talent without borders.
                   </p>
                 </div>
@@ -54,47 +54,17 @@ export default function Home() {
                 <div className="flex justify-center pt-4">
                   <a
                     href="/apps/cv-optimizer-free"
-                    className="inline-flex items-center justify-center gap-3 bg-red-600/20 backdrop-blur-sm text-red-400 font-semibold py-4 px-8 rounded-lg border border-red-600/30 hover:bg-red-600/30 hover:text-red-300 transition-all duration-300 text-lg shadow-premium"
+                    className="inline-flex items-center justify-center gap-3 bg-red-600/20 backdrop-blur-sm text-red-400 font-semibold py-5 px-8 sm:py-4 sm:px-8 rounded-lg border border-red-600/30 hover:bg-red-600/30 hover:text-red-300 transition-all duration-300 text-base sm:text-lg shadow-premium min-h-[48px] touch-manipulation"
                   >
                     Launch Talent Scan
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
                   </a>
                 </div>
               </div>
               
-              {/* Right Visual */}
-              <div className="relative h-96 lg:h-full min-h-[400px] flex items-center justify-center">
-                {/* Background Glow */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-purple-900/20 to-cyan-900/30 rounded-3xl transform rotate-3 blur-xl opacity-50"></div>
-
-                {/* Main Container */}
-                <div className="relative w-80 h-80 lg:w-96 lg:h-96 group">
-                  {/* Orbital Rings */}
-                  <div className="absolute inset-0 rounded-full border border-white/20 animate-spin-slow"></div>
-                  <div className="absolute inset-4 rounded-full border border-white/10 animate-spin-reverse-slow"></div>
-                  <div className="absolute inset-8 rounded-full border border-white/5 animate-spin-slow"></div>
-
-                  {/* Earth Image */}
-                  <div className="relative w-full h-full rounded-full overflow-hidden shadow-premium group-hover:shadow-glow transition-all duration-500">
-                    <img
-                      src="/earth-night.jpg"
-                      alt="Earth from space at night"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-white/10 rounded-full"></div>
-
-                    {/* Atmospheric Glow */}
-                    <div className="absolute inset-0 bg-gradient-radial from-transparent via-blue-500/10 to-cyan-400/20 rounded-full animate-pulse-slow shadow-[0_0_40px_rgba(59,130,246,0.3)]"></div>
-                  </div>
-
-                  {/* Floating Particles */}
-                  <div className="absolute -top-4 -right-4 w-3 h-3 bg-accent rounded-full animate-bounce-slow opacity-60"></div>
-                  <div className="absolute -bottom-6 -left-6 w-2 h-2 bg-gold rounded-full animate-bounce-reverse-slow opacity-80"></div>
-                  <div className="absolute top-1/2 -right-8 w-1.5 h-1.5 bg-white rounded-full animate-pulse opacity-40"></div>
-                </div>
-              </div>
+              {/* Right Visual - Removed */}
             </div>
           </div>
         </section>
