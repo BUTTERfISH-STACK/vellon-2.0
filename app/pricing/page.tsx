@@ -2,13 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import dynamic from 'next/dynamic';
-
-// Dynamically import Yoco SDK to avoid SSR issues
-const YocoPayment = dynamic(() => import('../components/YocoPayment'), {
-  ssr: false,
-  loading: () => <div className="animate-pulse bg-surface rounded-lg p-4">Loading payment...</div>
-});
+import YocoPayment from '../../components/YocoPayment';
 
 export default function Pricing() {
   const [isProcessing, setIsProcessing] = useState(false);
