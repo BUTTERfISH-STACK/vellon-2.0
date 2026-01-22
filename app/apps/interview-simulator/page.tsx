@@ -255,70 +255,159 @@ export default function InterviewSimulatorPage() {
         {/* Setup Section */}
         {step === 'setup' && (
           <section className="py-16">
-            <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="bg-white rounded-2xl shadow-xl p-8">
-                <div className="text-center mb-8">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-4">Setup Your Practice Session</h2>
-                  <p className="text-gray-600">Tell us about your target role so we can generate relevant questions</p>
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <h2 className="text-4xl font-bold text-gray-900 mb-4">Let's Get You Ready! 🎯</h2>
+                <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                  Tell us a bit about yourself so we can create the perfect interview practice session
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* Main Setup Card */}
+                <div className="lg:col-span-2">
+                  <div className="bg-white rounded-2xl shadow-xl p-8">
+                    <div className="mb-8">
+                      <h3 className="text-2xl font-bold text-gray-900 mb-2">Your Interview Target 🎯</h3>
+                      <p className="text-gray-600">This helps us generate relevant, industry-specific questions</p>
+                    </div>
+
+                    <div className="space-y-6">
+                      {/* Target Role */}
+                      <div>
+                        <label className="flex items-center gap-2 text-lg font-semibold text-gray-700 mb-3">
+                          <span className="text-2xl">💼</span>
+                          What role are you preparing for?
+                        </label>
+                        <input
+                          type="text"
+                          value={targetRole}
+                          onChange={(e) => setTargetRole(e.target.value)}
+                          className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-lg"
+                          placeholder="e.g., Software Engineer, Product Manager, Data Analyst..."
+                        />
+                        <p className="text-sm text-gray-500 mt-2">Be as specific as possible for better questions</p>
+                      </div>
+
+                      {/* Industry */}
+                      <div>
+                        <label className="flex items-center gap-2 text-lg font-semibold text-gray-700 mb-3">
+                          <span className="text-2xl">🏢</span>
+                          Which industry?
+                        </label>
+                        <input
+                          type="text"
+                          value={industry}
+                          onChange={(e) => setIndustry(e.target.value)}
+                          className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-lg"
+                          placeholder="e.g., Technology, Finance, Healthcare, Marketing..."
+                        />
+                        <p className="text-sm text-gray-500 mt-2">This tailors questions to your field</p>
+                      </div>
+
+                      {/* CV Content - Optional */}
+                      <div>
+                        <label className="flex items-center gap-2 text-lg font-semibold text-gray-700 mb-3">
+                          <span className="text-2xl">📄</span>
+                          Your CV/Resume <span className="text-sm font-normal text-gray-500">(Optional)</span>
+                        </label>
+                        <textarea
+                          value={cvContent}
+                          onChange={(e) => setCvContent(e.target.value)}
+                          className="w-full h-32 p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 resize-none text-lg"
+                          placeholder="Paste your CV content here for even more personalized questions... (optional)"
+                        />
+                        <p className="text-sm text-gray-500 mt-2">Adding your CV helps us create questions based on your actual experience</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
+                {/* Quick Tips Sidebar */}
                 <div className="space-y-6">
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Your CV/Resume Content
-                    </label>
-                    <textarea
-                      value={cvContent}
-                      onChange={(e) => setCvContent(e.target.value)}
-                      className="w-full h-32 p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 resize-none"
-                      placeholder="Paste your CV content here to personalize questions..."
-                    />
+                  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-100">
+                    <h4 className="text-lg font-bold text-blue-900 mb-4 flex items-center gap-2">
+                      <span className="text-2xl">💡</span>
+                      Pro Tips
+                    </h4>
+                    <ul className="space-y-3 text-blue-800">
+                      <li className="flex items-start gap-2">
+                        <span className="text-blue-600 mt-1">•</span>
+                        <span className="text-sm">Be specific about your target role for better questions</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-blue-600 mt-1">•</span>
+                        <span className="text-sm">CV content helps personalize questions to your experience</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-blue-600 mt-1">•</span>
+                        <span className="text-sm">You'll get 15 questions: 5 behavioral, 5 technical, 5 situational</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-blue-600 mt-1">•</span>
+                        <span className="text-sm">Each question has a 3-minute timer</span>
+                      </li>
+                    </ul>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Target Role
-                      </label>
-                      <input
-                        type="text"
-                        value={targetRole}
-                        onChange={(e) => setTargetRole(e.target.value)}
-                        className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
-                        placeholder="e.g., Software Engineer"
-                      />
+                  <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-100">
+                    <h4 className="text-lg font-bold text-green-900 mb-4 flex items-center gap-2">
+                      <span className="text-2xl">🎯</span>
+                      What to Expect
+                    </h4>
+                    <div className="space-y-3 text-green-800">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 bg-green-200 rounded-full flex items-center justify-center text-sm font-bold">1</div>
+                        <span className="text-sm">Review questions with tips</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 bg-green-200 rounded-full flex items-center justify-center text-sm font-bold">2</div>
+                        <span className="text-sm">Answer with timer pressure</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 bg-green-200 rounded-full flex items-center justify-center text-sm font-bold">3</div>
+                        <span className="text-sm">Get AI-powered feedback</span>
+                      </div>
                     </div>
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Industry
-                      </label>
-                      <input
-                        type="text"
-                        value={industry}
-                        onChange={(e) => setIndustry(e.target.value)}
-                        className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
-                        placeholder="e.g., Technology"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <button
-                      onClick={() => setStep('intro')}
-                      className="flex-1 bg-gray-200 text-gray-700 font-semibold py-4 px-6 rounded-xl hover:bg-gray-300 transition-all duration-300"
-                    >
-                      ← Back
-                    </button>
-                    <button
-                      onClick={generateQuestions}
-                      disabled={loading || !targetRole || !industry}
-                      className="flex-1 bg-gradient-primary text-white font-bold py-4 px-6 rounded-xl hover:shadow-glow transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {loading ? 'Generating Questions...' : 'Generate Interview Questions'}
-                    </button>
                   </div>
                 </div>
               </div>
+
+              {/* Action Buttons */}
+              <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+                <button
+                  onClick={() => setStep('intro')}
+                  className="px-8 py-3 bg-gray-200 text-gray-700 font-semibold rounded-xl hover:bg-gray-300 transition-all duration-300"
+                >
+                  ← Back
+                </button>
+                <button
+                  onClick={generateQuestions}
+                  disabled={loading || !targetRole.trim() || !industry.trim()}
+                  className="px-8 py-3 bg-gradient-primary text-white font-bold rounded-xl hover:shadow-glow transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  {loading ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                      Generating...
+                    </>
+                  ) : (
+                    <>
+                      <span>🚀</span>
+                      Start Practice
+                    </>
+                  )}
+                </button>
+              </div>
+
+              {/* Validation Messages */}
+              {(!targetRole.trim() || !industry.trim()) && (
+                <div className="mt-4 text-center">
+                  <p className="text-red-600 text-sm">
+                    Please fill in your target role and industry to continue
+                  </p>
+                </div>
+              )}
             </div>
           </section>
         )}
