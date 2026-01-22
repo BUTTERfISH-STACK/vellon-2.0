@@ -156,7 +156,7 @@ export default function Home() {
 
             {/* Trust Indicators */}
             <div className="mt-20 pt-12 border-t border-border/20">
-              <p className="text-center text-text-muted mb-8">Trusted by leading companies worldwide</p>
+              <p className="text-center text-text-muted mb-8" style={{ textShadow: '0 0 10px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4)' }}>Trusted by leading companies worldwide</p>
               <div className="flex justify-center items-center gap-8 opacity-70">
                 <div className="text-xs font-semibold text-text-muted tracking-wider">TRUSTED BY</div>
                 <div className="w-px h-4 bg-border"></div>
