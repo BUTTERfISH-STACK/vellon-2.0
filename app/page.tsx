@@ -66,14 +66,33 @@ export default function Home() {
               
               {/* Right Visual */}
               <div className="relative h-96 lg:h-full min-h-[400px] flex items-center justify-center">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-purple-900/20 rounded-3xl transform rotate-3"></div>
-                <div className="relative w-80 h-80 lg:w-96 lg:h-96">
-                  <img
-                    src="/earth-night.jpg"
-                    alt="Earth from space at night"
-                    className="w-full h-full object-cover rounded-full border border-white/10 shadow-2xl shadow-blue-900/50"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent rounded-full"></div>
+                {/* Background Glow */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-purple-900/20 to-cyan-900/30 rounded-3xl transform rotate-3 blur-xl opacity-50"></div>
+
+                {/* Main Container */}
+                <div className="relative w-80 h-80 lg:w-96 lg:h-96 group">
+                  {/* Orbital Rings */}
+                  <div className="absolute inset-0 rounded-full border border-white/20 animate-spin-slow"></div>
+                  <div className="absolute inset-4 rounded-full border border-white/10 animate-spin-reverse-slow"></div>
+                  <div className="absolute inset-8 rounded-full border border-white/5 animate-spin-slow"></div>
+
+                  {/* Earth Image */}
+                  <div className="relative w-full h-full rounded-full overflow-hidden shadow-premium group-hover:shadow-glow transition-all duration-500">
+                    <img
+                      src="/earth-night.jpg"
+                      alt="Earth from space at night"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-white/10 rounded-full"></div>
+
+                    {/* Atmospheric Glow */}
+                    <div className="absolute inset-0 bg-gradient-radial from-transparent via-blue-500/10 to-cyan-400/20 rounded-full animate-pulse-slow"></div>
+                  </div>
+
+                  {/* Floating Particles */}
+                  <div className="absolute -top-4 -right-4 w-3 h-3 bg-accent rounded-full animate-bounce-slow opacity-60"></div>
+                  <div className="absolute -bottom-6 -left-6 w-2 h-2 bg-gold rounded-full animate-bounce-reverse-slow opacity-80"></div>
+                  <div className="absolute top-1/2 -right-8 w-1.5 h-1.5 bg-white rounded-full animate-pulse opacity-40"></div>
                 </div>
               </div>
             </div>
