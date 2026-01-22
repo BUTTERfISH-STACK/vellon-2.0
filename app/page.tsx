@@ -42,7 +42,7 @@ export default function Home() {
                   </p>
                 </div>
                 
-                <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <div className="flex justify-center pt-4">
                   <a
                     href="/apps/cv-optimizer-free"
                     className="inline-flex items-center justify-center gap-3 bg-red-600/20 backdrop-blur-sm text-red-400 font-semibold py-4 px-8 rounded-lg border border-red-600/30 hover:bg-red-600/30 hover:text-red-300 transition-all duration-300 text-lg shadow-premium"
@@ -50,15 +50,6 @@ export default function Home() {
                     Launch Talent Scan
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
-                  </a>
-                  <a
-                    href="#network"
-                    className="inline-flex items-center justify-center gap-3 bg-white/5 backdrop-blur-sm text-white/80 font-medium py-4 px-8 rounded-lg border border-white/20 hover:bg-white/10 hover:text-white transition-all duration-300 text-lg shadow-premium"
-                  >
-                    View Global Network
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                     </svg>
                   </a>
                 </div>
