@@ -36,7 +36,7 @@ University of Technology, 2018
 export async function POST(request: NextRequest) {
   try {
     // Ensure we always return valid JSON
-    let responseData: { error?: string; success?: boolean; parsedData?: any; improvements?: string[]; accuracy?: number; extractedText?: string; wordCount?: number; characterCount?: number } = { error: 'Unknown error occurred' };
+    let responseData: any = { error: 'Unknown error occurred' };
     let statusCode = 500;
 
     try {
@@ -82,14 +82,11 @@ export async function POST(request: NextRequest) {
               // Generate optimization suggestions
               const improvements = generateOptimizationSuggestions(extractedText, jobDescription || '', parsedData);
 
+              const formattedCV = generateOptimizedCV(extractedText, parsedData, jobDescription || '');
+
               responseData = {
-                success: true,
-                parsedData,
-                improvements,
-                accuracy: Math.floor(85 + Math.random() * 10),
-                extractedText: extractedText.substring(0, 500) + (extractedText.length > 500 ? '...' : ''),
-                wordCount: extractedText.split(/\s+/).length,
-                characterCount: extractedText.length
+                suggestions: improvements,
+                formatted_CV: formattedCV
               };
               statusCode = 200;
 

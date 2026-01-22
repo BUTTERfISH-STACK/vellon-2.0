@@ -95,9 +95,9 @@ export default function Pricing() {
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold mb-2">Complete career enhancement suite</h3>
                 <div className="text-3xl font-bold mb-2">
-                  R119.99 <span className="text-lg font-normal opacity-90">once off</span>
+                  <span className="line-through text-white/60">R119.99</span> Special Offer
                 </div>
-                <p className="text-white/80 text-sm">Everything you need for career success • One-time purchase</p>
+                <p className="text-white/80 text-sm">Limited time offer • One-time purchase</p>
               </div>
 
               <ul className="space-y-3 mb-8">
@@ -133,18 +133,17 @@ export default function Pricing() {
                 </li>
               </ul>
 
-              <YocoPayment
-                amount={119.99}
-                currency="ZAR"
-                onSuccess={() => {
-                  // Additional success handling if needed
-                  console.log('Payment successful!');
-                }}
-                onError={(error) => {
-                  console.error('Payment failed:', error);
-                  alert('Payment failed. Please try again.');
-                }}
-              />
+              <a
+                href="https://pay.yoco.com/r/mR6yLL"
+                className="inline-block bg-white text-accent font-bold py-3 px-6 rounded-2xl hover:bg-gray-100 hover:shadow-lg transition-all duration-200 w-full text-center"
+              >
+                Upgrade Now
+              </a>
+
+              <div className="text-center text-xs text-white/80 mt-4">
+                <p>Secure payment powered by Yoco</p>
+                <p className="mt-1">🔒 SSL Encrypted • 💳 All major cards accepted</p>
+              </div>
             </div>
           </div>
 
