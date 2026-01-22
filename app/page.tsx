@@ -173,6 +173,33 @@ export default function Home() {
                 <div className="text-lg text-text-muted font-medium">Local Focus</div>
               </div>
             </div>
+
+            {/* Trust Indicators */}
+            <div className="mt-20 pt-12 border-t border-border/20">
+              <p className="text-center text-text-muted mb-8">Trusted by leading companies worldwide</p>
+              <div className="flex justify-center items-center gap-8 opacity-70">
+                <div className="text-xs font-semibold text-text-muted tracking-wider">TRUSTED BY</div>
+                <div className="w-px h-4 bg-border"></div>
+                <div className="flex items-center gap-6">
+                  <div className="flex items-center gap-2 px-4 py-3 bg-surface-light/50 rounded-lg hover:bg-surface-light/70 transition-colors">
+                    <img src="/lumi.svg" alt="Lumi" className="w-5 h-5" />
+                    <span className="text-xs font-medium text-text-muted">Lumi</span>
+                  </div>
+                  <div className="flex items-center gap-2 px-4 py-3 bg-surface-light/50 rounded-lg hover:bg-surface-light/70 transition-colors">
+                    <img src="/bitbucket.svg" alt="Bitbucket" className="w-5 h-5" />
+                    <span className="text-xs font-medium text-text-muted">Bitbucket</span>
+                  </div>
+                  <div className="flex items-center gap-2 px-4 py-3 bg-surface-light/50 rounded-lg hover:bg-surface-light/70 transition-colors">
+                    <img src="/bizzabo.svg" alt="Bizzabo" className="w-5 h-5" />
+                    <span className="text-xs font-medium text-text-muted">Bizzabo</span>
+                  </div>
+                  <div className="flex items-center gap-2 px-4 py-3 bg-surface-light/50 rounded-lg hover:bg-surface-light/70 transition-colors">
+                    <img src="/lucid.svg" alt="Lucid" className="w-5 h-5" />
+                    <span className="text-xs font-medium text-text-muted">Lucid</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
