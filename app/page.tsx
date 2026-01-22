@@ -1,4 +1,4 @@
-import StarRating from '@/components/StarRating'
+import StarRating from '@/components/StarRating';
 
 export default function Home() {
   return (
