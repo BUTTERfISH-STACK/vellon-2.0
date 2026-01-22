@@ -10,8 +10,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Hide header on apps page
-  const showHeader = pathname !== '/apps';
+  // Hide header on apps pages
+  const showHeader = !pathname?.startsWith('/apps');
 
   useEffect(() => {
     const canvas = canvasRef.current;

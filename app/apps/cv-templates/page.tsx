@@ -58,36 +58,6 @@ export default function CVTemplatesPage() {
   return (
     <Layout>
       <div className="min-h-screen bg-gray-50">
-        {/* Header */}
-        <header className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center py-4">
-              <div className="flex items-center">
-                <Link href="/" className="group flex items-center gap-3 transition-all duration-300">
-                  <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-premium group-hover:shadow-glow transition-all duration-300">
-                    <img src="/new-logo.png" alt="Vellon Logo" className="w-7 h-7 object-contain" />
-                  </div>
-                  <span className="text-2xl font-bold text-gradient-gold tracking-tight">Vellon</span>
-                </Link>
-              </div>
-              <div className="flex items-center gap-4">
-                <Link
-                  href="/apps"
-                  className="text-gray-600 hover:text-blue-600 transition-colors duration-300 font-medium"
-                >
-                  ← Back to Tools
-                </Link>
-                <Link
-                  href="/apps/cv-optimizer-free"
-                  className="bg-gradient-primary text-white font-bold py-2 px-6 rounded-xl hover:shadow-glow transition-all duration-300 shadow-premium"
-                >
-                  Start Free
-                </Link>
-              </div>
-            </div>
-          </div>
-        </header>
-
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700 text-white py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
