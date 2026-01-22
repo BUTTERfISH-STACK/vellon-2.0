@@ -2,6 +2,13 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
+
+// Dynamically import Yoco SDK to avoid SSR issues
+const YocoPayment = dynamic(() => import('../components/YocoPayment'), {
+  ssr: false,
+  loading: () => <div className="animate-pulse bg-surface rounded-lg p-4">Loading payment...</div>
+});
 
 export default function Pricing() {
   const [isProcessing, setIsProcessing] = useState(false);
@@ -132,12 +139,18 @@ export default function Pricing() {
                 </li>
               </ul>
 
-              <button
-                onClick={() => window.location.href = 'https://pay.yoco.com/r/mEDgNy?success_url=https://velloncareers.co.za/apps/cv-optimizer-pro?upgrade=success&cancel_url=https://velloncareers.co.za/pricing'}
-                className="inline-block bg-white text-accent font-bold py-3 px-6 rounded-2xl hover:bg-gray-100 hover:shadow-lg transition-all duration-200 w-full text-center"
-              >
-                Upgrade to Pro Now
-              </button>
+              <YocoPayment
+                amount={119.99}
+                currency="ZAR"
+                onSuccess={() => {
+                  // Additional success handling if needed
+                  console.log('Payment successful!');
+                }}
+                onError={(error) => {
+                  console.error('Payment failed:', error);
+                  alert('Payment failed. Please try again.');
+                }}
+              />
             </div>
           </div>
 
