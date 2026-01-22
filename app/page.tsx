@@ -5,18 +5,21 @@ export default function Home() {
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
         {/* Hero Section */}
-        <section className="min-h-screen flex items-center justify-center relative overflow-hidden px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
-          {/* Space Background Video */}
+        <section className="min-h-[100svh] flex items-center justify-center relative overflow-hidden px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-32">
+          {/* Space Background Video - Hidden on mobile for performance */}
           <video
-            className="absolute inset-0 w-full h-full object-cover"
+            className="hidden sm:block absolute inset-0 w-full h-full object-cover"
             autoPlay
             loop
             muted
             playsInline
+            poster="/space-bg.jpg"
           >
             <source src="/5747525-uhd_2160_3240_24fps.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-black/40"></div>
+          {/* Mobile background image */}
+          <div className="sm:hidden absolute inset-0 bg-black/90" style={{backgroundImage: 'url("/space-bg.jpg")', backgroundSize: 'cover', backgroundPosition: 'center'}}></div>
+          <div className="absolute inset-0 bg-black/50 sm:bg-black/40"></div>
           
           {/* Cinematic Noise Overlay */}
           <div className="absolute inset-0 bg-noise opacity-10"></div>
@@ -38,92 +41,90 @@ export default function Home() {
           </div>
           
           <div className="relative z-10 max-w-7xl mx-auto w-full">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              {/* Left Content */}
-              <div className="text-left space-y-8">
-                <div className="space-y-6">
-                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight tracking-tighter">
+            <div className="w-full max-w-4xl mx-auto">
+              {/* Content */}
+              <div className="text-center space-y-6 sm:space-y-8">
+                <div className="space-y-4 sm:space-y-6">
+                  <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white leading-[1.1] tracking-tighter">
                     Vellon × The Future<br/>
                     <span className="text-white/80">of Talent</span>
                   </h1>
-                  <p className="text-lg sm:text-xl md:text-2xl text-white/60 max-w-lg leading-relaxed font-light">
+                  <p className="text-base xs:text-lg sm:text-xl md:text-2xl text-white/70 max-w-2xl mx-auto leading-relaxed font-light">
                     From Earth to orbit — talent without borders.
                   </p>
                 </div>
-                
-                <div className="flex justify-center pt-4">
+
+                <div className="pt-6 sm:pt-4">
                   <a
                     href="/apps/cv-optimizer-free"
-                    className="inline-flex items-center justify-center gap-3 bg-red-600/20 backdrop-blur-sm text-red-400 font-semibold py-5 px-8 sm:py-4 sm:px-8 rounded-lg border border-red-600/30 hover:bg-red-600/30 hover:text-red-300 transition-all duration-300 text-base sm:text-lg shadow-premium min-h-[48px] touch-manipulation"
+                    className="inline-flex items-center justify-center gap-3 bg-red-600/25 backdrop-blur-sm text-red-300 font-semibold py-6 px-10 sm:py-5 sm:px-8 rounded-xl border border-red-500/40 hover:bg-red-600/35 hover:text-red-200 transition-all duration-300 text-lg sm:text-base shadow-premium min-h-[56px] sm:min-h-[48px] touch-manipulation w-full max-w-xs mx-auto"
                   >
                     Launch Talent Scan
-                    <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-6 h-6 sm:w-5 sm:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
                   </a>
                 </div>
               </div>
-              
-              {/* Right Visual - Removed */}
             </div>
           </div>
         </section>
 
         {/* Value Proposition */}
-        <section className="py-32 bg-gradient-to-b from-background to-surface/20">
+        <section className="py-20 sm:py-32 bg-gradient-to-b from-background to-surface/20">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-20">
-              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black mb-8 leading-tight tracking-tight">
+            <div className="text-center mb-12 sm:mb-20">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-6 sm:mb-8 leading-tight tracking-tight">
                 <span className="text-gradient-gold">Elevate</span> Your Career
                 <br />
                 <span className="text-foreground">With Precision</span>
               </h2>
-              <p className="text-xl sm:text-2xl text-text-muted max-w-4xl mx-auto leading-relaxed font-light">
+              <p className="text-lg sm:text-xl md:text-2xl text-text-muted max-w-4xl mx-auto leading-relaxed font-light px-4">
                 Sophisticated AI-powered CV optimization — engineered for discerning professionals in competitive South African markets.
               </p>
             </div>
 
             {/* Key Benefits */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20">
-              <div className="text-center group">
-                <div className="w-20 h-20 bg-gradient-primary rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-premium group-hover:shadow-glow transition-all duration-300">
-                  <span className="text-3xl">🎯</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12 mb-12 sm:mb-20">
+              <div className="text-center group px-4">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-primary rounded-3xl flex items-center justify-center mx-auto mb-6 sm:mb-8 shadow-premium group-hover:shadow-glow transition-all duration-300">
+                  <span className="text-2xl sm:text-3xl">🎯</span>
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-foreground">Smart Optimization</h3>
-                <p className="text-text-muted leading-relaxed">AI analyzes job requirements and optimizes your CV for maximum impact</p>
+                <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-foreground">Smart Optimization</h3>
+                <p className="text-sm sm:text-base text-text-muted leading-relaxed">AI analyzes job requirements and optimizes your CV for maximum impact</p>
               </div>
-              <div className="text-center group">
-                <div className="w-20 h-20 bg-gradient-primary rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-premium group-hover:shadow-glow transition-all duration-300">
-                  <span className="text-3xl">⚡</span>
+              <div className="text-center group px-4">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-primary rounded-3xl flex items-center justify-center mx-auto mb-6 sm:mb-8 shadow-premium group-hover:shadow-glow transition-all duration-300">
+                  <span className="text-2xl sm:text-3xl">⚡</span>
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-foreground">Instant Results</h3>
-                <p className="text-text-muted leading-relaxed">Professional CV ready in minutes, not hours</p>
+                <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-foreground">Instant Results</h3>
+                <p className="text-sm sm:text-base text-text-muted leading-relaxed">Professional CV ready in minutes, not hours</p>
               </div>
-              <div className="text-center group">
-                <div className="w-20 h-20 bg-gradient-primary rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-premium group-hover:shadow-glow transition-all duration-300">
-                  <span className="text-3xl">🏆</span>
+              <div className="text-center group px-4 sm:col-span-2 lg:col-span-1">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-primary rounded-3xl flex items-center justify-center mx-auto mb-6 sm:mb-8 shadow-premium group-hover:shadow-glow transition-all duration-300">
+                  <span className="text-2xl sm:text-3xl">🏆</span>
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-foreground">Proven Success</h3>
-                <p className="text-text-muted leading-relaxed">Used by thousands of professionals who landed their dream jobs</p>
+                <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-foreground">Proven Success</h3>
+                <p className="text-sm sm:text-base text-text-muted leading-relaxed">Used by thousands of professionals who landed their dream jobs</p>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
+            <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 justify-center items-center px-4">
               <a
                 href="/apps/cv-optimizer-free"
-                className="inline-flex items-center gap-4 bg-gradient-primary text-background font-bold py-6 px-12 rounded-2xl hover:shadow-glow transition-all duration-300 text-xl shadow-premium transform hover:scale-105"
+                className="inline-flex items-center gap-3 sm:gap-4 bg-gradient-primary text-background font-bold py-5 sm:py-6 px-8 sm:px-12 rounded-2xl hover:shadow-glow transition-all duration-300 text-lg sm:text-xl shadow-premium transform hover:scale-105 min-h-[52px] touch-manipulation w-full max-w-sm sm:w-auto"
               >
                 Start Optimizing
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </a>
               <a
                 href="#features"
-                className="inline-flex items-center gap-4 bg-surface-light/50 backdrop-blur-sm text-foreground font-semibold py-6 px-12 rounded-2xl border-2 border-border/50 hover:border-accent/50 hover:bg-surface transition-all duration-300 text-xl shadow-premium"
+                className="inline-flex items-center gap-3 sm:gap-4 bg-surface-light/50 backdrop-blur-sm text-foreground font-semibold py-5 sm:py-6 px-8 sm:px-12 rounded-2xl border-2 border-border/50 hover:border-accent/50 hover:bg-surface transition-all duration-300 text-lg sm:text-xl shadow-premium min-h-[52px] touch-manipulation w-full max-w-sm sm:w-auto"
               >
                 Explore Features
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
               </a>
