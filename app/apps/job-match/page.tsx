@@ -10,6 +10,9 @@ interface JobMatch {
   match_percentage: number
   missing_skills: string[]
   apply_link: string
+  source: string
+  posted_date?: string
+  salary?: string
 }
 
 export default function JobMatchPage() {
@@ -309,7 +312,7 @@ export default function JobMatchPage() {
                             {favorites.has(index) ? '❤️' : '🤍'}
                           </button>
                         </div>
-                        <div className="flex items-center gap-4 text-gray-600 mb-2">
+                        <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-gray-600 mb-2">
                           <span className="flex items-center gap-1">
                             <span className="text-blue-600">🏢</span>
                             {job.company}
@@ -318,6 +321,27 @@ export default function JobMatchPage() {
                             <span className="text-orange-600">📍</span>
                             {job.location}
                           </span>
+                          {job.salary && (
+                            <span className="flex items-center gap-1 text-green-600 font-medium">
+                              <span>💰</span>
+                              {job.salary}
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex items-center gap-2 text-xs text-gray-500">
+                          <span className={`px-2 py-1 rounded-full font-medium ${
+                            job.source === 'Adzuna' ? 'bg-blue-100 text-blue-800' :
+                            job.source === 'JSearch' ? 'bg-purple-100 text-purple-800' :
+                            'bg-gray-100 text-gray-800'
+                          }`}>
+                            {job.source}
+                          </span>
+                          {job.posted_date && (
+                            <span className="flex items-center gap-1">
+                              <span>📅</span>
+                              {new Date(job.posted_date).toLocaleDateString()}
+                            </span>
+                          )}
                         </div>
                       </div>
                       <div className="text-right">

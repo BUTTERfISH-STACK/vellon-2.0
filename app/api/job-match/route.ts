@@ -10,6 +10,9 @@ interface JobListing {
   missing_skills: string[];
   apply_link: string;
   description: string;
+  source: string;
+  posted_date?: string;
+  salary?: string;
 }
 
 export async function POST(request: NextRequest) {
@@ -72,18 +75,138 @@ function extractExperience(cvContent: string, providedExperience: string): numbe
   return 1;
 }
 
+// Cache for job listings to reduce API calls
+let jobCache: { data: JobListing[]; timestamp: number } | null = null;
+const CACHE_DURATION = 30 * 60 * 1000; // 30 minutes
+
 async function getJobListings(preferences: { industry?: string; location?: string; salary?: string }): Promise<JobListing[]> {
-  // Mock job listings for demonstration
-  // In production, scrape from Indeed, LinkedIn, etc.
-  const mockJobs: JobListing[] = [
+  // Check cache first
+  if (jobCache && Date.now() - jobCache.timestamp < CACHE_DURATION) {
+    return filterJobsByPreferences(jobCache.data, preferences);
+  }
+
+  const allJobs: JobListing[] = [];
+
+  try {
+    // Try Adzuna API first (South African jobs)
+    const adzunaJobs = await fetchAdzunaJobs(preferences);
+    allJobs.push(...adzunaJobs);
+  } catch (error) {
+    console.error('Adzuna API error:', error);
+  }
+
+  try {
+    // Try JSearch API as fallback
+    const jsearchJobs = await fetchJSearchJobs(preferences);
+    allJobs.push(...jsearchJobs);
+  } catch (error) {
+    console.error('JSearch API error:', error);
+  }
+
+  // If no jobs from APIs, use fallback mock data
+  if (allJobs.length === 0) {
+    console.log('Using fallback mock data');
+    allJobs.push(...getFallbackJobs());
+  }
+
+  // Remove duplicates and cache
+  const uniqueJobs = removeDuplicateJobs(allJobs);
+  jobCache = { data: uniqueJobs, timestamp: Date.now() };
+
+  return filterJobsByPreferences(uniqueJobs, preferences);
+}
+
+async function fetchAdzunaJobs(preferences: { industry?: string; location?: string; salary?: string }): Promise<JobListing[]> {
+  const ADZUNA_APP_ID = process.env.ADZUNA_APP_ID;
+  const ADZUNA_APP_KEY = process.env.ADZUNA_APP_KEY;
+
+  if (!ADZUNA_APP_ID || !ADZUNA_APP_KEY) {
+    throw new Error('Adzuna API credentials not configured');
+  }
+
+  const country = 'za'; // South Africa
+  const location = preferences.location || 'south africa';
+  const what = preferences.industry || 'technology';
+
+  const url = `https://api.adzuna.com/v1/api/jobs/${country}/search/1?app_id=${ADZUNA_APP_ID}&app_key=${ADZUNA_APP_KEY}&what=${encodeURIComponent(what)}&where=${encodeURIComponent(location)}&results_per_page=20`;
+
+  const response = await axios.get(url);
+  const jobs: JobListing[] = [];
+
+  if (response.data.results) {
+    response.data.results.forEach((job: any) => {
+      jobs.push({
+        job_title: job.title,
+        company: job.company?.display_name || 'Company not specified',
+        location: job.location?.display_name || 'Location not specified',
+        match_percentage: 0,
+        missing_skills: [],
+        apply_link: job.redirect_url,
+        description: job.description,
+        source: 'Adzuna',
+        posted_date: job.created,
+        salary: job.salary_min ? `R${job.salary_min} - R${job.salary_max || 'TBD'}` : undefined
+      });
+    });
+  }
+
+  return jobs;
+}
+
+async function fetchJSearchJobs(preferences: { industry?: string; location?: string; salary?: string }): Promise<JobListing[]> {
+  const JSEARCH_API_KEY = process.env.JSEARCH_API_KEY;
+
+  if (!JSEARCH_API_KEY) {
+    throw new Error('JSearch API key not configured');
+  }
+
+  const query = preferences.industry || 'software engineer';
+  const location = preferences.location || 'South Africa';
+
+  const url = `https://jsearch.p.rapidapi.com/search?query=${encodeURIComponent(query)}%20in%20${encodeURIComponent(location)}&page=1&num_pages=1`;
+
+  const response = await axios.get(url, {
+    headers: {
+      'X-RapidAPI-Key': JSEARCH_API_KEY,
+      'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
+    }
+  });
+
+  const jobs: JobListing[] = [];
+
+  if (response.data.data) {
+    response.data.data.forEach((job: any) => {
+      if (job.job_country === 'ZA' || job.job_city?.toLowerCase().includes('south africa')) {
+        jobs.push({
+          job_title: job.job_title,
+          company: job.employer_name || 'Company not specified',
+          location: job.job_city || job.job_country || 'South Africa',
+          match_percentage: 0,
+          missing_skills: [],
+          apply_link: job.job_apply_link || job.job_google_link,
+          description: job.job_description || job.job_highlights?.join(' ') || 'No description available',
+          source: 'JSearch',
+          posted_date: job.job_posted_at_datetime_utc,
+          salary: job.job_salary || undefined
+        });
+      }
+    });
+  }
+
+  return jobs;
+}
+
+function getFallbackJobs(): JobListing[] {
+  return [
     {
       job_title: 'Software Engineer',
       company: 'Tech Corp',
       location: 'Johannesburg, South Africa',
-      match_percentage: 0, // Will be calculated
+      match_percentage: 0,
       missing_skills: [],
       apply_link: 'https://example.com/job1',
-      description: 'Looking for a software engineer with JavaScript, React, and Node.js experience.'
+      description: 'Looking for a software engineer with JavaScript, React, and Node.js experience.',
+      source: 'Demo Data'
     },
     {
       job_title: 'Data Analyst',
@@ -92,7 +215,8 @@ async function getJobListings(preferences: { industry?: string; location?: strin
       match_percentage: 0,
       missing_skills: [],
       apply_link: 'https://example.com/job2',
-      description: 'Data analyst role requiring SQL, Python, and Tableau skills.'
+      description: 'Data analyst role requiring SQL, Python, and Tableau skills.',
+      source: 'Demo Data'
     },
     {
       job_title: 'Project Manager',
@@ -101,17 +225,29 @@ async function getJobListings(preferences: { industry?: string; location?: strin
       match_percentage: 0,
       missing_skills: [],
       apply_link: 'https://example.com/job3',
-      description: 'Project manager with Agile and Scrum experience needed.'
-    },
-    // Add more mock jobs...
+      description: 'Project manager with Agile and Scrum experience needed.',
+      source: 'Demo Data'
+    }
   ];
+}
 
-  // Filter by preferences
-  return mockJobs.filter(job => {
+function removeDuplicateJobs(jobs: JobListing[]): JobListing[] {
+  const seen = new Set<string>();
+  return jobs.filter(job => {
+    const key = `${job.job_title}-${job.company}-${job.location}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function filterJobsByPreferences(jobs: JobListing[], preferences: { industry?: string; location?: string; salary?: string }): JobListing[] {
+  return jobs.filter(job => {
     if (preferences.location && !job.location.toLowerCase().includes(preferences.location.toLowerCase())) {
       return false;
     }
-    if (preferences.industry && !job.description.toLowerCase().includes(preferences.industry.toLowerCase())) {
+    if (preferences.industry && !job.description.toLowerCase().includes(preferences.industry.toLowerCase()) &&
+        !job.job_title.toLowerCase().includes(preferences.industry.toLowerCase())) {
       return false;
     }
     return true;
