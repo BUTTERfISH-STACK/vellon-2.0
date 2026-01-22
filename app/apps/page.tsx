@@ -101,13 +101,9 @@ export default function AppsPage() {
     <Layout>
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700 text-white py-32">
+        <section className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700 text-white py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <h1 className="text-5xl md:text-6xl font-black mb-6 leading-tight">
-                Your Complete
-                <span className="block text-yellow-300">Career Toolkit</span>
-              </h1>
               <p className="text-xl md:text-2xl mb-8 opacity-90 max-w-4xl mx-auto leading-relaxed">
                 From CV optimization to career planning — everything you need to accelerate your professional growth
               </p>
