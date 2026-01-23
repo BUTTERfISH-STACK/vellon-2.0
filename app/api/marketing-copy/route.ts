@@ -16,79 +16,28 @@ export async function POST(request: NextRequest) {
       }, { status: 500 });
     }
 
-    // Generate main marketing copy
-    const mainCopyPrompt = `
-You are Vellon, the world's first AI-powered Done-for-You Job Application Sprint Platform.
+    // Use the reworked, more assertive marketing copy
+    const mainMarketingCopy = {
+      headline: "Stop Guessing. Start Landing Offers.",
+      subheadline: "Vellon is the world's first AI-powered Done-for-You Job Application Sprint. We don't just guide — we apply, optimize, and prepare your career launch. No one else does this, and we don't compromise.",
+      body: "You've spent countless hours tweaking CVs, rewriting cover letters, and chasing applications with little to show. Vellon changes the game.\n\nOptimized CVs and Cover Letters tailored to every job.\n\nLinkedIn Profiles rewritten to attract recruiters instantly.\n\nReady-to-Submit Applications for 30–100 jobs, fully prepped.\n\nPremium Outreach to top employers, personalized messages included.\n\nOther tools give suggestions. Other AI apps optimize a CV. But no one else does everything done-for-you, with human oversight, and global-first methodology.\n\nYou can continue wasting time, or you can launch your career with the only platform built to dominate the job market.",
+      cta: "Claim Your Spot Today — Because There's No One Else Like Us."
+    };
 
-Generate compelling marketing copy that positions Vellon as the first of its kind globally.
+    // Use the reworked upsell copy
+    const upsellSuggestions = {
+      standard: "Standard Tier: 30–50 ready-to-submit job applications, fully optimized CVs, cover letters, and LinkedIn rewrites — all done for you in HOURS, not days.\n\nIf you settle for other tools, you'll still be submitting applications manually. Only Vellon gives you true speed, quality, and results.",
+      premium: "Premium Tier: 50–100 ready-to-submit applications, plus direct access to top employers. Personalized outreach messages and priority support mean your applications don't just exist — they get noticed.\n\nOther platforms claim to help you land jobs. Vellon actually does it. And only here, only with us.",
+      addons: "Want to secure the offer faster? Add interview coaching, LinkedIn optimization, or additional job applications. Others provide advice — Vellon provides results-driven action, only for serious clients."
+    };
 
-Requirements:
-- Use hype language that conveys: fast results, massive value, first-of-its-kind innovation
-- Emphasize the complete end-to-end service
-- Highlight AI + human combination
-- Include specific benefits and outcomes
-- Make it conversion-focused
-
-Example structure:
-- Hook with the "first of its kind" positioning
-- Problem statement (job search frustration)
-- Solution (Vellon's complete service)
-- Benefits and features
-- Social proof elements
-- Call to action
-
-Keep it under 300 words but highly impactful.
-    `;
-
-    const mainCopyCompletion = await openai.chat.completions.create({
-      model: 'gpt-4',
-      messages: [
-        { role: 'system', content: 'Generate compelling marketing copy for Vellon platform.' },
-        { role: 'user', content: mainCopyPrompt }
-      ],
-      max_tokens: 400,
-      temperature: 0.8,
-    });
-
-    const mainMarketingCopy = mainCopyCompletion.choices[0]?.message?.content?.trim();
-
-    // Generate upsell suggestions
-    const upsellPrompt = `
-Suggest premium upsells and pricing tiers for Vellon.
-
-Current service: Basic job application sprint ($299)
-Premium features to upsell:
-- Direct employer outreach
-- Priority application processing
-- Interview preparation
-- Salary negotiation coaching
-- LinkedIn premium optimization
-- Resume writing service
-- Career coaching sessions
-
-Suggest 3 pricing tiers with clear value propositions.
-Include reseller opportunities and ambassador program benefits.
-    `;
-
-    const upsellCompletion = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages: [
-        { role: 'system', content: 'Suggest monetization strategies and pricing tiers.' },
-        { role: 'user', content: upsellPrompt }
-      ],
-      max_tokens: 300,
-      temperature: 0.7,
-    });
-
-    const upsellSuggestions = upsellCompletion.choices[0]?.message?.content?.trim();
-
-    // Generate hype copy variations
+    // Use the reworked hype copy variations
     const hypeVariations = [
-      "Introducing Vellon: The WORLD'S FIRST AI-powered Done-for-You Job Application Sprint. From optimized CVs to tailored cover letters, LinkedIn rewrites, and fully prepped job applications, Vellon gets you applying to 50+ jobs in HOURS — not days. Premium clients get direct access to top employers with personalized outreach messages. It's fast, efficient, and globally unprecedented — your career launch, supercharged by AI.",
+      "Stop Guessing. Start Landing Offers. Vellon is the world's first AI-powered Done-for-You Job Application Sprint. We don't just guide — we apply, optimize, and prepare your career launch. No one else does this, and we don't compromise.",
 
-      "STOP wasting weeks on job applications! Vellon is the world's first AI-powered Done-for-You Job Application Sprint that handles EVERYTHING: CV optimization, cover letters, LinkedIn profiles, job matching, and application submission. Get 50+ applications submitted in hours, not days. Premium tier includes direct employer outreach. The future of job searching is here — and it's called Vellon.",
+      "You've spent countless hours tweaking CVs, rewriting cover letters, and chasing applications with little to show. Vellon changes the game with optimized CVs, tailored cover letters, LinkedIn profiles rewritten to attract recruiters instantly, and ready-to-submit applications for 30–100 jobs. Other tools give suggestions. Vellon does everything done-for-you.",
 
-      "What if you could apply to 50 dream jobs in one day? With Vellon, the world's first AI-powered Done-for-You Job Application Sprint, that's reality. Our AI optimizes your CV for ATS, crafts perfect cover letters, rewrites your LinkedIn, finds matching jobs, and our human experts submit everything. Premium clients get personalized outreach to top companies. Don't just search for jobs — let Vellon find YOU the perfect role."
+      "Other platforms claim to help you land jobs. Vellon actually does it. With 50+ ready-to-submit applications, optimized CVs, cover letters, LinkedIn rewrites, and premium outreach to top employers — all in hours, not days. Only Vellon gives you true speed, quality, and results."
     ];
 
     const response = {
@@ -138,6 +87,15 @@ Include reseller opportunities and ambassador program benefits.
           "Priority support",
           "Marketing materials provided"
         ]
+      },
+      email_copy: {
+        subject: "Your Career Sprint Starts Now – Only With Vellon",
+        body: "Hi [Name],\n\nYou're about to take the fastest, smartest step in your career. Vellon, the world's first AI-powered Done-for-You Job Application Sprint, has prepared your optimized CV, cover letters, and job applications.\n\nThis isn't advice. This isn't a template. This is done-for-you, ready-to-submit, globally-first career automation.\n\nOther tools will make you wait. Vellon delivers. And you'll see the difference in hours, not weeks.",
+        cta: "Start Your Sprint Today — Only Vellon Can Do This."
+      },
+      client_report: {
+        intro: "Congratulations! Your career launch has officially begun with Vellon, the first AI platform to do everything for you — globally.\n\nHere's everything we've done for you: optimized CV, tailored cover letters, LinkedIn profile, and applications submitted. For premium clients, your top 15 employers have direct outreach messages prepared.",
+        section_copy: "Everything here is ready-to-use. No guessing, no wasted time, no incomplete applications. If you've used anything else before, you'll notice the difference immediately. Only Vellon does it this way."
       }
     };
 
