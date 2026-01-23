@@ -1,5 +1,8 @@
 import React from 'react';
 import StarRating from '@/components/StarRating';
+import ParticleBackground from '@/components/ParticleBackground';
+import PremiumCard from '@/components/PremiumCard';
+import AnimatedSection from '@/components/AnimatedSection';
 
 export default function Home() {
   return (
@@ -20,6 +23,9 @@ export default function Home() {
           {/* Mobile background image */}
           <div className="sm:hidden absolute inset-0 bg-black/90" style={{backgroundImage: 'url("/space-bg.jpg")', backgroundSize: 'cover', backgroundPosition: 'center'}}></div>
           <div className="absolute inset-0 bg-black/50 sm:bg-black/40"></div>
+
+          {/* Floating Particles */}
+          <ParticleBackground />
           
           {/* Cinematic Noise Overlay */}
           <div className="absolute inset-0 bg-noise opacity-10"></div>
@@ -80,18 +86,19 @@ export default function Home() {
         </section>
 
         {/* Value Proposition */}
-        <section className="py-20 sm:py-32 bg-gradient-to-b from-background to-surface/20">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12 sm:mb-20">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-6 sm:mb-8 leading-tight tracking-tight">
-                <span className="text-gradient-gold">Elevate</span> <span className="text-foreground" style={{ textShadow: '0 0 10px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4)' }}>Your Career</span>
-                <br />
-                <span className="text-foreground">With Precision</span>
-              </h2>
-              <p className="text-lg sm:text-xl md:text-2xl text-text-muted max-w-4xl mx-auto leading-relaxed font-light px-4">
-                Sophisticated AI-powered CV optimization — engineered for discerning professionals in competitive South African markets.
-              </p>
-            </div>
+        <AnimatedSection>
+          <section className="py-20 sm:py-32 bg-gradient-to-b from-background to-surface/20">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12 sm:mb-20">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-6 sm:mb-8 leading-tight tracking-tight">
+                  <span className="text-gradient-gold">Elevate</span> <span className="text-foreground" style={{ textShadow: '0 0 10px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4)' }}>Your Career</span>
+                  <br />
+                  <span className="text-foreground">With Precision</span>
+                </h2>
+                <p className="text-lg sm:text-xl md:text-2xl text-text-muted max-w-4xl mx-auto leading-relaxed font-light px-4">
+                  Sophisticated AI-powered CV optimization — engineered for discerning professionals in competitive South African markets.
+                </p>
+              </div>
 
             {/* Key Benefits */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12 mb-12 sm:mb-20">
@@ -201,51 +208,52 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-              <div className="group bg-surface-light/30 backdrop-blur-sm p-8 rounded-3xl border border-border/30 hover:border-accent/50 transition-all duration-300 hover:shadow-premium">
-                <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 shadow-premium">
-                  <span className="text-2xl">🎯</span>
-                </div>
-                <h3 className="text-2xl font-bold mb-4 text-foreground">ATS Optimization</h3>
-                <p className="text-text-muted leading-relaxed">Precision keyword integration for maximum system compatibility</p>
-              </div>
-              <div className="group bg-surface-light/30 backdrop-blur-sm p-8 rounded-3xl border border-border/30 hover:border-accent/50 transition-all duration-300 hover:shadow-premium">
-                <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 shadow-premium">
-                  <span className="text-2xl">✨</span>
-                </div>
-                <h3 className="text-2xl font-bold mb-4 text-foreground">Refined Formatting</h3>
-                <p className="text-text-muted leading-relaxed">Elegant, professional layouts that command attention</p>
-              </div>
-              <div className="group bg-surface-light/30 backdrop-blur-sm p-8 rounded-3xl border border-border/30 hover:border-accent/50 transition-all duration-300 hover:shadow-premium">
-                <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 shadow-premium">
-                  <span className="text-2xl">🔄</span>
-                </div>
-                <h3 className="text-2xl font-bold mb-4 text-foreground">Content Enhancement</h3>
-                <p className="text-text-muted leading-relaxed">Comprehensive rewriting for maximum impact</p>
-              </div>
-              <div className="group bg-surface-light/30 backdrop-blur-sm p-8 rounded-3xl border border-border/30 hover:border-accent/50 transition-all duration-300 hover:shadow-premium">
-                <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 shadow-premium">
-                  <span className="text-2xl">📄</span>
-                </div>
-                <h3 className="text-2xl font-bold mb-4 text-foreground">Premium Export</h3>
-                <p className="text-text-muted leading-relaxed">Polished PDF output ready for professional use</p>
-              </div>
-              <div className="group bg-surface-light/30 backdrop-blur-sm p-8 rounded-3xl border border-border/30 hover:border-accent/50 transition-all duration-300 hover:shadow-premium">
-                <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 shadow-premium">
-                  <span className="text-2xl">🏢</span>
-                </div>
-                <h3 className="text-2xl font-bold mb-4 text-foreground">Industry Tailoring</h3>
-                <p className="text-text-muted leading-relaxed">Optimized structure for your specific field</p>
-              </div>
-              <div className="group bg-surface-light/30 backdrop-blur-sm p-8 rounded-3xl border border-border/30 hover:border-accent/50 transition-all duration-300 hover:shadow-premium">
-                <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 shadow-premium">
-                  <span className="text-2xl">🎨</span>
-                </div>
-                <h3 className="text-2xl font-bold mb-4 text-foreground">Dual Optimization</h3>
-                <p className="text-text-muted leading-relaxed">Appeals to both human recruiters and automated systems</p>
-              </div>
-            </div>
-          </div>
-        </section>
+               <PremiumCard glow>
+                 <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 shadow-premium">
+                   <span className="text-2xl">🎯</span>
+                 </div>
+                 <h3 className="text-2xl font-bold mb-4 text-foreground">ATS Optimization</h3>
+                 <p className="text-text-muted leading-relaxed">Precision keyword integration for maximum system compatibility</p>
+               </PremiumCard>
+               <PremiumCard glow>
+                 <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 shadow-premium">
+                   <span className="text-2xl">✨</span>
+                 </div>
+                 <h3 className="text-2xl font-bold mb-4 text-foreground">Refined Formatting</h3>
+                 <p className="text-text-muted leading-relaxed">Elegant, professional layouts that command attention</p>
+               </PremiumCard>
+               <PremiumCard glow>
+                 <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 shadow-premium">
+                   <span className="text-2xl">🔄</span>
+                 </div>
+                 <h3 className="text-2xl font-bold mb-4 text-foreground">Content Enhancement</h3>
+                 <p className="text-text-muted leading-relaxed">Comprehensive rewriting for maximum impact</p>
+               </PremiumCard>
+               <PremiumCard glow>
+                 <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 shadow-premium">
+                   <span className="text-2xl">📄</span>
+                 </div>
+                 <h3 className="text-2xl font-bold mb-4 text-foreground">Premium Export</h3>
+                 <p className="text-text-muted leading-relaxed">Polished PDF output ready for professional use</p>
+               </PremiumCard>
+               <PremiumCard glow>
+                 <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 shadow-premium">
+                   <span className="text-2xl">🏢</span>
+                 </div>
+                 <h3 className="text-2xl font-bold mb-4 text-foreground">Industry Tailoring</h3>
+                 <p className="text-text-muted leading-relaxed">Optimized structure for your specific field</p>
+               </PremiumCard>
+               <PremiumCard glow>
+                 <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 shadow-premium">
+                   <span className="text-2xl">🎨</span>
+                 </div>
+                 <h3 className="text-2xl font-bold mb-4 text-foreground">Dual Optimization</h3>
+                 <p className="text-text-muted leading-relaxed">Appeals to both human recruiters and automated systems</p>
+               </PremiumCard>
+             </div>
+           </div>
+         </section>
+         </AnimatedSection>
 
         {/* How It Works */}
         <section className="py-32 bg-gradient-to-b from-surface/20 to-background">
