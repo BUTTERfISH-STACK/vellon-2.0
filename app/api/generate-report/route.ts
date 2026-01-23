@@ -93,7 +93,7 @@ export async function POST(request: NextRequest) {
     yPosition += 10;
 
     doc.setFontSize(10);
-    const submittedCount = client.jobs.filter(job => job.application?.submission?.status === 'submitted').length;
+    const submittedCount = client.jobs.filter((job: any) => job.application?.submission?.status === 'submitted').length;
     const totalCount = client.jobs.length;
 
     doc.text(`Total Applications Prepared: ${totalCount}`, 20, yPosition);

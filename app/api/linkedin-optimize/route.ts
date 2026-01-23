@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import OpenAI from 'openai';
 
-const openai = new OpenAI({
+const openai = process.env.OPENAI_API_KEY ? new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
-});
+}) : null;
 
 export async function POST(request: NextRequest) {
   try {
@@ -25,6 +25,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({
         error: 'Client not found'
       }, { status: 404 });
+    }
+
+    // Check if OpenAI is available
+    if (!openai) {
+      return NextResponse.json({
+        error: 'AI service not configured'
+      }, { status: 500 });
     }
 
     // Generate LinkedIn headline

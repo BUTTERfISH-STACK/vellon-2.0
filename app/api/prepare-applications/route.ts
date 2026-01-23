@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import OpenAI from 'openai';
 
-const openai = new OpenAI({
+const openai = process.env.OPENAI_API_KEY ? new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
-});
+}) : null;
 
 export async function POST(request: NextRequest) {
   try {
@@ -36,6 +36,13 @@ export async function POST(request: NextRequest) {
 
     // Prepare applications for each job
     const applications = [];
+
+    // Check if OpenAI is available
+    if (!openai) {
+      return NextResponse.json({
+        error: 'AI service not configured'
+      }, { status: 500 });
+    }
 
     for (const job of client.jobs.slice(0, 10)) { // Limit to top 10 for demo
       // Generate cover letter
