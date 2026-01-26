@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
 
 export async function POST(request: NextRequest) {
   try {
@@ -72,36 +71,9 @@ export async function POST(request: NextRequest) {
       }, { status: 400 });
     }
 
-    // Check if client already exists
-    const existingClient = await prisma.client.findUnique({
-      where: { email: body.email }
-    });
-
-    if (existingClient) {
-      return NextResponse.json({
-        error: 'Client with this email already exists',
-        validation_notes: 'Client with this email already exists'
-      }, { status: 409 });
-    }
-
-    // Create client in database
-    const client = await prisma.client.create({
-      data: {
-        name: body.name,
-        email: body.email,
-        location: body.location,
-        desiredTitles: body.target_roles,
-        industry: body.industry,
-        workPreference: body.work_preference,
-        yearsExperience: body.experience_years,
-        skills: body.skills,
-        cvText: body.cv_text,
-        linkedinUrl: body.linkedin,
-        countriesToApply: body.countries,
-        consent: body.consent,
-        status: 'intake'
-      }
-    });
+    // Database not available - Prisma removed
+    // Mock client creation
+    const mockClientId = `mock-${Date.now()}`;
 
     // Generate recruiter-friendly summary
     const summary = `
@@ -132,7 +104,7 @@ Consent: ${body.consent ? 'Given' : 'Not given'}
       countries: body.countries,
       consent: body.consent,
       validation_notes: 'All fields validated successfully',
-      client_id: client.id,
+      client_id: mockClientId,
       summary: summary
     };
 

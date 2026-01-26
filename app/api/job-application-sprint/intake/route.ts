@@ -1,2 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+
+export async function POST(request: NextRequest) {
+  try {
+    // Database not available - Prisma removed
+    return NextResponse.json({
+      error: 'Database service not available'
+    }, { status: 503 });
+  } catch (error) {
+    console.error('Intake API error:', error);
+    return NextResponse.json({
+      error: 'Internal server error during intake'
+    }, { status: 500 });
+  }
+}

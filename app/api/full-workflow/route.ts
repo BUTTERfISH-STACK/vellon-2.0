@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
 
 export async function POST(request: NextRequest) {
   try {
@@ -141,12 +140,7 @@ export async function POST(request: NextRequest) {
       estimated_completion: tier === 'basic' ? '3-5 business days' : '1-2 business days'
     };
 
-    // Update client status to completed
-    await prisma.client.update({
-      where: { id: clientId },
-      data: { status: 'workflow_completed' }
-    });
-
+    // Database update skipped - Prisma removed
     return NextResponse.json(workflowResult);
 
   } catch (error) {
